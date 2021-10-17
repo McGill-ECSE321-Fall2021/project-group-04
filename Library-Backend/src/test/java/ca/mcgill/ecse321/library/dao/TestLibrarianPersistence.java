@@ -37,10 +37,10 @@ public class TestLibrarianPersistence {
         String username="Librarian";
         String pass="pass";
         String add="1414 Chomedey";
-        Long myid = 9645643L;
+        //Long myid = 9645643L;
         Librarian testL=new Librarian();
         testL.setAddress(add);
-        testL.setId(myid);
+        //testL.setId(myid);
         testL.setPassword(pass);
         testL.setUsername(username);
 
