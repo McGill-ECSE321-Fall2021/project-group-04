@@ -23,5 +23,6 @@ public class TestArchivePersistence {
     }
 
     @Test
-    public void testPersistAndLoadArchive() {}
+    public void testPersistAndLoadArchive() {
+    }
 }

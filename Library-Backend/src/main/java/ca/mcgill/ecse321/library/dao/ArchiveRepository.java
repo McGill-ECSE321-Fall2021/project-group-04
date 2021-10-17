@@ -4,7 +4,7 @@ import ca.mcgill.ecse321.library.model.Archive;
 import org.springframework.data.repository.CrudRepository;
 
 public interface ArchiveRepository extends CrudRepository<Archive, String> {
-    Archive findArchiveByItemId(Long id);
+    Archive findArchiveById(Long id);
 
-    boolean existsArchiveByItemId(Long id);
+    boolean existsArchiveById(Long id);
 }

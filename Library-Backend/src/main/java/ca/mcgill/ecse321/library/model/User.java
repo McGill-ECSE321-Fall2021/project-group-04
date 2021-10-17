@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Accounts")
+@Table(name = "Users")
 public abstract class User {
     private Long id;
     private String username;

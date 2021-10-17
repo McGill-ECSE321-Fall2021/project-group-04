@@ -28,5 +28,6 @@ public class TestMusicAlbumPersistence {
     }
 
     @Test
-    public void testPersistAndLoadMusicAlbum() {}
+    public void testPersistAndLoadMusicAlbum() {
+    }
 }

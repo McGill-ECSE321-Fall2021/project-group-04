@@ -28,5 +28,6 @@ public class TestLibraryPersistence {
     }
 
     @Test
-    public void testPersistAndLoadLibrary() {}
+    public void testPersistAndLoadLibrary() {
+    }
 }

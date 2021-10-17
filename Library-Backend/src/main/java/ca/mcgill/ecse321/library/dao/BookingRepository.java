@@ -4,7 +4,7 @@ import ca.mcgill.ecse321.library.model.Booking;
 import org.springframework.data.repository.CrudRepository;
 
 public interface BookingRepository extends CrudRepository<Booking, String> {
-    Booking findBookingByBookingId(Long id);
+    Booking findBookingById(Long id);
 
-    boolean existsBookingByBookingId(Long id);
+    boolean existsBookingById(Long id);
 }

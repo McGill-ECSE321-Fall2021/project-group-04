@@ -24,5 +24,6 @@ public class TestMemberPersistence {
     }
 
     @Test
-    public void testPersistAndLoadCustomer() {}
+    public void testPersistAndLoadCustomer() {
+    }
 }

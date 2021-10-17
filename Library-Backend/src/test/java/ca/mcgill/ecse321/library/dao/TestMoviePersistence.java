@@ -27,6 +27,7 @@ public class TestMoviePersistence {
     }
 
     @Test
-    public void testPersistAndLoadMovie() {}
+    public void testPersistAndLoadMovie() {
+    }
 
 }

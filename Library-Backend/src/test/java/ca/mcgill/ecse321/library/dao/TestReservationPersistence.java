@@ -24,6 +24,7 @@ public class TestReservationPersistence {
     }
 
     @Test
-    public void testPersistAndLoadReservation() {}
+    public void testPersistAndLoadReservation() {
+    }
 
 }

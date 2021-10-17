@@ -24,5 +24,6 @@ public class TestNewspaperPersistence {
     }
 
     @Test
-    public void testPersistAndLoadNewspaper() {}
+    public void testPersistAndLoadNewspaper() {
+    }
 }

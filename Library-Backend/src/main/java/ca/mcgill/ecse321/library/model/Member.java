@@ -9,9 +9,11 @@ public class Member extends User {
     public enum MemberStatus {
         Active, Blacklisted
     }
+
     public enum MemberType {
         Local, Foreign
     }
+
     private MemberType memberType;
     private MemberStatus memberStatus;
     private int monthlyFee;

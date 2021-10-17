@@ -1,9 +1,10 @@
 package ca.mcgill.ecse321.library.dao;
 
-import org.springframework.data.repository.CrudRepository;
 import ca.mcgill.ecse321.library.model.Reservation;
+import org.springframework.data.repository.CrudRepository;
 
-public interface ReservationRepository extends CrudRepository<Reservation, String>{
-	Reservation findReservationByTypeId(Long id);
-	boolean existsReservationByTypeId(Long id);
+public interface ReservationRepository extends CrudRepository<Reservation, String> {
+    Reservation findReservationById(Long id);
+
+    boolean existsReservationById(Long id);
 }

@@ -28,5 +28,6 @@ public class TestBookPersistence {
     }
 
     @Test
-    public void testPersistAndLoadBook() {}
+    public void testPersistAndLoadBook() {
+    }
 }

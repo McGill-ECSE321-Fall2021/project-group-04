@@ -24,5 +24,6 @@ public class TestWorkDayPersistence {
     }
 
     @Test
-    public void testPersistAndLoadWorkDay() {}
+    public void testPersistAndLoadWorkDay() {
+    }
 }

@@ -28,5 +28,6 @@ public class TestLibrarianPersistence {
     }
 
     @Test
-    public void testPersistAndLoadLibrarian() {}
+    public void testPersistAndLoadLibrarian() {
+    }
 }

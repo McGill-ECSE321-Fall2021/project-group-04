@@ -4,7 +4,7 @@ import ca.mcgill.ecse321.library.model.MusicAlbum;
 import org.springframework.data.repository.CrudRepository;
 
 public interface MusicAlbumRepository extends CrudRepository<MusicAlbum, String> {
-    MusicAlbum findMusicAlbumByItemId(Long id);
+    MusicAlbum findMusicAlbumById(Long id);
 
-    boolean existsMusicAlbumByItemId(Long id);
+    boolean existsMusicAlbumById(Long id);
 }

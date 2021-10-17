@@ -24,5 +24,6 @@ public class TestLendingPersistence {
     }
 
     @Test
-    public void testPersistAndLoadLending() {}
+    public void testPersistAndLoadLending() {
+    }
 }

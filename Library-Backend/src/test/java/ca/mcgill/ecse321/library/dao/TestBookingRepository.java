@@ -36,11 +36,14 @@ public class TestBookingRepository {
     }
 
     @Test
-    public void testPersistAndLoadBookingWithMember() {}
+    public void testPersistAndLoadBookingWithMember() {
+    }
 
     @Test
-    public void testPersistAndLoadBookingWithLibrarian() {}
+    public void testPersistAndLoadBookingWithLibrarian() {
+    }
 
     @Test
-    public void testPersistAndLoadBookingWithHeadLibrarian() {}
+    public void testPersistAndLoadBookingWithHeadLibrarian() {
+    }
 }
