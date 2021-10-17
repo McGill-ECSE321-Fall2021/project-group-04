@@ -35,20 +35,18 @@ public class TestReservationPersistence {
 
     @Test
     public void testPersistAndLoadReservation() {
-        Long id = 6372983L;
         Date expirationDate = Date.valueOf("2021-10-20");
 
         Reservation reservation = new Reservation();
         reservation.setExpirationDate(expirationDate);
-        //reservation.setId(id);
 
         reservationRepository.save(reservation);
+        Long id = reservation.getId();      //the JPA generates the ID after saving the reservation into the database
         reservation = null;
         reservation = reservationRepository.findReservationById(id);
-        //reservation = reservationRepository.findByExpirationDate(expirationDate);
 
         assertNotNull(reservation);
-        //assertEquals(id, reservation.getId);
+        assertEquals(id, reservation.getId());
         assertEquals(expirationDate, reservation.getExpirationDate());
 
     }

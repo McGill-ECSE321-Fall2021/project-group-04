@@ -1,15 +1,13 @@
 package ca.mcgill.ecse321.library.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "BookingTypes")
 public abstract class BookingType {
     private Long id;
 
-    BookingType(Long id) {
+    public BookingType(Long id) {
         this.id = id;
     }
 
@@ -18,11 +16,12 @@ public abstract class BookingType {
     }
 
     @Id
-    Long getId() {
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    public Long getId() {
         return this.id;
     }
 
-    void setId(Long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }
