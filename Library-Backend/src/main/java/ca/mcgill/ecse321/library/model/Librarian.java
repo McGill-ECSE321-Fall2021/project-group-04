@@ -1,9 +1,9 @@
 package ca.mcgill.ecse321.library.model;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
 import java.util.HashSet;
 import java.util.Set;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Librarian extends User {

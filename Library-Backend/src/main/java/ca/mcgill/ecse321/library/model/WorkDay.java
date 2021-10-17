@@ -1,16 +1,20 @@
 package ca.mcgill.ecse321.library.model;
 
+import java.sql.Time;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import java.sql.Time;
 
 @Entity
 public class WorkDay {
 
+    public enum DayOfWeek {
+        Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
+    }
     private DayOfWeek dayOfWeek;
     private Time startTime;
     private Time endTime;
     private Long id;
+
     public WorkDay(Long id, DayOfWeek aDayOfWeek, Time aStartTime, Time aEndTime) {
         this.id = id;
         dayOfWeek = aDayOfWeek;
@@ -53,9 +57,5 @@ public class WorkDay {
 
     public void setId(Long aId) {
         this.id = aId;
-    }
-
-    public enum DayOfWeek {
-        Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
     }
 }

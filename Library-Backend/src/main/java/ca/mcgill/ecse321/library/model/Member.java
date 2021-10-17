@@ -1,15 +1,22 @@
 package ca.mcgill.ecse321.library.model;
 
-import javax.persistence.Entity;
 import java.sql.Date;
+import javax.persistence.Entity;
 
 @Entity
 public class Member extends User {
 
+    public enum MemberStatus {
+        Active, Blacklisted
+    }
+    public enum MemberType {
+        Local, Foreign
+    }
     private MemberType memberType;
     private MemberStatus memberStatus;
     private int monthlyFee;
     private Date startDate;
+
     public Member(Long aId, String aUsername, String aPassword, String aAddress, MemberType aMemberType, MemberStatus aMemberStatus, int aMonthlyFee, Date aStartDate) {
         super(aId, aUsername, aPassword, aAddress);
         memberType = aMemberType;
@@ -17,6 +24,7 @@ public class Member extends User {
         monthlyFee = aMonthlyFee;
         startDate = aStartDate;
     }
+
     public Member() {
         super();
     }
@@ -52,14 +60,5 @@ public class Member extends User {
     public void setStartDate(Date value) {
         this.startDate = value;
     }
-
-    public enum MemberStatus {
-        Active, Blacklisted
-    }
-
-    public enum MemberType {
-        Local, Foreign
-    }
-
 
 }

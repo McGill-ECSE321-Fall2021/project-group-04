@@ -1,7 +1,7 @@
 package ca.mcgill.ecse321.library.model;
 
-import javax.persistence.Entity;
 import java.sql.Date;
+import javax.persistence.Entity;
 
 @Entity
 public abstract class ImmobileItem extends LibraryItem {
