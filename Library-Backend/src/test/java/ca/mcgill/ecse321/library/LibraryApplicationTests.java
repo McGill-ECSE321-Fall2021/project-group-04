@@ -14,41 +14,11 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import javax.persistence.EntityManager;
 
-@ExtendWith(SpringExtension.class)
-@SpringBootTest
+
 class LibraryApplicationTests {
-
-    @Autowired
-    EntityManager entityManager;
-
-    @Autowired
-    private LibraryRepository libraryRepository;
-
-    @AfterEach
-    public void clearDatabase() {
-        libraryRepository.deleteAll();
-    }
 
     @Test
     void contextLoads() {
-        String name = "Group 4 Library";
-        String address = "Address";
-        Long libraryID = 123456789L;
-
-        Library library = new Library();
-        library.setName(name);
-        library.setAddress(address);
-        library.setId(libraryID);
-
-        libraryRepository.save(library);
-        library = null;
-        library = libraryRepository.findLibraryById(libraryID);
-        library = libraryRepository.findLibraryByNameAndAddress(name, address);
-
-        assertNotNull(library);
-        assertEquals(name, library.getName());
-        assertEquals(address, library.getAddress());
-        assertEquals(libraryID, library.getId());
 
     }
 
