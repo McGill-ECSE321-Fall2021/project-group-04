@@ -1,7 +1,6 @@
 package ca.mcgill.ecse321.library.model;
 
 import javax.persistence.Entity;
-import javax.persistence.OneToOne;
 import java.sql.Date;
 
 @Entity

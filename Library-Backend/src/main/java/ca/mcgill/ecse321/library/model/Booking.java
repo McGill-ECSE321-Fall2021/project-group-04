@@ -1,9 +1,6 @@
 package ca.mcgill.ecse321.library.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
@@ -34,6 +31,7 @@ public class Booking {
     }
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     public Long getId() {
         return this.id;
     }

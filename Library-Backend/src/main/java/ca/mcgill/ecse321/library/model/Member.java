@@ -6,19 +6,10 @@ import java.sql.Date;
 @Entity
 public class Member extends User {
 
-    public enum MemberStatus {
-        Active, Blacklisted
-    }
-
-    public enum MemberType {
-        Local, Foreign
-    }
-
     private MemberType memberType;
     private MemberStatus memberStatus;
     private int monthlyFee;
     private Date startDate;
-
     public Member(Long aId, String aUsername, String aPassword, String aAddress, MemberType aMemberType, MemberStatus aMemberStatus, int aMonthlyFee, Date aStartDate) {
         super(aId, aUsername, aPassword, aAddress);
         memberType = aMemberType;
@@ -26,7 +17,6 @@ public class Member extends User {
         monthlyFee = aMonthlyFee;
         startDate = aStartDate;
     }
-
     public Member() {
         super();
     }
@@ -47,12 +37,12 @@ public class Member extends User {
         this.memberStatus = value;
     }
 
-    public void setMonthlyFee(int value) {
-        this.monthlyFee = value;
-    }
-
     public int getMonthlyFee() {
         return this.monthlyFee;
+    }
+
+    public void setMonthlyFee(int value) {
+        this.monthlyFee = value;
     }
 
     public Date getStartDate() {
@@ -61,6 +51,14 @@ public class Member extends User {
 
     public void setStartDate(Date value) {
         this.startDate = value;
+    }
+
+    public enum MemberStatus {
+        Active, Blacklisted
+    }
+
+    public enum MemberType {
+        Local, Foreign
     }
 
 

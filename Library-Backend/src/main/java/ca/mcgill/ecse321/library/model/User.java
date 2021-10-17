@@ -1,8 +1,6 @@
 package ca.mcgill.ecse321.library.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "Accounts")
@@ -24,6 +22,7 @@ public abstract class User {
     }
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public Long getId() {
         return this.id;
     }
