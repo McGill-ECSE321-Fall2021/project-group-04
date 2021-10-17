@@ -1,9 +1,10 @@
 package ca.mcgill.ecse321.library.dao;
 
-import org.springframework.data.repository.CrudRepository;
 import ca.mcgill.ecse321.library.model.Newspaper;
+import org.springframework.data.repository.CrudRepository;
 
-public interface NewspaperRepository extends CrudRepository<Newspaper, String>{
-	Newspaper findNewsPaperByItemId(String id);
-	boolean existsNewsPaperByItemId(String id);
+public interface NewspaperRepository extends CrudRepository<Newspaper, String> {
+    Newspaper findNewspaperByItemId(String id);
+
+    boolean existsNewspaperByItemId(String id);
 }
