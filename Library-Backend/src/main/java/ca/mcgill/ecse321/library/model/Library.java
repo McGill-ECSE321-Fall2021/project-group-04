@@ -7,13 +7,14 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-public abstract class Library {
+public class Library {
     private Long id;
     private String name;
     private String address;
     private Set<WorkDay> openingHours;
 
-    public Library(String aLibraryId, String aName, String aAddress) {
+    public Library(Long aLibraryId, String aName, String aAddress) {
+        id = aLibraryId;
         name = aName;
         address = aAddress;
         openingHours = new HashSet<WorkDay>();
@@ -53,8 +54,8 @@ public abstract class Library {
         return this.openingHours;
     }
 
-    public void setOpeningHours(Set<WorkDay> openingHourss) {
-        this.openingHours = openingHourss;
+    public void setOpeningHours(Set<WorkDay> openingHours) {
+        this.openingHours = openingHours;
     }
 
 }

@@ -4,7 +4,7 @@ import ca.mcgill.ecse321.library.model.Library;
 import org.springframework.data.repository.CrudRepository;
 
 public interface LibraryRepository extends CrudRepository<Library, String> {
-    Library findLibraryByLibraryId(String id);
+    Library findLibraryByLibraryId(Long id);
 
-    boolean existsLibraryByLibraryId(String id);
+    boolean existsLibraryByLibraryId(Long id);
 }

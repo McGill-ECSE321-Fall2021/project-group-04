@@ -26,7 +26,7 @@ public class Booking {
         super();
     }
 
-    @OneToOne
+    @OneToOne(optional = false)
     public BookingType getBookingType() {
         return this.bookingType;
     }

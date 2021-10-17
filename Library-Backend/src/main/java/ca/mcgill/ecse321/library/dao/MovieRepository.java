@@ -4,7 +4,7 @@ import ca.mcgill.ecse321.library.model.Movie;
 import org.springframework.data.repository.CrudRepository;
 
 public interface MovieRepository extends CrudRepository<Movie, String> {
-    Movie findMovieByItemId(String id);
+    Movie findMovieByItemId(Long id);
 
-    boolean existsMovieByItemId(String id);
+    boolean existsMovieByItemId(Long id);
 }
