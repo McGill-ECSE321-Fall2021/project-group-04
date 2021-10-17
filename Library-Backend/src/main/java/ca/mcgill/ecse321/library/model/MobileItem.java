@@ -6,17 +6,15 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public abstract class MobileItem extends LibraryItem {
-    private String barCode;
-    private String title;
+    private String barcode;
     private String author;
     private Date dateOfRelease;
     private float price;
     private Booking booking;
 
     public MobileItem(Long aItemId, String aBarcode, String aTitle, String aAuthor, Date aDateOfRelease, float aPrice, Booking aBooking) {
-        super(aItemId);
-        barCode = aBarcode;
-        title = aTitle;
+        super(aItemId, aTitle);
+        barcode = aBarcode;
         author = aAuthor;
         dateOfRelease = aDateOfRelease;
         price = aPrice;
@@ -27,20 +25,12 @@ public abstract class MobileItem extends LibraryItem {
         super();
     }
 
-    public String getBarCode() {
-        return this.barCode;
+    public String getBarcode() {
+        return this.barcode;
     }
 
-    public void setBarCode(String value) {
-        this.barCode = value;
-    }
-
-    public String getTitle() {
-        return this.title;
-    }
-
-    public void setTitle(String value) {
-        this.title = value;
+    public void setBarcode(String value) {
+        this.barcode = value;
     }
 
     public String getAuthor() {

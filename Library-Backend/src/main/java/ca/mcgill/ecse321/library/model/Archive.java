@@ -6,8 +6,8 @@ import javax.persistence.Entity;
 @Entity
 public class Archive extends ImmobileItem {
 
-    public Archive(Long aItemId, Date aDate, int aNumberOfPages) {
-        super(aItemId, aDate, aNumberOfPages);
+    public Archive(Long aItemId, String aTitle, Date aDate, int aNumberOfPages) {
+        super(aItemId, aTitle, aDate, aNumberOfPages);
     }
 
     public Archive() {

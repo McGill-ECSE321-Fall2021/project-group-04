@@ -7,4 +7,6 @@ public interface LibraryRepository extends CrudRepository<Library, String> {
     Library findLibraryById(Long id);
 
     boolean existsLibraryById(Long id);
+
+    Library findLibraryByNameAndAddress(String name, String address);
 }

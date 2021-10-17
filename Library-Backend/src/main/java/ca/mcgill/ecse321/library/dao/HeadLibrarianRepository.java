@@ -7,4 +7,8 @@ public interface HeadLibrarianRepository extends CrudRepository<HeadLibrarian, S
     HeadLibrarian findHeadLibrarianByUsername(String username);
 
     boolean existsHeadLibrarianByUsername(String username);
+
+    HeadLibrarian findHeadLibrarianById(Long id);
+
+    boolean existsHeadLibrarianById(Long id);
 }

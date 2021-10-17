@@ -7,4 +7,8 @@ public interface LibrarianRepository extends CrudRepository<Librarian, String> {
     Librarian findLibrarianByUsername(String username);
 
     boolean existsLibrarianByUsername(String username);
+
+    Librarian findLibrarianById(Long id);
+
+    boolean existsLibrarianById(Long id);
 }

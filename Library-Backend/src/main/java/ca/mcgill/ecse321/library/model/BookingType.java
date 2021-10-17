@@ -7,7 +7,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "BookingTypes")
 public abstract class BookingType {
-    Long id;
+    private Long id;
 
     BookingType(Long id) {
         this.id = id;

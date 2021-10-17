@@ -5,8 +5,8 @@ import javax.persistence.Entity;
 
 @Entity
 public class Newspaper extends ImmobileItem {
-    public Newspaper(Long aItemId, Date aDate, int aNumberOfPages) {
-        super(aItemId, aDate, aNumberOfPages);
+    public Newspaper(Long aItemId, String aTitle, Date aDate, int aNumberOfPages) {
+        super(aItemId, aTitle, aDate, aNumberOfPages);
     }
 
     public Newspaper() {

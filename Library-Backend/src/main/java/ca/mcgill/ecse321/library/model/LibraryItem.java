@@ -9,14 +9,23 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "LibraryItems")
 public abstract class LibraryItem {
+    private String title;
     private Long id;
 
-    public LibraryItem(Long aItemId) {
+    public LibraryItem(Long aItemId, String aTitle) {
         id = aItemId;
+        title = aTitle;
     }
-
     public LibraryItem() {
         super();
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     @Id

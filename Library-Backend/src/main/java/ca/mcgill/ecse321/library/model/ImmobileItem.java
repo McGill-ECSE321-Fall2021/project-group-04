@@ -8,8 +8,8 @@ public abstract class ImmobileItem extends LibraryItem {
     private Date date;
     private int numberOfPages;
 
-    public ImmobileItem(Long aItemId, Date aDate, int aNumberOfPages) {
-        super(aItemId);
+    public ImmobileItem(Long aItemId, String aTitle, Date aDate, int aNumberOfPages) {
+        super(aItemId, aTitle);
         date = aDate;
         numberOfPages = aNumberOfPages;
     }
