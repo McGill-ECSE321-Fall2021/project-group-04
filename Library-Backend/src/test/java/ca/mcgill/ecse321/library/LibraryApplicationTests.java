@@ -8,6 +8,9 @@ class LibraryApplicationTests {
 
     @Test
     void contextLoads() {
+        String name = "";
+        String address = "";
+        String libraryID = "";
     }
 
 }
