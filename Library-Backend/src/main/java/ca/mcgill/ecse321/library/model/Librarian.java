@@ -1,28 +1,30 @@
-import javax.persistence.Entity;
-import javax.persistence.*;
+package ca.mcgill.ecse321.library.model;
 
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.OneToMany;
 
 @Entity
-public class Librarian extends User{
-private Set<WorkDay> workHours;
+public class Librarian extends User {
+    private Set<WorkDay> workHours;
 
-public Librarian(String aId, String aUsername, String aPassword, String aAddress)
-{
-  super(aId, aUsername, aPassword, aAddress);
-  workHours = new HashSet<WorkDay>();
-}
+    public Librarian(Long aId, String aUsername, String aPassword, String aAddress) {
+        super(aId, aUsername, aPassword, aAddress);
+        workHours = new HashSet<WorkDay>();
+    }
 
+    public Librarian() {
+        super();
+    }
 
-@OneToMany
-public Set<WorkDay> getWorkHours() {
-   return this.workHours;
-}
+    @OneToMany
+    public Set<WorkDay> getWorkHours() {
+        return this.workHours;
+    }
 
-public void setWorkHours(Set<WorkDay> workDays) {
-   this.workHours = workDays;
-}
+    public void setWorkHours(Set<WorkDay> workDays) {
+        this.workHours = workDays;
+    }
 
 }

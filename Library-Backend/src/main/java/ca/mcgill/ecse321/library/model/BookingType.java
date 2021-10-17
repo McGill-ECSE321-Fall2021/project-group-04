@@ -1,20 +1,26 @@
+package ca.mcgill.ecse321.library.model;
+
 import javax.persistence.Entity;
-import javax.persistence.*;
+import javax.persistence.Id;
 
 @Entity
-public abstract class BookingType{
-	String bTypeid;
-	
-	BookingType(String id){
-		this.bTypeid = id;
-	}
-	
-	@Id
-	String getId() {
-		return this.bTypeid;
-	}
-	
-	void setId(String id) {
-		this.bTypeid = id;
-	}
+public abstract class BookingType {
+    Long id;
+
+    BookingType(Long id) {
+        this.id = id;
+    }
+
+    public BookingType() {
+        super();
+    }
+
+    @Id
+    Long getId() {
+        return this.id;
+    }
+
+    void setId(Long id) {
+        this.id = id;
+    }
 }

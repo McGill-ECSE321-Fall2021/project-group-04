@@ -1,25 +1,28 @@
-import javax.persistence.OneToOne;
+package ca.mcgill.ecse321.library.model;
+
 import javax.persistence.Entity;
-import javax.persistence.*;
+import javax.persistence.OneToOne;
 import java.sql.Date;
 
 @Entity
-public class Lending extends BookingType{
-private Date returnDate;
+public class Lending extends BookingType {
+    private Date returnDate;
 
-public Lending(Date aReturnDate, String id)
-{
-  super(id);
-  returnDate = aReturnDate;
-}
+    public Lending(Long id, Date aReturnDate) {
+        super(id);
+        returnDate = aReturnDate;
+    }
 
-@OneToOne(optional=false)
-public Date getReturnDate() {
-   return this.returnDate;
-}
+    public Lending() {
+        super();
+    }
 
-public void setReturnDate(Date returnDate) {
-   this.returnDate = returnDate;
-}
+    public Date getReturnDate() {
+        return this.returnDate;
+    }
+
+    public void setReturnDate(Date returnDate) {
+        this.returnDate = returnDate;
+    }
 
 }

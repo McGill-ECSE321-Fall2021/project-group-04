@@ -1,71 +1,79 @@
+package ca.mcgill.ecse321.library.model;
+
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-
 import java.sql.Date;
 
-import javax.persistence.*;
-
 @Entity
-public abstract class MobileItem extends LibraryItem{
-private String barCode;
+public abstract class MobileItem extends LibraryItem {
+    private String barCode;
+    private String title;
+    private String author;
+    private Date dateOfRelease;
+    private float price;
+    private Booking booking;
 
-public MobileItem(String aItemId, String aBarcode, String aTitle, String aAuthor, Date aDateOfRelease, float aPrice, Booking aBooking)
-{
-  super(aItemId);
-  title = aTitle;
-  author = aAuthor;
-  dateOfRelease = aDateOfRelease;
-  price = aPrice;
-  
-}
-   
-   public void setBarCode(String value) {
-this.barCode = value;
+    public MobileItem(Long aItemId, String aBarcode, String aTitle, String aAuthor, Date aDateOfRelease, float aPrice, Booking aBooking) {
+        super(aItemId);
+        barCode = aBarcode;
+        title = aTitle;
+        author = aAuthor;
+        dateOfRelease = aDateOfRelease;
+        price = aPrice;
+        booking = aBooking;
     }
-public String getBarCode() {
-return this.barCode;
-    }
-private String title;
 
-public void setTitle(String value) {
-this.title = value;
+    public MobileItem() {
+        super();
     }
-public String getTitle() {
-return this.title;
-    }
-private String author;
 
-public void setAuthor(String value) {
-this.author = value;
+    public String getBarCode() {
+        return this.barCode;
     }
-public String getAuthor() {
-return this.author;
-    }
-private Date dateOfRelease;
 
-public void setDateOfRelease(Date value) {
-this.dateOfRelease = value;
+    public void setBarCode(String value) {
+        this.barCode = value;
     }
-public Date getDateOfRelease() {
-return this.dateOfRelease;
-    }
-private float price;
 
-public void setPrice(float value) {
-this.price = value;
+    public String getTitle() {
+        return this.title;
     }
-public float getPrice() {
-return this.price;
+
+    public void setTitle(String value) {
+        this.title = value;
     }
-private Booking booking;
 
-@ManyToOne(optional=false)
-public Booking getBooking() {
-   return this.booking;
-}
+    public String getAuthor() {
+        return this.author;
+    }
 
-public void setBooking(Booking booking) {
-   this.booking = booking;
-}
+    public void setAuthor(String value) {
+        this.author = value;
+    }
+
+    public Date getDateOfRelease() {
+        return this.dateOfRelease;
+    }
+
+    public void setDateOfRelease(Date value) {
+        this.dateOfRelease = value;
+    }
+
+    public float getPrice() {
+        return this.price;
+    }
+
+    public void setPrice(float value) {
+        this.price = value;
+    }
+
+    @ManyToOne(optional = false)
+    public Booking getBooking() {
+        return this.booking;
+    }
+
+    public void setBooking(Booking booking) {
+        this.booking = booking;
+    }
 
 }

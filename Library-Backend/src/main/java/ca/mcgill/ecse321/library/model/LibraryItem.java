@@ -1,20 +1,26 @@
-import javax.persistence.Entity;
-import javax.persistence.*;
-@Entity
-public abstract class LibraryItem{
-private String itemId;
+package ca.mcgill.ecse321.library.model;
 
-public LibraryItem(String aItemId)
-{
-  itemId = aItemId;
-}
-   
-   public void setItemId(String value) {
-this.itemId = value;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
+public abstract class LibraryItem {
+    private Long id;
+
+    public LibraryItem(Long aItemId) {
+        id = aItemId;
     }
-   
-@Id
-public String getItemId() {
-return this.itemId;
-       }
-   }
+
+    public LibraryItem() {
+        super();
+    }
+
+    @Id
+    public Long getId() {
+        return this.id;
+    }
+
+    public void setId(Long value) {
+        this.id = value;
+    }
+}

@@ -1,51 +1,62 @@
-import java.sql.Time;
+package ca.mcgill.ecse321.library.model;
 
 import javax.persistence.Entity;
-import javax.persistence.*;
+import javax.persistence.Id;
+import java.sql.Time;
 
 @Entity
-public class WorkDay{
-private DayOfWeek dayOfWeek;
+public class WorkDay {
 
-public WorkDay(DayOfWeek aDayOfWeek, Time aStartTime, Time aEndTime, String id)
-{
-  dayOfWeek = aDayOfWeek;
-  startTime = aStartTime;
-  endTime = aEndTime;
-  this.wDayid = id;
-  
+    public enum DayOfWeek {
+        Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
+    }
+
+    private DayOfWeek dayOfWeek;
+    private Time startTime;
+    private Time endTime;
+    private Long id;
+
+    public WorkDay(Long id, DayOfWeek aDayOfWeek, Time aStartTime, Time aEndTime) {
+        this.id = id;
+        dayOfWeek = aDayOfWeek;
+        startTime = aStartTime;
+        endTime = aEndTime;
+    }
+
+    public WorkDay() {
+        super();
+    }
+
+    public DayOfWeek getDayOfWeek() {
+        return this.dayOfWeek;
+    }
+
+    public void setDayOfWeek(DayOfWeek value) {
+        this.dayOfWeek = value;
+    }
+
+    public Time getStartTime() {
+        return this.startTime;
+    }
+
+    public void setStartTime(Time value) {
+        this.startTime = value;
+    }
+
+    public Time getEndTime() {
+        return this.endTime;
+    }
+
+    public void setEndTime(Time value) {
+        this.endTime = value;
+    }
+
+    @Id
+    public Long getId() {
+        return this.id;
+    }
+
+    public void setId(Long aId) {
+        this.id = aId;
+    }
 }
-   
-   public void setDayOfWeek(DayOfWeek value) {
-this.dayOfWeek = value;
-    }
-public DayOfWeek getDayOfWeek() {
-return this.dayOfWeek;
-    }
-private Time startTime;
-
-public void setStartTime(Time value) {
-this.startTime = value;
-    }
-public Time getStartTime() {
-return this.startTime;
-    }
-private Time endTime;
-
-public void setEndTime(Time value) {
-this.endTime = value;
-    }
-public Time getEndTime() {
-return this.endTime;
-    }
-private String wDayid;
-
-public void setwDayId(String value) {
-this.wDayid = value;
-    }
-
-@Id
-public String getwDayId() {
-return this.wDayid;
-       }
-   }
