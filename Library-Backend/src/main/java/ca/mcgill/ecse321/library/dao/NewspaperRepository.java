@@ -4,7 +4,7 @@ import ca.mcgill.ecse321.library.model.Newspaper;
 import java.sql.Date;
 import org.springframework.data.repository.CrudRepository;
 
-public interface NewspaperRepository extends CrudRepository<Newspaper, String> {
+public interface NewspaperRepository extends CrudRepository<Newspaper, Long> {
     Newspaper findNewspaperById(Long id);
 
     boolean existsNewspaperById(Long id);

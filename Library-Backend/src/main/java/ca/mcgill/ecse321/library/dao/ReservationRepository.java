@@ -5,7 +5,7 @@ import java.sql.Date;
 import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 
-public interface ReservationRepository extends CrudRepository<Reservation, String> {
+public interface ReservationRepository extends CrudRepository<Reservation, Long> {
     Reservation findReservationById(Long id);
 
     boolean existsReservationById(Long id);

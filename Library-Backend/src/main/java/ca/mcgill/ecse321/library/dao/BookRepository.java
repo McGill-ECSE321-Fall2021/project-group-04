@@ -5,7 +5,7 @@ import ca.mcgill.ecse321.library.model.Booking;
 import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 
-public interface BookRepository extends CrudRepository<Book, String> {
+public interface BookRepository extends CrudRepository<Book, Long> {
     Book findBookById(Long id);
 
     boolean existsBookById(Long id);

@@ -4,7 +4,7 @@ import ca.mcgill.ecse321.library.model.WorkDay;
 import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 
-public interface WorkDayRepository extends CrudRepository<WorkDay, String> {
+public interface WorkDayRepository extends CrudRepository<WorkDay, Long> {
 
     WorkDay findWorkDayById(Long id);
 
