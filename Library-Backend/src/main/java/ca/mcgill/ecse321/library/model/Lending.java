@@ -3,6 +3,8 @@ package ca.mcgill.ecse321.library.model;
 import java.sql.Date;
 import javax.persistence.Entity;
 
+
+
 @Entity
 public class Lending extends BookingType {
     private Date returnDate;
@@ -14,6 +16,14 @@ public class Lending extends BookingType {
 
     public Lending() {
         super();
+    }
+
+    public Long getId(){
+        return super.getId();
+    }
+
+    public void setId(Long id){
+        super.setId(id);
     }
 
     public Date getReturnDate() {
