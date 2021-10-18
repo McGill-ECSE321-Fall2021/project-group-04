@@ -149,10 +149,12 @@ public class TestBookPersistence {
 
 
 
-
+        assertEquals(true,bookRepository.existsBookById(testBook.getId()));
 
         
         
 
     }
+
+
 }
