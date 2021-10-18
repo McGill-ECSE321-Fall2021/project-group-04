@@ -1,6 +1,7 @@
 package ca.mcgill.ecse321.library.model;
 
 import java.sql.Date;
+import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,6 +17,7 @@ public class Booking {
     private Long id;
     private Date bookingDate;
     private User user;
+
 
     public Booking(Long aBookingId, Date aBookingDate, User aUser, BookingType aBookingType) {
         id = aBookingId;
