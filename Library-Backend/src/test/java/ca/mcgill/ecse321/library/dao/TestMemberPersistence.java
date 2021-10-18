@@ -59,5 +59,8 @@ public class TestMemberPersistence {
 		assertEquals(MemberStatus.Active,testMember.getMemberStatus());
 		assertEquals(0,testMember.getMonthlyFee());
 		assertEquals(startDate,testMember.getStartDate());
+		
+		assertEquals(true,memberRepository.existsMemberByUsername(testMember.getUsername()));
+		
     }
 }
