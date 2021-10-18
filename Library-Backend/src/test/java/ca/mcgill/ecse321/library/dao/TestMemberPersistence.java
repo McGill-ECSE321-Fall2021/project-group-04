@@ -32,26 +32,25 @@ public class TestMemberPersistence {
         memberRepository.deleteAll();
     }
 
-    @Test
-    public void testPersistAndLoadCustomer() {
-    Date startDate = Date.valueOf("2021-12-23");
-    	
-    	Member testMember = new Member();
-    	testMember.setUsername("happy");
-    	testMember.setPassword("1234");
-    	testMember.setAddress("199 Rotond");
-    	testMember.setMemberType(MemberType.Local);
-    	testMember.setMemberStatus(MemberStatus.Active);
-    	testMember.setMonthlyFee(0);
-    	testMember.setStartDate(startDate);
+	@Test
+	public void testPersistAndLoadCustomer() {
+		Date startDate = Date.valueOf("2021-12-23");
 
+		Member testMember = new Member();
+		testMember.setUsername("happy");
+		testMember.setPassword("1234");
+		testMember.setAddress("199 Rotond");
+		testMember.setMemberType(MemberType.Local);
+		testMember.setMemberStatus(MemberStatus.Active);
+		testMember.setMonthlyFee(0);
+		testMember.setStartDate(startDate);
+
+		//save
 		memberRepository.save(testMember);
-		
-		testMember = null;
-
 		testMember = memberRepository.findMemberByUsername("happy");
+		//not null
 		assertNotNull(testMember);
-		
+
 		assertEquals("happy", testMember.getUsername());
 		assertEquals("1234",testMember.getPassword());
 		assertEquals("199 Rotond",testMember.getAddress());
@@ -59,8 +58,8 @@ public class TestMemberPersistence {
 		assertEquals(MemberStatus.Active,testMember.getMemberStatus());
 		assertEquals(0,testMember.getMonthlyFee());
 		assertEquals(startDate,testMember.getStartDate());
-		
+		//boolean true
 		assertEquals(true,memberRepository.existsMemberByUsername(testMember.getUsername()));
-		
-    }
+
+	}
 }
