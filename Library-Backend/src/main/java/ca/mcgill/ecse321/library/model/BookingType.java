@@ -7,7 +7,7 @@ import javax.persistence.*;
 public abstract class BookingType {
     private Long id;
 
-    BookingType(Long id) {
+    public BookingType(Long id) {
         this.id = id;
     }
 
@@ -16,12 +16,12 @@ public abstract class BookingType {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    Long getId() {
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    public Long getId() {
         return this.id;
     }
 
-    void setId(Long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }
