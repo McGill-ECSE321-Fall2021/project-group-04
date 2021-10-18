@@ -33,7 +33,7 @@ public class TestLibraryPersistence {
     }
 
     @Test
-    public void testPersistAndLoadLibrary() {
+    public void testPersistAndLoadLibraryWithID() {
         String name = "Group 4 Library";
         String address = "Address";
         Long libraryID = 123456789L;
@@ -46,6 +46,27 @@ public class TestLibraryPersistence {
         libraryRepository.save(library);
         library = null;
         library = libraryRepository.findLibraryById(libraryID);
+
+        assertNotNull(library);
+        assertEquals(name, library.getName());
+        assertEquals(address, library.getAddress());
+        assertEquals(libraryID, library.getId());
+
+    }
+
+    @Test
+    public void testPersistAndLoadLibraryWithNameAndAddress() {
+        String name = "Group 4 Library";
+        String address = "Address";
+        Long libraryID = 123456789L;
+
+        Library library = new Library();
+        library.setName(name);
+        library.setAddress(address);
+        library.setId(libraryID);
+
+        libraryRepository.save(library);
+        library = null;
         library = libraryRepository.findLibraryByNameAndAddress(name, address);
 
         assertNotNull(library);

@@ -12,8 +12,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.sql.Date;
 
-import ca.mcgill.ecse321.library.model.BookingType;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -34,7 +32,7 @@ public class TestReservationPersistence {
     }
 
     @Test
-    public void testPersistAndLoadReservation() {
+    public void testPersistAndLoadReservationWithID() {
         Date expirationDate = Date.valueOf("2021-10-20");
 
         Reservation reservation = new Reservation();
@@ -44,6 +42,24 @@ public class TestReservationPersistence {
         Long id = reservation.getId();      //the JPA generates the ID after saving the reservation into the database
         reservation = null;
         reservation = reservationRepository.findReservationById(id);
+
+        assertNotNull(reservation);
+        assertEquals(id, reservation.getId());
+        assertEquals(expirationDate, reservation.getExpirationDate());
+
+    }
+
+    @Test
+    public void testPersistAndLoadReservationWithDate() {
+        Date expirationDate = Date.valueOf("2021-10-20");
+
+        Reservation reservation = new Reservation();
+        reservation.setExpirationDate(expirationDate);
+
+        reservationRepository.save(reservation);
+        Long id = reservation.getId();      //the JPA generates the ID after saving the reservation into the database
+        reservation = null;
+        reservation = reservationRepository.findByExpirationDate(expirationDate).get(0);
 
         assertNotNull(reservation);
         assertEquals(id, reservation.getId());
