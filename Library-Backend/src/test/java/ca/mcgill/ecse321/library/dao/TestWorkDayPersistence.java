@@ -1,5 +1,8 @@
 package ca.mcgill.ecse321.library.dao;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import java.sql.Time;
 
 import javax.persistence.EntityManager;
@@ -30,6 +33,23 @@ public class TestWorkDayPersistence {
 
     @Test
     public void testPersistAndLoadWorkDay() {	
+    	WorkDay testWorkday = new WorkDay();
+    	Time startTime = Time.valueOf("08:00:00");
+    	Time endTime = Time.valueOf("18:00:00");
+    	//DayOfWeek aDayOfWeek, Time aStartTime, Time aEndTime
+    	testWorkday.setDayOfWeek(DayOfWeek.Wednesday);
+    	testWorkday.setStartTime(startTime);
+    	testWorkday.setEndTime(endTime);
+    	
+    	workDayRepository.save(testWorkday);
+    	testWorkday = workDayRepository.findWorkDayById(testWorkday.getId());
+    	assertNotNull(testWorkday);
+    	
+    	assertEquals(DayOfWeek.Wednesday,testWorkday.getDayOfWeek());
+    	assertEquals("08:00:00", testWorkday.getStartTime());
+    	assertEquals("18:00:00", testWorkday.getEndTime());
+    	
+    	assertEquals(true,workDayRepository.existsWorkDayById(testWorkday.getId()));
     	
     }
 }
