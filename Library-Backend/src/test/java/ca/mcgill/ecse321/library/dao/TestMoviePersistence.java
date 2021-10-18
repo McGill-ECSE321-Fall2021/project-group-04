@@ -131,6 +131,28 @@ public class TestMoviePersistence {
 
         assertEquals(true, movieRepository.existsMovieById(testMovie.getId()));
 
+        returnB = movieRepository.findByAuthor(mAuthor).get(0);
+
+        assertNotNull(returnB);
+        assertEquals(mLength, returnB.getLength());
+        assertEquals(barCode, returnB.getBarcode());
+        assertEquals(mTitle, returnB.getTitle());
+        assertEquals(mAuthor, returnB.getAuthor());
+        assertEquals(mDateRelease, returnB.getDateOfRelease());
+        assertEquals(mPrice, returnB.getPrice());
+        assertEquals(booking1.getBookingDate(), returnB.getBooking().getBookingDate());
+
+        returnB = movieRepository.findByBooking(booking1).get(0);
+
+        assertNotNull(returnB);
+        assertEquals(mLength, returnB.getLength());
+        assertEquals(barCode, returnB.getBarcode());
+        assertEquals(mTitle, returnB.getTitle());
+        assertEquals(mAuthor, returnB.getAuthor());
+        assertEquals(mDateRelease, returnB.getDateOfRelease());
+        assertEquals(mPrice, returnB.getPrice());
+        assertEquals(booking1.getBookingDate(), returnB.getBooking().getBookingDate());
+
 
     }
 

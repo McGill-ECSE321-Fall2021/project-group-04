@@ -151,7 +151,29 @@ public class TestBookPersistence {
 
         assertEquals(true,bookRepository.existsBookById(testBook.getId()));
 
-        
+        returnB = bookRepository.findByAuthor(bAuthor).get(0);
+
+        assertNotNull(returnB);
+        assertEquals(bIsbn, returnB.getIsbn());
+        assertEquals(bNumPages, returnB.getNumberOfPages());
+        assertEquals(barCode, returnB.getBarcode());
+        assertEquals(bTitle, returnB.getTitle());
+        assertEquals(bAuthor, returnB.getAuthor());
+        assertEquals(bDateRelease, returnB.getDateOfRelease());
+        assertEquals(bPrice, returnB.getPrice());
+        assertEquals(booking1.getBookingDate(), returnB.getBooking().getBookingDate());
+
+        returnB = bookRepository.findByBooking(booking1).get(0);
+
+        assertNotNull(returnB);
+        assertEquals(bIsbn, returnB.getIsbn());
+        assertEquals(bNumPages, returnB.getNumberOfPages());
+        assertEquals(barCode, returnB.getBarcode());
+        assertEquals(bTitle, returnB.getTitle());
+        assertEquals(bAuthor, returnB.getAuthor());
+        assertEquals(bDateRelease, returnB.getDateOfRelease());
+        assertEquals(bPrice, returnB.getPrice());
+        assertEquals(booking1.getBookingDate(), returnB.getBooking().getBookingDate());
         
 
     }
