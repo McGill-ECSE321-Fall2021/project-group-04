@@ -33,6 +33,7 @@ public class TestWorkDayPersistence {
 
     @Test
     public void testPersistAndLoadWorkDay() {	
+    	
     	WorkDay testWorkday = new WorkDay();
     	Time startTime = Time.valueOf("08:00:00");
     	Time endTime = Time.valueOf("18:00:00");
@@ -43,12 +44,13 @@ public class TestWorkDayPersistence {
     	
     	workDayRepository.save(testWorkday);
     	testWorkday = workDayRepository.findWorkDayById(testWorkday.getId());
+    	//Not null
     	assertNotNull(testWorkday);
     	
     	assertEquals(DayOfWeek.Wednesday,testWorkday.getDayOfWeek());
     	assertEquals("08:00:00", testWorkday.getStartTime());
     	assertEquals("18:00:00", testWorkday.getEndTime());
-    	
+    	//boolean true
     	assertEquals(true,workDayRepository.existsWorkDayById(testWorkday.getId()));
     	
     }

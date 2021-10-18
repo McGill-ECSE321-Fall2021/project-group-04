@@ -45,11 +45,10 @@ public class TestMemberPersistence {
     	testMember.setMonthlyFee(0);
     	testMember.setStartDate(startDate);
 
+    	//save
 		memberRepository.save(testMember);
-		
-		testMember = null;
-
 		testMember = memberRepository.findMemberByUsername("happy");
+		//not null
 		assertNotNull(testMember);
 		
 		assertEquals("happy", testMember.getUsername());
@@ -59,7 +58,7 @@ public class TestMemberPersistence {
 		assertEquals(MemberStatus.Active,testMember.getMemberStatus());
 		assertEquals(0,testMember.getMonthlyFee());
 		assertEquals(startDate,testMember.getStartDate());
-		
+		//boolean true
 		assertEquals(true,memberRepository.existsMemberByUsername(testMember.getUsername()));
 		
     }
