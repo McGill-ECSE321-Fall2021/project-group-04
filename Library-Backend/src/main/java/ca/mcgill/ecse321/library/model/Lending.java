@@ -26,6 +26,8 @@ public class Lending extends BookingType {
         super.setId(id);
     }
 
+
+
     public Date getReturnDate() {
         return this.returnDate;
     }

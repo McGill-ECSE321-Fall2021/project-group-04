@@ -20,6 +20,11 @@ public class Reservation extends BookingType {
         return this.expirationDate;
     }
 
+    public Long getId(){
+        return super.getId();
+    }
+
+
     public void setExpirationDate(Date value) {
         this.expirationDate = value;
     }
