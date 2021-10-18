@@ -57,64 +57,22 @@ public class TestBookingRepository {
     @Test
     public void testPersistAndLoadBookingWithMember() {
 
-        Member tUser = new Member();
-        tUser.setUsername("Simo4");
-        tUser.setPassword("12341234");
-        tUser.setAddress("123 street");
+        Member tUser = (Member) generateUser("Member");
 
 
         Lending bT = new Lending();
-
-        Booking booking1= new Booking();
-        booking1.setBookingDate(java.sql.Date.valueOf("2015-03-30"));
-        booking1.setBookingType(bT);
-        booking1.setUser(tUser);
-
-        Booking booking2= new Booking();
-        booking2.setBookingDate(java.sql.Date.valueOf("2015-03-31"));
-        booking2.setBookingType(bT);
-        booking2.setUser(tUser);
-
+        Booking booking1 = generateBooking(tUser);
 
         //Book ---------------------------->
         String bIsbn = "Bsbsbssb12";
-        int bNumPages = 222;
-        String barCode = "121212121p";
-        String bTitle = "Boss";
-        String bAuthor = "habibi";
-        java.sql.Date bDateRelease = Date.valueOf("2015-03-31");
-        float bPrice = (float) 22.99;
-
-        Book testBook = new Book();
-        testBook.setIsbn(bIsbn);
-        testBook.setNumberOfPages(bNumPages);
-        testBook.setBarcode(barCode);
-        testBook.setTitle(bTitle);
-        testBook.setAuthor(bAuthor);
-        testBook.setDateOfRelease(bDateRelease);
-        testBook.setPrice(bPrice);
-        //testBook.setId(itemId);
-        testBook.setBooking(booking1);
-
-        Book testBook2 = new Book();
         String bIsbn2 = "Bsbsbssb123";
-        testBook2.setIsbn(bIsbn2);
-        testBook2.setNumberOfPages(bNumPages);
-        testBook2.setBarcode(barCode);
-        testBook2.setTitle(bTitle);
-        testBook2.setAuthor(bAuthor);
-        testBook2.setDateOfRelease(bDateRelease);
-        testBook2.setPrice(bPrice);
-        testBook2.setBooking(booking2);
-
+        Book book = generateBook(bIsbn);
+        book.setBooking(booking1);
 
         //SAVE------------------->
-        lendingRepository.save(bT);
 
         memberRepository.save(tUser);
-
         bookingRepository.save(booking1);
-//        bookingRepository.save(booking2);
 
 
         //TEST------------------->
@@ -127,14 +85,9 @@ public class TestBookingRepository {
         assertNotNull(testBooking1);
         assertNotNull(testBooking2);
 
-        assertEquals(booking1.getId(), findBooking.getId());
-        assertEquals(booking1.getBookingDate(), findBooking.getBookingDate());
-        assertEquals(booking1.getBookingType().toString().split("@")[0], findBooking.getBookingType().toString().split("@")[0]);
-        assertEquals(booking1.getUser().getUsername(), findBooking.getUser().getUsername());
+        compareToDB(booking1);
 
         assertEquals(booking1.getId(), testBooking2.get(0).getId());
-//        assertEquals(booking1.getId(), testBooking1.get(0).getId());
-//        assertEquals(booking2.getId(), testBooking1.get(1).getId());
 
 
 
@@ -144,64 +97,20 @@ public class TestBookingRepository {
     public void testPersistAndLoadBookingWithLibrarian() {
 
 
-        Librarian tUser = new Librarian();
-        tUser.setUsername("Simo4");
-        tUser.setPassword("12341234");
-        tUser.setAddress("123 street");
-        tUser.setAddress("1234 Aly street");
+        Librarian tUser = (Librarian) generateUser("Librarian");
 
-        Lending bT = new Lending();
-
-        Booking booking1= new Booking();
-        booking1.setBookingDate(java.sql.Date.valueOf("2015-03-30"));
-        booking1.setBookingType(bT);
-        booking1.setUser(tUser);
-
-        Booking booking2= new Booking();
-        booking2.setBookingDate(java.sql.Date.valueOf("2015-03-31"));
-        booking2.setBookingType(bT);
-        booking2.setUser(tUser);
-
+        Booking booking1 = generateBooking(tUser);
 
         //Book ---------------------------->
         String bIsbn = "Bsbsbssb12";
-        int bNumPages = 222;
-        String barCode = "121212121p";
-        String bTitle = "Boss";
-        String bAuthor = "habibi";
-        java.sql.Date bDateRelease = Date.valueOf("2015-03-31");
-        float bPrice = (float) 22.99;
-
-        Book testBook = new Book();
-        testBook.setIsbn(bIsbn);
-        testBook.setNumberOfPages(bNumPages);
-        testBook.setBarcode(barCode);
-        testBook.setTitle(bTitle);
-        testBook.setAuthor(bAuthor);
-        testBook.setDateOfRelease(bDateRelease);
-        testBook.setPrice(bPrice);
-        //testBook.setId(itemId);
-        testBook.setBooking(booking1);
-
-        Book testBook2 = new Book();
         String bIsbn2 = "Bsbsbssb123";
-        testBook2.setIsbn(bIsbn2);
-        testBook2.setNumberOfPages(bNumPages);
-        testBook2.setBarcode(barCode);
-        testBook2.setTitle(bTitle);
-        testBook2.setAuthor(bAuthor);
-        testBook2.setDateOfRelease(bDateRelease);
-        testBook2.setPrice(bPrice);
-        testBook2.setBooking(booking2);
-
+        Book book = generateBook(bIsbn);
+        book.setBooking(booking1);
 
         //SAVE------------------->
-        lendingRepository.save(bT);
 
         librarianRepository.save(tUser);
-
         bookingRepository.save(booking1);
-//        bookingRepository.save(booking2);
 
 
         //TEST------------------->
@@ -214,16 +123,9 @@ public class TestBookingRepository {
         assertNotNull(testBooking1);
         assertNotNull(testBooking2);
 
-        assertEquals(booking1.getId(), findBooking.getId());
-        assertEquals(booking1.getBookingDate(), findBooking.getBookingDate());
-        assertEquals(booking1.getBookingType().toString().split("@")[0], findBooking.getBookingType().toString().split("@")[0]);
-        assertEquals(booking1.getUser().getUsername(), findBooking.getUser().getUsername());
+        compareToDB(booking1);
 
         assertEquals(booking1.getId(), testBooking2.get(0).getId());
-//        assertEquals(booking1.getId(), testBooking1.get(0).getId());
-//        assertEquals(booking2.getId(), testBooking1.get(1).getId());
-
-
     }
 
     @Test
@@ -231,8 +133,6 @@ public class TestBookingRepository {
 
         HeadLibrarian tUser = (HeadLibrarian) generateUser("HeadLibrarian");
 
-
-        Lending bT = new Lending();
         Booking booking1 = generateBooking(tUser);
 
         //Book ---------------------------->
