@@ -5,7 +5,7 @@ import java.sql.Date;
 import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 
-public interface LendingRepository extends CrudRepository<Lending, String> {
+public interface LendingRepository extends CrudRepository<Lending, Long> {
     Lending findLendingById(Long id);
 
     boolean existsLendingById(Long id);

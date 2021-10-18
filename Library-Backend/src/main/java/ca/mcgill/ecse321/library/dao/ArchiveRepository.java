@@ -5,7 +5,7 @@ import java.sql.Date;
 import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 
-public interface ArchiveRepository extends CrudRepository<Archive, String> {
+public interface ArchiveRepository extends CrudRepository<Archive, Long> {
     Archive findArchiveById(Long id);
 
     boolean existsArchiveById(Long id);
