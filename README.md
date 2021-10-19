@@ -33,9 +33,9 @@ All the related documents for each sprint can be accessed below:
 ### Roles and Budget
 |        Name        |         Roles/Assigned Tasks       |    Time Spent   |
 | ------------------ | ---------------------------------- | --------------- |
-| Alexandre Saroufim | Domain model, Wiki Page, UC diagrams and specifications, Persistence Layer, Persistence testing                                   |        25      |
-|    Aly Mohamed     | DAO interfaces, Domain model, Persistence testing, UC specifications  |        25    |
-| Abd-El-Aziz Zayed  | Build System & CI, Domain Model, DAOs, Persistence Layer, Persistence Testing|    25       |
-|     Jewoo Lee      | Domain model, UC diagrams and specifications, Persistence Layer, Persistence testing, Wiki page   |       25      |
-|   Saghar Sahebi    | Domain model, Wiki Page, UC diagrams and specifications, Persistence Layer, Persistence testing                                  |        25    |
-| Simo      Benkirane| Domain model, Build System & CI, Persistence testing, JPA, UC                                 |    25     |
+| Alexandre Saroufim | Requirements, Domain model, Wiki Page, UC diagrams and specifications, Persistence Layer, Persistence testing                                   |        25      |
+|    Aly Mohamed     | Requirements,  Domain model, UC specifications, Persistence layer, DAO interfaces, Persistence testing  |        25    |
+| Abd-El-Aziz Zayed  | Requirements, Build System & CI, Domain Model, DAOs, Persistence Layer, Persistence Testing|    25       |
+|     Jewoo Lee      | Requirements, Domain model, UC diagrams and specifications, Persistence Layer, Persistence testing, Wiki page   |       25      |
+|   Saghar Sahebi    | Requirements, Domain model, Wiki Page, UC diagrams and specifications, Persistence Layer, Persistence testing                                  |        25    |
+| Simo      Benkirane| Requirements, Domain model, Build System & CI, Persistence testing, JPA, UC                              |    25     |
