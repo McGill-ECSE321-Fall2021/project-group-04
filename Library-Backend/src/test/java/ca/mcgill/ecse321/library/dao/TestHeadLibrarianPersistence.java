@@ -1,17 +1,16 @@
 package ca.mcgill.ecse321.library.dao;
 
-import javax.persistence.EntityManager;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
 import ca.mcgill.ecse321.library.model.HeadLibrarian;
+import javax.persistence.EntityManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -34,11 +33,11 @@ public class TestHeadLibrarianPersistence {
 
     @Test
     public void testPersistAndLoadHeadLibrarian() {
-        String username="headLibrarian";
-        String pass="pass";
-        String add="1414 Chomedey";
+        String username = "headLibrarian";
+        String pass = "pass";
+        String add = "1414 Chomedey";
         //Long myid = 479857L;
-        HeadLibrarian testHL=new HeadLibrarian();
+        HeadLibrarian testHL = new HeadLibrarian();
         testHL.setAddress(add);
         //testHL.setId(myid);
         testHL.setPassword(pass);
@@ -46,15 +45,14 @@ public class TestHeadLibrarianPersistence {
 
         headLibrarianRepository.save(testHL);
 
-        testHL=null;
+        testHL = null;
 
-        testHL=headLibrarianRepository.findHeadLibrarianByUsername(username);
+        testHL = headLibrarianRepository.findHeadLibrarianByUsername(username);
         assertNotNull(testHL);
         assertEquals(username, testHL.getUsername());
         assertEquals(pass, testHL.getPassword());
         assertEquals(add, testHL.getAddress());
         //assertEquals(myid, testHL.getId());
-
 
 
     }

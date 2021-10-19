@@ -1,19 +1,17 @@
 package ca.mcgill.ecse321.library.dao;
 
-import javax.persistence.EntityManager;
-
-import ca.mcgill.ecse321.library.model.Movie;
 import ca.mcgill.ecse321.library.model.Booking;
 import ca.mcgill.ecse321.library.model.Lending;
 import ca.mcgill.ecse321.library.model.Member;
+import ca.mcgill.ecse321.library.model.Movie;
+import java.sql.Date;
+import javax.persistence.EntityManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-
-import java.sql.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -54,14 +52,12 @@ public class TestMoviePersistence {
         tUser.setAddress("123 street");
 
 
-
         Lending bT = new Lending();
 
-        Booking booking1= new Booking();
+        Booking booking1 = new Booking();
         booking1.setBookingDate(Date.valueOf("2015-03-30"));
         booking1.setBookingType(bT);
         booking1.setUser(tUser);
-
 
 
         //Movie ------Parameters---------------------->
@@ -81,7 +77,6 @@ public class TestMoviePersistence {
         testMovie.setPrice(mPrice);
         testMovie.setBooking(booking1);
         //------------------------------------------->
-
 
 
         //SAVE------------------->

@@ -1,8 +1,7 @@
 package ca.mcgill.ecse321.library.dao;
 
-import javax.persistence.EntityManager;
-
 import ca.mcgill.ecse321.library.model.Librarian;
+import javax.persistence.EntityManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -34,11 +33,11 @@ public class TestLibrarianPersistence {
 
     @Test
     public void testPersistAndLoadLibrarian() {
-        String username="Librarian";
-        String pass="pass";
-        String add="1414 Chomedey";
+        String username = "Librarian";
+        String pass = "pass";
+        String add = "1414 Chomedey";
         //Long myid = 9645643L;
-        Librarian testL=new Librarian();
+        Librarian testL = new Librarian();
         testL.setAddress(add);
         //testL.setId(myid);
         testL.setPassword(pass);
@@ -47,9 +46,9 @@ public class TestLibrarianPersistence {
 
         librarianRepository.save(testL);
 
-        testL=null;
+        testL = null;
 
-        testL=librarianRepository.findLibrarianByUsername(username);
+        testL = librarianRepository.findLibrarianByUsername(username);
         assertNotNull(testL);
         assertEquals(username, testL.getUsername());
         assertEquals(pass, testL.getPassword());
