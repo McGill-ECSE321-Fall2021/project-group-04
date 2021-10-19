@@ -1,4 +1,4 @@
-# Welcome to the Group 4's Wiki Page!
+# Welcome to the Group 4's Page!
 ## Project Description
 This project is about developing a library management system that can be accessed through both a web page and an Android app. To begin with, the user must register into the library system in order to have full access to all the resources. Once the user has created an account, the user will be able to search available items, book, reserve, and check out any library items (except the Newspaper), as well as reserving the library as a whole for a special event. The user is capable of checking out the library items to at most 4 months, and the system will notify all the users with the list of items they have checked out. Moreover, when the return date is within 24 hours, the system will automatically notify the user as well. The head librarian is capable of making changes to the library and its items, such as the working hour and adding/removing more library items, and the librarian is responsible for any interactions with the users. The library management system must satisfy all the requirements.
 
