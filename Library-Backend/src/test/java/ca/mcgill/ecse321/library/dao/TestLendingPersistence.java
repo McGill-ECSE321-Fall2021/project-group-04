@@ -13,8 +13,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.sql.Date;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -40,6 +39,7 @@ public class TestLendingPersistence {
 
         lendingRepository.save(lending);
 
+        assertNotNull(lendingRepository.findLendingById(lending.getId()));
         assertTrue(lendingRepository.existsLendingById(lending.getId()));
         assertEquals(lending.getId(), lendingRepository.findByReturnDate(expDate).get(0).getId());
     }
