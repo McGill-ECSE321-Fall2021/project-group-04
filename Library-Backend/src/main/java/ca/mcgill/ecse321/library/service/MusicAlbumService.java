@@ -1,12 +1,14 @@
 package ca.mcgill.ecse321.library.service;
 
 import java.sql.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ca.mcgill.ecse321.library.dao.MusicAlbumRepository;
+import ca.mcgill.ecse321.library.model.Book;
 import ca.mcgill.ecse321.library.model.MusicAlbum;
 
 public class MusicAlbumService {
@@ -60,6 +62,27 @@ public class MusicAlbumService {
 		return musicAlbum;
 		
 	}
+	
+	@Transactional
+	public MusicAlbum getBookByTitle(String title) {
+		return musicAlbumRepository.findMusicAlbumByTitle(title);
+	}
+	
+	
+	@Transactional
+	public boolean deletBook(String title) {
+		MusicAlbum musicAlbum = musicAlbumRepository.findMusicAlbumByTitle(title);
+		if(musicAlbum!=null) {
+			musicAlbumRepository.delete(musicAlbum);
+			return true;
+		}
+		else return false;
+	}
+	
+	public List<MusicAlbum> getAllBooks(){
+		return HelpersBooking.toList(musicAlbumRepository.findAll());
+	}
+	
 	
 	
 	

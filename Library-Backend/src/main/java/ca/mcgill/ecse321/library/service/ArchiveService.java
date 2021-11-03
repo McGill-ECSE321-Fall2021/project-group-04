@@ -1,6 +1,7 @@
 package ca.mcgill.ecse321.library.service;
 
 import java.sql.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,9 +11,6 @@ import ca.mcgill.ecse321.library.dao.ArchiveRepository;
 import ca.mcgill.ecse321.library.model.Archive;
 
 
-
-
-
 public class ArchiveService {
 	
 	@Autowired
@@ -20,14 +18,10 @@ public class ArchiveService {
 	
 	/**
 	 * @author alymo
-	 * Creates a book
-	 * @param barCode
-	 * @param title
-	 * @param author
-	 * @param dateOfRelease
-	 * @param price
-	 * @param isbn
+	 * Creates an archive
+	 * @param date
 	 * @param numberOfPages
+	 * @param title
 	 * @return
 	 */
 	@Transactional
@@ -46,6 +40,42 @@ public class ArchiveService {
 		
 		return archive;
 		
+	}
+	
+	/**
+	 * @author alymo
+	 * Gets archives by title
+	 * @param title
+	 * @return
+	 */
+	@Transactional
+	public Archive getArchiveByTitle(String title) {
+		return archiveRepository.findArchiveByTitle(title);
+	}
+	
+	/**
+	 * @author alymo
+	 * Deletes archive by title
+	 * @param title
+	 * @return
+	 */
+	@Transactional
+	public boolean deletArchive(String title) {
+		Archive archive = archiveRepository.findArchiveByTitle(title);
+		if(archive!=null) {
+			archiveRepository.delete(archive);
+			return true;
+		}
+		else return false;
+	}
+	
+	/**
+	 * @author alymo
+	 * Gets archives from database
+	 * @return
+	 */
+	public List<Archive> getAllArchives(){
+		return HelpersBooking.toList(archiveRepository.findAll());
 	}
 	
 	

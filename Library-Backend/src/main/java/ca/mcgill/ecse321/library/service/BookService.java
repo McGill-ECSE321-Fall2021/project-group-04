@@ -1,6 +1,7 @@
 package ca.mcgill.ecse321.library.service;
 
 import java.sql.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,9 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ca.mcgill.ecse321.library.dao.BookRepository;
 import ca.mcgill.ecse321.library.model.Book;
-
-
-
 
 
 public class BookService {
@@ -63,6 +61,53 @@ public class BookService {
 		
 		return book;
 		
+	}
+	
+	/**
+	 * @author alymo
+	 * Gets book by title
+	 * @param title
+	 * @return
+	 */
+	@Transactional
+	public Book getBookByTitle(String title) {
+		return bookRepository.findBookByTitle(title);
+	}
+	
+	/**
+	 * @author alymo
+	 * Gets book by isbn
+	 * @param isbn
+	 * @return
+	 */
+	@Transactional
+	public Book getBookByIsbn(String isbn) {
+		return bookRepository.findBookByIsbn(isbn);
+	}
+	
+	/**
+	 * @author alymo
+	 * deletes book by title
+	 * @param title
+	 * @return
+	 */
+	@Transactional
+	public boolean deleteBook(String title) {
+		Book book = bookRepository.findBookByTitle(title);
+		if(book!=null) {
+			bookRepository.delete(book);
+			return true;
+		}
+		else return false;
+	}
+	
+	/**
+	 * @author alymo
+	 * returns all books from database
+	 * @return
+	 */
+	public List<Book> getAllBooks(){
+		return HelpersBooking.toList(bookRepository.findAll());
 	}
 	
 	

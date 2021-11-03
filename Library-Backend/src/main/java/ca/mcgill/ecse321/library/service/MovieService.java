@@ -1,6 +1,7 @@
 package ca.mcgill.ecse321.library.service;
 
 import java.sql.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -56,6 +57,41 @@ public class MovieService {
 		
 	}
 	
+	/**
+	 * @author alymo
+	 * Gets movie by title
+	 * @param title
+	 * @return
+	 */
+	@Transactional
+	public Movie getMovieByTitle(String title) {
+		return movieRepository.findMovieByTitle(title);
+	}
+	
+	/**
+	 * @author alymo
+	 * Deletes movie by title
+	 * @param title
+	 * @return
+	 */
+	@Transactional
+	public boolean deletMovie(String title) {
+		Movie movie = movieRepository.findMovieByTitle(title);
+		if(movie!=null) {
+			movieRepository.delete(movie);
+			return true;
+		}
+		else return false;
+	}
+	
+	/**
+	 * @author alymo
+	 * Gets movies from database
+	 * @return
+	 */
+	public List<Movie> getAllMovies(){
+		return HelpersBooking.toList(movieRepository.findAll());
+	}
 	
 	
 }

@@ -1,6 +1,8 @@
 package ca.mcgill.ecse321.library.service;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 public class HelpersBooking {
 	
@@ -55,7 +57,14 @@ public class HelpersBooking {
 		
 	}
 	
-	
+	/**
+	 * @author alymo
+	 * Checks if input elements are null
+	 * @param date
+	 * @param numberOfPages
+	 * @param title
+	 * @return
+	 */
 	public static boolean checkImmobileItemInfo(String date, String numberOfPages, String title) {
 		
 		String error = "";
@@ -88,4 +97,20 @@ public class HelpersBooking {
 		else return true;
 		
 	}
+	
+	/**
+	 * Converts an iterable element to a list
+	 * @param <T>
+	 * @param iterable
+	 * @return
+	 */
+	public static <T> List<T> toList(Iterable<T> iterable){
+		List<T> resultList = new ArrayList<T>();
+		for (T t : iterable) {
+			resultList.add(t);
+		}
+		return resultList;
+
+	}
+
 }

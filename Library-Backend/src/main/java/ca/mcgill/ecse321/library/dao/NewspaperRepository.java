@@ -10,4 +10,6 @@ public interface NewspaperRepository extends CrudRepository<Newspaper, Long> {
     boolean existsNewspaperById(Long id);
 
     Newspaper findNewspaperByDate(Date date);
+
+	Newspaper findNewspaperByTitle(String title);
 }
