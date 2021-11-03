@@ -1,5 +1,7 @@
 package ca.mcgill.ecse321.library.service;
 
+import java.sql.Date;
+
 public class HelpersBooking {
 	
 	
@@ -29,9 +31,21 @@ public class HelpersBooking {
 		}		
 		if(dateOfRelease == null || dateOfRelease == "") {
 			error += "dateOfRelease needs to be specified ";
-		}		
+		}
+		try {
+			Date date = Date.valueOf(dateOfRelease);
+		}
+		catch(Exception e) {
+			error += "date format is not correct";
+		}
 		if(price == null || price == "") {
 			error += "price needs to be specified ";
+		}
+		try {
+			int p = Integer.valueOf(price);
+		}
+		catch(Exception e) {
+			error += "price is not a number";
 		}
 		
 		Boolean hasError = error != null || error != "";
@@ -41,4 +55,37 @@ public class HelpersBooking {
 		
 	}
 	
+	
+	public static boolean checkImmobileItemInfo(String date, String numberOfPages, String title) {
+		
+		String error = "";
+		
+		if(title == null || title == "") {
+			error += "title needs to be specified ";
+		}	
+		if(date == null || date == "") {
+			error += "date needs to be specified ";
+		}		
+		try {
+			Date d = Date.valueOf(date);
+		}
+		catch(Exception e) {
+			error += "date format is not correct";
+		}
+		if(numberOfPages == null || numberOfPages == "") {
+			error += "number of pages needs to be specified ";
+		}		
+		try {
+			int pages = Integer.valueOf(numberOfPages);
+		}
+		catch(Exception e) {
+			error += "number of pages is not a number";
+		}
+	
+		Boolean hasError = error != null || error != "";
+		
+		if(hasError) throw new IllegalArgumentException(error);
+		else return true;
+		
+	}
 }

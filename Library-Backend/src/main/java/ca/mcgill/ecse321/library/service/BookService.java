@@ -57,6 +57,7 @@ public class BookService {
 		book.setPrice(Integer.valueOf(price));
 		book.setIsbn(isbn);
 		book.setNumberOfPages(Integer.valueOf(numberOfPages));
+		book.setBooking(null);
 		
 		bookRepository.save(book);
 		
