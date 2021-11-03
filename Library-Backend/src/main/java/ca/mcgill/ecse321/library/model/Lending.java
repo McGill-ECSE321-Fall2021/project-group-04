@@ -4,7 +4,6 @@ import java.sql.Date;
 import javax.persistence.Entity;
 
 
-
 @Entity
 public class Lending extends BookingType {
     private Date returnDate;
@@ -18,14 +17,13 @@ public class Lending extends BookingType {
         super();
     }
 
-    public Long getId(){
+    public Long getId() {
         return super.getId();
     }
 
-    public void setId(Long id){
+    public void setId(Long id) {
         super.setId(id);
     }
-
 
 
     public Date getReturnDate() {

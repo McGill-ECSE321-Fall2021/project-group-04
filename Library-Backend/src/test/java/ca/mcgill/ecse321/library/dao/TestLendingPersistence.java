@@ -1,9 +1,8 @@
 package ca.mcgill.ecse321.library.dao;
 
-import javax.persistence.EntityManager;
-
 import ca.mcgill.ecse321.library.model.Lending;
-import ca.mcgill.ecse321.library.model.Reservation;
+import java.sql.Date;
+import javax.persistence.EntityManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

@@ -1,6 +1,5 @@
 package ca.mcgill.ecse321.library.dao;
 
-import ca.mcgill.ecse321.library.model.Archive;
 import ca.mcgill.ecse321.library.model.Newspaper;
 import java.sql.Date;
 import javax.persistence.EntityManager;

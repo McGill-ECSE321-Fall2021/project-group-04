@@ -19,6 +19,7 @@ public abstract class LibraryItem {
         id = aItemId;
         title = aTitle;
     }
+
     public LibraryItem() {
         super();
     }

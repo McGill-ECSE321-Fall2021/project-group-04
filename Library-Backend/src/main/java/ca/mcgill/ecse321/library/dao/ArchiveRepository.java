@@ -11,5 +11,6 @@ public interface ArchiveRepository extends CrudRepository<Archive, Long> {
     boolean existsArchiveById(Long id);
 
     List<Archive> findByDate(Date date);
+
     Archive findArchiveByTitle(String title);
 }

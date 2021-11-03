@@ -1,12 +1,11 @@
 package ca.mcgill.ecse321.library.dao;
 
-import ca.mcgill.ecse321.library.*;
+import ca.mcgill.ecse321.library.model.Book;
+import ca.mcgill.ecse321.library.model.Booking;
+import ca.mcgill.ecse321.library.model.Lending;
+import ca.mcgill.ecse321.library.model.Member;
 import java.sql.Date;
-import java.util.List;
-
 import javax.persistence.EntityManager;
-
-import ca.mcgill.ecse321.library.model.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -57,12 +56,11 @@ public class TestBookPersistence {
 
         Lending bT = new Lending();
 
-        Booking booking1= new Booking();
+        Booking booking1 = new Booking();
         booking1.setBookingDate(Date.valueOf("2015-03-30"));
         //booking1.setId((long) 33233);
         booking1.setBookingType(bT);
         booking1.setUser(tUser);
-
 
 
         //Book ---------------------------->
@@ -86,7 +84,6 @@ public class TestBookPersistence {
         //testBook.setId(itemId);
         testBook.setBooking(booking1);
         //---------------------------->
-
 
 
         //SAVE------------------->
@@ -148,8 +145,7 @@ public class TestBookPersistence {
         assertEquals(booking1.getBookingDate(), returnB.getBooking().getBookingDate());
 
 
-
-        assertEquals(true,bookRepository.existsBookById(testBook.getId()));
+        assertEquals(true, bookRepository.existsBookById(testBook.getId()));
 
         returnB = bookRepository.findByAuthor(bAuthor).get(0);
 
@@ -174,7 +170,7 @@ public class TestBookPersistence {
         assertEquals(bDateRelease, returnB.getDateOfRelease());
         assertEquals(bPrice, returnB.getPrice());
         assertEquals(booking1.getBookingDate(), returnB.getBooking().getBookingDate());
-        
+
 
     }
 

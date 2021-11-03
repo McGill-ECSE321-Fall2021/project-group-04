@@ -1,21 +1,21 @@
 package ca.mcgill.ecse321.library.dao;
 
+import ca.mcgill.ecse321.library.model.Book;
+import ca.mcgill.ecse321.library.model.Booking;
+import ca.mcgill.ecse321.library.model.HeadLibrarian;
+import ca.mcgill.ecse321.library.model.Lending;
+import ca.mcgill.ecse321.library.model.Librarian;
+import ca.mcgill.ecse321.library.model.Member;
+import ca.mcgill.ecse321.library.model.User;
+import java.sql.Date;
+import java.util.List;
 import javax.persistence.EntityManager;
-
-import ca.mcgill.ecse321.library.model.*;
-import org.aspectj.apache.bcel.Repository;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-
-import java.sql.Date;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -78,7 +78,7 @@ public class TestBookingRepository {
         //TEST------------------->
 
         List<Booking> testBooking1 = bookingRepository.findByUser(tUser);
-        List<Booking> testBooking2 = bookingRepository.findByUserAndBookingDate(tUser,java.sql.Date.valueOf("2015-03-30"));
+        List<Booking> testBooking2 = bookingRepository.findByUserAndBookingDate(tUser, java.sql.Date.valueOf("2015-03-30"));
         Booking findBooking = bookingRepository.findBookingById(booking1.getId());
 
         assertNotNull(findBooking);
@@ -88,7 +88,6 @@ public class TestBookingRepository {
         compareToDB(booking1);
 
         assertEquals(booking1.getId(), testBooking2.get(0).getId());
-
 
 
     }
@@ -116,7 +115,7 @@ public class TestBookingRepository {
         //TEST------------------->
 
         List<Booking> testBooking1 = bookingRepository.findByUser(tUser);
-        List<Booking> testBooking2 = bookingRepository.findByUserAndBookingDate(tUser,java.sql.Date.valueOf("2015-03-30"));
+        List<Booking> testBooking2 = bookingRepository.findByUserAndBookingDate(tUser, java.sql.Date.valueOf("2015-03-30"));
         Booking findBooking = bookingRepository.findBookingById(booking1.getId());
 
         assertNotNull(findBooking);
@@ -150,7 +149,7 @@ public class TestBookingRepository {
         //TEST------------------->
 
         List<Booking> testBooking1 = bookingRepository.findByUser(tUser);
-        List<Booking> testBooking2 = bookingRepository.findByUserAndBookingDate(tUser,java.sql.Date.valueOf("2015-03-30"));
+        List<Booking> testBooking2 = bookingRepository.findByUserAndBookingDate(tUser, java.sql.Date.valueOf("2015-03-30"));
         Booking findBooking = bookingRepository.findBookingById(booking1.getId());
 
         assertNotNull(findBooking);
@@ -163,17 +162,15 @@ public class TestBookingRepository {
     }
 
 
-    private User generateUser(String type){
+    private User generateUser(String type) {
 
         User tUser;
 
-        if(type.equals("Member")){
+        if (type.equals("Member")) {
             tUser = new Member();
-        }
-        else if (type.equals("Librarian")){
+        } else if (type.equals("Librarian")) {
             tUser = new Librarian();
-        }
-        else {
+        } else {
             tUser = new HeadLibrarian();
         }
 
@@ -184,9 +181,9 @@ public class TestBookingRepository {
         return tUser;
     }
 
-    private Booking generateBooking(User tUser){
+    private Booking generateBooking(User tUser) {
         Lending bT = new Lending();
-        Booking booking1= new Booking();
+        Booking booking1 = new Booking();
         booking1.setBookingDate(java.sql.Date.valueOf("2015-03-30"));
         booking1.setBookingType(bT);
         booking1.setUser(tUser);
@@ -195,7 +192,7 @@ public class TestBookingRepository {
         return booking1;
     }
 
-    private Book generateBook(String bIsbn){
+    private Book generateBook(String bIsbn) {
         //Book ---------------------------->
         // String bIsbn = "Bsbsbssb12";
         int bNumPages = 222;
@@ -217,7 +214,7 @@ public class TestBookingRepository {
         return testBook;
     }
 
-    private void compareToDB (Booking expected){
+    private void compareToDB(Booking expected) {
         //TEST------------------->
 
 

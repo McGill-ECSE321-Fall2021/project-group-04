@@ -1,16 +1,18 @@
 package ca.mcgill.ecse321.library.dao;
 
+import ca.mcgill.ecse321.library.model.Booking;
+import ca.mcgill.ecse321.library.model.BookingType;
+import ca.mcgill.ecse321.library.model.Lending;
+import ca.mcgill.ecse321.library.model.Member;
+import ca.mcgill.ecse321.library.model.MusicAlbum;
+import java.sql.Date;
 import javax.persistence.EntityManager;
-
-import ca.mcgill.ecse321.library.model.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-
-import java.sql.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -48,7 +50,7 @@ public class TestMusicAlbumPersistence {
         //Generate dependencies------------------>
         Member libMember = generateMember();
         Lending lend = generateBookingType();
-        Booking booking = generateBooking(libMember,lend);
+        Booking booking = generateBooking(libMember, lend);
         //-------------------------------------->
         //Generate Testing Element------------------>
         MusicAlbum testMusicAlbum = generateMusicAlbum(booking);
@@ -70,7 +72,7 @@ public class TestMusicAlbumPersistence {
 
     }
 
-    private void compareToDB(MusicAlbum expected, MusicAlbum received){
+    private void compareToDB(MusicAlbum expected, MusicAlbum received) {
 
         assertNotNull(received);
         assertEquals(expected.getNumberOfSongs(), received.getNumberOfSongs());
@@ -85,7 +87,7 @@ public class TestMusicAlbumPersistence {
 
     }
 
-    private Member generateMember(){
+    private Member generateMember() {
         Member tUser = new Member();
         tUser.setUsername("Simo4");
         tUser.setPassword("12341234");
@@ -94,8 +96,8 @@ public class TestMusicAlbumPersistence {
         return tUser;
     }
 
-    private Booking generateBooking(Member m, BookingType bT){
-        Booking booking1= new Booking();
+    private Booking generateBooking(Member m, BookingType bT) {
+        Booking booking1 = new Booking();
         booking1.setBookingDate(Date.valueOf("2015-03-30"));
         //booking1.setId((long) 33233);
         booking1.setBookingType(bT);
@@ -104,13 +106,13 @@ public class TestMusicAlbumPersistence {
         return booking1;
     }
 
-    private Lending generateBookingType(){
+    private Lending generateBookingType() {
         Lending bT = new Lending();
 
         return bT;
     }
 
-    private MusicAlbum generateMusicAlbum(Booking booking){
+    private MusicAlbum generateMusicAlbum(Booking booking) {
 
         int mNumSongs = 12;
         float mLength = (float) 222.3;
