@@ -14,6 +14,9 @@ public class BookingService {
     BookingRepository bookingRepository;
 
     @Autowired
+    ReservationRepository reservationRepository;
+
+    @Autowired
     BookRepository bookRepository;
 
     @Autowired
@@ -23,59 +26,97 @@ public class BookingService {
     MusicAlbumRepository musicAlbumRepository;
 
     @Autowired
-    ArchiveRepository archiveRepository;
-
-    @Autowired
-    NewspaperRepository newspaperRepository;
-
-    @Autowired
     MemberRepository memberRepository;
 
 
     @Transactional
-    public Booking createBooking(String username, String elementType, String elementId, String endDate){
-
-        return bookingChecks(username, elementType, elementId, endDate);
+    public Booking createBooking(String username, String elementType, String elementId){
+        return bookingChecks(username, elementType, elementId);
     }
 
-    private Booking bookingChecks(String username, String elementType, String elementId, String endDate){
+    @Transactional
+    public Booking confirmBooking(String username, String elementType, String elementId){
+        firstChecks(username, elementType, elementId);
+
+        if(!bookingRepository.existsBookingById(Long.valueOf(elementId))){
+            throw new IllegalArgumentException("There is no booking with the entered id");
+        }
+
+        Booking booking = bookingRepository.findBookingById(Long.valueOf(elementId));
+
+        if (!booking.getUser().getUsername().equals(username)){
+            throw new IllegalArgumentException("The customer who has made this booking shall be the one confirming it");
+        }
+
+        Lending lending = new Lending();
+        long MILLIS_IN_A_DAY = 1000 * 60 * 60 * 24;
+        //return date is 3- days after current date
+        lending.setReturnDate(new java.sql.Date(System.currentTimeMillis() + MILLIS_IN_A_DAY * 30));
+        booking.setBookingType(lending);
+
+        bookingRepository.save(booking);
+        return booking;
+    }
+
+    private Booking bookingChecks(String username, String elementType, String elementId){
+
+        firstChecks(username, elementType, elementId);
+        Member customer = getCustomer(username);
+        Booking booking = makeBooking(customer);
+        setType(booking, elementType, elementId);
+
+        bookingRepository.save(booking);
+
+        return booking;
+    }
+
+    private void firstChecks(String username, String elementType, String elementId){
         String error = "";
 
         if(username == null || username == "") error += "Username cannot be empty ";
         if(elementType == null || elementType == "") error += "elementType cannot be empty ";
         if(elementId == null || elementId == "") error += "elementId cannot be empty ";
-        if(endDate == null || endDate == "") error += "endDate cannot be empty ";
 
-        try {
-            Date date = Date.valueOf(endDate);
-        }
-        catch (Exception e){
-            error += "date format is not correct ";
-        }
+
+        if(!error.equals("")) throw new IllegalArgumentException(error);
+    }
+
+    private Member getCustomer(String username){
 
         Member customer;
+        String error = "";
 
-        if(memberRepository.existsMemberByUsername(username))
+        if(memberRepository.existsMemberByUsername(username)) {
             customer = memberRepository.findMemberByUsername(username);
+            return customer;
+        }
         else {
             error += "could not find a customer with that username ";
             throw new IllegalArgumentException(error);
         }
 
+    }
 
+    private Booking makeBooking (Member customer){
         LibraryItem item;
         Reservation reservation = new Reservation();
         long MILLIS_IN_A_DAY = 1000 * 60 * 60 * 24;
         //expiry date is 3 days after current date
         reservation.setExpirationDate(new java.sql.Date(System.currentTimeMillis() + MILLIS_IN_A_DAY * 3));
+        reservationRepository.save(reservation);
+
         Booking booking = new Booking();
         booking.setBookingType(reservation);
         booking.setUser(customer);
 
-
-
         booking.setBookingDate(new java.sql.Date(System.currentTimeMillis()));
 
+        return booking;
+    }
+
+    private void setType(Booking booking, String elementType, String elementId){
+        String error = "";
+        LibraryItem item;
         switch (elementType){
             default: error += "invalid element type ";
             case "Book":
@@ -84,6 +125,7 @@ public class BookingService {
                     if(item == null) error += "could not find a book with that name ";
                     Book book = (Book) item;
                     book.setBooking(booking);
+                    bookRepository.save(book);
 
                 }
                 catch (Exception e){
@@ -99,6 +141,7 @@ public class BookingService {
                     }
                     Movie movie = (Movie) item;
                     movie.setBooking(booking);
+                    movieRepository.save(movie);
                 }
                 catch (Exception e){
                     error += "could not find a book with that name ";
@@ -114,6 +157,7 @@ public class BookingService {
 
                     MusicAlbum album = (MusicAlbum) item;
                     album.setBooking(booking);
+                    musicAlbumRepository.save(album);
                 }
                 catch (Exception e){
                     error += "could not find a music album with that name ";
@@ -121,11 +165,9 @@ public class BookingService {
                 break;
         }
 
-
-
-        if(error != "") throw new IllegalArgumentException(error);
-        else return booking;
+        if(!error.equals("")) throw new IllegalArgumentException(error);
     }
 
-    
+
+
 }
