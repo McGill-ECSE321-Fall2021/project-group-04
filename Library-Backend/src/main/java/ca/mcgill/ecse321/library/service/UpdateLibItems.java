@@ -3,6 +3,7 @@ package ca.mcgill.ecse321.library.service;
 import java.sql.Date;
 import java.util.List;
 
+import ca.mcgill.ecse321.library.model.Booking;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,13 +12,13 @@ import ca.mcgill.ecse321.library.dao.BookRepository;
 import ca.mcgill.ecse321.library.model.Book;
 
 
-public class BookService {
+public class UpdateLibItems {
 	
 	@Autowired
 	BookRepository bookRepository;
 	
 	/**
-	 * @author alymo
+	 * @author
 	 * Creates a book
 	 * @param barCode
 	 * @param title
@@ -29,7 +30,7 @@ public class BookService {
 	 * @return
 	 */
 	@Transactional
-	public Book createBook(String barCode, String title, String author,
+	public Book addBook(String barCode, String title, String author,
 			String dateOfRelease, String price, String isbn, String numberOfPages) {
 		
 		HelpersBooking.checkMobileItemInfo(barCode, title, author, dateOfRelease, price);
@@ -64,7 +65,7 @@ public class BookService {
 	}
 	
 	/**
-	 * @author alymo
+	 * @author
 	 * Gets book by title
 	 * @param title
 	 * @return
@@ -75,7 +76,7 @@ public class BookService {
 	}
 	
 	/**
-	 * @author alymo
+	 * @author
 	 * Gets book by isbn
 	 * @param isbn
 	 * @return
@@ -84,25 +85,47 @@ public class BookService {
 	public Book getBookByIsbn(String isbn) {
 		return bookRepository.findBookByIsbn(isbn);
 	}
+
+	@Transactional
+	public List getBookByAuthor(String author) {
+		return bookRepository.findByAuthor(author);
+	}
+
+	@Transactional
+	public Book getBookByBarcode(String barcode) {
+		return bookRepository.findBookByBarcode(barcode);
+	}
+
+	@Transactional
+	public Book getBookByID(Long id) {
+		return bookRepository.findBookById(id);
+	}
+
+	@Transactional
+	public List getBookByBooking(Booking booking) {
+		return bookRepository.findByBooking(booking);
+	}
+
 	
 	/**
-	 * @author alymo
+	 * @author
 	 * deletes book by title
 	 * @param title
 	 * @return
 	 */
 	@Transactional
-	public boolean deleteBook(String title) {
+	public boolean removeBook(String title) {
 		Book book = bookRepository.findBookByTitle(title);
-		if(book!=null) {
+		if(book != null) {
 			bookRepository.delete(book);
 			return true;
 		}
-		else return false;
+		else
+			return false;
 	}
 	
 	/**
-	 * @author alymo
+	 * @author
 	 * returns all books from database
 	 * @return
 	 */
