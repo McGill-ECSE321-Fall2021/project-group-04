@@ -8,8 +8,8 @@ public class Book extends MobileItem {
     private String isbn;
     private int numberOfPages;
 
-    public Book(Long aItemId, String aBarcode, String aTitle, String aAuthor, Date aDateOfRelease, float aPrice, Booking aBooking, String aIsbn, int aNumberOfPages) {
-        super(aItemId, aBarcode, aTitle, aAuthor, aDateOfRelease, aPrice, aBooking);
+    public Book(Long aItemId, String aBarcode, String aTitle, String aAuthor, Date aDateOfRelease, float aPrice, String aIsbn, int aNumberOfPages) {
+        super(aItemId, aBarcode, aTitle, aAuthor, aDateOfRelease, aPrice);
         isbn = aIsbn;
         numberOfPages = aNumberOfPages;
     }

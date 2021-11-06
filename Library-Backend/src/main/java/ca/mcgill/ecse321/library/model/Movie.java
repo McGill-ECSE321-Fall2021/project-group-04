@@ -7,8 +7,8 @@ import javax.persistence.Entity;
 public class Movie extends MobileItem {
     private float length;
 
-    public Movie(Long aItemId, String aBarcode, String aTitle, String aAuthor, Date aDateOfRelease, float aPrice, Booking aBooking, float aLength) {
-        super(aItemId, aBarcode, aTitle, aAuthor, aDateOfRelease, aPrice, aBooking);
+    public Movie(Long aItemId, String aBarcode, String aTitle, String aAuthor, Date aDateOfRelease, float aPrice, float aLength) {
+        super(aItemId, aBarcode, aTitle, aAuthor, aDateOfRelease, aPrice);
         length = aLength;
     }
 
