@@ -12,7 +12,7 @@ import ca.mcgill.ecse321.library.dao.BookRepository;
 import ca.mcgill.ecse321.library.model.Book;
 
 
-public class UpdateLibItems {
+public class BookService {
 	
 	@Autowired
 	BookRepository bookRepository;

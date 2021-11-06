@@ -12,13 +12,12 @@ public abstract class MobileItem extends LibraryItem {
     private float price;
     private Booking booking;
 
-    public MobileItem(Long aItemId, String aBarcode, String aTitle, String aAuthor, Date aDateOfRelease, float aPrice, Booking aBooking) {
+    public MobileItem(Long aItemId, String aBarcode, String aTitle, String aAuthor, Date aDateOfRelease, float aPrice) {
         super(aItemId, aTitle);
         barcode = aBarcode;
         author = aAuthor;
         dateOfRelease = aDateOfRelease;
         price = aPrice;
-        booking = aBooking;
     }
 
     public MobileItem() {
@@ -57,7 +56,7 @@ public abstract class MobileItem extends LibraryItem {
         this.price = value;
     }
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = true)
     public Booking getBooking() {
         return this.booking;
     }

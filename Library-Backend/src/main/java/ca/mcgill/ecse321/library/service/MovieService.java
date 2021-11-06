@@ -75,7 +75,7 @@ public class MovieService {
 	 * @return
 	 */
 	@Transactional
-	public boolean deletMovie(String title) {
+	public boolean deleteMovie(String title) {
 		Movie movie = movieRepository.findMovieByTitle(title);
 		if(movie!=null) {
 			movieRepository.delete(movie);
