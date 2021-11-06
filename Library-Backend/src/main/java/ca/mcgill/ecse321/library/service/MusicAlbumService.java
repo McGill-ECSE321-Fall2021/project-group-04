@@ -29,7 +29,7 @@ public class MusicAlbumService {
 	 * @return
 	 */
 	@Transactional
-	public MusicAlbum createmusicAlbum(String barCode, String title, String author,
+	public MusicAlbum createMusicAlbum(String barCode, String title, String author,
 			String dateOfRelease, String price, String numberOfSongs, String totalLength) {
 		
 		HelpersBooking.checkMobileItemInfo(barCode, title, author, dateOfRelease, price);
@@ -70,7 +70,7 @@ public class MusicAlbumService {
 	
 	
 	@Transactional
-	public boolean deletBook(String title) {
+	public boolean deleteBook(String title) {
 		MusicAlbum musicAlbum = musicAlbumRepository.findMusicAlbumByTitle(title);
 		if(musicAlbum!=null) {
 			musicAlbumRepository.delete(musicAlbum);
