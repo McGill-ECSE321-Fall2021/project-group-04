@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.transaction.Transactional;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class BookingService {
@@ -27,6 +29,11 @@ public class BookingService {
 
     @Autowired
     MemberRepository memberRepository;
+
+    @Transactional
+    public List<Booking> getAllBookings(){
+        return toList(bookingRepository.findAll());
+    }
 
 
     @Transactional
@@ -166,6 +173,14 @@ public class BookingService {
         }
 
         if(!error.equals("")) throw new IllegalArgumentException(error);
+    }
+
+    private <T> List<T> toList(Iterable<T> iterable){
+        List<T> resultList = new ArrayList<T>();
+        for (T t : iterable) {
+            resultList.add(t);
+        }
+        return resultList;
     }
 
 
