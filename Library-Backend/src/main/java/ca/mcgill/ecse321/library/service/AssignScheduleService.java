@@ -1,20 +1,17 @@
 package ca.mcgill.ecse321.library.service;
 
 
+import ca.mcgill.ecse321.library.dao.HeadLibrarianRepository;
+import ca.mcgill.ecse321.library.dao.LibrarianRepository;
+import ca.mcgill.ecse321.library.dao.LibraryRepository;
+import ca.mcgill.ecse321.library.dao.WorkDayRepository;
+import ca.mcgill.ecse321.library.model.HeadLibrarian;
+import ca.mcgill.ecse321.library.model.Librarian;
+import ca.mcgill.ecse321.library.model.User;
+import ca.mcgill.ecse321.library.model.WorkDay;
 import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-
-import ca.mcgill.ecse321.library.dao.WorkDayRepository;
-import ca.mcgill.ecse321.library.model.WorkDay;
-import ca.mcgill.ecse321.library.dao.HeadLibrarianRepository;
-import ca.mcgill.ecse321.library.model.HeadLibrarian;
-import ca.mcgill.ecse321.library.dao.LibrarianRepository;
-import ca.mcgill.ecse321.library.model.Librarian;
-import ca.mcgill.ecse321.library.dao.LibraryRepository;
-
-import ca.mcgill.ecse321.library.model.User;
 
 /**
  * @author Saghar Sahebi
@@ -114,9 +111,6 @@ public class AssignScheduleService {
 	
 		
 	}
-
-	
-	
 }
 	
 	
