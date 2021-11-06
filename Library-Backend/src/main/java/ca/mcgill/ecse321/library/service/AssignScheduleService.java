@@ -74,24 +74,50 @@ public class AssignScheduleService {
 	 */
 	
 	@Transactional
-	public Set<WorkDay> AssignSchedule(User user1,User user2) {
+	public Set<WorkDay> AssignScheduleTolib(User user1,User user2) {
 		
 		getHeadLibrarian(user1);
 		
-		Set<WorkDay> theWorkHours = getLibrarian(user2).getWorkHours();
-		if(theWorkHours == null)
+		Set<WorkDay> libWorkHours = getLibrarian(user2).getWorkHours();
+		if(libWorkHours == null)
 			throw new IllegalArgumentException("Librarian not available.");
 		
-		for(int i=0; i < theWorkHours.size(); i++) {
-			getHeadLibrarian(user1).setWorkHours(theWorkHours);
+		for(int i=0; i < libWorkHours.size(); i++) {
+			getHeadLibrarian(user1).setWorkHours(libWorkHours);
 		}
-		return theWorkHours;
+		return libWorkHours;
 		
 		
 	}
+	
+	/**
+	 * assigns a schedule to a headlibrarian 
+	 * 
+	 * @param user1
+	 * 
+	 * @return assigned schedule
+	 */
+	
+	@Transactional
+	public Set<WorkDay> AssignScheduleToHead(User user1) {
 		
+		getHeadLibrarian(user1);
+		Set<WorkDay> headlibWorkHours = getHeadLibrarian(user1).getWorkHours();
+		
+		if(headlibWorkHours == null)
+			throw new IllegalArgumentException("HeadLibrarian not available.");
+		
+		for(int i=0; i < headlibWorkHours.size(); i++) {
+			getHeadLibrarian(user1).setWorkHours(headlibWorkHours);
+		}
+		return headlibWorkHours;
+	
 		
 	}
+
+	
+	
+}
 	
 	
 	
