@@ -9,8 +9,8 @@ import javax.persistence.OneToMany;
 public class Librarian extends User {
     private Set<WorkDay> workHours;
 
-    public Librarian(Long aId, String aUsername, String aPassword, String aAddress) {
-        super(aId, aUsername, aPassword, aAddress);
+    public Librarian(String aUsername, String aPassword, String aAddress) {
+        super(aUsername, aPassword, aAddress);
         workHours = new HashSet<WorkDay>();
     }
 

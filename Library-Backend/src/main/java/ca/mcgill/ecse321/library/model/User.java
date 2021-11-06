@@ -14,10 +14,9 @@ public abstract class User {
     private String password;
     private String address;
 
-    public User(Long aId, String username, String password, String aAddress) {
+    public User(String username, String password, String aAddress) {
         this.username = username;
         this.password = password;
-        this.id = aId;
         this.address = aAddress;
     }
 

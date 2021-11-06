@@ -19,8 +19,8 @@ public class Member extends User {
     private int monthlyFee;
     private Date startDate;
 
-    public Member(Long aId, String aUsername, String aPassword, String aAddress, MemberType aMemberType, MemberStatus aMemberStatus, int aMonthlyFee, Date aStartDate) {
-        super(aId, aUsername, aPassword, aAddress);
+    public Member(String aUsername, String aPassword, String aAddress, MemberType aMemberType, MemberStatus aMemberStatus, int aMonthlyFee, Date aStartDate) {
+        super(aUsername, aPassword, aAddress);
         memberType = aMemberType;
         memberStatus = aMemberStatus;
         monthlyFee = aMonthlyFee;
