@@ -1,11 +1,21 @@
 package ca.mcgill.ecse321.library.service;
 
-import ca.mcgill.ecse321.library.dao.*;
-import ca.mcgill.ecse321.library.model.*;
-import org.springframework.beans.factory.annotation.Autowired;
-
+import ca.mcgill.ecse321.library.dao.BookRepository;
+import ca.mcgill.ecse321.library.dao.BookingRepository;
+import ca.mcgill.ecse321.library.dao.MemberRepository;
+import ca.mcgill.ecse321.library.dao.MovieRepository;
+import ca.mcgill.ecse321.library.dao.MusicAlbumRepository;
+import ca.mcgill.ecse321.library.dao.ReservationRepository;
+import ca.mcgill.ecse321.library.model.Book;
+import ca.mcgill.ecse321.library.model.Booking;
+import ca.mcgill.ecse321.library.model.Lending;
+import ca.mcgill.ecse321.library.model.LibraryItem;
+import ca.mcgill.ecse321.library.model.Member;
+import ca.mcgill.ecse321.library.model.Movie;
+import ca.mcgill.ecse321.library.model.MusicAlbum;
+import ca.mcgill.ecse321.library.model.Reservation;
 import javax.transaction.Transactional;
-import java.sql.Date;
+import org.springframework.beans.factory.annotation.Autowired;
 
 
 public class BookingService {
@@ -30,21 +40,21 @@ public class BookingService {
 
 
     @Transactional
-    public Booking createBooking(String username, String elementType, String elementId){
+    public Booking createBooking(String username, String elementType, String elementId) {
         return bookingChecks(username, elementType, elementId);
     }
 
     @Transactional
-    public Booking confirmBooking(String username, String elementType, String elementId){
+    public Booking confirmBooking(String username, String elementType, String elementId) {
         firstChecks(username, elementType, elementId);
 
-        if(!bookingRepository.existsBookingById(Long.valueOf(elementId))){
+        if (!bookingRepository.existsBookingById(Long.valueOf(elementId))) {
             throw new IllegalArgumentException("There is no booking with the entered id");
         }
 
         Booking booking = bookingRepository.findBookingById(Long.valueOf(elementId));
 
-        if (!booking.getUser().getUsername().equals(username)){
+        if (!booking.getUser().getUsername().equals(username)) {
             throw new IllegalArgumentException("The customer who has made this booking shall be the one confirming it");
         }
 
@@ -58,7 +68,7 @@ public class BookingService {
         return booking;
     }
 
-    private Booking bookingChecks(String username, String elementType, String elementId){
+    private Booking bookingChecks(String username, String elementType, String elementId) {
 
         firstChecks(username, elementType, elementId);
         Member customer = getCustomer(username);
@@ -70,34 +80,33 @@ public class BookingService {
         return booking;
     }
 
-    private void firstChecks(String username, String elementType, String elementId){
+    private void firstChecks(String username, String elementType, String elementId) {
         String error = "";
 
-        if(username == null || username == "") error += "Username cannot be empty ";
-        if(elementType == null || elementType == "") error += "elementType cannot be empty ";
-        if(elementId == null || elementId == "") error += "elementId cannot be empty ";
+        if (username == null || username == "") error += "Username cannot be empty ";
+        if (elementType == null || elementType == "") error += "elementType cannot be empty ";
+        if (elementId == null || elementId == "") error += "elementId cannot be empty ";
 
 
-        if(!error.equals("")) throw new IllegalArgumentException(error);
+        if (!error.equals("")) throw new IllegalArgumentException(error);
     }
 
-    private Member getCustomer(String username){
+    private Member getCustomer(String username) {
 
         Member customer;
         String error = "";
 
-        if(memberRepository.existsMemberByUsername(username)) {
+        if (memberRepository.existsMemberByUsername(username)) {
             customer = memberRepository.findMemberByUsername(username);
             return customer;
-        }
-        else {
+        } else {
             error += "could not find a customer with that username ";
             throw new IllegalArgumentException(error);
         }
 
     }
 
-    private Booking makeBooking (Member customer){
+    private Booking makeBooking(Member customer) {
         LibraryItem item;
         Reservation reservation = new Reservation();
         long MILLIS_IN_A_DAY = 1000 * 60 * 60 * 24;
@@ -114,43 +123,42 @@ public class BookingService {
         return booking;
     }
 
-    private void setType(Booking booking, String elementType, String elementId){
+    private void setType(Booking booking, String elementType, String elementId) {
         String error = "";
         LibraryItem item;
-        switch (elementType){
-            default: error += "invalid element type ";
+        switch (elementType) {
+            default:
+                error += "invalid element type ";
             case "Book":
                 try {
-                    item = (Book) bookRepository.findBookByTitle(elementId);
-                    if(item == null) error += "could not find a book with that name ";
+                    item = bookRepository.findBookByTitle(elementId);
+                    if (item == null) error += "could not find a book with that name ";
                     Book book = (Book) item;
                     book.setBooking(booking);
                     bookRepository.save(book);
 
-                }
-                catch (Exception e){
+                } catch (Exception e) {
                     error += "could not find a book with that name ";
                 }
                 break;
             case "Movie":
                 try {
-                    item = (Movie) movieRepository.findMovieByTitle(elementId);
-                    if(item == null){
+                    item = movieRepository.findMovieByTitle(elementId);
+                    if (item == null) {
                         error += "could not find a movie with that name ";
                         throw new IllegalArgumentException(error);
                     }
                     Movie movie = (Movie) item;
                     movie.setBooking(booking);
                     movieRepository.save(movie);
-                }
-                catch (Exception e){
+                } catch (Exception e) {
                     error += "could not find a book with that name ";
                 }
                 break;
             case "MusicAlbum":
                 try {
-                    item = (MusicAlbum) musicAlbumRepository.findMusicAlbumByTitle(elementId);
-                    if(item == null) {
+                    item = musicAlbumRepository.findMusicAlbumByTitle(elementId);
+                    if (item == null) {
                         error += "could not find a music album with that name ";
                         throw new IllegalArgumentException(error);
                     }
@@ -158,16 +166,14 @@ public class BookingService {
                     MusicAlbum album = (MusicAlbum) item;
                     album.setBooking(booking);
                     musicAlbumRepository.save(album);
-                }
-                catch (Exception e){
+                } catch (Exception e) {
                     error += "could not find a music album with that name ";
                 }
                 break;
         }
 
-        if(!error.equals("")) throw new IllegalArgumentException(error);
+        if (!error.equals("")) throw new IllegalArgumentException(error);
     }
-
 
 
 }
