@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 public class MemberService {
 
     @Autowired
-    private MemberRepository memberRepository;
+    MemberRepository memberRepository;
 
     @Transactional
     public Member createMember(String aUsername, String aPassword, String aAddress, Member.MemberType aMemberType, Member.MemberStatus aMemberStatus) {
