@@ -63,7 +63,7 @@ public class UserService {
     }
 
     // TODO
-    public static boolean passwordAddress(String address) {
+    public static boolean addressValid(String address) {
         return true;
     }
 
