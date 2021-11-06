@@ -3,6 +3,9 @@ package ca.mcgill.ecse321.library.service;
 import ca.mcgill.ecse321.library.dao.HeadLibrarianRepository;
 import ca.mcgill.ecse321.library.dao.LibrarianRepository;
 import ca.mcgill.ecse321.library.dao.MemberRepository;
+import ca.mcgill.ecse321.library.model.HeadLibrarian;
+import ca.mcgill.ecse321.library.model.Librarian;
+import ca.mcgill.ecse321.library.model.Member;
 import ca.mcgill.ecse321.library.model.User;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +28,28 @@ public class UserService {
     // TODO
     @Transactional
     public User login(String username, String password) {
-        return null;
+        if(!memberRepository.existsMemberByUsername(username) &&
+                !librarianRepository.existsLibrarianByUsername(username) &&
+                !headLibrarianRepository.existsHeadLibrarianByUsername(username)) {
+            throw new IllegalArgumentException("Invalid Username.");
+        }
+
+        Member member = memberRepository.findMemberByUsername(username);
+        if(member != null && member.getPassword().equals(password)) {
+            return member;
+        }
+
+        Librarian librarian = librarianRepository.findLibrarianByUsername(username);
+        if(librarian != null && librarian.getPassword().equals(password)) {
+            return librarian;
+        }
+
+        HeadLibrarian headLibrarian = headLibrarianRepository.findHeadLibrarianByUsername(username);
+        if(headLibrarian != null && headLibrarian.getPassword().equals(password)) {
+            return headLibrarian;
+        }
+
+        throw new IllegalArgumentException("Incorrect Password.");
     }
 
     // TODO
