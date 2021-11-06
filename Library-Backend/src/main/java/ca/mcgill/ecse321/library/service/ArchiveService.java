@@ -28,7 +28,6 @@ public class ArchiveService {
 	public Archive createArchive(String date, String numberOfPages, String title) {
 		
 		HelpersBooking.checkImmobileItemInfo(date, numberOfPages, title);
-		
 
 		Archive archive = new Archive();
 		archive.setDate(Date.valueOf(date));
@@ -39,7 +38,6 @@ public class ArchiveService {
 		archiveRepository.save(archive);
 		
 		return archive;
-		
 	}
 	
 	/**
@@ -60,7 +58,7 @@ public class ArchiveService {
 	 * @return
 	 */
 	@Transactional
-	public boolean deletArchive(String title) {
+	public boolean deleteArchive(String title) {
 		Archive archive = archiveRepository.findArchiveByTitle(title);
 		if(archive!=null) {
 			archiveRepository.delete(archive);

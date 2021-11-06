@@ -46,7 +46,7 @@ public class NewspaperService {
 	}
 	
 	@Transactional
-	public boolean deletNewspaper(String title) {
+	public boolean deleteNewspaper(String title) {
 		Newspaper newspaper = newspaperRepository.findNewspaperByTitle(title);
 		if(newspaper!=null) {
 			newspaperRepository.delete(newspaper);
