@@ -22,13 +22,13 @@ public class LibraryRestController {
     private UserService userService;
     private MemberService memberService;
 
-
+    //will remove this later (copy available in bookingController)
     @GetMapping(value = { "/bookings", "/bookings/" })
     public List<BookingDto> getAllBookings() {
         return bookingService.getAllBookings().stream().map(bk -> DTOController.convertToDto(bk,bk.getUser(),bk.getBookingType())).collect(Collectors.toList());
     }
 
-    //will remove this later
+    //will remove this later (copy available in bookingController)
     @PostMapping(value = { "/booking/{name}/itemType/{itemType}/itemId/{itemId}", "/booking/{name}/itemType/{itemType}/itemId/{itemId}/" })
     public BookingDto createBooking(@PathVariable("name") String name,@PathVariable("itemType") String itemType, @PathVariable("itemId") String itemId) throws IllegalArgumentException {
         Booking booking = bookingService.createBooking(name,itemType, itemId);

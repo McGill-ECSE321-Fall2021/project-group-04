@@ -21,8 +21,14 @@ public class BookingController {
 
 
     @GetMapping(value = { "/bookings", "/bookings/" })
-    public List<BookingDto> getAllBookings() {
-        return bookingService.getAllBookings().stream().map(bk -> DTOController.convertToDto(bk,bk.getUser(),bk.getBookingType())).collect(Collectors.toList());
+    public ResponseEntity<?> getAllBookings() {
+        try {
+            List bookings = bookingService.getAllBookings().stream().map(bk -> DTOController.convertToDto(bk, bk.getUser(), bk.getBookingType())).collect(Collectors.toList());
+            return new ResponseEntity<>(bookings, HttpStatus.OK);
+        }
+        catch(IllegalArgumentException e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @PostMapping(value = { "/booking/{name}/itemType/{itemType}/itemId/{itemId}", "/booking/{name}/itemType/{itemType}/itemId/{itemId}/" })
