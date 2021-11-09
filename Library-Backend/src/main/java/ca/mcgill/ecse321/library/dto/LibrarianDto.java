@@ -1,5 +1,7 @@
 package ca.mcgill.ecse321.library.dto;
 
+import ca.mcgill.ecse321.library.model.WorkDay;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,5 +16,9 @@ public class LibrarianDto extends UserDto {
 
     public Set<WorkDayDto> getWorkHours() {
         return workHours;
+    }
+
+    public void setWorkHours(Set<WorkDayDto> workDays) {
+        this.workHours = workDays;
     }
 }
