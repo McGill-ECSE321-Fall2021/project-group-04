@@ -23,35 +23,18 @@ public class UserService {
     @Autowired
     private HeadLibrarianRepository headLibrarianRepository;
 
-    // TODO
-    @Transactional
-    public User login(String username, String password) {
-        if(!memberRepository.existsMemberByUsername(username) &&
-                !librarianRepository.existsLibrarianByUsername(username) &&
-                !headLibrarianRepository.existsHeadLibrarianByUsername(username)) {
-            throw new IllegalArgumentException("Invalid Username.");
+    public static boolean checkValidUsername(String username) {
+        if (username == null || username == "") {
+            throw new IllegalArgumentException("Username cannot be empty.");
         }
-
-        Member member = memberRepository.findMemberByUsername(username);
-        if(member != null && member.getPassword().equals(password)) {
-            return member;
+        if (memberRepository.findMemberByUsername(username) == null) {
+            return true;
         }
-
-        Librarian librarian = librarianRepository.findLibrarianByUsername(username);
-        if(librarian != null && librarian.getPassword().equals(password)) {
-            return librarian;
-        }
-
-        HeadLibrarian headLibrarian = headLibrarianRepository.findHeadLibrarianByUsername(username);
-        if(headLibrarian != null && headLibrarian.getPassword().equals(password)) {
-            return headLibrarian;
-        }
-
-        throw new IllegalArgumentException("Incorrect Password.");
+        throw new IllegalArgumentException("Username already exists.");
     }
 
+
     /**
-     *
      * @param password
      * @return
      */
@@ -96,7 +79,6 @@ public class UserService {
     // Need to Review
 
     /**
-     *
      * @param address
      * @return
      */
@@ -108,12 +90,6 @@ public class UserService {
         return true;
     }
 
-    /**
-     *
-     * @param username
-     * @param password
-     * @return
-     */
     @Transactional
     public User login(String username, String password) {
         if (!memberRepository.existsMemberByUsername(username) &&

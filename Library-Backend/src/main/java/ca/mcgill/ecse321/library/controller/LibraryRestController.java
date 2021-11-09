@@ -6,7 +6,6 @@ import ca.mcgill.ecse321.library.service.ArchiveService;
 import ca.mcgill.ecse321.library.service.BookingService;
 import ca.mcgill.ecse321.library.service.MemberService;
 import ca.mcgill.ecse321.library.service.UserService;
-import jdk.incubator.vector.VectorOperators;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +18,7 @@ import java.util.stream.Collectors;
 @RestController
 public class LibraryRestController {
 
-    //@Autowired
+
     private BookingService bookingService;
     private UserService userService;
     private MemberService memberService;
@@ -27,13 +26,13 @@ public class LibraryRestController {
 
     @GetMapping(value = { "/bookings", "/bookings/" })
     public List<BookingDto> getAllBookings() {
-        return bookingService.getAllBookings().stream().map(bk -> convertToDto(bk,bk.getUser(),bk.getBookingType())).collect(Collectors.toList());
+        return bookingService.getAllBookings().stream().map(bk -> DTOController.convertToDto(bk,bk.getUser(),bk.getBookingType())).collect(Collectors.toList());
     }
 
     @PostMapping(value = { "/booking/{name}/itemType/{itemType}/itemId/{itemId}", "/booking/{name}/itemType/{itemType}/itemId/{itemId}/" })
     public BookingDto createPerson(@PathVariable("name") String name,@PathVariable("itemType") String itemType, @PathVariable("itemId") String itemId) throws IllegalArgumentException {
         Booking booking = bookingService.createBooking(name,itemType, itemId);
-        return convertToDto(booking, booking.getUser(), booking.getBookingType());
+        return DTOController.convertToDto(booking, booking.getUser(), booking.getBookingType());
     }
 
     @PostMapping(value = {"/login", "/login/"})
@@ -78,6 +77,7 @@ public class LibraryRestController {
     }
 
 
+
     private BookingTypeDto convertToDto(BookingType bt){
 
         //need to differentiate between lending and reservation
@@ -105,6 +105,7 @@ public class LibraryRestController {
 
         return new BookingDto(b.getId(),b.getBookingDate(),userDto,btDto);
     }
+
 
 
 }
