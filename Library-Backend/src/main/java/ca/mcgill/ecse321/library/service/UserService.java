@@ -23,6 +23,11 @@ public class UserService {
     @Autowired
     private HeadLibrarianRepository headLibrarianRepository;
 
+    /**
+     *
+     * @param username
+     * @return
+     */
     public static boolean checkValidUsername(String username) {
         if (username == null || username == "") {
             throw new IllegalArgumentException("Username cannot be empty.");
@@ -33,6 +38,11 @@ public class UserService {
         throw new IllegalArgumentException("Username already exists.");
     }
 
+    /**
+     *
+     * @param password
+     * @return
+     */
     public static boolean checkValidPassword(String password) {
         if (password == null || password == "") {
             throw new IllegalArgumentException("Password cannot be empty.");
@@ -72,6 +82,12 @@ public class UserService {
     }
 
     // Need to Review
+
+    /**
+     *
+     * @param address
+     * @return
+     */
     public static boolean checkValidAddress(String address) {
         if (address == null || address.equals("")) {
             throw new IllegalArgumentException("The address cannot be empty.");
@@ -80,6 +96,12 @@ public class UserService {
         return true;
     }
 
+    /**
+     *
+     * @param username
+     * @param password
+     * @return
+     */
     @Transactional
     public User login(String username, String password) {
         if (!memberRepository.existsMemberByUsername(username) &&

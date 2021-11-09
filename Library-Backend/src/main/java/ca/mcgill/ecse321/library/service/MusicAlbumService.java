@@ -59,12 +59,22 @@ public class MusicAlbumService {
 
     }
 
+    /**
+     *
+     * @param title
+     * @return
+     */
     @Transactional
     public MusicAlbum getBookByTitle(String title) {
         return musicAlbumRepository.findMusicAlbumByTitle(title);
     }
 
 
+    /**
+     *
+     * @param title
+     * @return
+     */
     @Transactional
     public boolean deleteBook(String title) {
         MusicAlbum musicAlbum = musicAlbumRepository.findMusicAlbumByTitle(title);
