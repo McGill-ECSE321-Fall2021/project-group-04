@@ -37,11 +37,21 @@ public class NewspaperService {
 
     }
 
+    /**
+     *
+     * @param title
+     * @return
+     */
     @Transactional
     public Newspaper getNewspaperByTitle(String title) {
         return newspaperRepository.findNewspaperByTitle(title);
     }
 
+    /**
+     *
+     * @param title
+     * @return
+     */
     @Transactional
     public boolean deleteNewspaper(String title) {
         Newspaper newspaper = newspaperRepository.findNewspaperByTitle(title);
