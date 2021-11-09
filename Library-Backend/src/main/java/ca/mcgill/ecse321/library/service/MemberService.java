@@ -11,30 +11,90 @@ import org.springframework.stereotype.Service;
 public class MemberService {
 
     @Autowired
-    private MemberRepository memberRepository;
+    MemberRepository memberRepository;
 
-    // TODO
+    /**
+     *
+     * @param aUsername
+     * @param aPassword
+     * @param aAddress
+     * @param aMemberType
+     * @param aMemberStatus
+     * @return
+     */
     @Transactional
     public Member createMember(String aUsername, String aPassword, String aAddress, Member.MemberType aMemberType, Member.MemberStatus aMemberStatus) {
-        return null;
+        UserService.checkValidUsername(aUsername);
+        UserService.checkValidPassword(aPassword);
+        UserService.checkValidAddress(aAddress);
+
+        Member member = new Member();
+        member.setUsername(aUsername);
+        member.setPassword(aPassword);
+        member.setAddress(aAddress);
+        member.setMemberType(aMemberType);
+        member.setMemberStatus(aMemberStatus);
+
+        memberRepository.save(member);
+
+        return member;
     }
 
-    // TODO
+    /**
+     *
+     * @param username
+     * @param newPassword
+     * @return
+     */
+    @Transactional
+    public Member changeMemberPassword(String username, String newPassword) {
+        UserService.checkValidUsername(username);
+        Member member = memberRepository.findMemberByUsername(username);
+
+        if (member == null) {
+            throw new IllegalArgumentException("Member is not found.");
+        }
+
+        if (UserService.checkValidPassword(newPassword)) {
+            member.setPassword(newPassword);
+        }
+        memberRepository.save(member);
+        return member;
+    }
+
+    /**
+     *
+     * @param username
+     * @return
+     */
     @Transactional
     public boolean deleteMember(String username) {
-        return false;
+        Member member = getMember(username);
+        if (member == null) {
+            throw new IllegalArgumentException("Member is not found.");
+        }
+        memberRepository.delete(member);
+        return true;
     }
 
-    // TODO
+    /**
+     *
+     * @param username
+     * @return
+     */
     @Transactional
     public Member getMember(String username) {
-        return null;
+        return memberRepository.findMemberByUsername(username);
     }
 
-    // TODO
+    /**
+     * 
+     * @return
+     */
     @Transactional
     public List<Member> getAllMembers() {
-        return null;
+        return Services.toList(memberRepository.findAll());
     }
+
 
 }

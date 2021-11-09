@@ -16,25 +16,54 @@ public class LibrarianService {
     // TODO
     @Transactional
     public Librarian createLibrarian(String aUsername, String aPassword, String aAddress) {
-        return null;
+        UserService.checkValidUsername(aUsername);
+        UserService.checkValidPassword(aPassword);
+        UserService.checkValidAddress(aAddress);
+
+        Librarian librarian = new Librarian();
+        librarian.setUsername(aUsername);
+        librarian.setPassword(aPassword);
+        librarian.setAddress(aAddress);
+
+        librarianRepository.save(librarian);
+
+        return librarian;
     }
 
-    // TODO
+    @Transactional
+    public Librarian changeLibrarianPassword(String username, String newPassword) {
+        UserService.checkValidUsername(username);
+        Librarian librarian = librarianRepository.findLibrarianByUsername(username);
+
+        if (librarian == null) {
+            throw new IllegalArgumentException("Librarian is not found.");
+        }
+
+        if (UserService.checkValidPassword(newPassword)) {
+            librarian.setPassword(newPassword);
+        }
+        librarianRepository.save(librarian);
+        return librarian;
+    }
+
     @Transactional
     public boolean deleteLibrarian(String username) {
+        Librarian librarian = getLibrarian(username);
+        if (librarian == null) {
+            throw new IllegalArgumentException("Librarian is not found.");
+        }
+        librarianRepository.delete(librarian);
         return true;
     }
 
-    // TODO
     @Transactional
     public Librarian getLibrarian(String username) {
-        return null;
+        return librarianRepository.findLibrarianByUsername(username);
     }
 
-    // TODO
     @Transactional
     public List<Librarian> getAllLibrarians() {
-        return null;
+        return Services.toList(librarianRepository.findAll());
     }
 
 }
