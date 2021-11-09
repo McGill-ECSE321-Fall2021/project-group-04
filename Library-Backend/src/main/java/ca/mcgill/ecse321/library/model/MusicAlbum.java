@@ -8,8 +8,8 @@ public class MusicAlbum extends MobileItem {
     private int numberOfSongs;
     private float totalLength;
 
-    public MusicAlbum(Long aItemId, String aBarcode, String aTitle, String aAuthor, Date aDateOfRelease, float aPrice, Booking aBooking, int aNumberOfSongs, float aTotalLength) {
-        super(aItemId, aBarcode, aTitle, aAuthor, aDateOfRelease, aPrice, aBooking);
+    public MusicAlbum(Long aItemId, String aBarcode, String aTitle, String aAuthor, Date aDateOfRelease, float aPrice, int aNumberOfSongs, float aTotalLength) {
+        super(aItemId, aBarcode, aTitle, aAuthor, aDateOfRelease, aPrice);
         numberOfSongs = aNumberOfSongs;
         totalLength = aTotalLength;
     }
