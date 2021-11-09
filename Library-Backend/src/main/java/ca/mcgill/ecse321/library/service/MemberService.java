@@ -13,6 +13,15 @@ public class MemberService {
     @Autowired
     MemberRepository memberRepository;
 
+    /**
+     *
+     * @param aUsername
+     * @param aPassword
+     * @param aAddress
+     * @param aMemberType
+     * @param aMemberStatus
+     * @return
+     */
     @Transactional
     public Member createMember(String aUsername, String aPassword, String aAddress, Member.MemberType aMemberType, Member.MemberStatus aMemberStatus) {
         UserService.checkValidUsername(aUsername);
@@ -31,6 +40,12 @@ public class MemberService {
         return member;
     }
 
+    /**
+     *
+     * @param username
+     * @param newPassword
+     * @return
+     */
     @Transactional
     public Member changeMemberPassword(String username, String newPassword) {
         UserService.checkValidUsername(username);
@@ -47,6 +62,11 @@ public class MemberService {
         return member;
     }
 
+    /**
+     *
+     * @param username
+     * @return
+     */
     @Transactional
     public boolean deleteMember(String username) {
         Member member = getMember(username);
@@ -57,11 +77,20 @@ public class MemberService {
         return true;
     }
 
+    /**
+     *
+     * @param username
+     * @return
+     */
     @Transactional
     public Member getMember(String username) {
         return memberRepository.findMemberByUsername(username);
     }
 
+    /**
+     *
+     * @return
+     */
     @Transactional
     public List<Member> getAllMembers() {
         return Services.toList(memberRepository.findAll());

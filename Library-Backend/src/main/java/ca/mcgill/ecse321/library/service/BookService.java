@@ -67,6 +67,7 @@ public class BookService {
      */
     @Transactional
     public Book getBookByTitle(String title) {
+
         return bookRepository.findBookByTitle(title);
     }
 
@@ -77,6 +78,7 @@ public class BookService {
      */
     @Transactional
     public Book getBookByIsbn(String isbn) {
+
         return bookRepository.findBookByIsbn(isbn);
     }
 
@@ -121,6 +123,7 @@ public class BookService {
      * @author returns all books from database
      */
     public List<Book> getAllBooks() {
+
         return Services.toList(bookRepository.findAll());
     }
 
