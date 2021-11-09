@@ -26,8 +26,8 @@ public class NewspaperService {
 	 */
 	@Transactional
 	public Newspaper createNewspaper(String date, String numberOfPages, String title) {
-		
-		HelpersBooking.checkImmobileItemInfo(date, numberOfPages, title);		
+
+		LibraryItemService.checkImmobileItemInfo(date, numberOfPages, title);
 
 		Newspaper newspaper = new Newspaper();
 		newspaper.setDate(Date.valueOf(date));
@@ -56,7 +56,7 @@ public class NewspaperService {
 	}
 	
 	public List<Newspaper> getAllNewspapers(){
-		return HelpersBooking.toList(newspaperRepository.findAll());
+		return LibraryItemService.toList(newspaperRepository.findAll());
 	}
 	
 	

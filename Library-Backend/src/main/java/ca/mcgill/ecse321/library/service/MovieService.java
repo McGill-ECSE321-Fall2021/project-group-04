@@ -29,8 +29,8 @@ public class MovieService {
 	@Transactional
 	public Movie createMovie(String barCode, String title, String author,
 			String dateOfRelease, String price, String length) {
-		
-		HelpersBooking.checkMobileItemInfo(barCode, title, author, dateOfRelease, price);
+
+		LibraryItemService.checkMobileItemInfo(barCode, title, author, dateOfRelease, price);
 		
 		String error = "";
 		if(length == null || length == "") {
@@ -90,7 +90,7 @@ public class MovieService {
 	 * @return
 	 */
 	public List<Movie> getAllMovies(){
-		return HelpersBooking.toList(movieRepository.findAll());
+		return LibraryItemService.toList(movieRepository.findAll());
 	}
 	
 	

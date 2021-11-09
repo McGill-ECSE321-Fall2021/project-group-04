@@ -31,8 +31,8 @@ public class MusicAlbumService {
 	@Transactional
 	public MusicAlbum createMusicAlbum(String barCode, String title, String author,
 			String dateOfRelease, String price, String numberOfSongs, String totalLength) {
-		
-		HelpersBooking.checkMobileItemInfo(barCode, title, author, dateOfRelease, price);
+
+		LibraryItemService.checkMobileItemInfo(barCode, title, author, dateOfRelease, price);
 		
 		String error = "";
 		if(numberOfSongs == null || numberOfSongs == "") {
@@ -80,7 +80,7 @@ public class MusicAlbumService {
 	}
 	
 	public List<MusicAlbum> getAllBooks(){
-		return HelpersBooking.toList(musicAlbumRepository.findAll());
+		return LibraryItemService.toList(musicAlbumRepository.findAll());
 	}
 	
 	

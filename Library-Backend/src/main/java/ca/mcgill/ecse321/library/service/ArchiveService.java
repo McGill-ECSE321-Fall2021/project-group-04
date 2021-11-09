@@ -26,8 +26,8 @@ public class ArchiveService {
 	 */
 	@Transactional
 	public Archive createArchive(String date, String numberOfPages, String title) {
-		
-		HelpersBooking.checkImmobileItemInfo(date, numberOfPages, title);
+
+		LibraryItemService.checkImmobileItemInfo(date, numberOfPages, title);
 
 		Archive archive = new Archive();
 		archive.setDate(Date.valueOf(date));
@@ -73,7 +73,7 @@ public class ArchiveService {
 	 * @return
 	 */
 	public List<Archive> getAllArchives(){
-		return HelpersBooking.toList(archiveRepository.findAll());
+		return LibraryItemService.toList(archiveRepository.findAll());
 	}
 	
 	

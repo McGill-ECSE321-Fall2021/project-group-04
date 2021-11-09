@@ -16,10 +16,9 @@ public class BookService {
 	
 	@Autowired
 	BookRepository bookRepository;
-	
+
 	/**
-	 * @author
-	 * Creates a book
+	 * @author alymo
 	 * @param barCode
 	 * @param title
 	 * @param author
@@ -30,10 +29,10 @@ public class BookService {
 	 * @return
 	 */
 	@Transactional
-	public Book addBook(String barCode, String title, String author,
+	public Book createBook(String barCode, String title, String author,
 			String dateOfRelease, String price, String isbn, String numberOfPages) {
 		
-		HelpersBooking.checkMobileItemInfo(barCode, title, author, dateOfRelease, price);
+		LibraryItemService.checkMobileItemInfo(barCode, title, author, dateOfRelease, price);
 		
 		String error = "";
 		if(isbn == null || isbn == "") {
@@ -108,13 +107,13 @@ public class BookService {
 
 	
 	/**
-	 * @author
+	 * @author alymo
 	 * deletes book by title
 	 * @param title
 	 * @return
 	 */
 	@Transactional
-	public boolean removeBook(String title) {
+	public boolean deleteBook(String title) {
 		Book book = bookRepository.findBookByTitle(title);
 		if(book != null) {
 			bookRepository.delete(book);
@@ -130,7 +129,7 @@ public class BookService {
 	 * @return
 	 */
 	public List<Book> getAllBooks(){
-		return HelpersBooking.toList(bookRepository.findAll());
+		return LibraryItemService.toList(bookRepository.findAll());
 	}
 	
 	
