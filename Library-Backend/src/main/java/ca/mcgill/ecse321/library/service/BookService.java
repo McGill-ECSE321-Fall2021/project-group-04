@@ -19,6 +19,7 @@ public class BookService {
 
 	/**
 	 * @author alymo
+	 * Creates a book
 	 * @param barCode
 	 * @param title
 	 * @param author

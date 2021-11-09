@@ -18,7 +18,6 @@ import java.util.stream.Collectors;
 @RestController
 public class LibraryRestController {
 
-
     private BookingService bookingService;
     private UserService userService;
     private MemberService memberService;
@@ -29,12 +28,14 @@ public class LibraryRestController {
         return bookingService.getAllBookings().stream().map(bk -> DTOController.convertToDto(bk,bk.getUser(),bk.getBookingType())).collect(Collectors.toList());
     }
 
+    //will remove this later
     @PostMapping(value = { "/booking/{name}/itemType/{itemType}/itemId/{itemId}", "/booking/{name}/itemType/{itemType}/itemId/{itemId}/" })
-    public BookingDto createPerson(@PathVariable("name") String name,@PathVariable("itemType") String itemType, @PathVariable("itemId") String itemId) throws IllegalArgumentException {
+    public BookingDto createBooking(@PathVariable("name") String name,@PathVariable("itemType") String itemType, @PathVariable("itemId") String itemId) throws IllegalArgumentException {
         Booking booking = bookingService.createBooking(name,itemType, itemId);
         return DTOController.convertToDto(booking, booking.getUser(), booking.getBookingType());
     }
 
+    //move this to MemberController
     @PostMapping(value = {"/login", "/login/"})
     public ResponseEntity<?> login(@RequestParam String username, @RequestParam String password) {
         User user = null;
@@ -46,20 +47,21 @@ public class LibraryRestController {
         }
 
         if(user instanceof Member) {
-            return new ResponseEntity<>(convertToDto((Member) user), HttpStatus.OK);
+            return new ResponseEntity<>(DTOController.convertToDto((Member) user), HttpStatus.OK);
         }
 
         if(user instanceof Librarian) {
-            return new ResponseEntity<>(convertToDto((Librarian) user), HttpStatus.OK);
+            return new ResponseEntity<>(DTOController.convertToDto((Librarian) user), HttpStatus.OK);
         }
 
         if(user instanceof HeadLibrarian) {
-            return new ResponseEntity<>(convertToDto((HeadLibrarian) user), HttpStatus.OK);
+            return new ResponseEntity<>(DTOController.convertToDto((HeadLibrarian) user), HttpStatus.OK);
         }
 
         return null;
     }
 
+    //move this to MemberController
     @PostMapping(value = {"/signup_user/", "/signup_user"})
     public ResponseEntity<?> signupUser(@RequestParam String address, @RequestParam String username, @RequestParam String password,
                                         @RequestParam Member.MemberType memberType, @RequestParam Member.MemberStatus memberStatus) {
@@ -73,39 +75,7 @@ public class LibraryRestController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
-        return new ResponseEntity<>(convertToDto(member), HttpStatus.CREATED);
+        return new ResponseEntity<>(DTOController.convertToDto(member), HttpStatus.CREATED);
     }
-
-
-
-    private BookingTypeDto convertToDto(BookingType bt){
-
-        //need to differentiate between lending and reservation
-
-        if(bt instanceof Lending){
-            return new LendingDto(bt.getId(),((Lending) bt).getReturnDate()); //return LendingDto
-        }
-
-        else{
-            return new ReservationDto(bt.getId(),((Reservation)bt).getExpirationDate()); //return ReservationDto
-        }
-
-    }
-
-    private static UserDto convertToDto(User user) {
-        if(user == null) {
-            throw new IllegalArgumentException("User is not found.");
-        }
-        return new UserDto(user.getId(),user.getUsername(), user.getPassword(), user.getAddress());
-    }
-
-    private BookingDto convertToDto(Booking b, User aUser, BookingType bt){
-        BookingTypeDto btDto = convertToDto(bt);
-        UserDto userDto = convertToDto(aUser);
-
-        return new BookingDto(b.getId(),b.getBookingDate(),userDto,btDto);
-    }
-
-
 
 }
