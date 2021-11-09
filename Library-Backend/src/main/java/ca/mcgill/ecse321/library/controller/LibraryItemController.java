@@ -1,6 +1,5 @@
 package ca.mcgill.ecse321.library.controller;
 
-import ca.mcgill.ecse321.library.dto.BookingDto;
 import ca.mcgill.ecse321.library.model.*;
 import ca.mcgill.ecse321.library.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +41,7 @@ public class LibraryItemController {
         Book book = null;
         try{
             book = bookService.createBook(barCode, title, author, dateOfRelease, price, isbn, numberOfPages);
-            return new ResponseEntity<>(DTOController.convertToDto(book, book.getBooking()), HttpStatus.CREATED);
+            return new ResponseEntity<>(DTOConverter.convertToDto(book, book.getBooking()), HttpStatus.CREATED);
         }
         catch(IllegalArgumentException e){
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
@@ -66,7 +65,7 @@ public class LibraryItemController {
          Movie movie = null;
         try{
             movie = movieService.createMovie(barCode, title, author, dateOfRelease, price, length);
-            return new ResponseEntity<>(DTOController.convertToDto(movie, movie.getBooking()), HttpStatus.CREATED);
+            return new ResponseEntity<>(DTOConverter.convertToDto(movie, movie.getBooking()), HttpStatus.CREATED);
         }
         catch(IllegalArgumentException e){
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
@@ -90,7 +89,7 @@ public class LibraryItemController {
         MusicAlbum musicAlbum = null;
         try{
             musicAlbum = musicAlbumService.createMusicAlbum(barCode, title, author, dateOfRelease, price, numberOfSongs, totalLength);
-            return new ResponseEntity<>(DTOController.convertToDto(musicAlbum, musicAlbum.getBooking()), HttpStatus.CREATED);
+            return new ResponseEntity<>(DTOConverter.convertToDto(musicAlbum, musicAlbum.getBooking()), HttpStatus.CREATED);
         }
         catch(IllegalArgumentException e){
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
@@ -109,7 +108,7 @@ public class LibraryItemController {
         Archive archive= null;
         try{
             archive = archiveService.createArchive(date, numofPages, title);
-            return new ResponseEntity<>(DTOController.convertToDto(archive), HttpStatus.CREATED);
+            return new ResponseEntity<>(DTOConverter.convertToDto(archive), HttpStatus.CREATED);
         }
         catch(IllegalArgumentException e){
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
@@ -128,7 +127,7 @@ public class LibraryItemController {
         Newspaper newspaper = null;
         try{
             newspaper = newspaperService.createNewspaper(date, numofPages, title);
-            return new ResponseEntity<>(DTOController.convertToDto(newspaper), HttpStatus.CREATED);
+            return new ResponseEntity<>(DTOConverter.convertToDto(newspaper), HttpStatus.CREATED);
         }
         catch(IllegalArgumentException e){
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);

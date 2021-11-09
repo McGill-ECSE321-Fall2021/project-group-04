@@ -3,7 +3,7 @@ package ca.mcgill.ecse321.library.controller;
 import ca.mcgill.ecse321.library.dto.*;
 import ca.mcgill.ecse321.library.model.*;
 
-public class DTOController {
+public class DTOConverter {
     public static BookingTypeDto convertToDto(BookingType bt){
         //need to differentiate between lending and reservation
         if(bt instanceof Lending){
@@ -17,6 +17,15 @@ public class DTOController {
     public static UserDto convertToDto(User user){
         //not taking into consideration different types of users
         return new UserDto(user.getId(),user.getUsername(), user.getPassword(), user.getAddress());
+    }
+
+    public static MemberDto convertToDto(Member member) {
+        return new MemberDto(member.getId(), member.getUsername(), member.getPassword(), member.getAddress(),
+                member.getMemberType(), member.getMemberStatus(), member.getMonthlyFee(), member.getStartDate());
+    }
+
+    public static LibrarianDto convertToDto(Librarian librarian) {
+        return new LibrarianDto(librarian.getId(), librarian.getUsername(), librarian.getPassword(), librarian.getAddress());
     }
 
     public static BookingDto convertToDto(Booking b, User aUser, BookingType bt){
