@@ -20,6 +20,12 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    /**
+     * @author Jewoo Lee
+     * @param username
+     * @param password
+     * @return
+     */
     @PostMapping(value = {"/login", "/login/"})
     public ResponseEntity<?> login(@RequestParam String username, @RequestParam String password) {
         User user = null;

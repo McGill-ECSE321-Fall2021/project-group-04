@@ -14,7 +14,7 @@ public class MemberService {
     MemberRepository memberRepository;
 
     /**
-     *
+     * @author Jewoo Lee
      * @param aUsername
      * @param aPassword
      * @param aAddress
@@ -41,7 +41,7 @@ public class MemberService {
     }
 
     /**
-     *
+     * @author Jewoo Lee
      * @param username
      * @param newPassword
      * @return
@@ -63,7 +63,7 @@ public class MemberService {
     }
 
     /**
-     *
+     * @author Jewoo Lee
      * @param username
      * @return
      */
@@ -78,7 +78,7 @@ public class MemberService {
     }
 
     /**
-     *
+     * @author Jewoo Lee
      * @param username
      * @return
      */
@@ -88,7 +88,7 @@ public class MemberService {
     }
 
     /**
-     * 
+     * @author Jewoo Lee
      * @return
      */
     @Transactional

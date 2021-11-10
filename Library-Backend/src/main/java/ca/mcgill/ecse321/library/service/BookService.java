@@ -65,7 +65,7 @@ public class BookService {
 	}
 	
 	/**
-	 * @author
+	 * @author Jewoo Lee
 	 * Gets book by title
 	 * @param title
 	 * @return
@@ -76,7 +76,7 @@ public class BookService {
 	}
 	
 	/**
-	 * @author
+	 * @author Jewoo Lee
 	 * Gets book by isbn
 	 * @param isbn
 	 * @return
@@ -86,21 +86,41 @@ public class BookService {
 		return bookRepository.findBookByIsbn(isbn);
 	}
 
+	/**
+	 * @author Jewoo Lee
+	 * @param author
+	 * @return
+	 */
 	@Transactional
 	public List getBookByAuthor(String author) {
 		return bookRepository.findByAuthor(author);
 	}
 
+	/**
+	 * @author Jewoo Lee
+	 * @param barcode
+	 * @return
+	 */
 	@Transactional
 	public Book getBookByBarcode(String barcode) {
 		return bookRepository.findBookByBarcode(barcode);
 	}
 
+	/**
+	 * @author Jewoo Lee
+	 * @param id
+	 * @return
+	 */
 	@Transactional
 	public Book getBookByID(Long id) {
 		return bookRepository.findBookById(id);
 	}
 
+	/**
+	 * @author Jewoo Lee
+	 * @param booking
+	 * @return
+	 */
 	@Transactional
 	public List getBookByBooking(Booking booking) {
 		return bookRepository.findByBooking(booking);
@@ -125,7 +145,7 @@ public class BookService {
 	}
 	
 	/**
-	 * @author
+	 * @author Jewoo Lee
 	 * returns all books from database
 	 * @return
 	 */
