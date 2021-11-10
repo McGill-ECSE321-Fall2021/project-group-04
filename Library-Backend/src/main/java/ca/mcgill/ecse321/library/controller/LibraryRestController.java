@@ -33,21 +33,4 @@ public class LibraryRestController {
         return DTOConverter.convertToDto(booking, booking.getUser(), booking.getBookingType());
     }
 
-    //move this to MemberController
-    @PostMapping(value = {"/signup_user/", "/signup_user"})
-    public ResponseEntity<?> signupUser(@RequestParam String address, @RequestParam String username, @RequestParam String password,
-                                        @RequestParam Member.MemberType memberType, @RequestParam Member.MemberStatus memberStatus) {
-
-        Member member = null;
-        try {
-            member = memberService.createMember(username, password, address, memberType, memberStatus);
-        }
-        catch(IllegalArgumentException e) {
-            memberService.deleteMember(username);
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-
-        return new ResponseEntity<>(DTOConverter.convertToDto(member), HttpStatus.CREATED);
-    }
-
 }

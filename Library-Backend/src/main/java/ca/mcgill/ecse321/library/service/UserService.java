@@ -23,6 +23,11 @@ public class UserService {
     @Autowired
     private HeadLibrarianRepository headLibrarianRepository;
 
+    /**
+     * @author Jewoo Lee
+     * @param username
+     * @return
+     */
     public static boolean checkValidUsername(String username) {
         if (username == null || username == "") {
             throw new IllegalArgumentException("Username cannot be empty.");
@@ -35,6 +40,7 @@ public class UserService {
 
 
     /**
+     * @author Jewoo Lee
      * @param password
      * @return
      */
@@ -79,6 +85,7 @@ public class UserService {
     // Need to Review
 
     /**
+     * @author Jewoo Lee
      * @param address
      * @return
      */
@@ -90,6 +97,12 @@ public class UserService {
         return true;
     }
 
+    /**
+     * @author Jewoo Lee
+     * @param username
+     * @param password
+     * @return
+     */
     @Transactional
     public User login(String username, String password) {
         if (!memberRepository.existsMemberByUsername(username) &&
