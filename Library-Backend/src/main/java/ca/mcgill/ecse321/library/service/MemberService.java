@@ -50,7 +50,6 @@ public class MemberService {
      */
     @Transactional
     public Member changeMemberPassword(String username, String newPassword) {
-        checkValidUsername(username);
         Member member = memberRepository.findMemberByUsername(username);
 
         if (member == null) {
