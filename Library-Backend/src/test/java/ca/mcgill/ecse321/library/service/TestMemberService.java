@@ -18,9 +18,6 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.lenient;
 
-/**
- * @author JewooLee
- */
 @ExtendWith(MockitoExtension.class)
 public class TestMemberService {
 
@@ -68,7 +65,7 @@ public class TestMemberService {
     }
 
     @Test
-    public void testSignupUser() {
+    public void testMemberSignUp() {
         assertEquals(0, memberService.getAllMembers().size());
         Member member = null;
 
@@ -95,7 +92,7 @@ public class TestMemberService {
     }
 
     @Test
-    public void testSignupUserNull() {
+    public void testMemberSignUpNull() {
         assertEquals(0, memberService.getAllMembers().size());
         Member member = null;
 
@@ -118,7 +115,7 @@ public class TestMemberService {
     }
 
     @Test
-    public void testSignupUserExistingUsername() {
+    public void testMemberSignUpExistingUsername() {
         assertEquals(0, memberService.getAllMembers().size());
         Member member = null;
 
@@ -140,7 +137,7 @@ public class TestMemberService {
     }
 
     @Test
-    public void testUpdateUserPassword() {
+    public void testUpdateMemberPassword() {
         assertEquals(0, memberService.getAllMembers().size());
         Member member = null;
 
@@ -156,7 +153,7 @@ public class TestMemberService {
     }
 
     @Test
-    public void testUpdateUserPasswordInvalidUpperCase() {
+    public void testUpdateMemberPasswordInvalidUpperCase() {
         assertEquals(0, memberService.getAllMembers().size());
         Member member = null;
         String error = null;
@@ -172,7 +169,7 @@ public class TestMemberService {
     }
 
     @Test
-    public void testUpdateUserPasswordInvalidLowerCase() {
+    public void testUpdateMemberPasswordInvalidLowerCase() {
         assertEquals(0, memberService.getAllMembers().size());
         Member member = null;
         String error = null;
@@ -188,7 +185,7 @@ public class TestMemberService {
     }
 
     @Test
-    public void testUpdateUserPasswordForEmptyPassword() {
+    public void testUpdateMemberPasswordForEmptyPassword() {
         assertEquals(0, memberService.getAllMembers().size());
         Member member = null;
         String error = null;
@@ -204,7 +201,7 @@ public class TestMemberService {
     }
 
     @Test
-    public void testUpdateUserPasswordForNoNumber() {
+    public void testUpdateMemberPasswordForNoNumber() {
         assertEquals(0, memberService.getAllMembers().size());
         Member member = null;
         String error = null;
@@ -220,7 +217,7 @@ public class TestMemberService {
     }
 
     @Test
-    public void testUpdateUserPasswordForShorterThan8() {
+    public void testUpdateMemberPasswordForShorterThan8() {
         assertEquals(0, memberService.getAllMembers().size());
         Member member = null;
         String error = null;
@@ -236,7 +233,7 @@ public class TestMemberService {
     }
 
     @Test
-    public void testUpdateUserPasswordForLongerthan20() {
+    public void testUpdateMemberPasswordForLongerthan20() {
         assertEquals(0, memberService.getAllMembers().size());
         Member member = null;
         String error = null;
@@ -252,7 +249,7 @@ public class TestMemberService {
     }
 
     @Test
-    public void testDeleteUser() {
+    public void testDeleteMember() {
         boolean deleted = false;
         try {
             deleted = memberService.deleteMember(USERNAME);
@@ -264,7 +261,7 @@ public class TestMemberService {
     }
 
     @Test
-    public void testDeleteUserUnknown() {
+    public void testDeleteMemberUnknown() {
         String error = null;
         try {
             memberService.deleteMember("Non-existing Username");
@@ -276,7 +273,7 @@ public class TestMemberService {
     }
 
     @Test
-    public void testInvalidPasswordForUpperCase() {
+    public void testInvalidMemberPasswordForUpperCase() {
         assertEquals(0, memberService.getAllMembers().size());
         Member member = null;
 
@@ -298,7 +295,7 @@ public class TestMemberService {
     }
 
     @Test
-    public void testInvalidPasswordForLowerCase() {
+    public void testInvalidMemberPasswordForLowerCase() {
         assertEquals(0, memberService.getAllMembers().size());
         Member member = null;
 
@@ -320,7 +317,7 @@ public class TestMemberService {
     }
 
     @Test
-    public void testInvalidPasswordForNoNumber() {
+    public void testInvalidMemberPasswordForNoNumber() {
         assertEquals(0, memberService.getAllMembers().size());
         Member member = null;
 
@@ -342,7 +339,7 @@ public class TestMemberService {
     }
 
     @Test
-    public void testInvalidPasswordForShorterThan8() {
+    public void testInvalidMemberPasswordForShorterThan8() {
         assertEquals(0, memberService.getAllMembers().size());
         Member member = null;
 
@@ -364,7 +361,7 @@ public class TestMemberService {
     }
 
     @Test
-    public void testInvalidPasswordForLongerThan20() {
+    public void testInvalidMemberPasswordForLongerThan20() {
         assertEquals(0, memberService.getAllMembers().size());
         Member member = null;
 
