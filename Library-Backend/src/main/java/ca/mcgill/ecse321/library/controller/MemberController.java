@@ -23,6 +23,11 @@ public class MemberController {
     @Autowired
     private MemberService memberService;
 
+    /**
+     * @author Abd-El-Aziz Zayed
+     * @param username
+     * @return
+     */
     @GetMapping(value = {"/member/{username}"})
     public MemberDto viewMember(@PathVariable("username") String username) {
         return DTOConverter.convertToDto(memberService.getMember(username));
@@ -52,6 +57,10 @@ public class MemberController {
         }
     }
 
+    /**
+     * @author Abd-El-Aziz Zayed
+     * @return
+     */
     @GetMapping(value = {"/members"})
     public List<MemberDto> getAllMembers() {
         return memberService.getAllMembers().stream().map(DTOConverter::convertToDto).collect(Collectors.toList());

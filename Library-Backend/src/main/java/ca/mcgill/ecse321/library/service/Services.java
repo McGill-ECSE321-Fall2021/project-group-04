@@ -6,7 +6,6 @@ import java.util.List;
 public class Services {
 
     /**
-     *
      * @param iterable
      * @param <T>
      * @return

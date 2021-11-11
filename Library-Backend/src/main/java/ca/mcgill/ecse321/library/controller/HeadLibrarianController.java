@@ -19,11 +19,23 @@ public class HeadLibrarianController {
     @Autowired
     private HeadLibrarianService headLibrarianService;
 
+    /**
+     * @author Abd-El-Aziz Zayed
+     * @param username
+     * @return
+     */
     @GetMapping(value = {"/head_librarian/{username}"})
     public LibrarianDto viewHeadLibrarian(@PathVariable("username") String username) {
         return DTOConverter.convertToDto(headLibrarianService.getHeadLibrarian(username));
     }
 
+    /**
+     * @author Abd-El-Aziz Zayed
+     * @param aUsername
+     * @param aPassword
+     * @param aAddress
+     * @return
+     */
     @PostMapping(value = {"/create_head_librarian"})
     public ResponseEntity<?> createMember(@RequestParam("username") String aUsername,
                                           @RequestParam("password") String aPassword,
