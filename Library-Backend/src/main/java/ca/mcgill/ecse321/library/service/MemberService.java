@@ -88,7 +88,11 @@ public class MemberService {
     }
 
     /**
+<<<<<<< HEAD
      *
+=======
+     * 
+>>>>>>> main
      * @return
      */
     @Transactional
