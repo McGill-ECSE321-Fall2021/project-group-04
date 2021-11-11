@@ -57,6 +57,7 @@ public class TestMemberService {
             return null;
         });
 
+
         Answer<?> returnParameterAsAnswer = (InvocationOnMock invocation) -> {
             return invocation.getArgument(0);
         };
