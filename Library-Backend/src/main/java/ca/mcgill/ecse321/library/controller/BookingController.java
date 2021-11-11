@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
+//@CrossOrigin(origins = "*")
+//@RestController
 public class BookingController {
 
-    @Autowired
+    //@Autowired
     BookingService bookingService;
 
 
@@ -24,6 +26,7 @@ public class BookingController {
             return new ResponseEntity<>(bookings, HttpStatus.OK);
         }
         catch(IllegalArgumentException e){
+            System.out.println(e.getMessage());
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

@@ -4,6 +4,7 @@ import ca.mcgill.ecse321.library.model.HeadLibrarian;
 import ca.mcgill.ecse321.library.model.Librarian;
 import ca.mcgill.ecse321.library.model.Member;
 import ca.mcgill.ecse321.library.model.User;
+import ca.mcgill.ecse321.library.service.BookingService;
 import ca.mcgill.ecse321.library.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,9 +14,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+
 @CrossOrigin(origins = "*")
 @RestController
 public class UserController {
+
+
+
 
     @Autowired
     private UserService userService;

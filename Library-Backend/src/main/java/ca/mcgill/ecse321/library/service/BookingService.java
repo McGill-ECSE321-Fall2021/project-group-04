@@ -3,13 +3,14 @@ package ca.mcgill.ecse321.library.service;
 import ca.mcgill.ecse321.library.dao.*;
 import ca.mcgill.ecse321.library.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
-
+@Service
 public class BookingService {
 
     @Autowired
