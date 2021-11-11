@@ -104,6 +104,7 @@ public class HeadLibrarianService {
 
     /**
 	 * HeadLib can assign schedule
+	 * @author saghar sahebi 
 	 * 
 	 * @param workday
 	 * @param startTime
@@ -114,7 +115,7 @@ public class HeadLibrarianService {
 	 * @return assigned schedule
 	 */
 	@Transactional
-	public Set<WorkDay> AssignSchedule (DayOfWeek workday,Time startTime, Time endTime, String librarianUser, String headlibUser){
+	public Set<WorkDay> AssignScheduleLibrarian (DayOfWeek workday,Time startTime, Time endTime, String librarianUser, String headlibUser){
 	
 		HeadLibrarianService headlibrarian = new HeadLibrarianService();
 		LibrarianService librarian = new LibrarianService();
@@ -134,9 +135,30 @@ public class HeadLibrarianService {
 		
 		}
 	
+	
+	
+	public Set<WorkDay> AssignScheduleHeadLibrarian (DayOfWeek workday,Time startTime, Time endTime, String headlibUser){
+	
+		HeadLibrarianService headlibrarian = new HeadLibrarianService();
+		if(headlibrarian.getAllHeadLibrarians().contains(headLibrarianRepository.findHeadLibrarianByUsername(headlibUser))){
+			headlibrarian.getHeadLibrarian(headlibUser).setWorkHours(WeekSchedule(Schedule(workday,startTime,endTime)));
+		}
+		else {
+			throw new IllegalArgumentException("Only a headlibrarian can assign schedules.");
+		}
+	
+		workdayRepository.saveAll(headlibrarian.getHeadLibrarian(headlibUser).getWorkHours());
+		
+		return headlibrarian.getHeadLibrarian(headlibUser).getWorkHours();
+		
+		
+	}
+
+
 	/**
 	 * HeadLib can delete a schedule
-	 * 
+	 * @author saghar sahebi
+	 *
 	 * @param workday
 	 * @param startTime
 	 * @param endTime

@@ -1,7 +1,11 @@
 package ca.mcgill.ecse321.library.controller;
 
+import java.sql.Time;
+
 import ca.mcgill.ecse321.library.dto.*;
 import ca.mcgill.ecse321.library.model.*;
+import ca.mcgill.ecse321.library.model.WorkDay.DayOfWeek;
+
 
 public class DTOConverter {
     public static BookingTypeDto convertToDto(BookingType bt){
@@ -81,5 +85,12 @@ public class DTOConverter {
         ArchiveDto archiveDto = new ArchiveDto(archive.getId(), archive.getTitle(), archive.getDate(),
                 archive.getNumberOfPages());
         return archiveDto;
+    }
+    
+    public static WorkDayDto convertToDto(WorkDay aworkday) {
+    	
+    	WorkDayDto workdayDto = new WorkDayDto(aworkday.getId(), aworkday.getDayOfWeek(),aworkday.getStartTime(),aworkday.getEndTime());
+    	
+    	return workdayDto;
     }
 }
