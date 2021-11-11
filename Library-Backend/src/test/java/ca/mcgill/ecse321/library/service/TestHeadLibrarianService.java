@@ -453,4 +453,110 @@ public class TestHeadLibrarianService {
         }
         assertFalse(deleted);
     }
+    
+    @Test
+    public void testAssignScheduleforlibrarianforOneDay() {}
+    
+    
+    
+    @Test
+    public void testAssignScheduleforlibrarianforFourDays() {}
+  
+    @Test 
+    public void testAssignSchedulelibrarianNull() {
+    String librarian ="TestLibrrarian";
+    String headlibrarian = "TestHeadlibrarian";
+    WorkDay.DayOfWeek workday = null;
+    Time startTime = null;
+    Time endTime = null;
+    String error = null;
+    Set<WorkDay> workDays = null;
+ 
+    
+    try {
+    	workDays = headLibrarianService.AssignScheduleLibrarian(workday, startTime, endTime, librarian, headlibrarian);
+    }
+    catch(IllegalArgumentException e){
+    	error = e.getMessage();
+    }
+    
+    assertNull(workDays);
+    assertEquals(error, "The chosen schedule cannot be null");
+   
+    }
+ 
+    @Test
+    public void testAssignSchedulelibrarianEmpty() {
+    
+    	
+    String librarian ="TestLibrrarian";
+    String headlibrarian = "TestHeadlibrarian";
+    WorkDay.DayOfWeek workday = null;
+    Time startTime = Time.valueOf("10:00:00");
+    Time endTime = Time.valueOf("12:00:00");
+    String error = null;
+    Set<WorkDay> workDays = null;
+    
+    try {
+    	workDays = headLibrarianService.AssignScheduleLibrarian(workday, startTime, endTime, librarian, headlibrarian);
+    }
+    catch(IllegalArgumentException e){
+    	error = e.getMessage();
+    }
+    
+    assertNull(workDays);
+    assertEquals(error, "The chosen schedule cannot be empty ");
+   
+    }
+    
+    
+    
+    
+    
+    
+    @Test
+    public void testAssignScheduleforHeadLibrarianforTwoDays() {}
+    
+    @Test
+    public void testAssignScheduleforHeadLibrarianforFiveDays() {}
+    
+    @Test
+    public void testAssignScheduleHeadLibrarianNull() {
+ //   	assertEquals(3, headLibrarianService.getAllHeadLibrarians().size());
+    	
+    	String headlibrarian = "TestHeadlibrarian";
+        WorkDay.DayOfWeek workday = null;
+        Time startTime = null;
+        Time endTime = null;
+        String error = null;
+        Set<WorkDay> workDays = null;
+     
+        try {
+        	workDays = headLibrarianService.AssignScheduleHeadLibrarian(workday, startTime, endTime, headlibrarian);
+        	assertNotNull(workDays);
+        }
+        catch(IllegalArgumentException e){
+        	error = e.getMessage();
+        	assertEquals(error, "The chosen schedule cannot be empty or null");
+        }
+        
+    }
+    
+    @Test 
+    public void testAssignScheduleHeadLibrarianEmpty() {}
+    
+    
+    
+    
+    @Test 
+    public void testDeletLibrarianSchedule() {}
+    
+    @Test 
+    public void testDeletHeadLibrarianSchedule() {}
+    
+    
+    
+    
+    
+    
 }
