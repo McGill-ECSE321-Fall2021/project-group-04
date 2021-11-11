@@ -39,4 +39,15 @@ public class BookingController {
         }
     }
 
+    @PostMapping(value = { "/return/itemType/{itemType}/itemId/{itemId}", "/return/{name}/itemType/{itemType}/itemId/{itemId}/" })
+    public ResponseEntity<?> returnItem(@RequestParam String itemType, @RequestParam String itemId) {
+        try {
+            bookingService.returnLibraryItem(itemType,itemId);
+            return new ResponseEntity<>("Successfully returned the book", HttpStatus.CREATED) ;
+        }
+        catch (IllegalArgumentException e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }

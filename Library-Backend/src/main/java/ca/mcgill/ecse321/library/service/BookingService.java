@@ -35,6 +35,140 @@ public class BookingService {
         return toList(bookingRepository.findAll());
     }
 
+    /**
+     * gets the mobile item from the db then sets its booking to null and then saves it again
+     * @author Simo Benkirane
+     * @param elementType
+     * @param elementId
+     */
+    @Transactional
+    public void returnLibraryItem(String elementType, String elementId){
+
+        //possible future issue
+        //bookings might still point to the user even though no item is pointing to them
+        MobileItem item = getMobileItem(elementType,elementId);
+        item.setBooking(null);
+        saveMobileItem(elementType,elementId);
+
+    }
+
+    /**
+     * saves mobile item into db
+     * @author Simo Benkirane
+     * @param elementType
+     * @param elementId
+     * @return
+     */
+    public MobileItem saveMobileItem(String elementType, String elementId){
+
+        String error = "";
+        MobileItem item = null;
+        switch (elementType){
+            default: error += "invalid element type ";
+            case "Book":
+                try {
+                    item = (Book) bookRepository.findBookByTitle(elementId);
+                    if(item == null) {
+                        error += "could not find a book with that name ";
+                        throw new IllegalArgumentException(error);
+                    }
+                    bookRepository.save((Book)item);
+
+                }
+                catch (Exception e){
+                    error += "could not find a book with that name ";
+                }
+                break;
+            case "Movie":
+                try {
+                    item = (Movie) movieRepository.findMovieByTitle(elementId);
+                    if(item == null){
+                        error += "could not find a movie with that name ";
+                        throw new IllegalArgumentException(error);
+                    }
+                    movieRepository.save((Movie) item);
+                }
+                catch (Exception e){
+                    error += "could not find a book with that name ";
+                }
+                break;
+            case "MusicAlbum":
+                try {
+                    item = (MusicAlbum) musicAlbumRepository.findMusicAlbumByTitle(elementId);
+                    if(item == null) {
+                        error += "could not find a music album with that name ";
+                        throw new IllegalArgumentException(error);
+                    }
+                    musicAlbumRepository.save((MusicAlbum) item);
+                }
+                catch (Exception e){
+                    error += "could not find a music album with that name ";
+                }
+                break;
+        }
+
+        if(!error.equals("")) throw new IllegalArgumentException(error);
+
+        else return item;
+
+
+    }
+
+    /**
+     * gets mobile item from db
+     * @author Simo Benkirane
+     * @param elementType
+     * @param elementId
+     * @return
+     */
+    public MobileItem getMobileItem(String elementType, String elementId){
+
+        String error = "";
+        MobileItem item = null;
+        switch (elementType){
+            default: error += "invalid element type ";
+            case "Book":
+                try {
+                    item = (Book) bookRepository.findBookByTitle(elementId);
+                    if(item == null) error += "could not find a book with that name ";
+                }
+                catch (Exception e){
+                    error += "could not find a book with that name ";
+                }
+                break;
+            case "Movie":
+                try {
+                    item = (Movie) movieRepository.findMovieByTitle(elementId);
+                    if(item == null){
+                        error += "could not find a movie with that name ";
+                        throw new IllegalArgumentException(error);
+                    }
+                }
+                catch (Exception e){
+                    error += "could not find a book with that name ";
+                }
+                break;
+            case "MusicAlbum":
+                try {
+                    item = (MusicAlbum) musicAlbumRepository.findMusicAlbumByTitle(elementId);
+                    if(item == null) {
+                        error += "could not find a music album with that name ";
+                        throw new IllegalArgumentException(error);
+                    }
+                }
+                catch (Exception e){
+                    error += "could not find a music album with that name ";
+                }
+                break;
+        }
+
+        if(!error.equals("")) throw new IllegalArgumentException(error);
+
+        else return item;
+
+
+    }
+
 
     @Transactional
     public Booking createBooking(String username, String elementType, String elementId){
