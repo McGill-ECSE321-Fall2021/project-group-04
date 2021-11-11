@@ -68,6 +68,14 @@ public class TestNewspaperService {
         lenient().when(newspaperRepository.save(any(Newspaper.class))).thenAnswer(returnParameterAsAnswer);
     }
 
+    @Test
+    public void testCreateNewspaper() {
+        assertEquals(0, newspaperService.getAllNewspapers().size());
+        Newspaper newspaper=null;
+
+
+
+    }
 
 
 
