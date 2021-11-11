@@ -20,6 +20,8 @@ import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.Answer;
 
+import javax.servlet.ServletOutputStream;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -72,10 +74,24 @@ public class TestNewspaperService {
     public void testCreateNewspaper() {
         assertEquals(0, newspaperService.getAllNewspapers().size());
         Newspaper newspaper=null;
+        String date = "2020-09-15";
+        String num = "100";
+        String tit = "Trophy";
 
+        try{
+            newspaper = newspaperService.createNewspaper(date , num , tit);
+        }
+        catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
+            fail();
 
-
+        }
+        assertNotNull(newspaper);
+        assertEquals(Date.valueOf(date) , newspaper.getDate());
+        assertEquals(Integer.parseInt(num) , newspaper.getNumberOfPages());
+        assertEquals(tit , newspaper.getTitle());
     }
+    
 
 
 
