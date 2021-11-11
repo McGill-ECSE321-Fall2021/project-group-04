@@ -26,6 +26,7 @@ import org.mockito.Mock;
 
 import java.sql.Date;
 
+@ExtendWith(MockitoExtension.class)
 public class TestBookService {
 
     @Mock
@@ -84,6 +85,7 @@ public class TestBookService {
             book = bookService.createBook(barCode, title, author, dateOfRelease, price, isbn, numberOfPages);
         }
         catch(IllegalArgumentException e){
+            System.out.println(e.getMessage());
             fail();
         }
 
