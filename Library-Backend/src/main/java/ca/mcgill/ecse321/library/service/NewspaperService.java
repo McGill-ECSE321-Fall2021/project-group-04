@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ca.mcgill.ecse321.library.dao.NewspaperRepository;
 import ca.mcgill.ecse321.library.model.Newspaper;
 
-
+@Service
 public class NewspaperService {
 	
 	@Autowired
@@ -27,7 +27,7 @@ public class NewspaperService {
 	@Transactional
 	public Newspaper createNewspaper(String date, String numberOfPages, String title) {
 
-		LibraryItemService.checkImmobileItemInfo(date, numberOfPages, title);
+		ImmobileItemServices.checkItemInfo(date, numberOfPages, title);
 
 		Newspaper newspaper = new Newspaper();
 		newspaper.setDate(Date.valueOf(date));
@@ -56,7 +56,7 @@ public class NewspaperService {
 	}
 	
 	public List<Newspaper> getAllNewspapers(){
-		return LibraryItemService.toList(newspaperRepository.findAll());
+		return Services.toList(newspaperRepository.findAll());
 	}
 	
 	

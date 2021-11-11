@@ -19,11 +19,21 @@ public class DTOConverter {
         return new UserDto(user.getId(),user.getUsername(), user.getPassword(), user.getAddress());
     }
 
+    /**
+     * @author Abd-El-Aziz Zayed
+     * @param member
+     * @return
+     */
     public static MemberDto convertToDto(Member member) {
         return new MemberDto(member.getId(), member.getUsername(), member.getPassword(), member.getAddress(),
                 member.getMemberType(), member.getMemberStatus(), member.getMonthlyFee(), member.getStartDate());
     }
 
+    /**
+     * @author Abd-El-Aziz Zayed
+     * @param librarian
+     * @return
+     */
     public static LibrarianDto convertToDto(Librarian librarian) {
         return new LibrarianDto(librarian.getId(), librarian.getUsername(), librarian.getPassword(), librarian.getAddress());
     }

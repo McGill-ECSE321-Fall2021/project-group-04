@@ -1,10 +1,12 @@
 package ca.mcgill.ecse321.library.controller;
 
+import ca.mcgill.ecse321.library.dao.*;
 import ca.mcgill.ecse321.library.dto.*;
 import ca.mcgill.ecse321.library.model.*;
 import ca.mcgill.ecse321.library.service.BookingService;
 import ca.mcgill.ecse321.library.service.MemberService;
 import ca.mcgill.ecse321.library.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,8 +18,15 @@ import java.util.stream.Collectors;
 @RestController
 public class LibraryRestController {
 
+    //error can't use @Autowired on bookingService, for some reason it breaks the code and wont compile
+
+    @Autowired
     private BookingService bookingService;
+
+
     private UserService userService;
+
+    @Autowired
     private MemberService memberService;
 
     //will remove this later (copy available in bookingController)

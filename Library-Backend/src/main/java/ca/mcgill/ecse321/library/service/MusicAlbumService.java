@@ -11,6 +11,7 @@ import ca.mcgill.ecse321.library.dao.MusicAlbumRepository;
 import ca.mcgill.ecse321.library.model.Book;
 import ca.mcgill.ecse321.library.model.MusicAlbum;
 
+@Service
 public class MusicAlbumService {
 	
 	@Autowired
@@ -32,7 +33,7 @@ public class MusicAlbumService {
 	public MusicAlbum createMusicAlbum(String barCode, String title, String author,
 			String dateOfRelease, String price, String numberOfSongs, String totalLength) {
 
-		LibraryItemService.checkMobileItemInfo(barCode, title, author, dateOfRelease, price);
+		MobileItemServices.checkItemInfo(barCode, title, author, dateOfRelease, price);
 		
 		String error = "";
 		if(numberOfSongs == null || numberOfSongs == "") {
@@ -80,7 +81,7 @@ public class MusicAlbumService {
 	}
 	
 	public List<MusicAlbum> getAllBooks(){
-		return LibraryItemService.toList(musicAlbumRepository.findAll());
+		return Services.toList(musicAlbumRepository.findAll());
 	}
 	
 	

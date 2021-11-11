@@ -9,21 +9,32 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+
+
 
 public class HeadLibrarianController {
 
     @Autowired
     private HeadLibrarianService headLibrarianService;
 
+    /**
+     * @author Abd-El-Aziz Zayed
+     * @param username
+     * @return
+     */
     @GetMapping(value = {"/head_librarian/{username}"})
     public LibrarianDto viewHeadLibrarian(@PathVariable("username") String username) {
         return DTOConverter.convertToDto(headLibrarianService.getHeadLibrarian(username));
     }
 
+    /**
+     * @author Abd-El-Aziz Zayed
+     * @param aUsername
+     * @param aPassword
+     * @param aAddress
+     * @return
+     */
     @PostMapping(value = {"/create_head_librarian"})
     public ResponseEntity<?> createMember(@RequestParam("username") String aUsername,
                                           @RequestParam("password") String aPassword,

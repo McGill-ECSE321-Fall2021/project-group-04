@@ -5,8 +5,10 @@ import ca.mcgill.ecse321.library.model.Movie;
 import java.sql.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Service
 public class MovieService {
 	
 	@Autowired
@@ -27,7 +29,7 @@ public class MovieService {
 	public Movie createMovie(String barCode, String title, String author,
 			String dateOfRelease, String price, String length) {
 
-		LibraryItemService.checkMobileItemInfo(barCode, title, author, dateOfRelease, price);
+		MobileItemServices.checkItemInfo(barCode, title, author, dateOfRelease, price);
 		
 		String error = "";
 		if(length == null || length == "") {
@@ -87,7 +89,7 @@ public class MovieService {
 	 * @return
 	 */
 	public List<Movie> getAllMovies(){
-		return LibraryItemService.toList(movieRepository.findAll());
+		return Services.toList(movieRepository.findAll());
 	}
 	
 	

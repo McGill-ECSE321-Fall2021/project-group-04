@@ -14,7 +14,9 @@ import java.util.Set;
 
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class HeadLibrarianService {
 
     @Autowired
@@ -25,7 +27,14 @@ public class HeadLibrarianService {
 	
 	@Autowired
 	LibrarianRepository librarianRepository;
-	
+
+	/**
+	 * @author Abd-El-Aziz Zayed
+	 * @param aUsername
+	 * @param aPassword
+	 * @param aAddress
+	 * @return
+	 */
     @Transactional
     public HeadLibrarian createHeadLibrarian(String aUsername, String aPassword, String aAddress) {
         UserService.checkValidUsername(aUsername);
@@ -42,6 +51,12 @@ public class HeadLibrarianService {
         return librarian;
     }
 
+	/**
+	 * @author Abd-El-Aziz Zayed
+	 * @param username
+	 * @param newPassword
+	 * @return
+	 */
     @Transactional
     public HeadLibrarian changeHeadLibrarianPassword(String username, String newPassword) {
         UserService.checkValidUsername(username);
@@ -58,6 +73,11 @@ public class HeadLibrarianService {
         return librarian;
     }
 
+	/**
+	 * @author Abd-El-Aziz Zayed
+	 * @param username
+	 * @return
+	 */
     @Transactional
     public boolean deleteHeadLibrarian(String username) {
         HeadLibrarian librarian = getHeadLibrarian(username);
@@ -68,6 +88,11 @@ public class HeadLibrarianService {
         return true;
     }
 
+	/**
+	 * @author Abd-El-Aziz Zayed
+	 * @param username
+	 * @return
+	 */
     @Transactional
     public HeadLibrarian getHeadLibrarian(String username) {
         return headLibrarianRepository.findHeadLibrarianByUsername(username);
@@ -78,6 +103,7 @@ public class HeadLibrarianService {
     public List<HeadLibrarian> getAllHeadLibrarians(){
     	return Services.toList(headLibrarianRepository.findAll());
 	}
+
     /**
 	 * HeadLib can assign schedule
 	 * 
@@ -85,11 +111,10 @@ public class HeadLibrarianService {
 	 * @param startTime
 	 * @param endTime
 	 * @param librarianUser
-	 * @param headlibuser
+	 * @param headlibUser
 	 * 
 	 * @return assigned schedule
 	 */
-
 	@Transactional
 	public Set<WorkDay> AssignSchedule (DayOfWeek workday,Time startTime, Time endTime, String librarianUser, String headlibUser){
 	
@@ -118,7 +143,7 @@ public class HeadLibrarianService {
 	 * @param startTime
 	 * @param endTime
 	 * @param librarianUser
-	 * @param headlibuser
+	 * @param headlibUser
 	 * 
 	 * @return assigned schedule
 	 */
@@ -146,7 +171,7 @@ public class HeadLibrarianService {
 
 
 	@Transactional
-	private WorkDay Schedule(DayOfWeek workday, Time astartTime, Time aendTime) {
+	public WorkDay Schedule(DayOfWeek workday, Time astartTime, Time aendTime) {
 		WorkDay workdays = new WorkDay();
 		workdays.setDayOfWeek(workday);
 		workdays.setStartTime(astartTime);
@@ -156,7 +181,7 @@ public class HeadLibrarianService {
 	}
 
 	@Transactional
-	private Set<WorkDay> WeekSchedule (WorkDay aWorkDaySchedule){
+	public Set<WorkDay> WeekSchedule (WorkDay aWorkDaySchedule){
 		Set<WorkDay> theSchedule = new HashSet<WorkDay>();  
 		theSchedule.add(aWorkDaySchedule);
 		return theSchedule;
