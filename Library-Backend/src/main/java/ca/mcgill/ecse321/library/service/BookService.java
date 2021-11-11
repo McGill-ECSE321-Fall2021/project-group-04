@@ -32,8 +32,8 @@ public class BookService {
 	@Transactional
 	public Book createBook(String barCode, String title, String author,
 			String dateOfRelease, String price, String isbn, String numberOfPages) {
-		
-		LibraryItemService.checkMobileItemInfo(barCode, title, author, dateOfRelease, price);
+
+		MobileItemServices.checkItemInfo(barCode, title, author, dateOfRelease, price);
 		
 		String error = "";
 		if(isbn == null || isbn == "") {
@@ -150,7 +150,7 @@ public class BookService {
 	 * @return
 	 */
 	public List<Book> getAllBooks(){
-		return LibraryItemService.toList(bookRepository.findAll());
+		return Services.toList(bookRepository.findAll());
 	}
 	
 	

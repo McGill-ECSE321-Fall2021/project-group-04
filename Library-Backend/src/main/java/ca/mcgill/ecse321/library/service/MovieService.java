@@ -29,7 +29,7 @@ public class MovieService {
 	public Movie createMovie(String barCode, String title, String author,
 			String dateOfRelease, String price, String length) {
 
-		LibraryItemService.checkMobileItemInfo(barCode, title, author, dateOfRelease, price);
+		MobileItemServices.checkItemInfo(barCode, title, author, dateOfRelease, price);
 		
 		String error = "";
 		if(length == null || length == "") {
@@ -89,7 +89,7 @@ public class MovieService {
 	 * @return
 	 */
 	public List<Movie> getAllMovies(){
-		return LibraryItemService.toList(movieRepository.findAll());
+		return Services.toList(movieRepository.findAll());
 	}
 	
 	
