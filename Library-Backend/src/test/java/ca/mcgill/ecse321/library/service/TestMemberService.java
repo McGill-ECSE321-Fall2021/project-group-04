@@ -110,7 +110,7 @@ public class TestMemberService {
             error = e.getMessage();
         }
         assertNull(member);
-        assertEquals(error, "The username cannot be empty.");
+        assertEquals(error, "Username cannot be empty.");
 
     }
 
@@ -133,7 +133,7 @@ public class TestMemberService {
             error = e.getMessage();
         }
         assertNull(member);
-        assertEquals(error, "This username already exists.");
+        assertEquals(error,  "Username already exists.");
     }
 
     @Test
@@ -165,7 +165,7 @@ public class TestMemberService {
             error = e.getMessage();
         }
         assertNull(member);
-        assertEquals(error, "Invalid Password. Password must contain at least one uppercase character.");
+        assertEquals(error, "The password must contain at least one uppercase character.");
     }
 
     @Test
@@ -181,7 +181,7 @@ public class TestMemberService {
             error = e.getMessage();
         }
         assertNull(member);
-        assertEquals(error, "Invalid Password. Password must contain at least one lowercase character.");
+        assertEquals(error, "The password must contain at least one lowercase character.");
     }
 
     @Test
@@ -197,7 +197,7 @@ public class TestMemberService {
             error = e.getMessage();
         }
         assertNull(member);
-        assertEquals(error, "Invalid Password. New password cannot be empty.");
+        assertEquals(error, "Password cannot be empty.");
     }
 
     @Test
@@ -213,7 +213,7 @@ public class TestMemberService {
             error = e.getMessage();
         }
         assertNull(member);
-        assertEquals(error, "Invalid Password. New password must contain at least one number.");
+        assertEquals(error, "The password must contain at least one numeric character.");
     }
 
     @Test
@@ -229,7 +229,7 @@ public class TestMemberService {
             error = e.getMessage();
         }
         assertNull(member);
-        assertEquals(error, "Invalid Password. New password must be longer than 8 characters.");
+        assertEquals(error, "The password length cannot be less than 8 characters.");
     }
 
     @Test
@@ -245,7 +245,7 @@ public class TestMemberService {
             error = e.getMessage();
         }
         assertNull(member);
-        assertEquals(error, "Invalid Password. New password must be shorter than 20 characters.");
+        assertEquals(error, "The password length cannot be more than 20 characters.");
     }
 
     @Test
@@ -290,8 +290,8 @@ public class TestMemberService {
         catch(IllegalArgumentException e) {
             error = e.getMessage();
         }
-        assertNotNull(member);
-        assertEquals(error, "Password must contain at least one uppercase character.");
+        assertNull(member);
+        assertEquals(error, "The password must contain at least one uppercase character.");
     }
 
     @Test
@@ -312,8 +312,8 @@ public class TestMemberService {
         catch(IllegalArgumentException e) {
             error = e.getMessage();
         }
-        assertNotNull(member);
-        assertEquals(error, "Password must contain at least one lowercase character.");
+        assertNull(member);
+        assertEquals(error, "The password must contain at least one lowercase character.");
     }
 
     @Test
@@ -334,8 +334,8 @@ public class TestMemberService {
         catch(IllegalArgumentException e) {
             error = e.getMessage();
         }
-        assertNotNull(member);
-        assertEquals(error, "Password must contain at least one number.");
+        assertNull(member);
+        assertEquals(error, "The password must contain at least one numeric character.");
     }
 
     @Test
@@ -356,8 +356,8 @@ public class TestMemberService {
         catch(IllegalArgumentException e) {
             error = e.getMessage();
         }
-        assertNotNull(member);
-        assertEquals(error, "Password must be at least 8 characters.");
+        assertNull(member);
+        assertEquals(error, "The password length cannot be less than 8 characters.");
     }
 
     @Test
@@ -378,7 +378,7 @@ public class TestMemberService {
         catch(IllegalArgumentException e) {
             error = e.getMessage();
         }
-        assertNotNull(member);
-        assertEquals(error, "Password must be shorter than 20 characters.");
+        assertNull(member);
+        assertEquals(error, "The password length cannot be more than 20 characters.");
     }
 }

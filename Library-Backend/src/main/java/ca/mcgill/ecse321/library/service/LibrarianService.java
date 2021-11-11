@@ -52,7 +52,6 @@ public class LibrarianService {
      */
     @Transactional
     public Librarian changeLibrarianPassword(String username, String newPassword) {
-        checkValidUsername(username);
         Librarian librarian = librarianRepository.findLibrarianByUsername(username);
 
         if (librarian == null) {
