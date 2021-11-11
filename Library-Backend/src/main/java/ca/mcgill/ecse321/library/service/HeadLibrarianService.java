@@ -2,6 +2,7 @@ package ca.mcgill.ecse321.library.service;
 
 import ca.mcgill.ecse321.library.dao.HeadLibrarianRepository;
 import ca.mcgill.ecse321.library.dao.LibrarianRepository;
+import ca.mcgill.ecse321.library.dao.MemberRepository;
 import ca.mcgill.ecse321.library.dao.WorkDayRepository;
 import ca.mcgill.ecse321.library.model.HeadLibrarian;
 import ca.mcgill.ecse321.library.model.WorkDay;
@@ -24,9 +25,6 @@ public class HeadLibrarianService {
    
     @Autowired
 	WorkDayRepository workdayRepository;
-	
-	@Autowired
-	LibrarianRepository librarianRepository;
 
 	/**
 	 * @author Abd-El-Aziz Zayed
@@ -37,7 +35,7 @@ public class HeadLibrarianService {
 	 */
     @Transactional
     public HeadLibrarian createHeadLibrarian(String aUsername, String aPassword, String aAddress) {
-        UserService.checkValidUsername(aUsername);
+        checkValidUsername(aUsername);
         UserService.checkValidPassword(aPassword);
         UserService.checkValidAddress(aAddress);
 
@@ -59,7 +57,7 @@ public class HeadLibrarianService {
 	 */
     @Transactional
     public HeadLibrarian changeHeadLibrarianPassword(String username, String newPassword) {
-        UserService.checkValidUsername(username);
+        checkValidUsername(username);
         HeadLibrarian librarian = headLibrarianRepository.findHeadLibrarianByUsername(username);
 
         if (librarian == null) {
@@ -186,5 +184,19 @@ public class HeadLibrarianService {
 		theSchedule.add(aWorkDaySchedule);
 		return theSchedule;
 	}
-    
+
+	/**
+	 * @author Jewoo Lee
+	 * @param username
+	 * @return
+	 */
+	public boolean checkValidUsername(String username) {
+		if (username == null || username == "") {
+			throw new IllegalArgumentException("Username cannot be empty.");
+		}
+		if (headLibrarianRepository.findHeadLibrarianByUsername(username) == null) {
+			return true;
+		}
+		throw new IllegalArgumentException("Username already exists.");
+	}
 }
