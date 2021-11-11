@@ -4,7 +4,6 @@ import ca.mcgill.ecse321.library.dao.MemberRepository;
 import ca.mcgill.ecse321.library.model.Member;
 import java.sql.Date;
 
-import net.bytebuddy.pool.TypePool;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
