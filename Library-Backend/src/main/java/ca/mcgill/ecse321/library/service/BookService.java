@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ca.mcgill.ecse321.library.dao.BookRepository;
 import ca.mcgill.ecse321.library.model.Book;
 
-
+@Service
 public class BookService {
 	
 	@Autowired

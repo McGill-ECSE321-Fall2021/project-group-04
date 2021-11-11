@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ca.mcgill.ecse321.library.dao.NewspaperRepository;
 import ca.mcgill.ecse321.library.model.Newspaper;
 
-
+@Service
 public class NewspaperService {
 	
 	@Autowired

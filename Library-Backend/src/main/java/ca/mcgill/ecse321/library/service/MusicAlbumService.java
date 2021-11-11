@@ -11,6 +11,7 @@ import ca.mcgill.ecse321.library.dao.MusicAlbumRepository;
 import ca.mcgill.ecse321.library.model.Book;
 import ca.mcgill.ecse321.library.model.MusicAlbum;
 
+@Service
 public class MusicAlbumService {
 	
 	@Autowired
