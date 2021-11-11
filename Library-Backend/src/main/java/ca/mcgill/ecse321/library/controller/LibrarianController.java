@@ -24,11 +24,23 @@ public class LibrarianController {
     @Autowired
     private LibrarianService libraryService;
 
+    /**
+     * @author Abd-El-Aziz Zayed
+     * @param username
+     * @return
+     */
     @GetMapping(value = {"/librarian/{username}"})
     public LibrarianDto viewLibrarian(@PathVariable("username") String username) {
         return DTOConverter.convertToDto(libraryService.getLibrarian(username));
     }
 
+    /**
+     * @author Abd-El-Aziz Zayed
+     * @param aUsername
+     * @param aPassword
+     * @param aAddress
+     * @return
+     */
     @PostMapping(value = {"/create_librarian"})
     public ResponseEntity<?> createLibrarian(@RequestParam("username") String aUsername,
                                           @RequestParam("password") String aPassword,
@@ -41,6 +53,10 @@ public class LibrarianController {
         }
     }
 
+    /**
+     * @author Abd-El-Aziz Zayed
+     * @return
+     */
     @GetMapping(value = {"/librarians"})
     public List<LibrarianDto> getAllLibrarians() {
         return libraryService.getAllLibrarians().stream().map(DTOConverter::convertToDto).collect(Collectors.toList());
