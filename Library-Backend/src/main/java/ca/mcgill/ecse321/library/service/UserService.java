@@ -24,22 +24,7 @@ public class UserService {
     private HeadLibrarianRepository headLibrarianRepository;
 
     /**
-     *
-     * @param username
-     * @return
-     */
-    public static boolean checkValidUsername(String username) {
-        if (username == null || username == "") {
-            throw new IllegalArgumentException("Username cannot be empty.");
-        }
-        if (memberRepository.findMemberByUsername(username) == null) {
-            return true;
-        }
-        throw new IllegalArgumentException("Username already exists.");
-    }
-
-    /**
-     *
+     * @author Jewoo Lee
      * @param password
      * @return
      */
@@ -50,7 +35,7 @@ public class UserService {
         if (password.length() < 8) {
             throw new IllegalArgumentException("The password length cannot be less than 8 characters.");
         }
-        if (password.length() < 20) {
+        if (password.length() > 20) {
             throw new IllegalArgumentException("The password length cannot be more than 20 characters.");
         }
 
@@ -84,7 +69,7 @@ public class UserService {
     // Need to Review
 
     /**
-     *
+     * @author Jewoo Lee
      * @param address
      * @return
      */
@@ -97,7 +82,7 @@ public class UserService {
     }
 
     /**
-     *
+     * @author Jewoo Lee
      * @param username
      * @param password
      * @return

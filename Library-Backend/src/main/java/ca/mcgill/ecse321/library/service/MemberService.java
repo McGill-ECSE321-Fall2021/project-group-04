@@ -1,5 +1,7 @@
 package ca.mcgill.ecse321.library.service;
 
+import ca.mcgill.ecse321.library.dao.HeadLibrarianRepository;
+import ca.mcgill.ecse321.library.dao.LibrarianRepository;
 import ca.mcgill.ecse321.library.dao.MemberRepository;
 import ca.mcgill.ecse321.library.model.Member;
 import java.util.List;
@@ -14,17 +16,17 @@ public class MemberService {
     MemberRepository memberRepository;
 
     /**
-     *
      * @param aUsername
      * @param aPassword
      * @param aAddress
      * @param aMemberType
      * @param aMemberStatus
      * @return
+     * @author Jewoo Lee
      */
     @Transactional
     public Member createMember(String aUsername, String aPassword, String aAddress, Member.MemberType aMemberType, Member.MemberStatus aMemberStatus) {
-        UserService.checkValidUsername(aUsername);
+        checkValidUsername(aUsername);
         UserService.checkValidPassword(aPassword);
         UserService.checkValidAddress(aAddress);
 
@@ -41,14 +43,14 @@ public class MemberService {
     }
 
     /**
-     *
      * @param username
      * @param newPassword
      * @return
+     * @author Jewoo Lee
      */
     @Transactional
     public Member changeMemberPassword(String username, String newPassword) {
-        UserService.checkValidUsername(username);
+        checkValidUsername(username);
         Member member = memberRepository.findMemberByUsername(username);
 
         if (member == null) {
@@ -63,9 +65,9 @@ public class MemberService {
     }
 
     /**
-     *
      * @param username
      * @return
+     * @author Jewoo Lee
      */
     @Transactional
     public boolean deleteMember(String username) {
@@ -78,9 +80,9 @@ public class MemberService {
     }
 
     /**
-     *
      * @param username
      * @return
+     * @author Jewoo Lee
      */
     @Transactional
     public Member getMember(String username) {
@@ -88,17 +90,26 @@ public class MemberService {
     }
 
     /**
-<<<<<<< HEAD
-     *
-=======
-     * 
->>>>>>> main
      * @return
+     * @author Jewoo Lee
      */
     @Transactional
     public List<Member> getAllMembers() {
         return Services.toList(memberRepository.findAll());
     }
 
-
+    /**
+     * @author Jewoo Lee
+     * @param username
+     * @return
+     */
+    public boolean checkValidUsername(String username) {
+        if (username == null || username == "") {
+            throw new IllegalArgumentException("Username cannot be empty.");
+        }
+        if (memberRepository.findMemberByUsername(username) == null) {
+            return true;
+        }
+        throw new IllegalArgumentException("Username already exists.");
+    }
 }

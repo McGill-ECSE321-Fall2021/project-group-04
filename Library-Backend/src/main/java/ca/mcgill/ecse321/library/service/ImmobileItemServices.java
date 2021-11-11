@@ -1,7 +1,10 @@
 package ca.mcgill.ecse321.library.service;
 
+import org.springframework.stereotype.Service;
+
 import java.sql.Date;
 
+@Service
 public class ImmobileItemServices {
 
     /**
