@@ -8,8 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 
-//@CrossOrigin(origins = "*")
-//@RestController
+@CrossOrigin(origins = "*")
+@RestController
 public class LibraryItemController {
 
     @Autowired

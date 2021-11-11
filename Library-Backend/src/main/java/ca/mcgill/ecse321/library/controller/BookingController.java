@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
-//@CrossOrigin(origins = "*")
-//@RestController
+@CrossOrigin(origins = "*")
+@RestController
 public class BookingController {
 
-    //@Autowired
+    @Autowired
     BookingService bookingService;
 
 
@@ -32,7 +32,7 @@ public class BookingController {
     }
 
     @PostMapping(value = { "/booking/{name}/itemType/{itemType}/itemId/{itemId}", "/booking/{name}/itemType/{itemType}/itemId/{itemId}/" })
-    public ResponseEntity<?> createBooking(@RequestParam String name,@RequestParam String itemType, @RequestParam String itemId) {
+    public ResponseEntity<?> createBooking(@PathVariable String name,@PathVariable String itemType,@PathVariable String itemId) {
         try {
             Booking booking = bookingService.createBooking(name, itemType, itemId);
             return new ResponseEntity<>(DTOConverter.convertToDto(booking, booking.getUser(), booking.getBookingType()), HttpStatus.CREATED) ;
