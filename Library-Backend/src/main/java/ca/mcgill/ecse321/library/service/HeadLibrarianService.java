@@ -57,7 +57,6 @@ public class HeadLibrarianService {
 	 */
     @Transactional
     public HeadLibrarian changeHeadLibrarianPassword(String username, String newPassword) {
-        checkValidUsername(username);
         HeadLibrarian librarian = headLibrarianRepository.findHeadLibrarianByUsername(username);
 
         if (librarian == null) {
