@@ -30,36 +30,20 @@ public class MemberController {
 
     /**
      * @author Jewoo Lee
-     * @param address
-     * @param username
-     * @param password
-     * @param memberType
-     * @param memberStatus
+     * @param aUsername
+     * @param aPassword
+     * @param aAddress
+     * @param aMemberType
+     * @param aMemberStatus
      * @return
      */
     @PostMapping(value = {"/signup_user/", "/signup_user"})
-    public ResponseEntity<?> signupUser(@RequestParam String address, @RequestParam String username, @RequestParam String password,
-                                        @RequestParam Member.MemberType memberType, @RequestParam Member.MemberStatus memberStatus) {
+    public ResponseEntity<?> signupUser(@RequestParam("username") String aUsername,
+                                        @RequestParam("password") String aPassword,
+                                        @RequestParam("address") String aAddress,
+                                        @RequestParam("member_type") Member.MemberType aMemberType,
+                                        @RequestParam("member_status") Member.MemberStatus aMemberStatus) {
 
-        Member member = null;
-        try {
-            member = memberService.createMember(username, password, address, memberType, memberStatus);
-        }
-        catch(IllegalArgumentException e) {
-            memberService.deleteMember(username);
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-
-        return new ResponseEntity<>(DTOConverter.convertToDto(member), HttpStatus.CREATED);
-    }
-
-    /*
-    @PostMapping(value = {"/create_member"})
-    public ResponseEntity<?> createMember(@RequestParam("username") String aUsername,
-                                          @RequestParam("password") String aPassword,
-                                          @RequestParam("address") String aAddress,
-                                          @RequestParam("member_type") Member.MemberType aMemberType,
-                                          @RequestParam("member_status") Member.MemberStatus aMemberStatus) {
         try {
             Member member = memberService.createMember(aUsername, aPassword, aAddress, aMemberType, aMemberStatus);
             return new ResponseEntity<>(DTOConverter.convertToDto(member), HttpStatus.CREATED) ;
@@ -67,7 +51,6 @@ public class MemberController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-     */
 
     @GetMapping(value = {"/members"})
     public List<MemberDto> getAllMembers() {
