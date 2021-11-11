@@ -13,7 +13,13 @@ public class LibrarianService {
     @Autowired
     LibrarianRepository librarianRepository;
 
-    // TODO
+    /**
+     * @author Abd-El-Aziz Zayed
+     * @param aUsername
+     * @param aPassword
+     * @param aAddress
+     * @return
+     */
     @Transactional
     public Librarian createLibrarian(String aUsername, String aPassword, String aAddress) {
         UserService.checkValidUsername(aUsername);
@@ -30,6 +36,12 @@ public class LibrarianService {
         return librarian;
     }
 
+    /**
+     * @author Abd-El-Aziz Zayed
+     * @param username
+     * @param newPassword
+     * @return
+     */
     @Transactional
     public Librarian changeLibrarianPassword(String username, String newPassword) {
         UserService.checkValidUsername(username);
@@ -46,6 +58,11 @@ public class LibrarianService {
         return librarian;
     }
 
+    /**
+     * @author Abd-El-Aziz Zayed
+     * @param username
+     * @return
+     */
     @Transactional
     public boolean deleteLibrarian(String username) {
         Librarian librarian = getLibrarian(username);
@@ -56,11 +73,20 @@ public class LibrarianService {
         return true;
     }
 
+    /**
+     * @author Abd-El-Aziz Zayed
+     * @param username
+     * @return
+     */
     @Transactional
     public Librarian getLibrarian(String username) {
         return librarianRepository.findLibrarianByUsername(username);
     }
 
+    /**
+     * @author Abd-El-Aziz Zayed
+     * @return
+     */
     @Transactional
     public List<Librarian> getAllLibrarians() {
         return Services.toList(librarianRepository.findAll());
