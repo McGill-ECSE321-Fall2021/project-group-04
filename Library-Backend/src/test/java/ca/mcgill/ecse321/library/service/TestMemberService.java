@@ -4,7 +4,6 @@ import ca.mcgill.ecse321.library.dao.MemberRepository;
 import ca.mcgill.ecse321.library.model.Member;
 import java.sql.Date;
 
-import net.bytebuddy.pool.TypePool;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -33,7 +32,7 @@ public class TestMemberService {
 
     private static final String USERNAME = "username";
     private static final String PASSWORD = "Password1234";
-    private static final String ADDRESS = "1234 University, Montreal, QC";
+    private static final String ADDRESS = "1234 University, Montreal, Quebec";
 
     private static final Member.MemberType MEMBER_TYPE = Member.MemberType.Local;
     private static final Member.MemberStatus MEMBER_STATUS = Member.MemberStatus.Active;
