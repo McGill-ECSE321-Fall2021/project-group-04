@@ -100,4 +100,180 @@ public class TestBookService {
         assertEquals(Integer.valueOf(numberOfPages), book.getNumberOfPages());
         assertNull(book.getBooking());
     }
+
+    @Test
+    public void testCreateBookNullBarcode(){
+        assertEquals(0, bookService.getAllBooks().size());
+        String barCode = "";
+        String title = "Aly's Book";
+        String author = "Aly";
+        String dateOfRelease = "2021-01-01";
+        String price = "20";
+        String isbn = "1";
+        String numberOfPages = "33";
+
+        Book book = null;
+
+        String error = "";
+        try{
+            book = bookService.createBook(barCode, title, author, dateOfRelease, price, isbn, numberOfPages);
+        }
+        catch(IllegalArgumentException e){
+            error = e.getMessage();
+        }
+
+        assertNull(book);
+        assertEquals(error, "barcode needs to be specified ");
+    }
+
+    @Test
+    public void testCreateBookNullTitle(){
+        assertEquals(0, bookService.getAllBooks().size());
+        String barCode = "11";
+        String title = "";
+        String author = "Aly";
+        String dateOfRelease = "2021-01-01";
+        String price = "20";
+        String isbn = "1";
+        String numberOfPages = "33";
+
+        Book book = null;
+
+        String error = "";
+        try{
+            book = bookService.createBook(barCode, title, author, dateOfRelease, price, isbn, numberOfPages);
+        }
+        catch(IllegalArgumentException e){
+            error = e.getMessage();
+        }
+
+        assertNull(book);
+        assertEquals(error, "title needs to be specified ");
+    }
+
+    @Test
+    public void testCreateBookNullAuthor(){
+        assertEquals(0, bookService.getAllBooks().size());
+        String barCode = "11";
+        String title = "Aly's book";
+        String author = "";
+        String dateOfRelease = "2021-01-01";
+        String price = "20";
+        String isbn = "1";
+        String numberOfPages = "33";
+
+        Book book = null;
+
+        String error = "";
+        try{
+            book = bookService.createBook(barCode, title, author, dateOfRelease, price, isbn, numberOfPages);
+        }
+        catch(IllegalArgumentException e){
+            error = e.getMessage();
+        }
+
+        assertNull(book);
+        assertEquals(error, "author needs to be specified ");
+    }
+
+    @Test
+    public void testCreateBookNullDateOfRelease(){
+        assertEquals(0, bookService.getAllBooks().size());
+        String barCode = "11";
+        String title = "Aly's book";
+        String author = "Aly";
+        String dateOfRelease = "";
+        String price = "20";
+        String isbn = "1";
+        String numberOfPages = "33";
+
+        Book book = null;
+
+        String error = "";
+        try{
+            book = bookService.createBook(barCode, title, author, dateOfRelease, price, isbn, numberOfPages);
+        }
+        catch(IllegalArgumentException e){
+            error = e.getMessage();
+        }
+
+        assertNull(book);
+        assertEquals(error, "dateOfRelease needs to be specified date format is not correct");
+    }
+
+    @Test
+    public void testCreateBookNullPrice(){
+        assertEquals(0, bookService.getAllBooks().size());
+        String barCode = "11";
+        String title = "Aly's book";
+        String author = "Aly";
+        String dateOfRelease = "2021-01-01";
+        String price = "";
+        String isbn = "1";
+        String numberOfPages = "33";
+
+        Book book = null;
+
+        String error = "";
+        try{
+            book = bookService.createBook(barCode, title, author, dateOfRelease, price, isbn, numberOfPages);
+        }
+        catch(IllegalArgumentException e){
+            error = e.getMessage();
+        }
+
+        assertNull(book);
+        assertEquals(error, "price needs to be specified price is not a number");
+    }
+
+
+    @Test
+    public void testCreateBookNullIsbn(){
+        assertEquals(0, bookService.getAllBooks().size());
+        String barCode = "11";
+        String title = "Aly's book";
+        String author = "Aly";
+        String dateOfRelease = "2021-01-01";
+        String price = "20";
+        String isbn = "";
+        String numberOfPages = "33";
+
+        Book book = null;
+
+        String error = "";
+        try{
+            book = bookService.createBook(barCode, title, author, dateOfRelease, price, isbn, numberOfPages);
+        }
+        catch(IllegalArgumentException e){
+            error = e.getMessage();
+        }
+
+        assertNull(book);
+        assertEquals(error, "isbn needs to be specified ");
+    }
+
+    @Test
+    public void testCreateBookNullNumberOfPages(){
+        assertEquals(0, bookService.getAllBooks().size());
+        String barCode = "11";
+        String title = "Aly's book";
+        String author = "Aly";
+        String dateOfRelease = "2021-01-01";
+        String price = "20";
+        String isbn = "1";
+        String numberOfPages = "";
+
+        Book book = null;
+
+        String error = "";
+        try{
+            book = bookService.createBook(barCode, title, author, dateOfRelease, price, isbn, numberOfPages);
+        }
+        catch(IllegalArgumentException e){
+            error = e.getMessage();
+        }
+
+        assertNull(book);
+        assertEquals(error, "number of pages needs to be specified ");
+    }
 }
