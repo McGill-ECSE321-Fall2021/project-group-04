@@ -1,5 +1,6 @@
 package ca.mcgill.ecse321.library.controller;
 
+import ca.mcgill.ecse321.library.dto.BookingDto;
 import ca.mcgill.ecse321.library.model.Booking;
 import ca.mcgill.ecse321.library.model.MobileItem;
 import ca.mcgill.ecse321.library.service.BookingService;
@@ -23,7 +24,7 @@ public class BookingController {
     @GetMapping(value = { "/bookings", "/bookings/" })
     public ResponseEntity<?> getAllBookings() {
         try {
-            List bookings = bookingService.getAllBookings().stream().map(bk -> DTOConverter.convertToDto(bk, bk.getUser(), bk.getBookingType())).collect(Collectors.toList());
+            List<BookingDto> bookings = bookingService.getAllBookings().stream().map(bk -> DTOConverter.convertToDto(bk, bk.getUser(), bk.getBookingType())).collect(Collectors.toList());
             return new ResponseEntity<>(bookings, HttpStatus.OK);
         }
         catch(IllegalArgumentException e){
