@@ -91,7 +91,68 @@ public class TestNewspaperService {
         assertEquals(Integer.parseInt(num) , newspaper.getNumberOfPages());
         assertEquals(tit , newspaper.getTitle());
     }
-    
+
+
+    @Test
+    public void testCreateNewspaperNullTitle() {
+        assertEquals(0, newspaperService.getAllNewspapers().size());
+        Newspaper newspaper=null;
+        String date = "2020-09-15";
+        String num = "100";
+        String tit = "";
+
+        String error = "";
+        try{
+            newspaper = newspaperService.createNewspaper(date , num , tit);
+        }
+        catch (IllegalArgumentException e){
+            error=e.getMessage();
+
+        }
+        assertNull(newspaper);
+        assertEquals(error, "title needs to be specified ");
+    }
+
+
+    @Test
+    public void testCreateNewspaperNullDate() {
+        assertEquals(0, newspaperService.getAllNewspapers().size());
+        Newspaper newspaper=null;
+        String date = "";
+        String num = "100";
+        String tit = "N";
+
+        String error = "";
+        try{
+            newspaper = newspaperService.createNewspaper(date , num , tit);
+        }
+        catch (IllegalArgumentException e){
+            error=e.getMessage();
+
+        }
+        assertNull(newspaper);
+        assertEquals(error, "date needs to be specified date format is not correct");
+    }
+
+    @Test
+    public void testCreateNewspaperNullNumberOfPages() {
+        assertEquals(0, newspaperService.getAllNewspapers().size());
+        Newspaper newspaper=null;
+        String date = "2020-09-15";
+        String num = "";
+        String tit = "N";
+
+        String error = "";
+        try{
+            newspaper = newspaperService.createNewspaper(date , num , tit);
+        }
+        catch (IllegalArgumentException e){
+            error=e.getMessage();
+
+        }
+        assertNull(newspaper);
+        assertEquals(error, "number of pages needs to be specified number of pages is not a number");
+    }
 
 
 
