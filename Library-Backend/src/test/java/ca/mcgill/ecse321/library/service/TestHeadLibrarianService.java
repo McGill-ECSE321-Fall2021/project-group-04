@@ -488,6 +488,10 @@ public class TestHeadLibrarianService {
         assertFalse(deleted);
     }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> c3b5595f002500f07f20e2108442525e5a941ed1
     @Test
     public void testAssignSchedulelibrarianNull() {
         assertEquals(0, headLibrarianService.getAllHeadLibrarians().size());
@@ -535,8 +539,11 @@ public class TestHeadLibrarianService {
     }
 
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> c3b5595f002500f07f20e2108442525e5a941ed1
     @Test
     public void testAssignScheduleHeadLibrarianNull() {
         String headlibrarian = HEAD_LIBRARIAN_USERNAME;
