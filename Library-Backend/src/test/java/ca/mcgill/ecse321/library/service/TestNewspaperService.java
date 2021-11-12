@@ -154,6 +154,35 @@ public class TestNewspaperService {
         assertEquals(error, "number of pages needs to be specified number of pages is not a number");
     }
 
+    @Test
+    public void testDeleteNewspaper() {
+        assertEquals(0, newspaperService.getAllNewspapers().size());
+        Newspaper newspaper=null;
+        String date = "2020-09-15";
+        String num = "50";
+        String tit = "N";
+
+        String error = "";
+        try{
+            newspaper = newspaperService.createNewspaper(date , num , tit);
+        }
+        catch (IllegalArgumentException e){
+            error=e.getMessage();
+
+        }
+        assertNotNull(newspaper);
+
+        try{
+            newspaperService.deleteNewspaper(tit);
+        }
+        catch (IllegalArgumentException e){
+            error=e.getMessage();
+
+        }
+        assertNull(newspaperService.getNewspaperByTitle(tit));
+
+    }
+
 
 
 
