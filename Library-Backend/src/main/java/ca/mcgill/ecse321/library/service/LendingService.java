@@ -17,33 +17,11 @@ import org.springframework.stereotype.Service;
 public class LendingService {
 
     @Autowired
-    BookingRepository bookingRepository;
-
-    @Autowired
     LendingRepository lendingRepository;
-
-    @Autowired
-    BookRepository bookRepository;
-
-    @Autowired
-    MovieRepository movieRepository;
-
-    @Autowired
-    MusicAlbumRepository musicAlbumRepository;
-
-    @Autowired
-    MemberRepository memberRepository;
 
     @Transactional
     public List<Lending> getAllLendings() {
-        return toList(lendingRepository.findAll());
+        return Services.toList(lendingRepository.findAll());
     }
 
-    private <T> List<T> toList(Iterable<T> iterable) {
-        List<T> resultList = new ArrayList<T>();
-        for (T t : iterable) {
-            resultList.add(t);
-        }
-        return resultList;
-    }
 }
