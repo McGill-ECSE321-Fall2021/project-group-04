@@ -3,10 +3,8 @@ package ca.mcgill.ecse321.library.service;
 import ca.mcgill.ecse321.library.dao.HeadLibrarianRepository;
 import ca.mcgill.ecse321.library.dao.LibrarianRepository;
 import ca.mcgill.ecse321.library.dao.MemberRepository;
-import ca.mcgill.ecse321.library.model.HeadLibrarian;
-import ca.mcgill.ecse321.library.model.Librarian;
-import ca.mcgill.ecse321.library.model.Member;
-import ca.mcgill.ecse321.library.model.WorkDay;
+import ca.mcgill.ecse321.library.model.*;
+
 import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
@@ -16,11 +14,13 @@ import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.Answer;
 
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.lenient;
@@ -36,6 +36,18 @@ public class TestUserService {
 
     @Mock
     private HeadLibrarianRepository headLibrarianRepository;
+
+    @InjectMocks
+    private UserService userService;
+
+    @InjectMocks
+    private MemberService memberService;
+
+    @InjectMocks
+    private LibrarianService librarianService;
+
+    @InjectMocks
+    private HeadLibrarianService headLibrarianService;
 
     private static final String MEMBER_USERNAME = "aziz";
     private static final String MEMBER_PASSWORD = "aziz123";
@@ -213,14 +225,94 @@ public class TestUserService {
     }
 
     @Test
-    public void testSignInMember() {}
+    public void testLogInMember() {
+        assertEquals(0, memberService.getAllMembers().size());
+        User user = null;
+
+        String username = "aziz";
+        String password = "aziz123";
+
+        try {
+            if(MEMBER_USERNAME == username && MEMBER_PASSWORD == password) {
+                user = userService.login(username, password);
+            }
+        }
+        catch(IllegalArgumentException e) {
+            fail();
+        }
+    }
 
     @Test
-    public void testSignInLibrarian() {}
+    public void testLogInLibrarian() {
+        assertEquals(0, librarianService.getAllLibrarians().size());
+        Librarian librarian = null;
+
+        String username = "aly";
+        String password = "aly123";
+
+        try {
+            if(LIBRARIAN_USERNAME == username && LIBRARIAN_PASSWORD == password) {
+                librarian = librarianService.login(username, password);
+            }
+        }
+        catch(IllegalArgumentException e) {
+            fail();
+        }
+    }
 
     @Test
-    public void testSignInHeadLibrarian() {}
+    public void testLogInHeadLibrarian() {
+        assertEquals(0, headLibrarianService.getAllHeadLibrarians().size());
+        Librarian headLibrarian = null;
+
+        String username = "aly";
+        String password = "aly123";
+
+        try {
+            if(HEAD_LIBRARIAN_USERNAME == username && HEAD_LIBRARIAN_PASSWORD == password) {
+                headLibrarian = headLibrarianService.login(username, password);
+            }
+        }
+        catch(IllegalArgumentException e) {
+            fail();
+        }
+    }
 
     @Test
-    public void testSignInInvalid() {}
+    public void testLogInInvalidUsername() {
+        assertEquals(0, memberService.getAllMembers().size());
+        User user = null;
+        String error = null;
+
+        String username = "abcd";
+        String password = "aziz123";
+
+        try {
+            user = userService.login(username,password);
+        }
+        catch(IllegalArgumentException e) {
+            error = e.getMessage();
+        }
+
+        assertEquals(error, "The username is incorrect.");
+    }
+
+    @Test
+    public void testLogInInvalidPassoword() {
+        assertEquals(0, memberService.getAllMembers().size());
+        User user = null;
+        String error = null;
+
+        String username = "aziz";
+        String password = "abcd123";
+
+        try {
+            user = userService.login(username,password);
+        }
+        catch(IllegalArgumentException e) {
+            error = e.getMessage();
+        }
+
+        assertEquals(error, "The password is incorrect.");
+    }
 }

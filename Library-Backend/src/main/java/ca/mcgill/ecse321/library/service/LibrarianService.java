@@ -3,9 +3,13 @@ package ca.mcgill.ecse321.library.service;
 import ca.mcgill.ecse321.library.dao.HeadLibrarianRepository;
 import ca.mcgill.ecse321.library.dao.LibrarianRepository;
 import ca.mcgill.ecse321.library.dao.MemberRepository;
+import ca.mcgill.ecse321.library.model.HeadLibrarian;
 import ca.mcgill.ecse321.library.model.Librarian;
 import java.util.List;
 import javax.transaction.Transactional;
+
+import ca.mcgill.ecse321.library.model.Member;
+import ca.mcgill.ecse321.library.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -112,5 +116,32 @@ public class LibrarianService {
             return true;
         }
         throw new IllegalArgumentException("Username already exists.");
+    }
+
+    /**
+     * @author Jewoo Lee
+     * @param username
+     * @param password
+     * @return
+     */
+    @Transactional
+    public Librarian login(String username, String password) {
+        if (!memberRepository.existsMemberByUsername(username) &&
+                !librarianRepository.existsLibrarianByUsername(username) &&
+                !headLibrarianRepository.existsHeadLibrarianByUsername(username)) {
+            throw new IllegalArgumentException("Invalid Username.");
+        }
+
+        Librarian librarian = librarianRepository.findLibrarianByUsername(username);
+        if (librarian != null && librarian.getPassword().equals(password)) {
+            return librarian;
+        }
+
+        HeadLibrarian headLibrarian = headLibrarianRepository.findHeadLibrarianByUsername(username);
+        if (headLibrarian != null && headLibrarian.getPassword().equals(password)) {
+            return headLibrarian;
+        }
+
+        throw new IllegalArgumentException("Incorrect Password.");
     }
 }

@@ -119,11 +119,7 @@ public class TestBookingService {
         });
 
         lenient().when(bookingRepository.existsBookingById(anyLong())).thenAnswer((InvocationOnMock invocation) -> {
-            if (invocation.getArgument(0).equals(BOOKING_ID)) {
-                return true;
-            }
-
-            return false;
+            return invocation.getArgument(0).equals(BOOKING_ID);
         });
 
         lenient().when(bookRepository.findBookByTitle(anyString())).thenAnswer((InvocationOnMock invocation) -> {
@@ -203,12 +199,7 @@ public class TestBookingService {
         });
 
         lenient().when(memberRepository.existsMemberByUsername(anyString())).thenAnswer((InvocationOnMock invocation) -> {
-            if (invocation.getArgument(0).equals(USERNAME)) {
-
-                return true;
-            }
-
-            return false;
+            return invocation.getArgument(0).equals(USERNAME);
         });
 
         Answer<?> returnParameterAsAnswer = (InvocationOnMock invocation) -> {
