@@ -42,29 +42,7 @@ jacocoTestCoverageVerification {
 	}
 }
 
-task integrationTest(type:Exec) {
-	workingDir '/'
 
-	// commandLine 'curl', '-s', '-X', 'POST', ''
-	commandLine 'curl', '-s', '-X', 'POST', 'http://localhost:8080/'
-
-	commandLine 'curl', '-s', '-X', 'POST', 'http://localhost:8080/member_sign_up?username=aziz&password=azizZ123&address=1234 University Avenue&member_type=Local&member_status=Active'
-	commandLine 'curl', '-s', '-X', 'POST', 'http://localhost:8080/member/aziz'
-	commandLine 'curl', '-s', '-X', 'POST', 'http://localhost:8080/members'
-
-	commandLine 'curl', '-s', '-X', 'POST', 'http://localhost:8080/create_librarian?username=aly&password=alyALY123&address=1200 University Avenue'
-	commandLine 'curl', '-s', '-X', 'POST', 'http://localhost:8080/librarian/aly'
-	commandLine 'curl', '-s', '-X', 'POST', 'http://localhost:8080/librarians'
-
-	commandLine 'curl', '-s', '-X', 'POST', 'http://localhost:8080/create_head_librarian?username=simo&password=simoM123&address=1500 University Avenue'
-	commandLine 'curl', '-s', '-X', 'POST', 'http://localhost:8080/head_librarian/simo'
-
-	standardOutput = new ByteArrayOutputStream()
-
-	ext.output = {
-		return standardOutput.toString()
-	}
-}
 
 
 task integrationTest(type:Exec) {
