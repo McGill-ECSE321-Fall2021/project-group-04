@@ -21,12 +21,11 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.lenient;
 
-import ca.mcgill.ecse321.library.dao.MovieRepository;
-import org.junit.jupiter.api.BeforeEach;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-
 import java.sql.Date;
+
+/**
+ * @author alymo
+ */
 
 @ExtendWith(MockitoExtension.class)
 public class TestMovieService {
