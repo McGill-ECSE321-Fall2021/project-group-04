@@ -26,4 +26,6 @@ jobs:
         working-directory: Library-Backend
       - name: Build with Gradle
         run: ./gradlew build
+      - name: Integration Test with Gradle
+        run: ./gradlew integrationTest
         working-directory: Library-Backend
