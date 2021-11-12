@@ -223,7 +223,7 @@ public class TestBookingService {
         Booking booking = null;
 
         try{
-            booking = bookingService.confirmBooking(USERNAME,"Book", String.valueOf(BOOKING_ID));
+            booking = bookingService.confirmBooking(USERNAME, String.valueOf(BOOKING_ID));
         }
         catch(IllegalArgumentException e){
 
@@ -243,7 +243,7 @@ public class TestBookingService {
         String error = null;
 
         try{
-            booking = bookingService.confirmBooking("NoBookingUsername","Book", String.valueOf(BOOKING_ID));
+            booking = bookingService.confirmBooking("NoBookingUsername", String.valueOf(BOOKING_ID));
         }
         catch(IllegalArgumentException e){
 
@@ -257,16 +257,97 @@ public class TestBookingService {
     }
 
     @Test
-    public void testReturnBook(){
+    public void testCheckOutBookInvalidBooking(){
+
+        Booking booking = null;
+        String error = null;
+
+        try{
+            booking = bookingService.confirmBooking(USERNAME, String.valueOf(34343434));
+        }
+        catch(IllegalArgumentException e){
+
+            error = e.getMessage();
+
+        }
+        assertNull(booking);
+        assertEquals("There is no booking with the entered id",error);
+
 
     }
 
     @Test
-    public void testDeleteBooking(){
+    public void testReturnLibraryItem(){
+        MobileItem item = null;
+
+        try{
+            item = bookingService.returnLibraryItem("Book",BOOK_TITLE);
+        }
+        catch(IllegalArgumentException e){
+            fail();
+        }
+
+        assertNotNull(item);
+        assertEquals(BOOK_TITLE, item.getTitle());
+        assertNull(item.getBooking());
 
     }
 
+    @Test
+    public void testReturnNonExistentBook(){
+        MobileItem item = null;
+        String error = null;
+        try{
+            item = bookingService.returnLibraryItem("Book","NonExistentTitle");
+        }
+        catch(IllegalArgumentException e){
+            error = e.getMessage();
+        }
+        assertNull(item);
+        assertEquals("could not find a book with that name ", error);
+    }
 
+    @Test
+    public void testReturnNonExistentMovie(){
+        MobileItem item = null;
+        String error = null;
+        try{
+            item = bookingService.returnLibraryItem("Movie","NonExistentTitle");
+        }
+        catch(IllegalArgumentException e){
+            error = e.getMessage();
+        }
+        assertNull(item);
+        assertEquals("could not find a movie with that name ", error);
+    }
+
+    @Test
+    public void testReturnNonExistentMusicAlbum(){
+        MobileItem item = null;
+        String error = null;
+        try{
+            item = bookingService.returnLibraryItem("MusicAlbum","NonExistentTitle");
+        }
+        catch(IllegalArgumentException e){
+            error = e.getMessage();
+        }
+        assertNull(item);
+        assertEquals("could not find a music album with that name ", error);
+    }
+
+    @Test
+    public void testReturnNonExistentType(){
+        MobileItem item = null;
+        String error = null;
+        try{
+            item = bookingService.returnLibraryItem("wrongtype","NonExistentTitle");
+        }
+        catch(IllegalArgumentException e){
+            error = e.getMessage();
+        }
+        assertNull(item);
+        assertEquals("invalid element type ", error);
+    }
 
     @Test
     public void testCreateBookingNonExistentUser(){
