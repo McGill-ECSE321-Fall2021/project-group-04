@@ -2,6 +2,7 @@ package ca.mcgill.ecse321.library.service;
 
 import ca.mcgill.ecse321.library.dao.HeadLibrarianRepository;
 import ca.mcgill.ecse321.library.dao.LibrarianRepository;
+import ca.mcgill.ecse321.library.dao.WorkDayRepository;
 import ca.mcgill.ecse321.library.model.HeadLibrarian;
 import ca.mcgill.ecse321.library.model.Librarian;
 import ca.mcgill.ecse321.library.model.WorkDay;
@@ -61,7 +62,7 @@ public class TestHeadLibrarianService {
     private static final String HEAD_LIBRARIAN_FRIDAY_END = "17:00:00";
 
     private static final String LIBRARIAN_USERNAME = "aly";
-    private static final String LIBRARIAN_PASSWORD = "aly123";
+    private static final String LIBRARIAN_PASSWORD = "Aly123456";
     private static final String LIBRARIAN_ADDRESS = "1234 University, Montreal, QC";
 
     private static final String LIBRARIAN_MONDAY_START = "09:00:00";
@@ -488,10 +489,16 @@ public class TestHeadLibrarianService {
     }
 
 
-    //Saghar
+    
+    
+    
+    
+    //Saghar 
 
     @Test
     public void testAssignScheduleforlibrarianforOneDay() {
+    	
+    	
     }
 
 
@@ -526,7 +533,6 @@ public class TestHeadLibrarianService {
     @Test
     public void testAssignSchedulelibrarianEmpty() {
 
-
         String librarian = LIBRARIAN_USERNAME;
         String headlibrarian = HEAD_LIBRARIAN_USERNAME;
         WorkDay.DayOfWeek workday = null;
@@ -548,11 +554,36 @@ public class TestHeadLibrarianService {
 
 
     @Test
-    public void testAssignScheduleforHeadLibrarianforTwoDays() {
+    public void testAssignScheduleforHeadLibrarian() {
+    	assertEquals(0, headLibrarianService.getAllHeadLibrarians().size());
+    	
+    	Librarian librarian = librarianService.createLibrarian(LIBRARIAN_USERNAME, LIBRARIAN_PASSWORD,LIBRARIAN_ADDRESS);
+    	String headlibrarian = HEAD_LIBRARIAN_USERNAME;
+    	WorkDay.DayOfWeek workday = DayOfWeek.Monday;
+    	Time startTime = Time.valueOf(HEAD_LIBRARIAN_MONDAY_START);
+    	Time endTime = Time.valueOf(HEAD_LIBRARIAN_MONDAY_END);
+        Set<WorkDay> workDays = librarian.getWorkHours();
+        WorkDay workdayss = new WorkDay();
+
+        		try {
+        	
+            workDays = headLibrarianService.AssignScheduleHeadLibrarian(workday, startTime, endTime, headlibrarian);
+            
+        }  catch (IllegalArgumentException e) {
+        	fail();
+        }
+        
+        assertNotNull(workDays);
+        assertEquals(headlibrarian, librarian.getUsername());
+        assertEquals(startTime, workdayss.getStartTime());
+        assertEquals(endTime, workdayss.getEndTime()); 
+        assertEquals(workday, workdayss.getDayOfWeek());
+        
     }
 
     @Test
     public void testAssignScheduleforHeadLibrarianforFiveDays() {
+    	
     }
 
     @Test
@@ -593,11 +624,7 @@ public class TestHeadLibrarianService {
         assertEquals(error, "Only a headlibrarian can assign schedules.");
     }
 
-
-    @Test
-    public void testDeletLibrarianSchedule() {
-    	
-    }
+    
 
     @Test
     public void testDeletHeadLibrarianSchedule() {
@@ -607,7 +634,6 @@ public class TestHeadLibrarianService {
         Time startTime = Time.valueOf("10:00:00");
         Time endTime = Time.valueOf("12:00:00");
         String error = null;
-        Set<WorkDay> workDays = null;
     	
     	try {
             boolean deleted = headLibrarianService.DeleteSchedule(workday, startTime, endTime, librarian, headlibrarian);
