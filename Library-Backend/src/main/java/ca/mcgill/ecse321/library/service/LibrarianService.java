@@ -124,22 +124,16 @@ public class LibrarianService {
      * @param password
      * @return
      */
+
     @Transactional
     public Librarian login(String username, String password) {
-        if (!memberRepository.existsMemberByUsername(username) &&
-                !librarianRepository.existsLibrarianByUsername(username) &&
-                !headLibrarianRepository.existsHeadLibrarianByUsername(username)) {
+        if (librarianRepository.findLibrarianByUsername(username) == null) {
             throw new IllegalArgumentException("Invalid Username.");
         }
 
         Librarian librarian = librarianRepository.findLibrarianByUsername(username);
         if (librarian != null && librarian.getPassword().equals(password)) {
             return librarian;
-        }
-
-        HeadLibrarian headLibrarian = headLibrarianRepository.findHeadLibrarianByUsername(username);
-        if (headLibrarian != null && headLibrarian.getPassword().equals(password)) {
-            return headLibrarian;
         }
 
         throw new IllegalArgumentException("Incorrect Password.");
