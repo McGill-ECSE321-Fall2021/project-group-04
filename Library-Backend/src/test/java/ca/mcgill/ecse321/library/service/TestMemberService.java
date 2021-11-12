@@ -18,6 +18,9 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.lenient;
 
+/**
+ * @author JewooLee
+ */
 @ExtendWith(MockitoExtension.class)
 public class TestMemberService {
 
