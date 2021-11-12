@@ -2,6 +2,7 @@ package ca.mcgill.ecse321.library.service;
 import ca.mcgill.ecse321.library.dao.LibrarianRepository;
 import ca.mcgill.ecse321.library.dao.MovieRepository;
 import ca.mcgill.ecse321.library.model.Movie;
+import ca.mcgill.ecse321.library.model.MusicAlbum;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -246,6 +247,40 @@ public class TestMovieService {
         assertNull(movie);
         assertEquals(error, "length needs to be specified ");
     }
+
+    @Test
+    public void testDeleteMovie(){
+
+        assertEquals(0, movieService.getAllMovies().size());
+        Movie movie = null;
+        String barCode = "11";
+        String title = "Aly's musicAlbum";
+        String author = "Aly";
+        String dateOfRelease = "2020-02-02";
+        String price = "20";
+        String length = "160";
+        String numberOfSongs = "33";
+
+        String error = "";
+        try{
+            movie = movieService.createMovie(barCode, title, author, dateOfRelease, price, length);
+        }
+        catch (IllegalArgumentException e){
+            error = e.getMessage();
+
+        }
+        assertNotNull(movie);
+
+        try{
+            movieService.deleteMovie(title);
+        }
+        catch (IllegalArgumentException e){
+            error = e.getMessage();
+
+        }
+        assertNull(movieService.getMovieByTitle(title));
+    }
+
 
 
 }
