@@ -2,10 +2,10 @@ package ca.mcgill.ecse321.library.dto;
 
 public class UserDto {
 
-    private Long id;
-    private String username;
-    private String password;
-    private String address;
+    private final Long id;
+    private final String username;
+    private final String password;
+    private final String address;
 
     public UserDto(Long aId, String username, String password, String aAddress) {
         this.username = username;

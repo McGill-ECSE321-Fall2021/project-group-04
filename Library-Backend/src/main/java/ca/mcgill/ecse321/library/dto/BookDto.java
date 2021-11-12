@@ -4,8 +4,8 @@ import java.sql.Date;
 
 public class BookDto extends MobileItemDto {
 
-    private String isbn;
-    private int numberOfPages;
+    private final String isbn;
+    private final int numberOfPages;
 
     public BookDto(Long aItemId, String aBarcode, String aTitle, String aAuthor, Date aDateOfRelease, float aPrice, String aIsbn, int aNumberOfPages, BookingDto booking) {
         super(aItemId, aBarcode, aTitle, aAuthor, aDateOfRelease, aPrice, booking);

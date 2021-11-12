@@ -1,9 +1,8 @@
 package ca.mcgill.ecse321.library.controller;
 
 import ca.mcgill.ecse321.library.dto.MemberDto;
-import ca.mcgill.ecse321.library.model.Booking;
 import ca.mcgill.ecse321.library.model.Member;
-import ca.mcgill.ecse321.library.service.BookingService;
+import ca.mcgill.ecse321.library.model.User;
 import ca.mcgill.ecse321.library.service.MemberService;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,59 +20,67 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class MemberController {
 
-
-
-
     @Autowired
     private MemberService memberService;
 
     /**
-     * @author Abd-El-Aziz Zayed
      * @param username
      * @return
+     * @author Abd-El-Aziz Zayed
      */
     @GetMapping(value = {"/member/{username}"})
     public ResponseEntity<?> viewMember(@PathVariable("username") String username) {
         try {
-            return new ResponseEntity<>(DTOConverter.convertToDto(memberService.getMember(username)),HttpStatus.OK);
-        }
-        catch(Exception e){
+            return new ResponseEntity<>(DTOConverter.convertToDto(memberService.getMember(username)), HttpStatus.OK);
+        } catch (Exception e) {
             System.out.println("Error Message: " + e.getMessage());
-            return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 
     /**
-     * @author Jewoo Lee
      * @param aUsername
      * @param aPassword
      * @param aAddress
      * @param aMemberType
      * @param aMemberStatus
      * @return
+     * @author Jewoo Lee
      */
-    @PostMapping(value = {"/signup_user/", "/signup_user"})
-    public ResponseEntity<?> signupUser(@RequestParam("username") String aUsername,
-                                        @RequestParam("password") String aPassword,
-                                        @RequestParam("address") String aAddress,
-                                        @RequestParam("member_type") Member.MemberType aMemberType,
-                                        @RequestParam("member_status") Member.MemberStatus aMemberStatus) {
+    @PostMapping(value = {"/member_sign_up/", "/member_sign_up"})
+    public ResponseEntity<?> createMember(@RequestParam("username") String aUsername,
+                                          @RequestParam("password") String aPassword,
+                                          @RequestParam("address") String aAddress,
+                                          @RequestParam("member_type") String aMemberType,
+                                          @RequestParam("member_status") String aMemberStatus) {
 
         try {
-            Member member = memberService.createMember(aUsername, aPassword, aAddress, aMemberType, aMemberStatus);
-            return new ResponseEntity<>(DTOConverter.convertToDto(member), HttpStatus.CREATED) ;
+            Member member = memberService.createMember(aUsername, aPassword, aAddress, Member.MemberType.valueOf(aMemberType), Member.MemberStatus.valueOf(aMemberStatus));
+            return new ResponseEntity<>(DTOConverter.convertToDto(member), HttpStatus.CREATED);
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     /**
-     * @author Abd-El-Aziz Zayed
      * @return
+     * @author Abd-El-Aziz Zayed
      */
     @GetMapping(value = {"/members"})
     public List<MemberDto> getAllMembers() {
         return memberService.getAllMembers().stream().map(DTOConverter::convertToDto).collect(Collectors.toList());
+    }
+
+    @PostMapping(value = {"/member_login", "/member_login/"})
+    public ResponseEntity<?> login(@RequestParam String username, @RequestParam String password) {
+        Member member = null;
+        try {
+            member = memberService.login(username, password);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        return new ResponseEntity<>(DTOConverter.convertToDto(member), HttpStatus.OK);
     }
 
 }

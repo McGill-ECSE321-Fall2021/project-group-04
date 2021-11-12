@@ -11,5 +11,5 @@ public interface NewspaperRepository extends CrudRepository<Newspaper, Long> {
 
     Newspaper findNewspaperByDate(Date date);
 
-	Newspaper findNewspaperByTitle(String title);
+    Newspaper findNewspaperByTitle(String title);
 }

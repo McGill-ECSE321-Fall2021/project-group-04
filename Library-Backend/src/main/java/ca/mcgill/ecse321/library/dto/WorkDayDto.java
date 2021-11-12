@@ -5,10 +5,10 @@ import java.sql.Time;
 
 public class WorkDayDto {
 
-    private WorkDay.DayOfWeek dayOfWeek;
-    private Time startTime;
-    private Time endTime;
-    private Long id;
+    private final WorkDay.DayOfWeek dayOfWeek;
+    private final Time startTime;
+    private final Time endTime;
+    private final Long id;
 
     public WorkDayDto(Long id, WorkDay.DayOfWeek aDayOfWeek, Time aStartTime, Time aEndTime) {
         this.id = id;

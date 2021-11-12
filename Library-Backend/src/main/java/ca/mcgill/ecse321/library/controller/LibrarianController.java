@@ -1,11 +1,9 @@
 package ca.mcgill.ecse321.library.controller;
 
 import ca.mcgill.ecse321.library.dto.LibrarianDto;
-import ca.mcgill.ecse321.library.dto.MemberDto;
 import ca.mcgill.ecse321.library.model.Librarian;
 import ca.mcgill.ecse321.library.model.Member;
 import ca.mcgill.ecse321.library.service.LibrarianService;
-import ca.mcgill.ecse321.library.service.MemberService;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +24,9 @@ public class LibrarianController {
     private LibrarianService libraryService;
 
     /**
-     * @author Abd-El-Aziz Zayed
      * @param username
      * @return
+     * @author Abd-El-Aziz Zayed
      */
     @GetMapping(value = {"/librarian/{username}"})
     public LibrarianDto viewLibrarian(@PathVariable("username") String username) {
@@ -36,31 +34,43 @@ public class LibrarianController {
     }
 
     /**
-     * @author Abd-El-Aziz Zayed
      * @param aUsername
      * @param aPassword
      * @param aAddress
      * @return
+     * @author Abd-El-Aziz Zayed
      */
     @PostMapping(value = {"/create_librarian"})
     public ResponseEntity<?> createLibrarian(@RequestParam("username") String aUsername,
-                                          @RequestParam("password") String aPassword,
-                                          @RequestParam("address") String aAddress) {
+                                             @RequestParam("password") String aPassword,
+                                             @RequestParam("address") String aAddress) {
         try {
             Librarian librarian = libraryService.createLibrarian(aUsername, aPassword, aAddress);
-            return new ResponseEntity<>(DTOConverter.convertToDto(librarian), HttpStatus.CREATED) ;
+            return new ResponseEntity<>(DTOConverter.convertToDto(librarian), HttpStatus.CREATED);
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     /**
-     * @author Abd-El-Aziz Zayed
      * @return
+     * @author Abd-El-Aziz Zayed
      */
     @GetMapping(value = {"/librarians"})
     public List<LibrarianDto> getAllLibrarians() {
         return libraryService.getAllLibrarians().stream().map(DTOConverter::convertToDto).collect(Collectors.toList());
+    }
+
+    @PostMapping(value = {"/librarian_login", "/librarian_login/"})
+    public ResponseEntity<?> login(@RequestParam String username, @RequestParam String password) {
+        Librarian librarian = null;
+        try {
+            librarian = libraryService.login(username, password);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        return new ResponseEntity<>(DTOConverter.convertToDto(librarian), HttpStatus.OK);
     }
 
 }

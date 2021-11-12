@@ -28,30 +28,23 @@ import static org.mockito.Mockito.lenient;
 @ExtendWith(MockitoExtension.class)
 public class TestLibrarianService {
 
-    @Mock
-    private LibrarianRepository librarianRepository;
-
-    @InjectMocks
-    private LibrarianService librarianService;
-
     private static final String LIBRARIAN_USERNAME = "aly";
     private static final String LIBRARIAN_PASSWORD = "aly123";
     private static final String LIBRARIAN_ADDRESS = "1234 University, Montreal, QC";
-
     private static final String LIBRARIAN_MONDAY_START = "09:00:00";
     private static final String LIBRARIAN_MONDAY_END = "17:00:00";
-
     private static final String LIBRARIAN_TUESDAY_START = "09:00:00";
     private static final String LIBRARIAN_TUESDAY_END = "17:00:00";
-
     private static final String LIBRARIAN_WEDNESDAY_START = "09:00:00";
     private static final String LIBRARIAN_WEDNESDAY_END = "17:00:00";
-
     private static final String LIBRARIAN_THURSDAY_START = "09:00:00";
     private static final String LIBRARIAN_THURSDAY_END = "17:00:00";
-
     private static final String LIBRARIAN_FRIDAY_START = "09:00:00";
     private static final String LIBRARIAN_FRIDAY_END = "17:00:00";
+    @Mock
+    private LibrarianRepository librarianRepository;
+    @InjectMocks
+    private LibrarianService librarianService;
 
     @BeforeEach
     public void setMockOutput() {
@@ -124,7 +117,7 @@ public class TestLibrarianService {
             assertEquals(username, librarian.getUsername());
             assertEquals(password, librarian.getPassword());
             assertEquals(address, librarian.getAddress());
-        } catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             fail();
         }
     }
@@ -140,7 +133,7 @@ public class TestLibrarianService {
         Librarian librarian = null;
         try {
             librarian = librarianService.createLibrarian(username, password, address);
-        } catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             assertEquals(e.getMessage(), "Username cannot be empty.");
         }
         assertNull(librarian);
@@ -157,7 +150,7 @@ public class TestLibrarianService {
         Librarian librarian = null;
         try {
             librarian = librarianService.createLibrarian(username, password, address);
-        } catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             assertEquals(e.getMessage(), "Username cannot be empty.");
         }
         assertNull(librarian);
@@ -174,7 +167,7 @@ public class TestLibrarianService {
         Librarian librarian = null;
         try {
             librarian = librarianService.createLibrarian(username, password, address);
-        } catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             assertEquals(e.getMessage(), "Username already exists.");
         }
 
@@ -192,7 +185,7 @@ public class TestLibrarianService {
         Librarian librarian = null;
         try {
             librarian = librarianService.createLibrarian(username, password, address);
-        } catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             assertEquals(e.getMessage(), "Password cannot be empty.");
         }
 
@@ -210,7 +203,7 @@ public class TestLibrarianService {
         Librarian librarian = null;
         try {
             librarian = librarianService.createLibrarian(username, newPassword, address);
-        } catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             assertEquals(e.getMessage(), "Password cannot be empty.");
         }
 
@@ -228,7 +221,7 @@ public class TestLibrarianService {
         Librarian librarian = null;
         try {
             librarian = librarianService.createLibrarian(username, newPassword, address);
-        } catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             assertEquals(e.getMessage(), "The password must contain at least one uppercase character.");
         }
 
@@ -246,7 +239,7 @@ public class TestLibrarianService {
         Librarian librarian = null;
         try {
             librarian = librarianService.createLibrarian(username, newPassword, address);
-        } catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             assertEquals(e.getMessage(), "The password must contain at least one lowercase character.");
         }
 
@@ -264,7 +257,7 @@ public class TestLibrarianService {
         Librarian librarian = null;
         try {
             librarian = librarianService.createLibrarian(username, newPassword, address);
-        } catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             assertEquals(e.getMessage(), "The password length cannot be less than 8 characters.");
         }
 
@@ -282,7 +275,7 @@ public class TestLibrarianService {
         Librarian librarian = null;
         try {
             librarian = librarianService.createLibrarian(username, newPassword, address);
-        } catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             assertEquals(e.getMessage(), "The password length cannot be more than 20 characters.");
         }
 
@@ -300,7 +293,7 @@ public class TestLibrarianService {
         Librarian librarian = null;
         try {
             librarian = librarianService.createLibrarian(username, newPassword, address);
-        } catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             assertEquals(e.getMessage(), "The password must contain at least one numeric character.");
         }
 
@@ -319,7 +312,7 @@ public class TestLibrarianService {
             assertNotNull(librarian);
             assertEquals(username, librarian.getUsername());
             assertEquals(newPassword, librarian.getPassword());
-        } catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             fail();
         }
     }
@@ -334,7 +327,7 @@ public class TestLibrarianService {
         Librarian librarian = null;
         try {
             librarian = librarianService.changeLibrarianPassword(username, newPassword);
-        } catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             assertEquals(e.getMessage(), "Password cannot be empty.");
         }
         assertNull(librarian);
@@ -350,7 +343,7 @@ public class TestLibrarianService {
         Librarian librarian = null;
         try {
             librarian = librarianService.changeLibrarianPassword(username, newPassword);
-        } catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             assertEquals(e.getMessage(), "Password cannot be empty.");
         }
         assertNull(librarian);
@@ -366,7 +359,7 @@ public class TestLibrarianService {
         Librarian librarian = null;
         try {
             librarian = librarianService.changeLibrarianPassword(username, newPassword);
-        } catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             assertEquals(e.getMessage(), "The password must contain at least one uppercase character.");
         }
         assertNull(librarian);
@@ -382,7 +375,7 @@ public class TestLibrarianService {
         Librarian librarian = null;
         try {
             librarian = librarianService.changeLibrarianPassword(username, newPassword);
-        } catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             assertEquals(e.getMessage(), "The password must contain at least one lowercase character.");
         }
         assertNull(librarian);
@@ -398,7 +391,7 @@ public class TestLibrarianService {
         Librarian librarian = null;
         try {
             librarian = librarianService.changeLibrarianPassword(username, newPassword);
-        } catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             assertEquals(e.getMessage(), "The password length cannot be less than 8 characters.");
         }
         assertNull(librarian);
@@ -414,7 +407,7 @@ public class TestLibrarianService {
         Librarian librarian = null;
         try {
             librarian = librarianService.changeLibrarianPassword(username, newPassword);
-        } catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             assertEquals(e.getMessage(), "The password length cannot be more than 20 characters.");
         }
         assertNull(librarian);
@@ -430,7 +423,7 @@ public class TestLibrarianService {
         Librarian librarian = null;
         try {
             librarian = librarianService.changeLibrarianPassword(username, newPassword);
-        } catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             assertEquals(e.getMessage(), "The password must contain at least one numeric character.");
         }
         assertNull(librarian);
@@ -441,8 +434,7 @@ public class TestLibrarianService {
         try {
             boolean deleted = librarianService.deleteLibrarian(LIBRARIAN_USERNAME);
             assertTrue(deleted);
-        }
-        catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             fail();
         }
     }
@@ -452,11 +444,27 @@ public class TestLibrarianService {
         boolean deleted = false;
         try {
             deleted = librarianService.deleteLibrarian("randomusername");
-        }
-        catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             assertEquals(e.getMessage(), "Librarian is not found.");
         }
         assertFalse(deleted);
+    }
+
+    @Test
+    public void testLogInLibrarian() {
+        assertEquals(0, librarianService.getAllLibrarians().size());
+        Librarian librarian = null;
+
+        String username = LIBRARIAN_USERNAME;
+        String password = LIBRARIAN_PASSWORD;
+
+        try {
+            librarian = librarianService.login(username, password);
+        } catch (IllegalArgumentException e) {
+            fail();
+        }
+
+        assertNotNull(librarian);
     }
 
 }

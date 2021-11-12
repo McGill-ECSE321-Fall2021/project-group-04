@@ -1,8 +1,8 @@
 package ca.mcgill.ecse321.library.service;
-import ca.mcgill.ecse321.library.dao.LibrarianRepository;
+
 import ca.mcgill.ecse321.library.dao.MusicAlbumRepository;
 import ca.mcgill.ecse321.library.model.MusicAlbum;
-import ca.mcgill.ecse321.library.model.Newspaper;
+import java.sql.Date;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -11,6 +11,7 @@ import org.mockito.Mock;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.Answer;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -19,8 +20,6 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.lenient;
 
-import java.sql.Date;
-
 /**
  * @author alymo
  */
@@ -28,14 +27,7 @@ import java.sql.Date;
 @ExtendWith(MockitoExtension.class)
 public class TestMusicAlbumService {
 
-    @Mock
-    private MusicAlbumRepository musicAlbumRepository;
-
-    @InjectMocks
-    private MusicAlbumService musicAlbumService;
-
-    private static final String LIBRARIAN_USERNAME ="TestCustomer";
-
+    private static final String LIBRARIAN_USERNAME = "TestCustomer";
     private static final String AUTHOR = "LOLLS";
     private static final float LENGTH = 233f;
     private static final String DATE_OF_RELEASE = "2021-11-01";
@@ -44,14 +36,16 @@ public class TestMusicAlbumService {
     private static final String BARCODE = "122344";
     private static final int NUMBER_OF_SONGS = 20;
     private static final int TOTAL_LENGTH = 20;
-
-
+    @Mock
+    private MusicAlbumRepository musicAlbumRepository;
+    @InjectMocks
+    private MusicAlbumService musicAlbumService;
 
     @BeforeEach
-    public void setMockOutput(){
+    public void setMockOutput() {
 
         lenient().when(musicAlbumRepository.findMusicAlbumByBarcode(anyString())).thenAnswer((InvocationOnMock invocation) -> {
-            if(invocation.getArgument(0).equals(BARCODE)) {
+            if (invocation.getArgument(0).equals(BARCODE)) {
                 MusicAlbum musicAlbum = new MusicAlbum();
                 musicAlbum.setAuthor(AUTHOR);
                 musicAlbum.setTotalLength(LENGTH);
@@ -61,8 +55,7 @@ public class TestMusicAlbumService {
                 musicAlbum.setTitle(TITLE);
 
                 return musicAlbum;
-            }
-            else return null;
+            } else return null;
         });
 
         Answer<?> returnParameterAsAnswer = (InvocationOnMock invocation) -> {
@@ -73,7 +66,7 @@ public class TestMusicAlbumService {
     }
 
     @Test
-    public void testCreateMusicAlbum(){
+    public void testCreateMusicAlbum() {
         assertEquals(0, musicAlbumService.getAllMusicAlbums().size());
         String barCode = "11";
         String title = "Aly's musicAlbum";
@@ -85,10 +78,9 @@ public class TestMusicAlbumService {
 
 
         MusicAlbum musicAlbum = null;
-        try{
+        try {
             musicAlbum = musicAlbumService.createMusicAlbum(barCode, title, author, dateOfRelease, price, numberOfSongs, length);
-        }
-        catch(IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             String error = e.getMessage();
             fail();
@@ -106,7 +98,7 @@ public class TestMusicAlbumService {
     }
 
     @Test
-    public void testCreateMusicAlbumNullBarcode(){
+    public void testCreateMusicAlbumNullBarcode() {
         assertEquals(0, musicAlbumService.getAllMusicAlbums().size());
         String barCode = "";
         String title = "Aly's musicAlbum";
@@ -119,10 +111,9 @@ public class TestMusicAlbumService {
         MusicAlbum musicAlbum = null;
 
         String error = "";
-        try{
+        try {
             musicAlbum = musicAlbumService.createMusicAlbum(barCode, title, author, dateOfRelease, price, numberOfSongs, length);
-        }
-        catch(IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             error = e.getMessage();
         }
 
@@ -131,7 +122,7 @@ public class TestMusicAlbumService {
     }
 
     @Test
-    public void testCreateMusicAlbumNullTitle(){
+    public void testCreateMusicAlbumNullTitle() {
         assertEquals(0, musicAlbumService.getAllMusicAlbums().size());
         String barCode = "11";
         String title = "";
@@ -144,10 +135,9 @@ public class TestMusicAlbumService {
         MusicAlbum musicAlbum = null;
 
         String error = "";
-        try{
+        try {
             musicAlbum = musicAlbumService.createMusicAlbum(barCode, title, author, dateOfRelease, price, numberOfSongs, length);
-        }
-        catch(IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             error = e.getMessage();
         }
 
@@ -156,7 +146,7 @@ public class TestMusicAlbumService {
     }
 
     @Test
-    public void testCreateMusicAlbumNullAuthor(){
+    public void testCreateMusicAlbumNullAuthor() {
         assertEquals(0, musicAlbumService.getAllMusicAlbums().size());
         String barCode = "11";
         String title = "Aly's musicAlbum";
@@ -169,10 +159,9 @@ public class TestMusicAlbumService {
         MusicAlbum musicAlbum = null;
 
         String error = "";
-        try{
+        try {
             musicAlbum = musicAlbumService.createMusicAlbum(barCode, title, author, dateOfRelease, price, numberOfSongs, length);
-        }
-        catch(IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             error = e.getMessage();
         }
 
@@ -181,7 +170,7 @@ public class TestMusicAlbumService {
     }
 
     @Test
-    public void testCreateMusicAlbumNullDateOfRelease(){
+    public void testCreateMusicAlbumNullDateOfRelease() {
         assertEquals(0, musicAlbumService.getAllMusicAlbums().size());
         String barCode = "11";
         String title = "Aly's musicAlbum";
@@ -194,10 +183,9 @@ public class TestMusicAlbumService {
         MusicAlbum musicAlbum = null;
 
         String error = "";
-        try{
+        try {
             musicAlbum = musicAlbumService.createMusicAlbum(barCode, title, author, dateOfRelease, price, numberOfSongs, length);
-        }
-        catch(IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             error = e.getMessage();
         }
 
@@ -206,7 +194,7 @@ public class TestMusicAlbumService {
     }
 
     @Test
-    public void testCreateMusicAlbumNullPrice(){
+    public void testCreateMusicAlbumNullPrice() {
         assertEquals(0, musicAlbumService.getAllMusicAlbums().size());
         String barCode = "11";
         String title = "Aly's musicAlbum";
@@ -219,10 +207,9 @@ public class TestMusicAlbumService {
         MusicAlbum musicAlbum = null;
 
         String error = "";
-        try{
+        try {
             musicAlbum = musicAlbumService.createMusicAlbum(barCode, title, author, dateOfRelease, price, numberOfSongs, length);
-        }
-        catch(IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             error = e.getMessage();
         }
 
@@ -232,7 +219,7 @@ public class TestMusicAlbumService {
 
 
     @Test
-    public void testCreateMusicAlbumNullLength(){
+    public void testCreateMusicAlbumNullLength() {
         assertEquals(0, musicAlbumService.getAllMusicAlbums().size());
         String barCode = "11";
         String title = "Aly's musicAlbum";
@@ -245,10 +232,9 @@ public class TestMusicAlbumService {
         MusicAlbum musicAlbum = null;
 
         String error = "";
-        try{
+        try {
             musicAlbum = musicAlbumService.createMusicAlbum(barCode, title, author, dateOfRelease, price, numberOfSongs, length);
-        }
-        catch(IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             error = e.getMessage();
         }
 
@@ -257,7 +243,7 @@ public class TestMusicAlbumService {
     }
 
     @Test
-    public void testCreateMusicAlbumNullNumberOfSongs(){
+    public void testCreateMusicAlbumNullNumberOfSongs() {
         assertEquals(0, musicAlbumService.getAllMusicAlbums().size());
         String barCode = "11";
         String title = "Aly's musicAlbum";
@@ -270,10 +256,9 @@ public class TestMusicAlbumService {
         MusicAlbum musicAlbum = null;
 
         String error = "";
-        try{
+        try {
             musicAlbum = musicAlbumService.createMusicAlbum(barCode, title, author, dateOfRelease, price, numberOfSongs, length);
-        }
-        catch(IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             error = e.getMessage();
         }
 
@@ -282,7 +267,7 @@ public class TestMusicAlbumService {
     }
 
     @Test
-    public void testDeleteMusicAlbum(){
+    public void testDeleteMusicAlbum() {
 
         assertEquals(0, musicAlbumService.getAllMusicAlbums().size());
         MusicAlbum musicAlbum = null;
@@ -295,25 +280,22 @@ public class TestMusicAlbumService {
         String numberOfSongs = "33";
 
         String error = "";
-        try{
+        try {
             musicAlbum = musicAlbumService.createMusicAlbum(barCode, title, author, dateOfRelease, price, numberOfSongs, length);
-        }
-        catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             error = e.getMessage();
 
         }
         assertNotNull(musicAlbum);
 
-        try{
+        try {
             musicAlbumService.deleteMusicAlbum(title);
-        }
-        catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             error = e.getMessage();
 
         }
         assertNull(musicAlbumService.getMusicAlbumByTitle(title));
     }
-
 
 
 }

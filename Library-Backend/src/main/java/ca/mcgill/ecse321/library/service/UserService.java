@@ -11,22 +11,12 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service
 public class UserService {
 
-    @Autowired
-    private static MemberRepository memberRepository;
-
-    @Autowired
-    private LibrarianRepository librarianRepository;
-
-    @Autowired
-    private HeadLibrarianRepository headLibrarianRepository;
-
     /**
-     * @author Jewoo Lee
      * @param password
      * @return
+     * @author Jewoo Lee
      */
     public static boolean checkValidPassword(String password) {
         if (password == null || password == "") {
@@ -69,9 +59,9 @@ public class UserService {
     // Need to Review
 
     /**
-     * @author Jewoo Lee
      * @param address
      * @return
+     * @author Jewoo Lee
      */
     public static boolean checkValidAddress(String address) {
         if (address == null || address.equals("")) {
@@ -79,37 +69,5 @@ public class UserService {
         }
 
         return true;
-    }
-
-    /**
-     * @author Jewoo Lee
-     * @param username
-     * @param password
-     * @return
-     */
-    @Transactional
-    public User login(String username, String password) {
-        if (!(memberRepository.findMemberByUsername(username) == null) &&
-                !(librarianRepository.findLibrarianByUsername(username) == null) &&
-                !(headLibrarianRepository.findHeadLibrarianByUsername(username) == null)) {
-            throw new IllegalArgumentException("Invalid Username.");
-        }
-
-        Member member = memberRepository.findMemberByUsername(username);
-        if (member != null && member.getPassword().equals(password)) {
-            return member;
-        }
-
-        Librarian librarian = librarianRepository.findLibrarianByUsername(username);
-        if (librarian != null && librarian.getPassword().equals(password)) {
-            return librarian;
-        }
-
-        HeadLibrarian headLibrarian = headLibrarianRepository.findHeadLibrarianByUsername(username);
-        if (headLibrarian != null && headLibrarian.getPassword().equals(password)) {
-            return headLibrarian;
-        }
-
-        throw new IllegalArgumentException("Incorrect Password.");
     }
 }
