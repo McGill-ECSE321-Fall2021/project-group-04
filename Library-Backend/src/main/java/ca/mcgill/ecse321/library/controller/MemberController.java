@@ -21,9 +21,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class MemberController {
 
-
-
-
     @Autowired
     private MemberService memberService;
 
@@ -52,15 +49,15 @@ public class MemberController {
      * @param aMemberStatus
      * @return
      */
-    @PostMapping(value = {"/signup_user/", "/signup_user"})
-    public ResponseEntity<?> signupUser(@RequestParam("username") String aUsername,
+    @PostMapping(value = {"/member_sign_up/", "/member_sign_up"})
+    public ResponseEntity<?> createMember(@RequestParam("username") String aUsername,
                                         @RequestParam("password") String aPassword,
                                         @RequestParam("address") String aAddress,
-                                        @RequestParam("member_type") Member.MemberType aMemberType,
-                                        @RequestParam("member_status") Member.MemberStatus aMemberStatus) {
+                                        @RequestParam("member_type") String aMemberType,
+                                        @RequestParam("member_status") String aMemberStatus) {
 
         try {
-            Member member = memberService.createMember(aUsername, aPassword, aAddress, aMemberType, aMemberStatus);
+            Member member = memberService.createMember(aUsername, aPassword, aAddress, Member.MemberType.valueOf(aMemberType), Member.MemberStatus.valueOf(aMemberStatus));
             return new ResponseEntity<>(DTOConverter.convertToDto(member), HttpStatus.CREATED) ;
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);

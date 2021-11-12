@@ -39,3 +39,17 @@ All the related documents for each sprint can be accessed below:
 |     Jewoo Lee      | Requirements, Domain model, UC diagrams and specifications, Persistence Layer, Persistence testing, Wiki page   |       25      |
 |   Saghar Sahebi    | Requirements, Domain model, Wiki Page, UC diagrams and specifications, Persistence Layer, Persistence testing                                  |        25    |
 | Simo      Benkirane| Requirements, Domain model, Build System & CI, Persistence testing, JPA, UC                              |    25     |
+
+### Sprint 2
+
+
+
+### Roles and Budget
+|        Name        |         Roles/Assigned Tasks       |    Time Spent   |
+| ------------------ | ---------------------------------- | --------------- |
+| Alexandre Saroufim | Service/Controller classes, Unit testing, Integration testing, documentation                                   |        40      |
+|    Aly Mohamed     | Service/Dto/Controller classes, Unit testing, Integration testing  |        40    |
+| Abd-El-Aziz Zayed  | Service/Dto/Controller classes,  Unit testing, Integration testing |    40       |
+|     Jewoo Lee      | Service/Controller classes, Wiki Page, Unit testing, Integration testing   |       40      |
+|   Saghar Sahebi    | Service/Controller classes, Wiki Page, Unit testing, Integration testing         |        40    |
+| Simo      Benkirane| Service/Dto/Controller classes,  Unit testing, Integration testing                  |    40     |
