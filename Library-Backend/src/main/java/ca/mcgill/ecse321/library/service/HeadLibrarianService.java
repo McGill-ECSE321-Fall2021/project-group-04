@@ -5,6 +5,7 @@ import ca.mcgill.ecse321.library.dao.LibrarianRepository;
 import ca.mcgill.ecse321.library.dao.MemberRepository;
 import ca.mcgill.ecse321.library.dao.WorkDayRepository;
 import ca.mcgill.ecse321.library.model.HeadLibrarian;
+import ca.mcgill.ecse321.library.model.Librarian;
 import ca.mcgill.ecse321.library.model.WorkDay;
 import ca.mcgill.ecse321.library.model.WorkDay.DayOfWeek;
 
@@ -197,5 +198,25 @@ public class HeadLibrarianService {
 			return true;
 		}
 		throw new IllegalArgumentException("Username already exists.");
+	}
+
+	/**
+	 * @author Jewoo Lee
+	 * @param username
+	 * @param password
+	 * @return
+	 */
+	@Transactional
+	public Librarian login(String username, String password) {
+		if (!headLibrarianRepository.existsHeadLibrarianByUsername(username)) {
+			throw new IllegalArgumentException("Invalid Username.");
+		}
+
+		HeadLibrarian headLibrarian = headLibrarianRepository.findHeadLibrarianByUsername(username);
+		if (headLibrarian != null && headLibrarian.getPassword().equals(password)) {
+			return headLibrarian;
+		}
+
+		throw new IllegalArgumentException("Incorrect Password.");
 	}
 }
