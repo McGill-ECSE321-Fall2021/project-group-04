@@ -489,23 +489,6 @@ public class TestHeadLibrarianService {
     }
 
 
-    
-    
-    
-    
-    //Saghar 
-
-    @Test
-    public void testAssignScheduleforlibrarianforOneDay() {
-    	
-    	
-    }
-
-
-    @Test
-    public void testAssignScheduleforlibrarianforFourDays() {
-    }
-
     @Test
     public void testAssignSchedulelibrarianNull() {
         assertEquals(0, headLibrarianService.getAllHeadLibrarians().size());
@@ -552,39 +535,6 @@ public class TestHeadLibrarianService {
 
     }
 
-
-    @Test
-    public void testAssignScheduleforHeadLibrarian() {
-    	assertEquals(0, headLibrarianService.getAllHeadLibrarians().size());
-    	
-    	Librarian librarian = librarianService.createLibrarian(LIBRARIAN_USERNAME, LIBRARIAN_PASSWORD,LIBRARIAN_ADDRESS);
-    	String headlibrarian = HEAD_LIBRARIAN_USERNAME;
-    	WorkDay.DayOfWeek workday = DayOfWeek.Monday;
-    	Time startTime = Time.valueOf(HEAD_LIBRARIAN_MONDAY_START);
-    	Time endTime = Time.valueOf(HEAD_LIBRARIAN_MONDAY_END);
-        Set<WorkDay> workDays = librarian.getWorkHours();
-        WorkDay workdayss = new WorkDay();
-
-        		try {
-        	
-            workDays = headLibrarianService.AssignScheduleHeadLibrarian(workday, startTime, endTime, headlibrarian);
-            
-        }  catch (IllegalArgumentException e) {
-        	fail();
-        }
-        
-        assertNotNull(workDays);
-        assertEquals(headlibrarian, librarian.getUsername());
-        assertEquals(startTime, workdayss.getStartTime());
-        assertEquals(endTime, workdayss.getEndTime()); 
-        assertEquals(workday, workdayss.getDayOfWeek());
-        
-    }
-
-    @Test
-    public void testAssignScheduleforHeadLibrarianforFiveDays() {
-    	
-    }
 
     @Test
     public void testAssignScheduleHeadLibrarianNull() {
