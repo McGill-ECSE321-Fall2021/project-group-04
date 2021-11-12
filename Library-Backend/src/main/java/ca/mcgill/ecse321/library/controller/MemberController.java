@@ -2,6 +2,7 @@ package ca.mcgill.ecse321.library.controller;
 
 import ca.mcgill.ecse321.library.dto.MemberDto;
 import ca.mcgill.ecse321.library.model.Member;
+import ca.mcgill.ecse321.library.model.User;
 import ca.mcgill.ecse321.library.service.MemberService;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -68,6 +69,18 @@ public class MemberController {
     @GetMapping(value = {"/members"})
     public List<MemberDto> getAllMembers() {
         return memberService.getAllMembers().stream().map(DTOConverter::convertToDto).collect(Collectors.toList());
+    }
+
+    @PostMapping(value = {"/member_login", "/member_login/"})
+    public ResponseEntity<?> login(@RequestParam String username, @RequestParam String password) {
+        Member member = null;
+        try {
+            member = memberService.login(username, password);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        return new ResponseEntity<>(DTOConverter.convertToDto(member), HttpStatus.OK);
     }
 
 }
