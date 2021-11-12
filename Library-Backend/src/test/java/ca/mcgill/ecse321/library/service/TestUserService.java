@@ -223,7 +223,7 @@ public class TestUserService {
         lenient().when(librarianRepository.save(any(Librarian.class))).thenAnswer(returnParameterAsAnswer);
         lenient().when(headLibrarianRepository.save(any(HeadLibrarian.class))).thenAnswer(returnParameterAsAnswer);
     }
-/*
+
     @Test
     public void testLogInMember() {
         assertEquals(0, memberService.getAllMembers().size());
@@ -242,9 +242,7 @@ public class TestUserService {
         }
     }
 
- */
 
-    /*
     @Test
     public void testLogInLibrarian() {
         assertEquals(0, librarianService.getAllLibrarians().size());
@@ -260,7 +258,6 @@ public class TestUserService {
             fail();
         }
     }
-     */
 
     @Test
     public void testLogInHeadLibrarian() {
@@ -279,4 +276,45 @@ public class TestUserService {
             fail();
         }
     }
+
+    @Test
+    public void testLogInInvalidUsername() {
+        assertEquals(0, memberService.getAllMembers().size());
+        User user = null;
+        String error = null;
+
+        String username = "abcd";
+        String password = "aziz123";
+
+        try {
+            user = userService.login(username,password);
+        }
+        catch(IllegalArgumentException e) {
+            error = e.getMessage();
+        }
+
+        assertEquals(error, "Invalid Username.");
+    }
+
+    @Test
+    public void testLogInInvalidPassoword() {
+        assertEquals(0, memberService.getAllMembers().size());
+        User user = null;
+        String error = null;
+
+        String username = MEMBER_USERNAME;
+        String password = "abcd123";
+
+        try {
+            //if(MEMBER_USERNAME == username && MEMBER_PASSWORD == password) {
+                user = userService.login(username, password);
+            //}
+        }
+        catch(IllegalArgumentException e) {
+            error = e.getMessage();
+        }
+
+        assertEquals(error, "Incorrect Password.");
+    }
+
 }

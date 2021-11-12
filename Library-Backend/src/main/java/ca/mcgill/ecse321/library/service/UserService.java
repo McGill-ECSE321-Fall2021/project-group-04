@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
     @Autowired
-    private static MemberRepository memberRepository;
+    private MemberRepository memberRepository;
 
     @Autowired
     private LibrarianRepository librarianRepository;
@@ -89,9 +89,9 @@ public class UserService {
      */
     @Transactional
     public User login(String username, String password) {
-        if (!(memberRepository.findMemberByUsername(username) == null) &&
-                !(librarianRepository.findLibrarianByUsername(username) == null) &&
-                !(headLibrarianRepository.findHeadLibrarianByUsername(username) == null)) {
+        if ((memberRepository.findMemberByUsername(username) == null) &&
+                (librarianRepository.findLibrarianByUsername(username) == null) &&
+                (headLibrarianRepository.findHeadLibrarianByUsername(username) == null)) {
             throw new IllegalArgumentException("Invalid Username.");
         }
 
