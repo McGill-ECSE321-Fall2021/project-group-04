@@ -18,9 +18,6 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.lenient;
 
-/**
- * @author JewooLee
- */
 @ExtendWith(MockitoExtension.class)
 public class TestMemberService {
 
@@ -60,6 +57,7 @@ public class TestMemberService {
             return null;
         });
 
+
         Answer<?> returnParameterAsAnswer = (InvocationOnMock invocation) -> {
             return invocation.getArgument(0);
         };
@@ -68,7 +66,7 @@ public class TestMemberService {
     }
 
     @Test
-    public void testSignupUser() {
+    public void testMemberSignUp() {
         assertEquals(0, memberService.getAllMembers().size());
         Member member = null;
 
@@ -95,7 +93,7 @@ public class TestMemberService {
     }
 
     @Test
-    public void testSignupUserNull() {
+    public void testMemberSignUpNull() {
         assertEquals(0, memberService.getAllMembers().size());
         Member member = null;
 
@@ -113,12 +111,12 @@ public class TestMemberService {
             error = e.getMessage();
         }
         assertNull(member);
-        assertEquals(error, "The username cannot be empty.");
+        assertEquals(error, "Username cannot be empty.");
 
     }
 
     @Test
-    public void testSignupUserExistingUsername() {
+    public void testMemberSignUpExistingUsername() {
         assertEquals(0, memberService.getAllMembers().size());
         Member member = null;
 
@@ -136,11 +134,11 @@ public class TestMemberService {
             error = e.getMessage();
         }
         assertNull(member);
-        assertEquals(error, "This username already exists.");
+        assertEquals(error,  "Username already exists.");
     }
 
     @Test
-    public void testUpdateUserPassword() {
+    public void testUpdateMemberPassword() {
         assertEquals(0, memberService.getAllMembers().size());
         Member member = null;
 
@@ -156,7 +154,7 @@ public class TestMemberService {
     }
 
     @Test
-    public void testUpdateUserPasswordInvalidUpperCase() {
+    public void testUpdateMemberPasswordInvalidUpperCase() {
         assertEquals(0, memberService.getAllMembers().size());
         Member member = null;
         String error = null;
@@ -168,11 +166,11 @@ public class TestMemberService {
             error = e.getMessage();
         }
         assertNull(member);
-        assertEquals(error, "Invalid Password. Password must contain at least one uppercase character.");
+        assertEquals(error, "The password must contain at least one uppercase character.");
     }
 
     @Test
-    public void testUpdateUserPasswordInvalidLowerCase() {
+    public void testUpdateMemberPasswordInvalidLowerCase() {
         assertEquals(0, memberService.getAllMembers().size());
         Member member = null;
         String error = null;
@@ -184,11 +182,11 @@ public class TestMemberService {
             error = e.getMessage();
         }
         assertNull(member);
-        assertEquals(error, "Invalid Password. Password must contain at least one lowercase character.");
+        assertEquals(error, "The password must contain at least one lowercase character.");
     }
 
     @Test
-    public void testUpdateUserPasswordForEmptyPassword() {
+    public void testUpdateMemberPasswordForEmptyPassword() {
         assertEquals(0, memberService.getAllMembers().size());
         Member member = null;
         String error = null;
@@ -200,11 +198,11 @@ public class TestMemberService {
             error = e.getMessage();
         }
         assertNull(member);
-        assertEquals(error, "Invalid Password. New password cannot be empty.");
+        assertEquals(error, "Password cannot be empty.");
     }
 
     @Test
-    public void testUpdateUserPasswordForNoNumber() {
+    public void testUpdateMemberPasswordForNoNumber() {
         assertEquals(0, memberService.getAllMembers().size());
         Member member = null;
         String error = null;
@@ -216,11 +214,11 @@ public class TestMemberService {
             error = e.getMessage();
         }
         assertNull(member);
-        assertEquals(error, "Invalid Password. New password must contain at least one number.");
+        assertEquals(error, "The password must contain at least one numeric character.");
     }
 
     @Test
-    public void testUpdateUserPasswordForShorterThan8() {
+    public void testUpdateMemberPasswordForShorterThan8() {
         assertEquals(0, memberService.getAllMembers().size());
         Member member = null;
         String error = null;
@@ -232,11 +230,11 @@ public class TestMemberService {
             error = e.getMessage();
         }
         assertNull(member);
-        assertEquals(error, "Invalid Password. New password must be longer than 8 characters.");
+        assertEquals(error, "The password length cannot be less than 8 characters.");
     }
 
     @Test
-    public void testUpdateUserPasswordForLongerthan20() {
+    public void testUpdateMemberPasswordForLongerthan20() {
         assertEquals(0, memberService.getAllMembers().size());
         Member member = null;
         String error = null;
@@ -248,11 +246,11 @@ public class TestMemberService {
             error = e.getMessage();
         }
         assertNull(member);
-        assertEquals(error, "Invalid Password. New password must be shorter than 20 characters.");
+        assertEquals(error, "The password length cannot be more than 20 characters.");
     }
 
     @Test
-    public void testDeleteUser() {
+    public void testDeleteMember() {
         boolean deleted = false;
         try {
             deleted = memberService.deleteMember(USERNAME);
@@ -264,7 +262,7 @@ public class TestMemberService {
     }
 
     @Test
-    public void testDeleteUserUnknown() {
+    public void testDeleteMemberUnknown() {
         String error = null;
         try {
             memberService.deleteMember("Non-existing Username");
@@ -276,7 +274,7 @@ public class TestMemberService {
     }
 
     @Test
-    public void testInvalidPasswordForUpperCase() {
+    public void testInvalidMemberPasswordForUpperCase() {
         assertEquals(0, memberService.getAllMembers().size());
         Member member = null;
 
@@ -293,12 +291,12 @@ public class TestMemberService {
         catch(IllegalArgumentException e) {
             error = e.getMessage();
         }
-        assertNotNull(member);
-        assertEquals(error, "Password must contain at least one uppercase character.");
+        assertNull(member);
+        assertEquals(error, "The password must contain at least one uppercase character.");
     }
 
     @Test
-    public void testInvalidPasswordForLowerCase() {
+    public void testInvalidMemberPasswordForLowerCase() {
         assertEquals(0, memberService.getAllMembers().size());
         Member member = null;
 
@@ -315,12 +313,12 @@ public class TestMemberService {
         catch(IllegalArgumentException e) {
             error = e.getMessage();
         }
-        assertNotNull(member);
-        assertEquals(error, "Password must contain at least one lowercase character.");
+        assertNull(member);
+        assertEquals(error, "The password must contain at least one lowercase character.");
     }
 
     @Test
-    public void testInvalidPasswordForNoNumber() {
+    public void testInvalidMemberPasswordForNoNumber() {
         assertEquals(0, memberService.getAllMembers().size());
         Member member = null;
 
@@ -337,12 +335,12 @@ public class TestMemberService {
         catch(IllegalArgumentException e) {
             error = e.getMessage();
         }
-        assertNotNull(member);
-        assertEquals(error, "Password must contain at least one number.");
+        assertNull(member);
+        assertEquals(error, "The password must contain at least one numeric character.");
     }
 
     @Test
-    public void testInvalidPasswordForShorterThan8() {
+    public void testInvalidMemberPasswordForShorterThan8() {
         assertEquals(0, memberService.getAllMembers().size());
         Member member = null;
 
@@ -359,12 +357,12 @@ public class TestMemberService {
         catch(IllegalArgumentException e) {
             error = e.getMessage();
         }
-        assertNotNull(member);
-        assertEquals(error, "Password must be at least 8 characters.");
+        assertNull(member);
+        assertEquals(error, "The password length cannot be less than 8 characters.");
     }
 
     @Test
-    public void testInvalidPasswordForLongerThan20() {
+    public void testInvalidMemberPasswordForLongerThan20() {
         assertEquals(0, memberService.getAllMembers().size());
         Member member = null;
 
@@ -381,7 +379,7 @@ public class TestMemberService {
         catch(IllegalArgumentException e) {
             error = e.getMessage();
         }
-        assertNotNull(member);
-        assertEquals(error, "Password must be shorter than 20 characters.");
+        assertNull(member);
+        assertEquals(error, "The password length cannot be more than 20 characters.");
     }
 }

@@ -1,6 +1,8 @@
 package ca.mcgill.ecse321.library.service;
 
+import ca.mcgill.ecse321.library.dao.HeadLibrarianRepository;
 import ca.mcgill.ecse321.library.dao.LibrarianRepository;
+import ca.mcgill.ecse321.library.dao.MemberRepository;
 import ca.mcgill.ecse321.library.model.Librarian;
 import java.util.List;
 import javax.transaction.Transactional;
@@ -11,7 +13,13 @@ import org.springframework.stereotype.Service;
 public class LibrarianService {
 
     @Autowired
+    MemberRepository memberRepository;
+
+    @Autowired
     LibrarianRepository librarianRepository;
+
+    @Autowired
+    HeadLibrarianRepository headLibrarianRepository;
 
     /**
      * @author Abd-El-Aziz Zayed
@@ -22,7 +30,7 @@ public class LibrarianService {
      */
     @Transactional
     public Librarian createLibrarian(String aUsername, String aPassword, String aAddress) {
-        UserService.checkValidUsername(aUsername);
+        checkValidUsername(aUsername);
         UserService.checkValidPassword(aPassword);
         UserService.checkValidAddress(aAddress);
 
@@ -44,7 +52,6 @@ public class LibrarianService {
      */
     @Transactional
     public Librarian changeLibrarianPassword(String username, String newPassword) {
-        UserService.checkValidUsername(username);
         Librarian librarian = librarianRepository.findLibrarianByUsername(username);
 
         if (librarian == null) {
@@ -92,4 +99,18 @@ public class LibrarianService {
         return Services.toList(librarianRepository.findAll());
     }
 
+    /**
+     * @author Jewoo Lee
+     * @param username
+     * @return
+     */
+    public boolean checkValidUsername(String username) {
+        if (username == null || username == "") {
+            throw new IllegalArgumentException("Username cannot be empty.");
+        }
+        if (librarianRepository.findLibrarianByUsername(username) == null) {
+            return true;
+        }
+        throw new IllegalArgumentException("Username already exists.");
+    }
 }

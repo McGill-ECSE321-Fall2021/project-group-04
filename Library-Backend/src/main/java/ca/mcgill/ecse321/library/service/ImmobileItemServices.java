@@ -39,7 +39,7 @@ public class ImmobileItemServices {
             error += "number of pages is not a number";
         }
 
-        Boolean hasError = error != null || error != "";
+        Boolean hasError = error != "";
 
         if (hasError) throw new IllegalArgumentException(error);
         else return true;
