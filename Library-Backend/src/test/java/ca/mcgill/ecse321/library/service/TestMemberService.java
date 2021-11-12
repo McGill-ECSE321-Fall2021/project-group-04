@@ -2,6 +2,7 @@ package ca.mcgill.ecse321.library.service;
 
 import ca.mcgill.ecse321.library.dao.MemberRepository;
 import ca.mcgill.ecse321.library.model.Member;
+import ca.mcgill.ecse321.library.model.User;
 import java.sql.Date;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -366,5 +367,52 @@ public class TestMemberService {
         }
         assertNull(member);
         assertEquals(error, "The password length cannot be more than 20 characters.");
+    }
+
+    @Test
+    public void testLogInMember() {
+        assertEquals(0, memberService.getAllMembers().size());
+
+        String username = USERNAME;
+        String password = PASSWORD;
+
+        Member member = null;
+        try {
+            member = memberService.login(username, password);
+        } catch (IllegalArgumentException e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void testLogInInvalidUsername() {
+        assertEquals(0, memberService.getAllMembers().size());
+
+        String username = "abcd";
+        String password = "aziz123";
+
+        Member member = null;
+        try {
+            member = memberService.login(username, password);
+        } catch (IllegalArgumentException e) {
+            assertEquals(e.getMessage(), "Invalid Username.");
+        }
+        assertNull(member);
+    }
+
+    @Test
+    public void testLogInInvalidPassoword() {
+        assertEquals(0, memberService.getAllMembers().size());
+
+        String username = USERNAME;
+        String password = "aziz123";
+
+        Member member = null;
+        try {
+            member = memberService.login(username, password);
+        } catch (IllegalArgumentException e) {
+            assertEquals(e.getMessage(), "Incorrect Password.");
+        }
+        assertNull(member);
     }
 }

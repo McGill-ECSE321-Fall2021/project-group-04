@@ -568,4 +568,21 @@ public class TestHeadLibrarianService {
         }
     }
 
+    @Test
+    public void testLogInHeadLibrarian() {
+        assertEquals(0, headLibrarianService.getAllHeadLibrarians().size());
+
+        String username = HEAD_LIBRARIAN_USERNAME;
+        String password = HEAD_LIBRARIAN_PASSWORD;
+
+        HeadLibrarian headLibrarian = null;
+        try {
+            headLibrarian = headLibrarianService.login(username, password);
+        } catch (IllegalArgumentException e) {
+            fail();
+        }
+
+        assertNotNull(headLibrarian);
+    }
+
 }

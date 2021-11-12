@@ -1,7 +1,10 @@
 package ca.mcgill.ecse321.library.service;
 
 import ca.mcgill.ecse321.library.dao.MemberRepository;
+import ca.mcgill.ecse321.library.model.HeadLibrarian;
+import ca.mcgill.ecse321.library.model.Librarian;
 import ca.mcgill.ecse321.library.model.Member;
+import ca.mcgill.ecse321.library.model.User;
 import java.util.List;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -108,5 +111,25 @@ public class MemberService {
             return true;
         }
         throw new IllegalArgumentException("Username already exists.");
+    }
+
+    /**
+     * @param username
+     * @param password
+     * @return
+     * @author Jewoo Lee
+     */
+    @Transactional
+    public Member login(String username, String password) {
+        if (memberRepository.findMemberByUsername(username) == null) {
+            throw new IllegalArgumentException("Invalid Username.");
+        }
+
+        Member member = memberRepository.findMemberByUsername(username);
+        if (member != null && member.getPassword().equals(password)) {
+            return member;
+        }
+
+        throw new IllegalArgumentException("Incorrect Password.");
     }
 }
