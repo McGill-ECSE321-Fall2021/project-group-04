@@ -23,6 +23,9 @@ public class HeadLibrarianService {
 
     @Autowired
     HeadLibrarianRepository headLibrarianRepository;
+
+	@Autowired
+	LibrarianRepository librarianRepository;
    
     @Autowired
 	WorkDayRepository workdayRepository;
@@ -96,7 +99,6 @@ public class HeadLibrarianService {
         return headLibrarianRepository.findHeadLibrarianByUsername(username);
     }
     
-    
     //list of all head librarians
     @Transactional
     public List<HeadLibrarian> getAllHeadLibrarians(){
@@ -117,22 +119,19 @@ public class HeadLibrarianService {
 	 */
 	@Transactional
 	public Set<WorkDay> AssignScheduleLibrarian (DayOfWeek workday,Time startTime, Time endTime, String librarianUser, String headlibUser){
+
 	
-		HeadLibrarianService headlibrarian = new HeadLibrarianService();
-		LibrarianService librarian = new LibrarianService();
-	
-	
-		if(headlibrarian.getAllHeadLibrarians().contains(headLibrarianRepository.findHeadLibrarianByUsername(headlibUser))){
-			librarian.getLibrarian(librarianUser).setWorkHours(WeekSchedule(Schedule(workday,startTime,endTime)));
+		if(getAllHeadLibrarians().contains(headLibrarianRepository.findHeadLibrarianByUsername(headlibUser))){
+			librarianRepository.findLibrarianByUsername(librarianUser).setWorkHours(WeekSchedule(Schedule(workday,startTime,endTime)));
 		}
 	
 		else {
 			throw new IllegalArgumentException("Only a headlibrarian can assign schedules.");
 		}
 	
-		workdayRepository.saveAll(librarian.getLibrarian(librarianUser).getWorkHours());
+		workdayRepository.saveAll(librarianRepository.findLibrarianByUsername(librarianUser).getWorkHours());
 		
-		return librarian.getLibrarian(librarianUser).getWorkHours();
+		return librarianRepository.findLibrarianByUsername(librarianUser).getWorkHours();
 		
 		}
 	
@@ -140,17 +139,16 @@ public class HeadLibrarianService {
 	
 	public Set<WorkDay> AssignScheduleHeadLibrarian (DayOfWeek workday,Time startTime, Time endTime, String headlibUser){
 	
-		HeadLibrarianService headlibrarian = new HeadLibrarianService();
-		if(headlibrarian.getAllHeadLibrarians().contains(headLibrarianRepository.findHeadLibrarianByUsername(headlibUser))){
-			headlibrarian.getHeadLibrarian(headlibUser).setWorkHours(WeekSchedule(Schedule(workday,startTime,endTime)));
+		if(getAllHeadLibrarians().contains(headLibrarianRepository.findHeadLibrarianByUsername(headlibUser))){
+			getHeadLibrarian(headlibUser).setWorkHours(WeekSchedule(Schedule(workday,startTime,endTime)));
 		}
 		else {
 			throw new IllegalArgumentException("Only a headlibrarian can assign schedules.");
 		}
 	
-		workdayRepository.saveAll(headlibrarian.getHeadLibrarian(headlibUser).getWorkHours());
+		workdayRepository.saveAll(getHeadLibrarian(headlibUser).getWorkHours());
 		
-		return headlibrarian.getHeadLibrarian(headlibUser).getWorkHours();
+		return getHeadLibrarian(headlibUser).getWorkHours();
 		
 		
 	}
@@ -169,29 +167,27 @@ public class HeadLibrarianService {
 	 * @return assigned schedule
 	 */
 	@Transactional
-	public void DeleteSchedule(DayOfWeek workday,Time startTime, Time endTime ,String librarianUser, String headlibUser){
-		
-		HeadLibrarianService headlibrarian = new HeadLibrarianService();
-		LibrarianService librarian = new LibrarianService();
-		
-		if(librarian.getLibrarian(librarianUser).getWorkHours().isEmpty()) {
+	public boolean DeleteSchedule (DayOfWeek workday,Time startTime, Time endTime ,String librarianUser, String headlibUser){
+		Set<WorkDay> headlibrarianschedule = AssignScheduleHeadLibrarian(workday,startTime,endTime,headlibUser);
+		Set <WorkDay> librarianschedule = AssignScheduleLibrarian(workday,startTime,endTime,librarianUser, headlibUser);
+		if(headlibrarianschedule.isEmpty() || librarianschedule.isEmpty()) {
 			throw new IllegalArgumentException("No schedule exists for this librarian.");
 		}
 		
-		if(headlibrarian.getAllHeadLibrarians().contains(headLibrarianRepository.findHeadLibrarianByUsername(headlibUser))) {
+		if(getAllHeadLibrarians().contains(headLibrarianRepository.findHeadLibrarianByUsername(headlibUser))) {
 			throw new IllegalArgumentException("Only a headlibrarian can assign schedules.");
 		}
 		
 		else {
-		workdayRepository.deleteAll(librarian.getLibrarian(librarianUser).getWorkHours());
-		
+		workdayRepository.deleteAll(librarianRepository.findLibrarianByUsername(librarianUser).getWorkHours());
+		return true;
 		}
+		
 		
 	}
 	
 
 
-	@Transactional
 	public WorkDay Schedule(DayOfWeek workday, Time astartTime, Time aendTime) {
 		WorkDay workdays = new WorkDay();
 		workdays.setDayOfWeek(workday);
@@ -201,8 +197,7 @@ public class HeadLibrarianService {
 	
 	}
 
-	@Transactional
-	public Set<WorkDay> WeekSchedule (WorkDay aWorkDaySchedule){
+	private Set<WorkDay> WeekSchedule (WorkDay aWorkDaySchedule){
 		Set<WorkDay> theSchedule = new HashSet<WorkDay>();  
 		theSchedule.add(aWorkDaySchedule);
 		return theSchedule;
