@@ -1,6 +1,7 @@
 package ca.mcgill.ecse321.library.controller;
 
 import ca.mcgill.ecse321.library.dto.LibrarianDto;
+import ca.mcgill.ecse321.library.model.HeadLibrarian;
 import ca.mcgill.ecse321.library.model.Librarian;
 import ca.mcgill.ecse321.library.model.WorkDay;
 import ca.mcgill.ecse321.library.service.HeadLibrarianService;
@@ -89,5 +90,15 @@ public class HeadLibrarianController {
         return headLibrarianService.getAllHeadLibrarians().stream().map(DTOConverter::convertToDto).collect(Collectors.toList());
     }
 
+    @PostMapping(value = {"/head_librarian_login", "/head_librarian_login/"})
+    public ResponseEntity<?> login(@RequestParam String username, @RequestParam String password) {
+        HeadLibrarian librarian = null;
+        try {
+            librarian = headLibrarianService.login(username, password);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
 
+        return new ResponseEntity<>(DTOConverter.convertToDto(librarian), HttpStatus.OK);
+    }
 }

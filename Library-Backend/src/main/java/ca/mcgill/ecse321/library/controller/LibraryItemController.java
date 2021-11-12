@@ -152,66 +152,6 @@ public class LibraryItemController {
     }
 
     /**
-     * author: Alexandre
-     *
-     * @param isbn
-     * @return
-     */
-    @PostMapping(value = {"/view_book_by_ISBN"})
-    public BookDto viewBookByISBN(@RequestParam String isbn) {
-        return DTOConverter.convertToDto(bookService.getBookByIsbn(isbn), bookService.getBookByIsbn(isbn).getBooking());
-
-    }
-
-    /**
-     * author: Alexandre
-     *
-     * @param title
-     * @return
-     */
-    @PostMapping(value = {"/view_movie_by_title"})
-    public MovieDto viewMovieByTitle(@RequestParam String title) {
-        return DTOConverter.convertToDto(movieService.getMovieByTitle(title), movieService.getMovieByTitle(title).getBooking());
-
-    }
-
-    /**
-     * author: Alexandre
-     *
-     * @param title
-     * @return
-     */
-    @PostMapping(value = {"/view_music_album_by_title"})
-    public MusicAlbumDto viewMusicAlbumByTitle(@RequestParam String title) {
-        return DTOConverter.convertToDto(musicAlbumService.getMusicAlbumByTitle(title), musicAlbumService.getMusicAlbumByTitle(title).getBooking());
-
-    }
-
-    /**
-     * author: Alexandre
-     *
-     * @param title
-     * @return
-     */
-    @PostMapping(value = {"/view_archive_by_title"})
-    public ArchiveDto viewArchiveByTitle(@RequestParam String title) {
-        return DTOConverter.convertToDto(archiveService.getArchiveByTitle(title));
-
-    }
-
-    /**
-     * author: Alexandre
-     *
-     * @param title
-     * @return
-     */
-    @PostMapping(value = {"/view_newspaper_by_title"})
-    public NewspaperDto viewNewsPaperByTitle(@RequestParam String title) {
-        return DTOConverter.convertToDto(newspaperService.getNewspaperByTitle(title));
-
-    }
-
-    /**
      * @return list of all the books
      * @author Alexandre
      * Gets a list of all the books
@@ -273,7 +213,7 @@ public class LibraryItemController {
      * Gets a list of all the Newpapers
      */
     @GetMapping(value = {"/newspaper", "/newspaper/"})
-    public List<NewspaperDto> getAllNewsPapers() {
+    public List<NewspaperDto> getAllNewspapers() {
         List<NewspaperDto> newspapers = new ArrayList<NewspaperDto>();
         for (Newspaper newspaper : newspaperService.getAllNewspapers()) {
             newspapers.add(DTOConverter.convertToDto(newspaper));

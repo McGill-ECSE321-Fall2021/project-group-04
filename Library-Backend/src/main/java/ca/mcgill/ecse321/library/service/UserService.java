@@ -11,17 +11,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service
 public class UserService {
-
-    @Autowired
-    private MemberRepository memberRepository;
-
-    @Autowired
-    private LibrarianRepository librarianRepository;
-
-    @Autowired
-    private HeadLibrarianRepository headLibrarianRepository;
 
     /**
      * @param password
@@ -79,37 +69,5 @@ public class UserService {
         }
 
         return true;
-    }
-
-    /**
-     * @param username
-     * @param password
-     * @return
-     * @author Jewoo Lee
-     */
-    @Transactional
-    public User login(String username, String password) {
-        if ((memberRepository.findMemberByUsername(username) == null) &&
-                (librarianRepository.findLibrarianByUsername(username) == null) &&
-                (headLibrarianRepository.findHeadLibrarianByUsername(username) == null)) {
-            throw new IllegalArgumentException("Invalid Username.");
-        }
-
-        Member member = memberRepository.findMemberByUsername(username);
-        if (member != null && member.getPassword().equals(password)) {
-            return member;
-        }
-
-        Librarian librarian = librarianRepository.findLibrarianByUsername(username);
-        if (librarian != null && librarian.getPassword().equals(password)) {
-            return librarian;
-        }
-
-        HeadLibrarian headLibrarian = headLibrarianRepository.findHeadLibrarianByUsername(username);
-        if (headLibrarian != null && headLibrarian.getPassword().equals(password)) {
-            return headLibrarian;
-        }
-
-        throw new IllegalArgumentException("Incorrect Password.");
     }
 }

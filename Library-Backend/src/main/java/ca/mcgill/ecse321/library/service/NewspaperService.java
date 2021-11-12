@@ -49,7 +49,8 @@ public class NewspaperService {
         if (newspaper != null) {
             newspaperRepository.delete(newspaper);
             return true;
-        } else return false;
+        }
+        return false;
     }
 
     public List<Newspaper> getAllNewspapers() {

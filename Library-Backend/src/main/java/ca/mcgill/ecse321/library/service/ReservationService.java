@@ -17,33 +17,10 @@ import org.springframework.stereotype.Service;
 public class ReservationService {
 
     @Autowired
-    BookingRepository bookingRepository;
-
-    @Autowired
     ReservationRepository reservationRepository;
-
-    @Autowired
-    BookRepository bookRepository;
-
-    @Autowired
-    MovieRepository movieRepository;
-
-    @Autowired
-    MusicAlbumRepository musicAlbumRepository;
-
-    @Autowired
-    MemberRepository memberRepository;
 
     @Transactional
     public List<Reservation> getAllReservations() {
-        return toList(reservationRepository.findAll());
-    }
-
-    private <T> List<T> toList(Iterable<T> iterable) {
-        List<T> resultList = new ArrayList<T>();
-        for (T t : iterable) {
-            resultList.add(t);
-        }
-        return resultList;
+        return Services.toList(reservationRepository.findAll());
     }
 }

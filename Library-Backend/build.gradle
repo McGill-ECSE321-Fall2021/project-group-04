@@ -42,7 +42,7 @@ jacocoTestCoverageVerification {
 	}
 }
 
-task integartionTest(type:Exec) {
+task integrationTest(type:Exec) {
 	workingDir '/'
 
 	// commandLine 'curl', '-s', '-X', 'POST', ''

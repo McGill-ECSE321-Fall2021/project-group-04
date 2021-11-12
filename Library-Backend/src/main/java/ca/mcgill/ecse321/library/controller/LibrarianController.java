@@ -2,6 +2,7 @@ package ca.mcgill.ecse321.library.controller;
 
 import ca.mcgill.ecse321.library.dto.LibrarianDto;
 import ca.mcgill.ecse321.library.model.Librarian;
+import ca.mcgill.ecse321.library.model.Member;
 import ca.mcgill.ecse321.library.service.LibrarianService;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -58,6 +59,18 @@ public class LibrarianController {
     @GetMapping(value = {"/librarians"})
     public List<LibrarianDto> getAllLibrarians() {
         return libraryService.getAllLibrarians().stream().map(DTOConverter::convertToDto).collect(Collectors.toList());
+    }
+
+    @PostMapping(value = {"/librarian_login", "/librarian_login/"})
+    public ResponseEntity<?> login(@RequestParam String username, @RequestParam String password) {
+        Librarian librarian = null;
+        try {
+            librarian = libraryService.login(username, password);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        return new ResponseEntity<>(DTOConverter.convertToDto(librarian), HttpStatus.OK);
     }
 
 }
