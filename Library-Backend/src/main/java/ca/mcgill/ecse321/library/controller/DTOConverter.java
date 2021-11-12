@@ -78,7 +78,7 @@ public class DTOConverter {
 
     public static MovieDto convertToDto(Movie movie, Booking booking) {
 
-        BookingDto bookingDto = convertToDto(booking, booking.getUser(), booking.getBookingType());
+        BookingDto bookingDto = booking == null ? null :  convertToDto(booking, booking.getUser(), booking.getBookingType());
         MovieDto bookDto = new MovieDto(movie.getId(), movie.getBarcode(), movie.getTitle(), movie.getAuthor(),
                 movie.getDateOfRelease(), movie.getPrice(), movie.getLength(), bookingDto);
         return bookDto;
@@ -86,7 +86,7 @@ public class DTOConverter {
 
     public static MusicAlbumDto convertToDto(MusicAlbum album, Booking booking) {
 
-        BookingDto bookingDto = convertToDto(booking, booking.getUser(), booking.getBookingType());
+        BookingDto bookingDto = booking == null ? null : convertToDto(booking, booking.getUser(), booking.getBookingType());
         MusicAlbumDto musicAlbumDto = new MusicAlbumDto(album.getId(), album.getBarcode(), album.getTitle(), album.getAuthor(),
                 album.getDateOfRelease(), album.getPrice(), album.getNumberOfSongs(), album.getTotalLength(), bookingDto);
         return musicAlbumDto;
