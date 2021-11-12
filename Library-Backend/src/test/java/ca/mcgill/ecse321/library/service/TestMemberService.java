@@ -3,7 +3,6 @@ package ca.mcgill.ecse321.library.service;
 import ca.mcgill.ecse321.library.dao.MemberRepository;
 import ca.mcgill.ecse321.library.model.Member;
 import java.sql.Date;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,7 +12,11 @@ import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.Answer;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.lenient;
@@ -24,21 +27,17 @@ import static org.mockito.Mockito.lenient;
 @ExtendWith(MockitoExtension.class)
 public class TestMemberService {
 
-    @Mock
-    private MemberRepository memberRepository;
-
-    @InjectMocks
-    private static MemberService memberService;
-
     private static final String USERNAME = "username";
     private static final String PASSWORD = "Password1234";
     private static final String ADDRESS = "1234 University, Montreal, Quebec";
-
     private static final Member.MemberType MEMBER_TYPE = Member.MemberType.Local;
     private static final Member.MemberStatus MEMBER_STATUS = Member.MemberStatus.Active;
-
     private static final int MONTHLY_FEE = 0;
     private static final Date START_DATE = Date.valueOf("2020-05-29");
+    @InjectMocks
+    private static MemberService memberService;
+    @Mock
+    private MemberRepository memberRepository;
 
     @BeforeEach
     public void setMockOutput() {
@@ -81,8 +80,7 @@ public class TestMemberService {
 
         try {
             member = memberService.createMember(username, password, address, memberType, memberStatus);
-        }
-        catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             fail();
         }
 
@@ -109,8 +107,7 @@ public class TestMemberService {
 
         try {
             member = memberService.createMember(username, password, address, memberType, memberStatus);
-        }
-        catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             error = e.getMessage();
         }
         assertNull(member);
@@ -132,12 +129,11 @@ public class TestMemberService {
 
         try {
             member = memberService.createMember(username, password, address, memberType, memberStatus);
-        }
-        catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             error = e.getMessage();
         }
         assertNull(member);
-        assertEquals(error,  "Username already exists.");
+        assertEquals(error, "Username already exists.");
     }
 
     @Test
@@ -147,8 +143,7 @@ public class TestMemberService {
 
         try {
             member = memberService.changeMemberPassword(USERNAME, "Newpassword123");
-        }
-        catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             fail();
         }
         assertNotNull(member);
@@ -164,8 +159,7 @@ public class TestMemberService {
 
         try {
             member = memberService.changeMemberPassword(USERNAME, "invalidpassword123");
-        }
-        catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             error = e.getMessage();
         }
         assertNull(member);
@@ -180,8 +174,7 @@ public class TestMemberService {
 
         try {
             member = memberService.changeMemberPassword(USERNAME, "INVALIDPASSWORD123");
-        }
-        catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             error = e.getMessage();
         }
         assertNull(member);
@@ -196,8 +189,7 @@ public class TestMemberService {
 
         try {
             member = memberService.changeMemberPassword(USERNAME, null);
-        }
-        catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             error = e.getMessage();
         }
         assertNull(member);
@@ -212,8 +204,7 @@ public class TestMemberService {
 
         try {
             member = memberService.changeMemberPassword(USERNAME, "InvalidPassword");
-        }
-        catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             error = e.getMessage();
         }
         assertNull(member);
@@ -228,8 +219,7 @@ public class TestMemberService {
 
         try {
             member = memberService.changeMemberPassword(USERNAME, "InvPwd1");
-        }
-        catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             error = e.getMessage();
         }
         assertNull(member);
@@ -244,8 +234,7 @@ public class TestMemberService {
 
         try {
             member = memberService.changeMemberPassword(USERNAME, "InvalidPasswordThatIsLongerThan20");
-        }
-        catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             error = e.getMessage();
         }
         assertNull(member);
@@ -257,8 +246,7 @@ public class TestMemberService {
         boolean deleted = false;
         try {
             deleted = memberService.deleteMember(USERNAME);
-        }
-        catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             fail();
         }
         assertTrue(deleted);
@@ -269,8 +257,7 @@ public class TestMemberService {
         String error = null;
         try {
             memberService.deleteMember("Non-existing Username");
-        }
-        catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             error = e.getMessage();
         }
         assertEquals(error, "Member is not found.");
@@ -290,8 +277,7 @@ public class TestMemberService {
 
         try {
             member = memberService.createMember(username, password, address, memberType, memberStatus);
-        }
-        catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             error = e.getMessage();
         }
         assertNull(member);
@@ -312,8 +298,7 @@ public class TestMemberService {
 
         try {
             member = memberService.createMember(username, password, address, memberType, memberStatus);
-        }
-        catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             error = e.getMessage();
         }
         assertNull(member);
@@ -334,8 +319,7 @@ public class TestMemberService {
 
         try {
             member = memberService.createMember(username, password, address, memberType, memberStatus);
-        }
-        catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             error = e.getMessage();
         }
         assertNull(member);
@@ -356,8 +340,7 @@ public class TestMemberService {
 
         try {
             member = memberService.createMember(username, password, address, memberType, memberStatus);
-        }
-        catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             error = e.getMessage();
         }
         assertNull(member);
@@ -378,8 +361,7 @@ public class TestMemberService {
 
         try {
             member = memberService.createMember(username, password, address, memberType, memberStatus);
-        }
-        catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             error = e.getMessage();
         }
         assertNull(member);

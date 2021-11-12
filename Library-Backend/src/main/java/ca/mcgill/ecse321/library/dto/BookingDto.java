@@ -1,13 +1,9 @@
 package ca.mcgill.ecse321.library.dto;
 
-import ca.mcgill.ecse321.library.model.BookingType;
-import ca.mcgill.ecse321.library.model.User;
-
-import javax.persistence.*;
 import java.sql.Date;
 
 public class BookingDto {
-    private BookingTypeDto  bookingType;
+    private BookingTypeDto bookingType;
     private Long id;
     private Date bookingDate;
     private UserDto user;

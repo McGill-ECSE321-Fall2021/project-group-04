@@ -4,8 +4,8 @@ import java.sql.Date;
 
 public abstract class ImmobileItemDto extends LibraryItemDto {
 
-    private Date date;
-    private int numberOfPages;
+    private final Date date;
+    private final int numberOfPages;
 
     public ImmobileItemDto(Long aItemId, String aTitle, Date aDate, int aNumberOfPages) {
         super(aItemId, aTitle);

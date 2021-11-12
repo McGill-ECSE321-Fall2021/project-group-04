@@ -1,9 +1,7 @@
 package ca.mcgill.ecse321.library.controller;
 
 import ca.mcgill.ecse321.library.dto.MemberDto;
-import ca.mcgill.ecse321.library.model.Booking;
 import ca.mcgill.ecse321.library.model.Member;
-import ca.mcgill.ecse321.library.service.BookingService;
 import ca.mcgill.ecse321.library.service.MemberService;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,48 +23,47 @@ public class MemberController {
     private MemberService memberService;
 
     /**
-     * @author Abd-El-Aziz Zayed
      * @param username
      * @return
+     * @author Abd-El-Aziz Zayed
      */
     @GetMapping(value = {"/member/{username}"})
     public ResponseEntity<?> viewMember(@PathVariable("username") String username) {
         try {
-            return new ResponseEntity<>(DTOConverter.convertToDto(memberService.getMember(username)),HttpStatus.OK);
-        }
-        catch(Exception e){
+            return new ResponseEntity<>(DTOConverter.convertToDto(memberService.getMember(username)), HttpStatus.OK);
+        } catch (Exception e) {
             System.out.println("Error Message: " + e.getMessage());
-            return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 
     /**
-     * @author Jewoo Lee
      * @param aUsername
      * @param aPassword
      * @param aAddress
      * @param aMemberType
      * @param aMemberStatus
      * @return
+     * @author Jewoo Lee
      */
     @PostMapping(value = {"/member_sign_up/", "/member_sign_up"})
     public ResponseEntity<?> createMember(@RequestParam("username") String aUsername,
-                                        @RequestParam("password") String aPassword,
-                                        @RequestParam("address") String aAddress,
-                                        @RequestParam("member_type") String aMemberType,
-                                        @RequestParam("member_status") String aMemberStatus) {
+                                          @RequestParam("password") String aPassword,
+                                          @RequestParam("address") String aAddress,
+                                          @RequestParam("member_type") String aMemberType,
+                                          @RequestParam("member_status") String aMemberStatus) {
 
         try {
             Member member = memberService.createMember(aUsername, aPassword, aAddress, Member.MemberType.valueOf(aMemberType), Member.MemberStatus.valueOf(aMemberStatus));
-            return new ResponseEntity<>(DTOConverter.convertToDto(member), HttpStatus.CREATED) ;
+            return new ResponseEntity<>(DTOConverter.convertToDto(member), HttpStatus.CREATED);
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     /**
-     * @author Abd-El-Aziz Zayed
      * @return
+     * @author Abd-El-Aziz Zayed
      */
     @GetMapping(value = {"/members"})
     public List<MemberDto> getAllMembers() {

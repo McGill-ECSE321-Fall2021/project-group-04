@@ -3,13 +3,14 @@ package ca.mcgill.ecse321.library.service;
 import ca.mcgill.ecse321.library.dao.HeadLibrarianRepository;
 import ca.mcgill.ecse321.library.dao.LibrarianRepository;
 import ca.mcgill.ecse321.library.dao.MemberRepository;
-import ca.mcgill.ecse321.library.model.*;
-
+import ca.mcgill.ecse321.library.model.HeadLibrarian;
+import ca.mcgill.ecse321.library.model.Librarian;
+import ca.mcgill.ecse321.library.model.Member;
+import ca.mcgill.ecse321.library.model.User;
+import ca.mcgill.ecse321.library.model.WorkDay;
 import java.sql.Date;
 import java.sql.Time;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,7 +21,8 @@ import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.Answer;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.lenient;
@@ -28,76 +30,53 @@ import static org.mockito.Mockito.lenient;
 @ExtendWith(MockitoExtension.class)
 public class TestUserService {
 
-    @Mock
-    private MemberRepository memberRepository;
-
-    @Mock
-    private LibrarianRepository librarianRepository;
-
-    @Mock
-    private HeadLibrarianRepository headLibrarianRepository;
-
-    @InjectMocks
-    private UserService userService;
-
-    @InjectMocks
-    private MemberService memberService;
-
-    @InjectMocks
-    private LibrarianService librarianService;
-
-    @InjectMocks
-    private HeadLibrarianService headLibrarianService;
-
     private static final String MEMBER_USERNAME = "aziz";
     private static final String MEMBER_PASSWORD = "aziz123";
     private static final String MEMBER_ADDRESS = "1234 University, Montreal, QC";
-
     private static final Member.MemberType MEMBER_TYPE = Member.MemberType.Local;
     private static final Member.MemberStatus MEMBER_STATUS = Member.MemberStatus.Active;
-
     private static final int MEMBER_MONTHLY_FEE = 0;
     private static final Date MEMBER_START_DATE = Date.valueOf("2020-05-29");
-
-
     private static final String LIBRARIAN_USERNAME = "aly";
     private static final String LIBRARIAN_PASSWORD = "aly123";
     private static final String LIBRARIAN_ADDRESS = "1234 University, Montreal, QC";
-
     private static final String LIBRARIAN_MONDAY_START = "09:00:00";
     private static final String LIBRARIAN_MONDAY_END = "17:00:00";
-
     private static final String LIBRARIAN_TUESDAY_START = "09:00:00";
     private static final String LIBRARIAN_TUESDAY_END = "17:00:00";
-
     private static final String LIBRARIAN_WEDNESDAY_START = "09:00:00";
     private static final String LIBRARIAN_WEDNESDAY_END = "17:00:00";
-
     private static final String LIBRARIAN_THURSDAY_START = "09:00:00";
     private static final String LIBRARIAN_THURSDAY_END = "17:00:00";
-
     private static final String LIBRARIAN_FRIDAY_START = "09:00:00";
     private static final String LIBRARIAN_FRIDAY_END = "17:00:00";
-
-
     private static final String HEAD_LIBRARIAN_USERNAME = "simo";
     private static final String HEAD_LIBRARIAN_PASSWORD = "simo123";
     private static final String HEAD_LIBRARIAN_ADDRESS = "1234 University, Montreal, QC";
-
     private static final String HEAD_LIBRARIAN_MONDAY_START = "09:00:00";
     private static final String HEAD_LIBRARIAN_MONDAY_END = "17:00:00";
-
     private static final String HEAD_LIBRARIAN_TUESDAY_START = "09:00:00";
     private static final String HEAD_LIBRARIAN_TUESDAY_END = "17:00:00";
-
     private static final String HEAD_LIBRARIAN_WEDNESDAY_START = "09:00:00";
     private static final String HEAD_LIBRARIAN_WEDNESDAY_END = "17:00:00";
-
     private static final String HEAD_LIBRARIAN_THURSDAY_START = "09:00:00";
     private static final String HEAD_LIBRARIAN_THURSDAY_END = "17:00:00";
-
     private static final String HEAD_LIBRARIAN_FRIDAY_START = "09:00:00";
     private static final String HEAD_LIBRARIAN_FRIDAY_END = "17:00:00";
+    @Mock
+    private MemberRepository memberRepository;
+    @Mock
+    private LibrarianRepository librarianRepository;
+    @Mock
+    private HeadLibrarianRepository headLibrarianRepository;
+    @InjectMocks
+    private UserService userService;
+    @InjectMocks
+    private MemberService memberService;
+    @InjectMocks
+    private LibrarianService librarianService;
+    @InjectMocks
+    private HeadLibrarianService headLibrarianService;
 
     @BeforeEach
     public void setMockOutput() {
@@ -233,11 +212,10 @@ public class TestUserService {
         String password = "aziz123";
 
         try {
-            if(MEMBER_USERNAME == username && MEMBER_PASSWORD == password) {
+            if (MEMBER_USERNAME == username && MEMBER_PASSWORD == password) {
                 user = userService.login(username, password);
             }
-        }
-        catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             fail();
         }
     }
@@ -253,8 +231,7 @@ public class TestUserService {
 
         try {
             librarian = librarianService.login(username, password);
-        }
-        catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             fail();
         }
     }
@@ -268,11 +245,10 @@ public class TestUserService {
         String password = "aly123";
 
         try {
-            if(HEAD_LIBRARIAN_USERNAME == username && HEAD_LIBRARIAN_PASSWORD == password) {
+            if (HEAD_LIBRARIAN_USERNAME == username && HEAD_LIBRARIAN_PASSWORD == password) {
                 headLibrarian = headLibrarianService.login(username, password);
             }
-        }
-        catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             fail();
         }
     }
@@ -287,9 +263,8 @@ public class TestUserService {
         String password = "aziz123";
 
         try {
-            user = userService.login(username,password);
-        }
-        catch(IllegalArgumentException e) {
+            user = userService.login(username, password);
+        } catch (IllegalArgumentException e) {
             error = e.getMessage();
         }
 
@@ -307,10 +282,9 @@ public class TestUserService {
 
         try {
             //if(MEMBER_USERNAME == username && MEMBER_PASSWORD == password) {
-                user = userService.login(username, password);
+            user = userService.login(username, password);
             //}
-        }
-        catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             error = e.getMessage();
         }
 

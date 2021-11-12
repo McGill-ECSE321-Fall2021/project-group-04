@@ -5,10 +5,10 @@ import java.sql.Date;
 
 public class MemberDto extends UserDto {
 
-    private Member.MemberType memberType;
-    private Member.MemberStatus memberStatus;
-    private int monthlyFee;
-    private Date startDate;
+    private final Member.MemberType memberType;
+    private final Member.MemberStatus memberStatus;
+    private final int monthlyFee;
+    private final Date startDate;
 
     public MemberDto(Long aId, String aUsername, String aPassword, String aAddress, Member.MemberType aMemberType, Member.MemberStatus aMemberStatus, int aMonthlyFee, Date aStartDate) {
         super(aId, aUsername, aPassword, aAddress);

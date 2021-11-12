@@ -3,15 +3,9 @@ package ca.mcgill.ecse321.library.service;
 import ca.mcgill.ecse321.library.dao.HeadLibrarianRepository;
 import ca.mcgill.ecse321.library.dao.LibrarianRepository;
 import ca.mcgill.ecse321.library.dao.MemberRepository;
-import ca.mcgill.ecse321.library.model.HeadLibrarian;
 import ca.mcgill.ecse321.library.model.Librarian;
-import ca.mcgill.ecse321.library.model.Member;
-import ca.mcgill.ecse321.library.model.User;
 import java.util.List;
 import javax.transaction.Transactional;
-
-import ca.mcgill.ecse321.library.model.Member;
-import ca.mcgill.ecse321.library.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,11 +22,11 @@ public class LibrarianService {
     HeadLibrarianRepository headLibrarianRepository;
 
     /**
-     * @author Abd-El-Aziz Zayed
      * @param aUsername
      * @param aPassword
      * @param aAddress
      * @return
+     * @author Abd-El-Aziz Zayed
      */
     @Transactional
     public Librarian createLibrarian(String aUsername, String aPassword, String aAddress) {
@@ -51,10 +45,10 @@ public class LibrarianService {
     }
 
     /**
-     * @author Abd-El-Aziz Zayed
      * @param username
      * @param newPassword
      * @return
+     * @author Abd-El-Aziz Zayed
      */
     @Transactional
     public Librarian changeLibrarianPassword(String username, String newPassword) {
@@ -72,9 +66,9 @@ public class LibrarianService {
     }
 
     /**
-     * @author Abd-El-Aziz Zayed
      * @param username
      * @return
+     * @author Abd-El-Aziz Zayed
      */
     @Transactional
     public boolean deleteLibrarian(String username) {
@@ -87,9 +81,9 @@ public class LibrarianService {
     }
 
     /**
-     * @author Abd-El-Aziz Zayed
      * @param username
      * @return
+     * @author Abd-El-Aziz Zayed
      */
     @Transactional
     public Librarian getLibrarian(String username) {
@@ -97,8 +91,8 @@ public class LibrarianService {
     }
 
     /**
-     * @author Abd-El-Aziz Zayed
      * @return
+     * @author Abd-El-Aziz Zayed
      */
     @Transactional
     public List<Librarian> getAllLibrarians() {
@@ -106,9 +100,9 @@ public class LibrarianService {
     }
 
     /**
-     * @author Jewoo Lee
      * @param username
      * @return
+     * @author Jewoo Lee
      */
     public boolean checkValidUsername(String username) {
         if (username == null || username == "") {
@@ -121,10 +115,10 @@ public class LibrarianService {
     }
 
     /**
-     * @author Jewoo Lee
      * @param username
      * @param password
      * @return
+     * @author Jewoo Lee
      */
     @Transactional
     public Librarian login(String username, String password) {

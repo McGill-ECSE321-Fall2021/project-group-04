@@ -1,6 +1,7 @@
 package ca.mcgill.ecse321.library.service;
 
 import ca.mcgill.ecse321.library.dao.HeadLibrarianRepository;
+import ca.mcgill.ecse321.library.dao.LibrarianRepository;
 import ca.mcgill.ecse321.library.model.HeadLibrarian;
 import ca.mcgill.ecse321.library.model.Librarian;
 import ca.mcgill.ecse321.library.model.WorkDay;
@@ -29,30 +30,40 @@ import static org.mockito.Mockito.lenient;
 @ExtendWith(MockitoExtension.class)
 public class TestHeadLibrarianService {
 
-    @Mock
-    private HeadLibrarianRepository headLibrarianRepository;
-
-    @InjectMocks
-    private HeadLibrarianService headLibrarianService;
-
     private static final String HEAD_LIBRARIAN_USERNAME = "simo";
     private static final String HEAD_LIBRARIAN_PASSWORD = "simo123";
     private static final String HEAD_LIBRARIAN_ADDRESS = "1234 University, Montreal, QC";
-
     private static final String HEAD_LIBRARIAN_MONDAY_START = "09:00:00";
     private static final String HEAD_LIBRARIAN_MONDAY_END = "17:00:00";
-
     private static final String HEAD_LIBRARIAN_TUESDAY_START = "09:00:00";
     private static final String HEAD_LIBRARIAN_TUESDAY_END = "17:00:00";
-
     private static final String HEAD_LIBRARIAN_WEDNESDAY_START = "09:00:00";
     private static final String HEAD_LIBRARIAN_WEDNESDAY_END = "17:00:00";
-
     private static final String HEAD_LIBRARIAN_THURSDAY_START = "09:00:00";
     private static final String HEAD_LIBRARIAN_THURSDAY_END = "17:00:00";
-
     private static final String HEAD_LIBRARIAN_FRIDAY_START = "09:00:00";
     private static final String HEAD_LIBRARIAN_FRIDAY_END = "17:00:00";
+    private static final String LIBRARIAN_USERNAME = "aly";
+    private static final String LIBRARIAN_PASSWORD = "Aly123456";
+    private static final String LIBRARIAN_ADDRESS = "1234 University, Montreal, QC";
+    private static final String LIBRARIAN_MONDAY_START = "09:00:00";
+    private static final String LIBRARIAN_MONDAY_END = "17:00:00";
+    private static final String LIBRARIAN_TUESDAY_START = "09:00:00";
+    private static final String LIBRARIAN_TUESDAY_END = "17:00:00";
+    private static final String LIBRARIAN_WEDNESDAY_START = "09:00:00";
+    private static final String LIBRARIAN_WEDNESDAY_END = "17:00:00";
+    private static final String LIBRARIAN_THURSDAY_START = "09:00:00";
+    private static final String LIBRARIAN_THURSDAY_END = "17:00:00";
+    private static final String LIBRARIAN_FRIDAY_START = "09:00:00";
+    private static final String LIBRARIAN_FRIDAY_END = "17:00:00";
+    @Mock
+    private HeadLibrarianRepository headLibrarianRepository;
+    @Mock
+    private LibrarianRepository librarianRepository;
+    @InjectMocks
+    private HeadLibrarianService headLibrarianService;
+    @InjectMocks
+    private LibrarianService librarianService;
 
     @BeforeEach
     public void setMockOutput() {
@@ -125,7 +136,7 @@ public class TestHeadLibrarianService {
             assertEquals(username, librarian.getUsername());
             assertEquals(password, librarian.getPassword());
             assertEquals(address, librarian.getAddress());
-        } catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             fail();
         }
     }
@@ -141,7 +152,7 @@ public class TestHeadLibrarianService {
         Librarian librarian = null;
         try {
             librarian = headLibrarianService.createHeadLibrarian(username, password, address);
-        } catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             assertEquals(e.getMessage(), "Username cannot be empty.");
         }
 
@@ -159,7 +170,7 @@ public class TestHeadLibrarianService {
         Librarian librarian = null;
         try {
             librarian = headLibrarianService.createHeadLibrarian(username, password, address);
-        } catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             assertEquals(e.getMessage(), "Username cannot be empty.");
         }
 
@@ -177,7 +188,7 @@ public class TestHeadLibrarianService {
         Librarian librarian = null;
         try {
             librarian = headLibrarianService.createHeadLibrarian(username, password, address);
-        } catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             assertEquals(e.getMessage(), "Username already exists.");
         }
         assertNull(librarian);
@@ -194,7 +205,7 @@ public class TestHeadLibrarianService {
         Librarian librarian = null;
         try {
             librarian = headLibrarianService.createHeadLibrarian(username, password, address);
-        } catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             assertEquals(e.getMessage(), "Password cannot be empty.");
         }
         assertNull(librarian);
@@ -211,7 +222,7 @@ public class TestHeadLibrarianService {
         Librarian librarian = null;
         try {
             librarian = headLibrarianService.createHeadLibrarian(username, newPassword, address);
-        } catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             assertEquals(e.getMessage(), "Password cannot be empty.");
         }
         assertNull(librarian);
@@ -228,7 +239,7 @@ public class TestHeadLibrarianService {
         Librarian librarian = null;
         try {
             librarian = headLibrarianService.createHeadLibrarian(username, newPassword, address);
-        } catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             assertEquals(e.getMessage(), "The password must contain at least one uppercase character.");
         }
         assertNull(librarian);
@@ -245,10 +256,10 @@ public class TestHeadLibrarianService {
         Librarian librarian = null;
         try {
             librarian = headLibrarianService.createHeadLibrarian(username, newPassword, address);
-        } catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             assertEquals(e.getMessage(), "The password must contain at least one lowercase character.");
         }
-         assertNull(librarian);
+        assertNull(librarian);
     }
 
     @Test
@@ -262,10 +273,10 @@ public class TestHeadLibrarianService {
         Librarian librarian = null;
         try {
             librarian = headLibrarianService.createHeadLibrarian(username, newPassword, address);
-        } catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             assertEquals(e.getMessage(), "The password length cannot be less than 8 characters.");
         }
-         assertNull(librarian);
+        assertNull(librarian);
     }
 
     @Test
@@ -279,10 +290,10 @@ public class TestHeadLibrarianService {
         Librarian librarian = null;
         try {
             librarian = headLibrarianService.createHeadLibrarian(username, newPassword, address);
-        } catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             assertEquals(e.getMessage(), "The password length cannot be more than 20 characters.");
         }
-         assertNull(librarian);
+        assertNull(librarian);
     }
 
     @Test
@@ -296,10 +307,10 @@ public class TestHeadLibrarianService {
         Librarian librarian = null;
         try {
             librarian = headLibrarianService.createHeadLibrarian(username, newPassword, address);
-        } catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             assertEquals(e.getMessage(), "The password must contain at least one numeric character.");
         }
-         assertNull(librarian);
+        assertNull(librarian);
     }
 
     @Test
@@ -316,7 +327,7 @@ public class TestHeadLibrarianService {
             assertNotNull(librarian);
             assertEquals(username, librarian.getUsername());
             assertEquals(newPassword, librarian.getPassword());
-        } catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             fail();
         }
     }
@@ -331,7 +342,7 @@ public class TestHeadLibrarianService {
         Librarian librarian = null;
         try {
             librarian = headLibrarianService.changeHeadLibrarianPassword(username, newPassword);
-        } catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             assertEquals(e.getMessage(), "Password cannot be empty.");
         }
         assertNull(librarian);
@@ -347,7 +358,7 @@ public class TestHeadLibrarianService {
         Librarian librarian = null;
         try {
             librarian = headLibrarianService.changeHeadLibrarianPassword(username, newPassword);
-        } catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             assertEquals(e.getMessage(), "Password cannot be empty.");
         }
         assertNull(librarian);
@@ -363,7 +374,7 @@ public class TestHeadLibrarianService {
         Librarian librarian = null;
         try {
             librarian = headLibrarianService.changeHeadLibrarianPassword(username, newPassword);
-        } catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             assertEquals(e.getMessage(), "The password must contain at least one uppercase character.");
         }
         assertNull(librarian);
@@ -379,7 +390,7 @@ public class TestHeadLibrarianService {
         Librarian librarian = null;
         try {
             librarian = headLibrarianService.changeHeadLibrarianPassword(username, newPassword);
-        } catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             assertEquals(e.getMessage(), "The password must contain at least one lowercase character.");
         }
         assertNull(librarian);
@@ -395,7 +406,7 @@ public class TestHeadLibrarianService {
         Librarian librarian = null;
         try {
             librarian = headLibrarianService.changeHeadLibrarianPassword(username, newPassword);
-        } catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             assertEquals(e.getMessage(), "The password length cannot be less than 8 characters.");
         }
         assertNull(librarian);
@@ -411,7 +422,7 @@ public class TestHeadLibrarianService {
         Librarian librarian = null;
         try {
             librarian = headLibrarianService.changeHeadLibrarianPassword(username, newPassword);
-        } catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             assertEquals(e.getMessage(), "The password length cannot be more than 20 characters.");
         }
         assertNull(librarian);
@@ -427,7 +438,7 @@ public class TestHeadLibrarianService {
         Librarian librarian = null;
         try {
             librarian = headLibrarianService.changeHeadLibrarianPassword(username, newPassword);
-        } catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             assertEquals(e.getMessage(), "The password must contain at least one numeric character.");
         }
         assertNull(librarian);
@@ -438,7 +449,7 @@ public class TestHeadLibrarianService {
         try {
             boolean deleted = headLibrarianService.deleteHeadLibrarian(HEAD_LIBRARIAN_USERNAME);
             assertTrue(deleted);
-        } catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             fail();
         }
     }
@@ -448,9 +459,113 @@ public class TestHeadLibrarianService {
         boolean deleted = false;
         try {
             deleted = headLibrarianService.deleteHeadLibrarian("randomusername");
-        } catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             assertEquals(e.getMessage(), "Head librarian is not found.");
         }
         assertFalse(deleted);
     }
+
+    @Test
+    public void testAssignScheduleLibrarianNull() {
+        assertEquals(0, headLibrarianService.getAllHeadLibrarians().size());
+
+        String librarian = LIBRARIAN_USERNAME;
+        String headlibrarian = HEAD_LIBRARIAN_USERNAME;
+        WorkDay.DayOfWeek workday = null;
+        Time startTime = null;
+        Time endTime = null;
+        String error = null;
+        Set<WorkDay> workDays = null;
+
+
+        try {
+            workDays = headLibrarianService.AssignScheduleLibrarian(workday, startTime, endTime, librarian, headlibrarian);
+        } catch (IllegalArgumentException e) {
+            error = e.getMessage();
+        }
+
+        assertNull(workDays);
+        assertEquals(error, "Only a headlibrarian can assign schedules.");
+
+    }
+
+    @Test
+    public void testAssignScheduleLibrarianEmpty() {
+
+        String librarian = LIBRARIAN_USERNAME;
+        String headlibrarian = HEAD_LIBRARIAN_USERNAME;
+        WorkDay.DayOfWeek workday = null;
+        Time startTime = Time.valueOf("10:00:00");
+        Time endTime = Time.valueOf("12:00:00");
+        String error = null;
+        Set<WorkDay> workDays = null;
+
+        try {
+            workDays = headLibrarianService.AssignScheduleLibrarian(workday, startTime, endTime, librarian, headlibrarian);
+        } catch (IllegalArgumentException e) {
+            error = e.getMessage();
+        }
+
+        assertNull(workDays);
+        assertEquals(error, "Only a headlibrarian can assign schedules.");
+
+    }
+
+
+    @Test
+    public void testAssignScheduleHeadLibrarianNull() {
+        String headlibrarian = HEAD_LIBRARIAN_USERNAME;
+        WorkDay.DayOfWeek workday = null;
+        Time startTime = null;
+        Time endTime = null;
+        String error = null;
+        Set<WorkDay> workDays = null;
+
+
+        try {
+            workDays = headLibrarianService.AssignScheduleHeadLibrarian(workday, startTime, endTime, headlibrarian);
+        } catch (IllegalArgumentException e) {
+            error = e.getMessage();
+        }
+        assertNull(workDays);
+        assertEquals(error, "Only a headlibrarian can assign schedules.");
+    }
+
+    @Test
+    public void testAssignScheduleHeadLibrarianEmpty() {
+        String headlibrarian = HEAD_LIBRARIAN_USERNAME;
+        WorkDay.DayOfWeek workday = null;
+        Time startTime = Time.valueOf("10:00:00");
+        Time endTime = Time.valueOf("12:00:00");
+        String error = null;
+        Set<WorkDay> workDays = null;
+
+        try {
+            workDays = headLibrarianService.AssignScheduleHeadLibrarian(workday, startTime, endTime, headlibrarian);
+        } catch (IllegalArgumentException e) {
+            error = e.getMessage();
+        }
+
+        assertNull(workDays);
+        assertEquals(error, "Only a headlibrarian can assign schedules.");
+    }
+
+
+    @Test
+    public void testDeleteHeadLibrarianSchedule() {
+        String headlibrarian = HEAD_LIBRARIAN_USERNAME;
+        String librarian = LIBRARIAN_USERNAME;
+        WorkDay.DayOfWeek workday = WorkDay.DayOfWeek.Friday;
+        Time startTime = Time.valueOf("10:00:00");
+        Time endTime = Time.valueOf("12:00:00");
+        String error = null;
+
+        try {
+            headLibrarianService.DeleteSchedule(workday, startTime, endTime, librarian, headlibrarian);
+        } catch (IllegalArgumentException e) {
+            error = e.getMessage();
+            assertEquals(error, "Only a headlibrarian can assign schedules.");
+        }
+    }
+
 }

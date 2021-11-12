@@ -4,7 +4,6 @@ import ca.mcgill.ecse321.library.model.HeadLibrarian;
 import ca.mcgill.ecse321.library.model.Librarian;
 import ca.mcgill.ecse321.library.model.Member;
 import ca.mcgill.ecse321.library.model.User;
-import ca.mcgill.ecse321.library.service.BookingService;
 import ca.mcgill.ecse321.library.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,36 +19,33 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
 
-
-
     @Autowired
     private UserService userService;
 
     /**
-     * @author Jewoo Lee
      * @param username
      * @param password
      * @return
+     * @author Jewoo Lee
      */
     @PostMapping(value = {"/login", "/login/"})
     public ResponseEntity<?> login(@RequestParam String username, @RequestParam String password) {
         User user = null;
         try {
             user = userService.login(username, password);
-        }
-        catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
-        if(user instanceof Member) {
+        if (user instanceof Member) {
             return new ResponseEntity<>(DTOConverter.convertToDto((Member) user), HttpStatus.OK);
         }
 
-        if(user instanceof Librarian) {
+        if (user instanceof Librarian) {
             return new ResponseEntity<>(DTOConverter.convertToDto((Librarian) user), HttpStatus.OK);
         }
 
-        if(user instanceof HeadLibrarian) {
+        if (user instanceof HeadLibrarian) {
             return new ResponseEntity<>(DTOConverter.convertToDto((HeadLibrarian) user), HttpStatus.OK);
         }
 

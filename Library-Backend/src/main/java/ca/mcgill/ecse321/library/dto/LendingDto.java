@@ -3,7 +3,7 @@ package ca.mcgill.ecse321.library.dto;
 import java.sql.Date;
 
 public class LendingDto extends BookingTypeDto {
-    private Date returnDate;
+    private final Date returnDate;
 
     public LendingDto(Long id, Date aReturnDate) {
         super(id);
@@ -17,7 +17,6 @@ public class LendingDto extends BookingTypeDto {
     public Date getReturnDate() {
         return this.returnDate;
     }
-
 
 
 }
