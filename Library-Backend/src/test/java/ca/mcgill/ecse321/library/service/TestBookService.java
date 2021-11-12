@@ -278,7 +278,7 @@ public class TestBookService {
     }
 
     @Test
-    public void testDeleteMusicAlbum(){
+    public void testDeleteBook(){
 
         assertEquals(0, bookService.getAllBooks().size());
         String barCode = "11";
@@ -286,7 +286,7 @@ public class TestBookService {
         String author = "Aly";
         String dateOfRelease = "2021-01-01";
         String price = "20";
-        String isbn = "";
+        String isbn = "11";
         String numberOfPages = "33";
 
         Book book = null;
