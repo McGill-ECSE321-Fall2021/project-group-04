@@ -290,7 +290,7 @@ public class TestBookService {
             error = e.getMessage();
 
         }
-        assertNull(bookService.getBookByTitle(title));
+        assertNull(bookRepository.findBookByTitle(title));
     }
 
 }
