@@ -44,7 +44,7 @@ public class BookingService {
 
     @Transactional
     public List<Booking> getAllBookings() {
-        return toList(bookingRepository.findAll());
+        return Services.toList(bookingRepository.findAll());
     }
 
     /**
