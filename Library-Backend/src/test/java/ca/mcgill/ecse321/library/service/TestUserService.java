@@ -279,48 +279,4 @@ public class TestUserService {
             fail();
         }
     }
-
-    /*
-    @Test
-    public void testLogInInvalidUsername() {
-        assertEquals(0, memberService.getAllMembers().size());
-        User user = null;
-        String error = null;
-
-        String username = "abcd";
-        String password = "aziz123";
-
-        try {
-            user = userService.login(username,password);
-        }
-        catch(IllegalArgumentException e) {
-            error = e.getMessage();
-        }
-
-        assertEquals(error, "The username is incorrect.");
-    }
-
-     */
-
-    /*
-    @Test
-    public void testLogInInvalidPassoword() {
-        assertEquals(0, memberService.getAllMembers().size());
-        User user = null;
-        String error = null;
-
-        String username = "aziz";
-        String password = "abcd123";
-
-        try {
-            user = userService.login(username,password);
-        }
-        catch(IllegalArgumentException e) {
-            error = e.getMessage();
-        }
-
-        assertEquals(error, "The password is incorrect.");
-    }
-
-     */
 }

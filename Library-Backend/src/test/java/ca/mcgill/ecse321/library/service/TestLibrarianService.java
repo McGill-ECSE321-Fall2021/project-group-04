@@ -459,4 +459,21 @@ public class TestLibrarianService {
         assertFalse(deleted);
     }
 
+    @Test
+    public void testLogInLibrarian() {
+        assertEquals(0, librarianService.getAllLibrarians().size());
+        Librarian librarian = null;
+
+        String username = LIBRARIAN_USERNAME;
+        String password = LIBRARIAN_PASSWORD;
+
+        try {
+            librarian = librarianService.login(username, password);
+        } catch(IllegalArgumentException e) {
+            fail();
+        }
+
+        assertNotNull(librarian);
+    }
+
 }
