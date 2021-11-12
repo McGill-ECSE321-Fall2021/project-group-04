@@ -183,6 +183,40 @@ public class TestNewspaperService {
 
     }
 
+//    @Test
+//    public void testGetNewspaperThenDelete() {
+//        assertEquals(0, newspaperService.getAllNewspapers().size());
+//        Newspaper newspaper=null;
+//        String date = "2020-09-15";
+//        String num = "50";
+//        String tit = "N";
+//
+//        String error = "";
+//        try{
+//            newspaper = newspaperService.createNewspaper(date , num , tit);
+//        }
+//        catch (IllegalArgumentException e){
+//            error=e.getMessage();
+//
+//        }
+//        assertNotNull(newspaper);
+//        Newspaper n = newspaperService.getNewspaperByTitle(tit);
+//        System.out.println("get : " + n);
+//        assertEquals(newspaper , n );
+//
+//        try{
+//            newspaperService.deleteNewspaper(tit);
+//        }
+//        catch (IllegalArgumentException e){
+//            error=e.getMessage();
+//
+//        }
+//        assertNull(newspaperService.getNewspaperByTitle(tit));
+//
+//    }
+
+
+
 
 
 
