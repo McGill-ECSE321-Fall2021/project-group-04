@@ -104,7 +104,7 @@ public class TestMusicAlbumService {
     }
 
     @Test
-    public void testCreatemusicAlbumNullBarcode(){
+    public void testCreateMusicAlbumNullBarcode(){
         assertEquals(0, musicAlbumService.getAllMusicAlbums().size());
         String barCode = "";
         String title = "Aly's musicAlbum";
@@ -129,7 +129,7 @@ public class TestMusicAlbumService {
     }
 
     @Test
-    public void testCreatemusicAlbumNullTitle(){
+    public void testCreateMusicAlbumNullTitle(){
         assertEquals(0, musicAlbumService.getAllMusicAlbums().size());
         String barCode = "11";
         String title = "";
@@ -154,7 +154,7 @@ public class TestMusicAlbumService {
     }
 
     @Test
-    public void testCreatemusicAlbumNullAuthor(){
+    public void testCreateMusicAlbumNullAuthor(){
         assertEquals(0, musicAlbumService.getAllMusicAlbums().size());
         String barCode = "11";
         String title = "Aly's musicAlbum";
@@ -277,6 +277,11 @@ public class TestMusicAlbumService {
 
         assertNull(musicAlbum);
         assertEquals(error, "number of songs needs to be specified ");
+    }
+
+    @Test
+    public void testDeleteMusicAlbum(){
+        
     }
 
 }
