@@ -208,7 +208,7 @@ public class HeadLibrarianService {
 	 */
 	@Transactional
 	public Librarian login(String username, String password) {
-		if (!headLibrarianRepository.existsHeadLibrarianByUsername(username)) {
+		if (!(headLibrarianRepository.findHeadLibrarianByUsername(username) == null)) {
 			throw new IllegalArgumentException("Invalid Username.");
 		}
 

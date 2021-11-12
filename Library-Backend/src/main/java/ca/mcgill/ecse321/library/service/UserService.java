@@ -89,9 +89,9 @@ public class UserService {
      */
     @Transactional
     public User login(String username, String password) {
-        if (!memberRepository.existsMemberByUsername(username) &&
-                !librarianRepository.existsLibrarianByUsername(username) &&
-                !headLibrarianRepository.existsHeadLibrarianByUsername(username)) {
+        if (!(memberRepository.findMemberByUsername(username) == null) &&
+                !(librarianRepository.findLibrarianByUsername(username) == null) &&
+                !(headLibrarianRepository.findHeadLibrarianByUsername(username) == null)) {
             throw new IllegalArgumentException("Invalid Username.");
         }
 
