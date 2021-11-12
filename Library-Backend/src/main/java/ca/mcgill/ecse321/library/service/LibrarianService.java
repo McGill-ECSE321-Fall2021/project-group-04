@@ -5,6 +5,8 @@ import ca.mcgill.ecse321.library.dao.LibrarianRepository;
 import ca.mcgill.ecse321.library.dao.MemberRepository;
 import ca.mcgill.ecse321.library.model.HeadLibrarian;
 import ca.mcgill.ecse321.library.model.Librarian;
+import ca.mcgill.ecse321.library.model.Member;
+import ca.mcgill.ecse321.library.model.User;
 import java.util.List;
 import javax.transaction.Transactional;
 
@@ -124,7 +126,6 @@ public class LibrarianService {
      * @param password
      * @return
      */
-
     @Transactional
     public Librarian login(String username, String password) {
         if (librarianRepository.findLibrarianByUsername(username) == null) {
