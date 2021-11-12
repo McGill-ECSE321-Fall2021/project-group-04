@@ -247,6 +247,50 @@ public class TestBookingService {
     }
 
     @Test
+    public void testCreateBookingforMovie(){
+
+        String elementType = "Movie";
+        String elementId = MOVIE_TITLE;
+        String user = USERNAME;
+
+        Booking booking = null;
+
+        try{
+            booking = bookingService.createBooking(user,elementType,elementId);
+        }
+        catch (IllegalArgumentException e){
+            fail();
+        }
+
+        assertNotNull(booking);
+        assertEquals(USERNAME,booking.getUser().getUsername());
+        assertEquals(Reservation.class, booking.getBookingType().getClass());
+
+    }
+
+    @Test
+    public void testCreateBookingforMusicAlbum(){
+
+        String elementType = "MusicAlbum";
+        String elementId = MUSICALBUM_TITLE;
+        String user = USERNAME;
+
+        Booking booking = null;
+
+        try{
+            booking = bookingService.createBooking(user,elementType,elementId);
+        }
+        catch (IllegalArgumentException e){
+            fail();
+        }
+
+        assertNotNull(booking);
+        assertEquals(USERNAME,booking.getUser().getUsername());
+        assertEquals(Reservation.class, booking.getBookingType().getClass());
+
+    }
+
+    @Test
     public void testGetAllBookings(){
         List<Booking> list = null;
         try{

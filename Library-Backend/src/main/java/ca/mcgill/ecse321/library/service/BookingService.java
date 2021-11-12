@@ -63,7 +63,7 @@ public class BookingService {
      * saves mobile item into db
      * @author Simo Benkirane
      * @param elementType
-     * @param elementId
+     * @param item
      * @return
      */
     public MobileItem saveMobileItem(String elementType, MobileItem item){
