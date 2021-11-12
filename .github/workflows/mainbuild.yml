@@ -29,4 +29,4 @@ jobs:
         working-directory: Library-Backend
       - name: Deploy to Heroku
         run: git push backend-heroku main
-        working-directory: project-group-04
+        working-directory: Library-Backend
