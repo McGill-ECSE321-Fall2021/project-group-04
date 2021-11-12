@@ -62,15 +62,15 @@ public class DTOConverter {
     }
 
     public static BookingDto convertToDto(Booking b, User aUser, BookingType bt) {
-        BookingTypeDto btDto = convertToDto(bt);
-        UserDto userDto = convertToDto(aUser);
+        BookingTypeDto btDto = bt == null ? null : convertToDto(bt);
+        UserDto userDto = aUser == null ? null : convertToDto(aUser);
 
         return new BookingDto(b.getId(), b.getBookingDate(), userDto, btDto);
     }
 
     public static BookDto convertToDto(Book book, Booking booking) {
 
-        BookingDto bookingDto = convertToDto(booking, booking.getUser(), booking.getBookingType());
+        BookingDto bookingDto = booking==null? null : convertToDto(booking, booking.getUser(), booking.getBookingType());
         BookDto bookDto = new BookDto(book.getId(), book.getBarcode(), book.getTitle(), book.getAuthor(),
                 book.getDateOfRelease(), book.getPrice(), book.getIsbn(), book.getNumberOfPages(), bookingDto);
         return bookDto;

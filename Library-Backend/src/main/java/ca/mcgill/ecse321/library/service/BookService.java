@@ -56,7 +56,12 @@ public class BookService {
         book.setNumberOfPages(Integer.valueOf(numberOfPages));
         book.setBooking(null);
 
-        bookRepository.save(book);
+        try {
+            bookRepository.save(book);
+        }
+        catch(IllegalArgumentException e){
+            throw new IllegalArgumentException("failed to save");
+        }
 
         return book;
 

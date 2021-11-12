@@ -1,11 +1,6 @@
 package ca.mcgill.ecse321.library.service;
 
-import ca.mcgill.ecse321.library.dao.BookRepository;
-import ca.mcgill.ecse321.library.dao.BookingRepository;
-import ca.mcgill.ecse321.library.dao.MemberRepository;
-import ca.mcgill.ecse321.library.dao.MovieRepository;
-import ca.mcgill.ecse321.library.dao.MusicAlbumRepository;
-import ca.mcgill.ecse321.library.dao.ReservationRepository;
+import ca.mcgill.ecse321.library.dao.*;
 import ca.mcgill.ecse321.library.model.Book;
 import ca.mcgill.ecse321.library.model.Booking;
 import ca.mcgill.ecse321.library.model.Lending;
@@ -41,6 +36,9 @@ public class BookingService {
 
     @Autowired
     MemberRepository memberRepository;
+
+    @Autowired
+    LendingRepository lendingRepository;
 
     @Transactional
     public List<Booking> getAllBookings() {
@@ -205,7 +203,15 @@ public class BookingService {
         lending.setReturnDate(new java.sql.Date(System.currentTimeMillis() + MILLIS_IN_A_DAY * 30));
         booking.setBookingType(lending);
 
-        bookingRepository.save(booking);
+        lendingRepository.save(lending);
+
+        try {
+            bookingRepository.save(booking);
+        }
+        catch(IllegalArgumentException e){
+            throw new IllegalArgumentException("Could not save booking");
+        }
+
         return booking;
     }
 

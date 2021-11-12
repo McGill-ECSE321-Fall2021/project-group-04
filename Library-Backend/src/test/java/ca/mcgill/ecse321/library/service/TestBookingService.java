@@ -1,11 +1,6 @@
 package ca.mcgill.ecse321.library.service;
 
-import ca.mcgill.ecse321.library.dao.BookRepository;
-import ca.mcgill.ecse321.library.dao.BookingRepository;
-import ca.mcgill.ecse321.library.dao.MemberRepository;
-import ca.mcgill.ecse321.library.dao.MovieRepository;
-import ca.mcgill.ecse321.library.dao.MusicAlbumRepository;
-import ca.mcgill.ecse321.library.dao.ReservationRepository;
+import ca.mcgill.ecse321.library.dao.*;
 import ca.mcgill.ecse321.library.model.Book;
 import ca.mcgill.ecse321.library.model.Booking;
 import ca.mcgill.ecse321.library.model.Lending;
@@ -65,6 +60,8 @@ public class TestBookingService {
     private MemberRepository memberRepository;
     @Mock
     private ReservationRepository reservationRepository;
+    @Mock
+    private LendingRepository lendingRepository;
     @Mock
     private BookRepository bookRepository;
     @Mock
@@ -199,7 +196,7 @@ public class TestBookingService {
         lenient().when(musicAlbumRepository.save(any(MusicAlbum.class))).thenAnswer(returnParameterAsAnswer);
         lenient().when(memberRepository.save(any(Member.class))).thenAnswer(returnParameterAsAnswer);
         lenient().when(reservationRepository.save(any(Reservation.class))).thenAnswer(returnParameterAsAnswer);
-
+        lenient().when(lendingRepository.save(any(Lending.class))).thenAnswer(returnParameterAsAnswer);
     }
 
     @Test
