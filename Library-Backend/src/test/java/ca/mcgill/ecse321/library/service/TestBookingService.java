@@ -1,22 +1,22 @@
 package ca.mcgill.ecse321.library.service;
 
-import ca.mcgill.ecse321.library.dao.*;
-import ca.mcgill.ecse321.library.model.*;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.junit.jupiter.MockitoExtension;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.lenient;
-import static org.mockito.Mockito.when;
+import ca.mcgill.ecse321.library.dao.BookRepository;
+import ca.mcgill.ecse321.library.dao.BookingRepository;
+import ca.mcgill.ecse321.library.dao.MemberRepository;
+import ca.mcgill.ecse321.library.dao.MovieRepository;
+import ca.mcgill.ecse321.library.dao.MusicAlbumRepository;
+import ca.mcgill.ecse321.library.dao.ReservationRepository;
+import ca.mcgill.ecse321.library.model.Book;
+import ca.mcgill.ecse321.library.model.Booking;
+import ca.mcgill.ecse321.library.model.Lending;
+import ca.mcgill.ecse321.library.model.Member;
+import ca.mcgill.ecse321.library.model.MobileItem;
+import ca.mcgill.ecse321.library.model.Movie;
+import ca.mcgill.ecse321.library.model.MusicAlbum;
+import ca.mcgill.ecse321.library.model.Reservation;
 import java.sql.Date;
-import java.sql.Time;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -25,53 +25,32 @@ import org.mockito.Mock;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.Answer;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.fail;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.lenient;
 
 
 @ExtendWith(MockitoExtension.class)
 public class TestBookingService {
 
-    @Mock
-    private BookingRepository bookingRepository;
-
-    @Mock
-    private MemberRepository memberRepository;
-
-    @Mock
-    private ReservationRepository reservationRepository;
-
-    @Mock
-    private BookRepository bookRepository;
-
-    @Mock
-    private MovieRepository movieRepository;
-
-    @Mock
-    private MusicAlbumRepository musicAlbumRepository;
-
-
-    @InjectMocks
-    private BookingService bookingService;
-
     //Booking Fields
     private static final long BOOKING_ID = 1234;
-
     //BookingType Fields
     private static final Date RESERVATION_DATE = Date.valueOf("2021-05-29");
-
     //Book with booking fields
     private static final String BOOK_TITLE = "bookTitle";
-
     //Book without booking fields
     private static final String BOOK_TITLE2 = "bookTitle2";
-
     //Movie Fields
     private static final String MOVIE_TITLE = "movieTitle";
-
     //MusicAlbum Fields
     private static final String MUSICALBUM_TITLE = "musicAlbumTitle";
-
-
     //Member fields
     private static final String USERNAME = "username";
     private static final String PASSWORD = "Password1234";
@@ -80,7 +59,20 @@ public class TestBookingService {
     private static final Member.MemberStatus MEMBER_STATUS = Member.MemberStatus.Active;
     private static final int MONTHLY_FEE = 0;
     private static final Date START_DATE = Date.valueOf("2020-05-29");
-
+    @Mock
+    private BookingRepository bookingRepository;
+    @Mock
+    private MemberRepository memberRepository;
+    @Mock
+    private ReservationRepository reservationRepository;
+    @Mock
+    private BookRepository bookRepository;
+    @Mock
+    private MovieRepository movieRepository;
+    @Mock
+    private MusicAlbumRepository musicAlbumRepository;
+    @InjectMocks
+    private BookingService bookingService;
 
     @BeforeEach
     public void setMockOutput() {
@@ -111,7 +103,6 @@ public class TestBookingService {
                 booking.setUser(member);
 
 
-
                 return booking;
             }
 
@@ -133,7 +124,6 @@ public class TestBookingService {
                 book.setBooking(booking);
 
 
-
                 return book;
             }
 
@@ -143,7 +133,6 @@ public class TestBookingService {
                 book.setTitle(BOOK_TITLE2);
 
                 book.setBooking(null);
-
 
 
                 return book;
@@ -159,7 +148,6 @@ public class TestBookingService {
                 movie.setTitle(MOVIE_TITLE);
 
 
-
                 return movie;
             }
 
@@ -171,7 +159,6 @@ public class TestBookingService {
 
                 MusicAlbum musicAlbum = new MusicAlbum();
                 musicAlbum.setTitle(MUSICALBUM_TITLE);
-
 
 
                 return musicAlbum;
@@ -216,7 +203,7 @@ public class TestBookingService {
     }
 
     @Test
-    public void testCreateBooking(){
+    public void testCreateBooking() {
 
         String elementType = "Book";
         String elementId = BOOK_TITLE;
@@ -224,21 +211,20 @@ public class TestBookingService {
 
         Booking booking = null;
 
-        try{
-            booking = bookingService.createBooking(user,elementType,elementId);
-        }
-        catch (IllegalArgumentException e){
+        try {
+            booking = bookingService.createBooking(user, elementType, elementId);
+        } catch (IllegalArgumentException e) {
             fail();
         }
 
         assertNotNull(booking);
-        assertEquals(USERNAME,booking.getUser().getUsername());
+        assertEquals(USERNAME, booking.getUser().getUsername());
         assertEquals(Reservation.class, booking.getBookingType().getClass());
 
     }
 
     @Test
-    public void testCreateBookingforMovie(){
+    public void testCreateBookingforMovie() {
 
         String elementType = "Movie";
         String elementId = MOVIE_TITLE;
@@ -246,21 +232,20 @@ public class TestBookingService {
 
         Booking booking = null;
 
-        try{
-            booking = bookingService.createBooking(user,elementType,elementId);
-        }
-        catch (IllegalArgumentException e){
+        try {
+            booking = bookingService.createBooking(user, elementType, elementId);
+        } catch (IllegalArgumentException e) {
             fail();
         }
 
         assertNotNull(booking);
-        assertEquals(USERNAME,booking.getUser().getUsername());
+        assertEquals(USERNAME, booking.getUser().getUsername());
         assertEquals(Reservation.class, booking.getBookingType().getClass());
 
     }
 
     @Test
-    public void testCreateBookingforMusicAlbum(){
+    public void testCreateBookingforMusicAlbum() {
 
         String elementType = "MusicAlbum";
         String elementId = MUSICALBUM_TITLE;
@@ -268,26 +253,24 @@ public class TestBookingService {
 
         Booking booking = null;
 
-        try{
-            booking = bookingService.createBooking(user,elementType,elementId);
-        }
-        catch (IllegalArgumentException e){
+        try {
+            booking = bookingService.createBooking(user, elementType, elementId);
+        } catch (IllegalArgumentException e) {
             fail();
         }
 
         assertNotNull(booking);
-        assertEquals(USERNAME,booking.getUser().getUsername());
+        assertEquals(USERNAME, booking.getUser().getUsername());
         assertEquals(Reservation.class, booking.getBookingType().getClass());
 
     }
 
     @Test
-    public void testGetAllBookings(){
+    public void testGetAllBookings() {
         List<Booking> list = null;
-        try{
+        try {
             list = bookingService.getAllBookings();
-        }
-        catch(IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             fail();
         }
 
@@ -299,74 +282,69 @@ public class TestBookingService {
     }
 
 
-
     @Test
-    public void testCheckOutBook(){
+    public void testCheckOutBook() {
 
         Booking booking = null;
 
-        try{
+        try {
             booking = bookingService.confirmBooking(USERNAME, String.valueOf(BOOKING_ID));
-        }
-        catch(IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
 
             fail();
         }
         assertNotNull(booking);
-        assertEquals(USERNAME,booking.getUser().getUsername());
-        assertEquals(BOOKING_ID,booking.getId());
-        assertEquals(Lending.class,booking.getBookingType().getClass());
+        assertEquals(USERNAME, booking.getUser().getUsername());
+        assertEquals(BOOKING_ID, booking.getId());
+        assertEquals(Lending.class, booking.getBookingType().getClass());
 
     }
 
     @Test
-    public void testCheckOutBookUserWithoutBooking(){
+    public void testCheckOutBookUserWithoutBooking() {
 
         Booking booking = null;
         String error = null;
 
-        try{
+        try {
             booking = bookingService.confirmBooking("NoBookingUsername", String.valueOf(BOOKING_ID));
-        }
-        catch(IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
 
             error = e.getMessage();
 
         }
         assertNull(booking);
-        assertEquals("The customer who has made this booking shall be the one confirming it",error);
+        assertEquals("The customer who has made this booking shall be the one confirming it", error);
 
 
     }
 
     @Test
-    public void testCheckOutBookInvalidBooking(){
+    public void testCheckOutBookInvalidBooking() {
 
         Booking booking = null;
         String error = null;
 
-        try{
+        try {
             booking = bookingService.confirmBooking(USERNAME, String.valueOf(34343434));
-        }
-        catch(IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
 
             error = e.getMessage();
 
         }
         assertNull(booking);
-        assertEquals("There is no booking with the entered id",error);
+        assertEquals("There is no booking with the entered id", error);
 
 
     }
 
     @Test
-    public void testReturnLibraryItem(){
+    public void testReturnLibraryItem() {
         MobileItem item = null;
 
-        try{
-            item = bookingService.returnLibraryItem("Book",BOOK_TITLE);
-        }
-        catch(IllegalArgumentException e){
+        try {
+            item = bookingService.returnLibraryItem("Book", BOOK_TITLE);
+        } catch (IllegalArgumentException e) {
             fail();
         }
 
@@ -377,13 +355,12 @@ public class TestBookingService {
     }
 
     @Test
-    public void testReturnNonExistentBook(){
+    public void testReturnNonExistentBook() {
         MobileItem item = null;
         String error = null;
-        try{
-            item = bookingService.returnLibraryItem("Book","NonExistentTitle");
-        }
-        catch(IllegalArgumentException e){
+        try {
+            item = bookingService.returnLibraryItem("Book", "NonExistentTitle");
+        } catch (IllegalArgumentException e) {
             error = e.getMessage();
         }
         assertNull(item);
@@ -391,13 +368,12 @@ public class TestBookingService {
     }
 
     @Test
-    public void testReturnAlreadyReturnedBook(){
+    public void testReturnAlreadyReturnedBook() {
         MobileItem item = null;
         String error = null;
-        try{
-            item = bookingService.returnLibraryItem("Book",BOOK_TITLE2);
-        }
-        catch(IllegalArgumentException e){
+        try {
+            item = bookingService.returnLibraryItem("Book", BOOK_TITLE2);
+        } catch (IllegalArgumentException e) {
             error = e.getMessage();
         }
 
@@ -406,13 +382,12 @@ public class TestBookingService {
     }
 
     @Test
-    public void testReturnNonExistentMovie(){
+    public void testReturnNonExistentMovie() {
         MobileItem item = null;
         String error = null;
-        try{
-            item = bookingService.returnLibraryItem("Movie","NonExistentTitle");
-        }
-        catch(IllegalArgumentException e){
+        try {
+            item = bookingService.returnLibraryItem("Movie", "NonExistentTitle");
+        } catch (IllegalArgumentException e) {
             error = e.getMessage();
         }
         assertNull(item);
@@ -420,13 +395,12 @@ public class TestBookingService {
     }
 
     @Test
-    public void testReturnNonExistentMusicAlbum(){
+    public void testReturnNonExistentMusicAlbum() {
         MobileItem item = null;
         String error = null;
-        try{
-            item = bookingService.returnLibraryItem("MusicAlbum","NonExistentTitle");
-        }
-        catch(IllegalArgumentException e){
+        try {
+            item = bookingService.returnLibraryItem("MusicAlbum", "NonExistentTitle");
+        } catch (IllegalArgumentException e) {
             error = e.getMessage();
         }
         assertNull(item);
@@ -434,13 +408,12 @@ public class TestBookingService {
     }
 
     @Test
-    public void testReturnNonExistentType(){
+    public void testReturnNonExistentType() {
         MobileItem item = null;
         String error = null;
-        try{
-            item = bookingService.returnLibraryItem("wrongtype","NonExistentTitle");
-        }
-        catch(IllegalArgumentException e){
+        try {
+            item = bookingService.returnLibraryItem("wrongtype", "NonExistentTitle");
+        } catch (IllegalArgumentException e) {
             error = e.getMessage();
         }
         assertNull(item);
@@ -448,7 +421,7 @@ public class TestBookingService {
     }
 
     @Test
-    public void testCreateBookingNonExistentUser(){
+    public void testCreateBookingNonExistentUser() {
 
 
         String elementType = "Book";
@@ -458,10 +431,9 @@ public class TestBookingService {
         Booking booking = null;
         String error = null;
 
-        try{
-            booking = bookingService.createBooking(user,elementType,elementId);
-        }
-        catch (IllegalArgumentException e){
+        try {
+            booking = bookingService.createBooking(user, elementType, elementId);
+        } catch (IllegalArgumentException e) {
             error = e.getMessage();
         }
 
@@ -470,7 +442,7 @@ public class TestBookingService {
     }
 
     @Test
-    public void testCreateBookingEmptyUserName(){
+    public void testCreateBookingEmptyUserName() {
 
 
         String elementType = "Book";
@@ -480,10 +452,9 @@ public class TestBookingService {
         Booking booking = null;
         String error = null;
 
-        try{
-            booking = bookingService.createBooking(user,elementType,elementId);
-        }
-        catch (IllegalArgumentException e){
+        try {
+            booking = bookingService.createBooking(user, elementType, elementId);
+        } catch (IllegalArgumentException e) {
             error = e.getMessage();
         }
 
@@ -492,7 +463,7 @@ public class TestBookingService {
     }
 
     @Test
-    public void testCreateBookingEmptyElementType(){
+    public void testCreateBookingEmptyElementType() {
 
 
         String elementType = "";
@@ -502,10 +473,9 @@ public class TestBookingService {
         Booking booking = null;
         String error = null;
 
-        try{
-            booking = bookingService.createBooking(user,elementType,elementId);
-        }
-        catch (IllegalArgumentException e){
+        try {
+            booking = bookingService.createBooking(user, elementType, elementId);
+        } catch (IllegalArgumentException e) {
             error = e.getMessage();
         }
 
@@ -514,7 +484,7 @@ public class TestBookingService {
     }
 
     @Test
-    public void testCreateBookingEmptyElementID(){
+    public void testCreateBookingEmptyElementID() {
 
 
         String elementType = "Book";
@@ -524,10 +494,9 @@ public class TestBookingService {
         Booking booking = null;
         String error = null;
 
-        try{
-            booking = bookingService.createBooking(user,elementType,elementId);
-        }
-        catch (IllegalArgumentException e){
+        try {
+            booking = bookingService.createBooking(user, elementType, elementId);
+        } catch (IllegalArgumentException e) {
             error = e.getMessage();
         }
 
@@ -536,7 +505,7 @@ public class TestBookingService {
     }
 
     @Test
-    public void testCreateBookingNullUserName(){
+    public void testCreateBookingNullUserName() {
         String elementType = "Book";
         String elementId = BOOK_TITLE;
         String user = null;
@@ -544,10 +513,9 @@ public class TestBookingService {
         Booking booking = null;
         String error = null;
 
-        try{
-            booking = bookingService.createBooking(user,elementType,elementId);
-        }
-        catch (IllegalArgumentException e){
+        try {
+            booking = bookingService.createBooking(user, elementType, elementId);
+        } catch (IllegalArgumentException e) {
             error = e.getMessage();
         }
 
@@ -556,7 +524,7 @@ public class TestBookingService {
     }
 
     @Test
-    public void testCreateBookingNullElementType(){
+    public void testCreateBookingNullElementType() {
         String elementType = null;
         String elementId = BOOK_TITLE;
         String user = USERNAME;
@@ -564,10 +532,9 @@ public class TestBookingService {
         Booking booking = null;
         String error = null;
 
-        try{
-            booking = bookingService.createBooking(user,elementType,elementId);
-        }
-        catch (IllegalArgumentException e){
+        try {
+            booking = bookingService.createBooking(user, elementType, elementId);
+        } catch (IllegalArgumentException e) {
             error = e.getMessage();
         }
 
@@ -576,7 +543,7 @@ public class TestBookingService {
     }
 
     @Test
-    public void testCreateBookingNullElementID(){
+    public void testCreateBookingNullElementID() {
 
         String elementType = "Book";
         String elementId = null;
@@ -585,10 +552,9 @@ public class TestBookingService {
         Booking booking = null;
         String error = null;
 
-        try{
-            booking = bookingService.createBooking(user,elementType,elementId);
-        }
-        catch (IllegalArgumentException e){
+        try {
+            booking = bookingService.createBooking(user, elementType, elementId);
+        } catch (IllegalArgumentException e) {
             error = e.getMessage();
         }
 
@@ -597,7 +563,7 @@ public class TestBookingService {
     }
 
     @Test
-    public void testCreateBookingNonExistentBook(){
+    public void testCreateBookingNonExistentBook() {
 
         String elementType = "Book";
         String elementId = "NonExistentBookTitle";
@@ -606,10 +572,9 @@ public class TestBookingService {
         Booking booking = null;
         String error = null;
 
-        try{
-            booking = bookingService.createBooking(user,elementType,elementId);
-        }
-        catch (IllegalArgumentException e){
+        try {
+            booking = bookingService.createBooking(user, elementType, elementId);
+        } catch (IllegalArgumentException e) {
             error = e.getMessage();
         }
 
@@ -618,7 +583,7 @@ public class TestBookingService {
     }
 
     @Test
-    public void testCreateBookingNonExistentMovie(){
+    public void testCreateBookingNonExistentMovie() {
 
         String elementType = "Movie";
         String elementId = "NonExistentMovieTitle";
@@ -627,10 +592,9 @@ public class TestBookingService {
         Booking booking = null;
         String error = null;
 
-        try{
-            booking = bookingService.createBooking(user,elementType,elementId);
-        }
-        catch (IllegalArgumentException e){
+        try {
+            booking = bookingService.createBooking(user, elementType, elementId);
+        } catch (IllegalArgumentException e) {
             error = e.getMessage();
         }
 
@@ -639,7 +603,7 @@ public class TestBookingService {
     }
 
     @Test
-    public void testCreateBookingNonExistentMusicAlbum(){
+    public void testCreateBookingNonExistentMusicAlbum() {
 
         String elementType = "MusicAlbum";
         String elementId = "NonExistentTitle";
@@ -648,10 +612,9 @@ public class TestBookingService {
         Booking booking = null;
         String error = null;
 
-        try{
-            booking = bookingService.createBooking(user,elementType,elementId);
-        }
-        catch (IllegalArgumentException e){
+        try {
+            booking = bookingService.createBooking(user, elementType, elementId);
+        } catch (IllegalArgumentException e) {
             error = e.getMessage();
         }
 
@@ -660,7 +623,7 @@ public class TestBookingService {
     }
 
     @Test
-    public void testCreateBookingNonExistentType(){
+    public void testCreateBookingNonExistentType() {
 
         String elementType = "nontype";
         String elementId = "NonExistentBookTitle";
@@ -669,10 +632,9 @@ public class TestBookingService {
         Booking booking = null;
         String error = null;
 
-        try{
-            booking = bookingService.createBooking(user,elementType,elementId);
-        }
-        catch (IllegalArgumentException e){
+        try {
+            booking = bookingService.createBooking(user, elementType, elementId);
+        } catch (IllegalArgumentException e) {
             error = e.getMessage();
         }
 

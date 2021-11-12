@@ -1,7 +1,8 @@
 package ca.mcgill.ecse321.library.service;
-import ca.mcgill.ecse321.library.dao.LibrarianRepository;
+
+import ca.mcgill.ecse321.library.dao.BookRepository;
 import ca.mcgill.ecse321.library.model.Book;
-import ca.mcgill.ecse321.library.model.MusicAlbum;
+import java.sql.Date;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -10,20 +11,14 @@ import org.mockito.Mock;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.Answer;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.lenient;
-
-import ca.mcgill.ecse321.library.dao.BookRepository;
-
-
-import java.sql.Date;
 
 /**
  * @author alymo
@@ -32,27 +27,23 @@ import java.sql.Date;
 @ExtendWith(MockitoExtension.class)
 public class TestBookService {
 
-    @Mock
-    private BookRepository bookRepository;
-
-    @InjectMocks
-    private BookService bookService;
-
-    private static final String LIBRARIAN_USERNAME ="TestCustomer";
-
+    private static final String LIBRARIAN_USERNAME = "TestCustomer";
     private static final String ISBN = "1234554653";
     private static final String AUTHOR = "LOLLS";
     private static final int NUMBER_OF_PAGES = 233;
     private static final String DATE_OF_RELEASE = "2021-11-01";
     private static final int PRICE = 30;
     private static final String TITLE = " The meaning of life";
-
+    @Mock
+    private BookRepository bookRepository;
+    @InjectMocks
+    private BookService bookService;
 
     @BeforeEach
-    public void setMockOutput(){
+    public void setMockOutput() {
 
         lenient().when(bookRepository.findBookByIsbn(anyString())).thenAnswer((InvocationOnMock invocation) -> {
-            if(invocation.getArgument(0).equals(ISBN)) {
+            if (invocation.getArgument(0).equals(ISBN)) {
                 Book book = new Book();
                 book.setAuthor(AUTHOR);
                 book.setNumberOfPages(NUMBER_OF_PAGES);
@@ -61,8 +52,7 @@ public class TestBookService {
                 book.setTitle(TITLE);
 
                 return book;
-            }
-            else return null;
+            } else return null;
         });
 
         Answer<?> returnParameterAsAnswer = (InvocationOnMock invocation) -> {
@@ -73,7 +63,7 @@ public class TestBookService {
     }
 
     @Test
-    public void testCreateBook(){
+    public void testCreateBook() {
         assertEquals(0, bookService.getAllBooks().size());
         String barCode = "11";
         String title = "Aly's Book";
@@ -84,10 +74,9 @@ public class TestBookService {
         String numberOfPages = "33";
 
         Book book = null;
-        try{
+        try {
             book = bookService.createBook(barCode, title, author, dateOfRelease, price, isbn, numberOfPages);
-        }
-        catch(IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             fail();
         }
@@ -104,7 +93,7 @@ public class TestBookService {
     }
 
     @Test
-    public void testCreateBookNullBarcode(){
+    public void testCreateBookNullBarcode() {
         assertEquals(0, bookService.getAllBooks().size());
         String barCode = "";
         String title = "Aly's Book";
@@ -117,10 +106,9 @@ public class TestBookService {
         Book book = null;
 
         String error = "";
-        try{
+        try {
             book = bookService.createBook(barCode, title, author, dateOfRelease, price, isbn, numberOfPages);
-        }
-        catch(IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             error = e.getMessage();
         }
 
@@ -129,7 +117,7 @@ public class TestBookService {
     }
 
     @Test
-    public void testCreateBookNullTitle(){
+    public void testCreateBookNullTitle() {
         assertEquals(0, bookService.getAllBooks().size());
         String barCode = "11";
         String title = "";
@@ -142,10 +130,9 @@ public class TestBookService {
         Book book = null;
 
         String error = "";
-        try{
+        try {
             book = bookService.createBook(barCode, title, author, dateOfRelease, price, isbn, numberOfPages);
-        }
-        catch(IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             error = e.getMessage();
         }
 
@@ -154,7 +141,7 @@ public class TestBookService {
     }
 
     @Test
-    public void testCreateBookNullAuthor(){
+    public void testCreateBookNullAuthor() {
         assertEquals(0, bookService.getAllBooks().size());
         String barCode = "11";
         String title = "Aly's book";
@@ -167,10 +154,9 @@ public class TestBookService {
         Book book = null;
 
         String error = "";
-        try{
+        try {
             book = bookService.createBook(barCode, title, author, dateOfRelease, price, isbn, numberOfPages);
-        }
-        catch(IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             error = e.getMessage();
         }
 
@@ -179,7 +165,7 @@ public class TestBookService {
     }
 
     @Test
-    public void testCreateBookNullDateOfRelease(){
+    public void testCreateBookNullDateOfRelease() {
         assertEquals(0, bookService.getAllBooks().size());
         String barCode = "11";
         String title = "Aly's book";
@@ -192,10 +178,9 @@ public class TestBookService {
         Book book = null;
 
         String error = "";
-        try{
+        try {
             book = bookService.createBook(barCode, title, author, dateOfRelease, price, isbn, numberOfPages);
-        }
-        catch(IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             error = e.getMessage();
         }
 
@@ -204,7 +189,7 @@ public class TestBookService {
     }
 
     @Test
-    public void testCreateBookNullPrice(){
+    public void testCreateBookNullPrice() {
         assertEquals(0, bookService.getAllBooks().size());
         String barCode = "11";
         String title = "Aly's book";
@@ -217,10 +202,9 @@ public class TestBookService {
         Book book = null;
 
         String error = "";
-        try{
+        try {
             book = bookService.createBook(barCode, title, author, dateOfRelease, price, isbn, numberOfPages);
-        }
-        catch(IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             error = e.getMessage();
         }
 
@@ -230,7 +214,7 @@ public class TestBookService {
 
 
     @Test
-    public void testCreateBookNullIsbn(){
+    public void testCreateBookNullIsbn() {
         assertEquals(0, bookService.getAllBooks().size());
         String barCode = "11";
         String title = "Aly's book";
@@ -243,10 +227,9 @@ public class TestBookService {
         Book book = null;
 
         String error = "";
-        try{
+        try {
             book = bookService.createBook(barCode, title, author, dateOfRelease, price, isbn, numberOfPages);
-        }
-        catch(IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             error = e.getMessage();
         }
 
@@ -255,7 +238,7 @@ public class TestBookService {
     }
 
     @Test
-    public void testCreateBookNullNumberOfPages(){
+    public void testCreateBookNullNumberOfPages() {
         assertEquals(0, bookService.getAllBooks().size());
         String barCode = "11";
         String title = "Aly's book";
@@ -268,10 +251,9 @@ public class TestBookService {
         Book book = null;
 
         String error = "";
-        try{
+        try {
             book = bookService.createBook(barCode, title, author, dateOfRelease, price, isbn, numberOfPages);
-        }
-        catch(IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             error = e.getMessage();
         }
 
@@ -280,7 +262,7 @@ public class TestBookService {
     }
 
     @Test
-    public void testDeleteBook(){
+    public void testDeleteBook() {
 
         assertEquals(0, bookService.getAllBooks().size());
         String barCode = "11";
@@ -294,19 +276,17 @@ public class TestBookService {
         Book book = null;
 
         String error = "";
-        try{
+        try {
             book = bookService.createBook(barCode, title, author, dateOfRelease, price, isbn, numberOfPages);
-        }
-        catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             error = e.getMessage();
 
         }
         assertNotNull(book);
 
-        try{
+        try {
             bookService.deleteBook(title);
-        }
-        catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             error = e.getMessage();
 
         }

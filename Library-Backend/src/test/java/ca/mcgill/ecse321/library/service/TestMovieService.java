@@ -1,8 +1,8 @@
 package ca.mcgill.ecse321.library.service;
-import ca.mcgill.ecse321.library.dao.LibrarianRepository;
+
 import ca.mcgill.ecse321.library.dao.MovieRepository;
 import ca.mcgill.ecse321.library.model.Movie;
-import ca.mcgill.ecse321.library.model.MusicAlbum;
+import java.sql.Date;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -11,17 +11,14 @@ import org.mockito.Mock;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.Answer;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.lenient;
-
-import java.sql.Date;
 
 /**
  * @author alymo
@@ -30,28 +27,23 @@ import java.sql.Date;
 @ExtendWith(MockitoExtension.class)
 public class TestMovieService {
 
-    @Mock
-    private MovieRepository movieRepository;
-
-    @InjectMocks
-    private MovieService movieService;
-
-    private static final String LIBRARIAN_USERNAME ="TestCustomer";
-
+    private static final String LIBRARIAN_USERNAME = "TestCustomer";
     private static final String AUTHOR = "LOLLS";
     private static final float LENGTH = 233f;
     private static final String DATE_OF_RELEASE = "2021-11-01";
     private static final int PRICE = 30;
     private static final String TITLE = " The meaning of life";
     private static final String BARCODE = "122344";
-
-
+    @Mock
+    private MovieRepository movieRepository;
+    @InjectMocks
+    private MovieService movieService;
 
     @BeforeEach
-    public void setMockOutput(){
+    public void setMockOutput() {
 
         lenient().when(movieRepository.findMovieByBarcode(anyString())).thenAnswer((InvocationOnMock invocation) -> {
-            if(invocation.getArgument(0).equals(BARCODE)) {
+            if (invocation.getArgument(0).equals(BARCODE)) {
                 Movie movie = new Movie();
                 movie.setAuthor(AUTHOR);
                 movie.setLength(LENGTH);
@@ -60,8 +52,7 @@ public class TestMovieService {
                 movie.setTitle(TITLE);
 
                 return movie;
-            }
-            else return null;
+            } else return null;
         });
 
         Answer<?> returnParameterAsAnswer = (InvocationOnMock invocation) -> {
@@ -72,7 +63,7 @@ public class TestMovieService {
     }
 
     @Test
-    public void testCreateMovie(){
+    public void testCreateMovie() {
         assertEquals(0, movieService.getAllMovies().size());
         String barCode = "11";
         String title = "Aly's movie";
@@ -83,10 +74,9 @@ public class TestMovieService {
         String numberOfPages = "33";
 
         Movie movie = null;
-        try{
+        try {
             movie = movieService.createMovie(barCode, title, author, dateOfRelease, price, length);
-        }
-        catch(IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             String error = e.getMessage();
             fail();
@@ -103,7 +93,7 @@ public class TestMovieService {
     }
 
     @Test
-    public void testCreateMovieNullBarcode(){
+    public void testCreateMovieNullBarcode() {
         assertEquals(0, movieService.getAllMovies().size());
         String barCode = "";
         String title = "Aly's movie";
@@ -115,10 +105,9 @@ public class TestMovieService {
         Movie movie = null;
 
         String error = "";
-        try{
+        try {
             movie = movieService.createMovie(barCode, title, author, dateOfRelease, price, length);
-        }
-        catch(IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             error = e.getMessage();
         }
 
@@ -127,7 +116,7 @@ public class TestMovieService {
     }
 
     @Test
-    public void testCreateMovieNullTitle(){
+    public void testCreateMovieNullTitle() {
         assertEquals(0, movieService.getAllMovies().size());
         String barCode = "11";
         String title = "";
@@ -139,10 +128,9 @@ public class TestMovieService {
         Movie movie = null;
 
         String error = "";
-        try{
+        try {
             movie = movieService.createMovie(barCode, title, author, dateOfRelease, price, length);
-        }
-        catch(IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             error = e.getMessage();
         }
 
@@ -151,7 +139,7 @@ public class TestMovieService {
     }
 
     @Test
-    public void testCreateMovieNullAuthor(){
+    public void testCreateMovieNullAuthor() {
         assertEquals(0, movieService.getAllMovies().size());
         String barCode = "11";
         String title = "Aly's movie";
@@ -163,10 +151,9 @@ public class TestMovieService {
         Movie movie = null;
 
         String error = "";
-        try{
+        try {
             movie = movieService.createMovie(barCode, title, author, dateOfRelease, price, length);
-        }
-        catch(IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             error = e.getMessage();
         }
 
@@ -175,7 +162,7 @@ public class TestMovieService {
     }
 
     @Test
-    public void testCreateMovieNullDateOfRelease(){
+    public void testCreateMovieNullDateOfRelease() {
         assertEquals(0, movieService.getAllMovies().size());
         String barCode = "11";
         String title = "Aly's movie";
@@ -187,10 +174,9 @@ public class TestMovieService {
         Movie movie = null;
 
         String error = "";
-        try{
+        try {
             movie = movieService.createMovie(barCode, title, author, dateOfRelease, price, length);
-        }
-        catch(IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             error = e.getMessage();
         }
 
@@ -199,7 +185,7 @@ public class TestMovieService {
     }
 
     @Test
-    public void testCreateMovieNullPrice(){
+    public void testCreateMovieNullPrice() {
         assertEquals(0, movieService.getAllMovies().size());
         String barCode = "11";
         String title = "Aly's movie";
@@ -211,10 +197,9 @@ public class TestMovieService {
         Movie movie = null;
 
         String error = "";
-        try{
+        try {
             movie = movieService.createMovie(barCode, title, author, dateOfRelease, price, length);
-        }
-        catch(IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             error = e.getMessage();
         }
 
@@ -224,7 +209,7 @@ public class TestMovieService {
 
 
     @Test
-    public void testCreateMovieNullLength(){
+    public void testCreateMovieNullLength() {
         assertEquals(0, movieService.getAllMovies().size());
         String barCode = "11";
         String title = "Aly's movie";
@@ -236,10 +221,9 @@ public class TestMovieService {
         Movie movie = null;
 
         String error = "";
-        try{
+        try {
             movie = movieService.createMovie(barCode, title, author, dateOfRelease, price, length);
-        }
-        catch(IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             error = e.getMessage();
         }
 
@@ -248,7 +232,7 @@ public class TestMovieService {
     }
 
     @Test
-    public void testDeleteMovie(){
+    public void testDeleteMovie() {
 
         assertEquals(0, movieService.getAllMovies().size());
         Movie movie = null;
@@ -261,25 +245,22 @@ public class TestMovieService {
         String numberOfSongs = "33";
 
         String error = "";
-        try{
+        try {
             movie = movieService.createMovie(barCode, title, author, dateOfRelease, price, length);
-        }
-        catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             error = e.getMessage();
 
         }
         assertNotNull(movie);
 
-        try{
+        try {
             movieService.deleteMovie(title);
-        }
-        catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             error = e.getMessage();
 
         }
         assertNull(movieService.getMovieByTitle(title));
     }
-
 
 
 }

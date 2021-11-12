@@ -1,8 +1,8 @@
 package ca.mcgill.ecse321.library.dto;
 
 public abstract class LibraryItemDto {
-    private String title;
-    private Long id;
+    private final String title;
+    private final Long id;
 
     public LibraryItemDto(Long aItemId, String aTitle) {
         id = aItemId;

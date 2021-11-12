@@ -4,11 +4,11 @@ import java.sql.Date;
 
 public abstract class MobileItemDto extends LibraryItemDto {
 
-    private String barcode;
-    private String author;
-    private Date dateOfRelease;
-    private float price;
-    private BookingDto booking;
+    private final String barcode;
+    private final String author;
+    private final Date dateOfRelease;
+    private final float price;
+    private final BookingDto booking;
 
     public MobileItemDto(Long aItemId, String aBarcode, String aTitle, String aAuthor, Date aDateOfRelease, float aPrice, BookingDto booking) {
         super(aItemId, aTitle);

@@ -4,8 +4,8 @@ import java.sql.Date;
 
 public class MusicAlbumDto extends MobileItemDto {
 
-    private int numberOfSongs;
-    private float totalLength;
+    private final int numberOfSongs;
+    private final float totalLength;
 
     public MusicAlbumDto(Long aItemId, String aBarcode, String aTitle, String aAuthor, Date aDateOfRelease, float aPrice, int aNumberOfSongs, float aTotalLength, BookingDto booking) {
         super(aItemId, aBarcode, aTitle, aAuthor, aDateOfRelease, aPrice, booking);

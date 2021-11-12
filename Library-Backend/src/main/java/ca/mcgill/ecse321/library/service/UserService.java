@@ -24,9 +24,9 @@ public class UserService {
     private HeadLibrarianRepository headLibrarianRepository;
 
     /**
-     * @author Jewoo Lee
      * @param password
      * @return
+     * @author Jewoo Lee
      */
     public static boolean checkValidPassword(String password) {
         if (password == null || password == "") {
@@ -69,9 +69,9 @@ public class UserService {
     // Need to Review
 
     /**
-     * @author Jewoo Lee
      * @param address
      * @return
+     * @author Jewoo Lee
      */
     public static boolean checkValidAddress(String address) {
         if (address == null || address.equals("")) {
@@ -82,10 +82,10 @@ public class UserService {
     }
 
     /**
-     * @author Jewoo Lee
      * @param username
      * @param password
      * @return
+     * @author Jewoo Lee
      */
     @Transactional
     public User login(String username, String password) {

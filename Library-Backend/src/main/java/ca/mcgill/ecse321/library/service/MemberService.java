@@ -1,7 +1,5 @@
 package ca.mcgill.ecse321.library.service;
 
-import ca.mcgill.ecse321.library.dao.HeadLibrarianRepository;
-import ca.mcgill.ecse321.library.dao.LibrarianRepository;
 import ca.mcgill.ecse321.library.dao.MemberRepository;
 import ca.mcgill.ecse321.library.model.Member;
 import java.util.List;
@@ -98,9 +96,9 @@ public class MemberService {
     }
 
     /**
-     * @author Jewoo Lee
      * @param username
      * @return
+     * @author Jewoo Lee
      */
     public boolean checkValidUsername(String username) {
         if (username == null || username == "") {

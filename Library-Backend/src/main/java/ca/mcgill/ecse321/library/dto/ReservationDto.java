@@ -3,7 +3,7 @@ package ca.mcgill.ecse321.library.dto;
 import java.sql.Date;
 
 public class ReservationDto extends BookingTypeDto {
-    private Date expirationDate;
+    private final Date expirationDate;
 
     public ReservationDto(Long id, Date aExpirationDate) {
         super(id);
