@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
-//@CrossOrigin(origins = "*")
-//@RestController
+@CrossOrigin(origins = "*")
+@RestController
 public class BookingController {
 
-    //@Autowired
+    @Autowired
     BookingService bookingService;
 
 
@@ -32,7 +32,7 @@ public class BookingController {
     }
 
     @PostMapping(value = { "/booking/{name}/itemType/{itemType}/itemId/{itemId}", "/booking/{name}/itemType/{itemType}/itemId/{itemId}/" })
-    public ResponseEntity<?> createBooking(@RequestParam String name,@RequestParam String itemType, @RequestParam String itemId) {
+    public ResponseEntity<?> createBooking(@PathVariable String name,@PathVariable String itemType,@PathVariable String itemId) {
         try {
             Booking booking = bookingService.createBooking(name, itemType, itemId);
             return new ResponseEntity<>(DTOConverter.convertToDto(booking, booking.getUser(), booking.getBookingType()), HttpStatus.CREATED) ;
@@ -43,9 +43,20 @@ public class BookingController {
     }
 
     @PostMapping(value = { "/return/itemType/{itemType}/itemId/{itemId}", "/return/{name}/itemType/{itemType}/itemId/{itemId}/" })
-    public ResponseEntity<?> returnItem(@RequestParam String itemType, @RequestParam String itemId) {
+    public ResponseEntity<?> returnItem(@PathVariable String itemType, @PathVariable String itemId) {
         try {
             bookingService.returnLibraryItem(itemType,itemId);
+            return new ResponseEntity<>("Successfully returned the book", HttpStatus.CREATED) ;
+        }
+        catch (IllegalArgumentException e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping(value = { "/checkout/username/{username}/bookingId/{bookingId}", "/checkout/username/{username}/bookingId/{bookingId}/" })
+    public ResponseEntity<?> checkoutItem(@PathVariable String username, @PathVariable String bookingId) {
+        try {
+            bookingService.confirmBooking(username,bookingId);
             return new ResponseEntity<>("Successfully returned the book", HttpStatus.CREATED) ;
         }
         catch (IllegalArgumentException e){

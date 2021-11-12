@@ -44,7 +44,7 @@ public class MusicAlbumService {
 			error += "total length needs to be specified ";
 		}
 		
-		Boolean hasError = error != null || error != "";
+		Boolean hasError = error != "";
 		
 		if(hasError) throw new IllegalArgumentException(error);
 
@@ -65,13 +65,13 @@ public class MusicAlbumService {
 	}
 	
 	@Transactional
-	public MusicAlbum getBookByTitle(String title) {
+	public MusicAlbum getMusicAlbumByTitle(String title) {
 		return musicAlbumRepository.findMusicAlbumByTitle(title);
 	}
 	
 	
 	@Transactional
-	public boolean deleteBook(String title) {
+	public boolean deleteMusicAlbum(String title) {
 		MusicAlbum musicAlbum = musicAlbumRepository.findMusicAlbumByTitle(title);
 		if(musicAlbum!=null) {
 			musicAlbumRepository.delete(musicAlbum);
@@ -80,7 +80,7 @@ public class MusicAlbumService {
 		else return false;
 	}
 	
-	public List<MusicAlbum> getAllBooks(){
+	public List<MusicAlbum> getAllMusicAlbums(){
 		return Services.toList(musicAlbumRepository.findAll());
 	}
 	
