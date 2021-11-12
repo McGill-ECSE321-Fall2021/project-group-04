@@ -27,13 +27,6 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build
         working-directory: Library-Backend
-      - name: Deploy to Heroku
-      - uses: actions/checkout@v2
-      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
-        with:
-          heroku_api_key: 603f6273-45f6-4eec-b6b0-b41604e7d648
-          heroku_app_name: "library-backend-a6a" #Must be unique in Heroku
-          heroku_email: "mohamed.benkirane@mail.mcgill.ca"
-          buildpack: "https://github.com/HashNuke/heroku-buildpack-elixir.git"
+      
       
         
