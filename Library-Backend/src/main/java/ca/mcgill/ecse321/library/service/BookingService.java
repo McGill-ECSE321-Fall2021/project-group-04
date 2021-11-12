@@ -49,6 +49,11 @@ public class BookingService {
         //possible future issue
         //bookings might still point to the user even though no item is pointing to them
         MobileItem item = getMobileItem(itemType,itemTitle);
+
+        if(item.getBooking() == null) {
+            throw new IllegalArgumentException("Book already returned");
+        }
+
         item.setBooking(null);
         return saveMobileItem(itemType,item);
 

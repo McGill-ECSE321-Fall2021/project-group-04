@@ -57,8 +57,11 @@ public class TestBookingService {
     //BookingType Fields
     private static final Date RESERVATION_DATE = Date.valueOf("2021-05-29");
 
-    //Book Fields
+    //Book with booking fields
     private static final String BOOK_TITLE = "bookTitle";
+
+    //Book without booking fields
+    private static final String BOOK_TITLE2 = "bookTitle2";
 
     //Movie Fields
     private static final String MOVIE_TITLE = "movieTitle";
@@ -114,6 +117,18 @@ public class TestBookingService {
                 Booking booking = new Booking();
                 booking.setId(BOOKING_ID);
                 book.setBooking(booking);
+
+
+
+                return book;
+            }
+
+            if (invocation.getArgument(0).equals(BOOK_TITLE2)) {
+
+                Book book = new Book();
+                book.setTitle(BOOK_TITLE2);
+
+                book.setBooking(null);
 
 
 
@@ -305,6 +320,21 @@ public class TestBookingService {
         }
         assertNull(item);
         assertEquals("could not find a book with that name ", error);
+    }
+
+    @Test
+    public void testReturnAlreadyReturnedBook(){
+        MobileItem item = null;
+        String error = null;
+        try{
+            item = bookingService.returnLibraryItem("Book",BOOK_TITLE2);
+        }
+        catch(IllegalArgumentException e){
+            error = e.getMessage();
+        }
+
+        assertNull(item);
+        assertEquals("Book already returned", error);
     }
 
     @Test
