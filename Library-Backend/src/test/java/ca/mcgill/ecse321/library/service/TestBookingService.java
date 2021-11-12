@@ -4,9 +4,8 @@ import ca.mcgill.ecse321.library.dao.*;
 import ca.mcgill.ecse321.library.model.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.fail;
+
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.when;
@@ -86,6 +85,10 @@ public class TestBookingService {
                 Booking booking = new Booking();
                 booking.setId(BOOKING_ID);
 
+                Member member = new Member();
+                member.setUsername(USERNAME);
+                booking.setUser(member);
+
 
 
                 return booking;
@@ -94,11 +97,23 @@ public class TestBookingService {
             return null;
         });
 
+        lenient().when(bookingRepository.existsBookingById(anyLong())).thenAnswer((InvocationOnMock invocation) -> {
+            if (invocation.getArgument(0).equals(BOOKING_ID)) {
+                return true;
+            }
+
+            return false;
+        });
+
         lenient().when(bookRepository.findBookByTitle(anyString())).thenAnswer((InvocationOnMock invocation) -> {
             if (invocation.getArgument(0).equals(BOOK_TITLE)) {
 
                 Book book = new Book();
                 book.setTitle(BOOK_TITLE);
+
+                Booking booking = new Booking();
+                booking.setId(BOOKING_ID);
+                book.setBooking(booking);
 
 
 
@@ -154,6 +169,15 @@ public class TestBookingService {
             return null;
         });
 
+        lenient().when(memberRepository.existsMemberByUsername(anyString())).thenAnswer((InvocationOnMock invocation) -> {
+            if (invocation.getArgument(0).equals(USERNAME)) {
+
+                return true;
+            }
+
+            return false;
+        });
+
         Answer<?> returnParameterAsAnswer = (InvocationOnMock invocation) -> {
             return invocation.getArgument(0);
         };
@@ -170,20 +194,65 @@ public class TestBookingService {
     @Test
     public void testCreateBooking(){
 
+        assertEquals(0, bookingService.getAllBookings().size());
+
+        String elementType = "Book";
+        String elementId = BOOK_TITLE;
+        String user = USERNAME;
+
+        Booking booking = null;
+
+        try{
+            booking = bookingService.createBooking(user,elementType,elementId);
+        }
+        catch (IllegalArgumentException e){
+            fail();
+        }
+
+        assertNotNull(booking);
+        assertEquals(USERNAME,booking.getUser().getUsername());
+        assertEquals(Reservation.class, booking.getBookingType().getClass());
+
     }
 
-    @Test
-    public void testGetExistingBooking(){
 
-    }
-
-    @Test
-    public void testGetNonExistingBooking(){
-
-    }
 
     @Test
     public void testCheckOutBook(){
+
+        Booking booking = null;
+
+        try{
+            booking = bookingService.confirmBooking(USERNAME,"Book", String.valueOf(BOOKING_ID));
+        }
+        catch(IllegalArgumentException e){
+
+            fail();
+        }
+        assertNotNull(booking);
+        assertEquals(USERNAME,booking.getUser().getUsername());
+        assertEquals(BOOKING_ID,booking.getId());
+        assertEquals(Lending.class,booking.getBookingType().getClass());
+
+    }
+
+    @Test
+    public void testCheckOutBookUserWithoutBooking(){
+
+        Booking booking = null;
+        String error = null;
+
+        try{
+            booking = bookingService.confirmBooking("NoBookingUsername","Book", String.valueOf(BOOKING_ID));
+        }
+        catch(IllegalArgumentException e){
+
+            error = e.getMessage();
+
+        }
+        assertNull(booking);
+        assertEquals("The customer who has made this booking shall be the one confirming it",error);
+
 
     }
 
@@ -197,13 +266,247 @@ public class TestBookingService {
 
     }
 
-    @Test
-    public void testCreateBookingEmpty(){
 
+
+    @Test
+    public void testCreateBookingNonExistentUser(){
+        assertEquals(0, bookingService.getAllBookings().size());
+
+        String elementType = "Book";
+        String elementId = BOOK_TITLE;
+        String user = "NonExistentUser";
+
+        Booking booking = null;
+        String error = null;
+
+        try{
+            booking = bookingService.createBooking(user,elementType,elementId);
+        }
+        catch (IllegalArgumentException e){
+            error = e.getMessage();
+        }
+
+        assertNull(booking);
+        assertEquals("could not find a customer with that username ", error);
     }
 
     @Test
-    public void testCreateBookingNoUser(){
+    public void testCreateBookingEmptyUserName(){
+        assertEquals(0, bookingService.getAllBookings().size());
 
+        String elementType = "Book";
+        String elementId = BOOK_TITLE;
+        String user = "";
+
+        Booking booking = null;
+        String error = null;
+
+        try{
+            booking = bookingService.createBooking(user,elementType,elementId);
+        }
+        catch (IllegalArgumentException e){
+            error = e.getMessage();
+        }
+
+        assertNull(booking);
+        assertEquals("Username cannot be empty ", error);
+    }
+
+    @Test
+    public void testCreateBookingEmptyElementType(){
+        assertEquals(0, bookingService.getAllBookings().size());
+
+        String elementType = "";
+        String elementId = BOOK_TITLE;
+        String user = USERNAME;
+
+        Booking booking = null;
+        String error = null;
+
+        try{
+            booking = bookingService.createBooking(user,elementType,elementId);
+        }
+        catch (IllegalArgumentException e){
+            error = e.getMessage();
+        }
+
+        assertNull(booking);
+        assertEquals("elementType cannot be empty ", error);
+    }
+
+    @Test
+    public void testCreateBookingEmptyElementID(){
+        assertEquals(0, bookingService.getAllBookings().size());
+
+        String elementType = "Book";
+        String elementId = "";
+        String user = USERNAME;
+
+        Booking booking = null;
+        String error = null;
+
+        try{
+            booking = bookingService.createBooking(user,elementType,elementId);
+        }
+        catch (IllegalArgumentException e){
+            error = e.getMessage();
+        }
+
+        assertNull(booking);
+        assertEquals("elementId cannot be empty ", error);
+    }
+
+    @Test
+    public void testCreateBookingNullUserName(){
+        assertEquals(0, bookingService.getAllBookings().size());
+
+        String elementType = "Book";
+        String elementId = BOOK_TITLE;
+        String user = null;
+
+        Booking booking = null;
+        String error = null;
+
+        try{
+            booking = bookingService.createBooking(user,elementType,elementId);
+        }
+        catch (IllegalArgumentException e){
+            error = e.getMessage();
+        }
+
+        assertNull(booking);
+        assertEquals("Username cannot be empty ", error);
+    }
+
+    @Test
+    public void testCreateBookingNullElementType(){
+        assertEquals(0, bookingService.getAllBookings().size());
+
+        String elementType = null;
+        String elementId = BOOK_TITLE;
+        String user = USERNAME;
+
+        Booking booking = null;
+        String error = null;
+
+        try{
+            booking = bookingService.createBooking(user,elementType,elementId);
+        }
+        catch (IllegalArgumentException e){
+            error = e.getMessage();
+        }
+
+        assertNull(booking);
+        assertEquals("elementType cannot be empty ", error);
+    }
+
+    @Test
+    public void testCreateBookingNullElementID(){
+        assertEquals(0, bookingService.getAllBookings().size());
+
+        String elementType = "Book";
+        String elementId = null;
+        String user = USERNAME;
+
+        Booking booking = null;
+        String error = null;
+
+        try{
+            booking = bookingService.createBooking(user,elementType,elementId);
+        }
+        catch (IllegalArgumentException e){
+            error = e.getMessage();
+        }
+
+        assertNull(booking);
+        assertEquals("elementId cannot be empty ", error);
+    }
+
+    @Test
+    public void testCreateBookingNonExistentBook(){
+        assertEquals(0, bookingService.getAllBookings().size());
+
+        String elementType = "Book";
+        String elementId = "NonExistentBookTitle";
+        String user = USERNAME;
+
+        Booking booking = null;
+        String error = null;
+
+        try{
+            booking = bookingService.createBooking(user,elementType,elementId);
+        }
+        catch (IllegalArgumentException e){
+            error = e.getMessage();
+        }
+
+        assertNull(booking);
+        assertEquals("could not find a book with that name ", error);
+    }
+
+    @Test
+    public void testCreateBookingNonExistentMovie(){
+        assertEquals(0, bookingService.getAllBookings().size());
+
+        String elementType = "Movie";
+        String elementId = "NonExistentMovieTitle";
+        String user = USERNAME;
+
+        Booking booking = null;
+        String error = null;
+
+        try{
+            booking = bookingService.createBooking(user,elementType,elementId);
+        }
+        catch (IllegalArgumentException e){
+            error = e.getMessage();
+        }
+
+        assertNull(booking);
+        assertEquals("could not find a movie with that name ", error);
+    }
+
+    @Test
+    public void testCreateBookingNonExistentMusicAlbum(){
+        assertEquals(0, bookingService.getAllBookings().size());
+
+        String elementType = "MusicAlbum";
+        String elementId = "NonExistentTitle";
+        String user = USERNAME;
+
+        Booking booking = null;
+        String error = null;
+
+        try{
+            booking = bookingService.createBooking(user,elementType,elementId);
+        }
+        catch (IllegalArgumentException e){
+            error = e.getMessage();
+        }
+
+        assertNull(booking);
+        assertEquals("could not find a music album with that name ", error);
+    }
+
+    @Test
+    public void testCreateBookingNonExistentType(){
+        assertEquals(0, bookingService.getAllBookings().size());
+
+        String elementType = "nontype";
+        String elementId = "NonExistentBookTitle";
+        String user = USERNAME;
+
+        Booking booking = null;
+        String error = null;
+
+        try{
+            booking = bookingService.createBooking(user,elementType,elementId);
+        }
+        catch (IllegalArgumentException e){
+            error = e.getMessage();
+        }
+
+        assertNull(booking);
+        assertEquals("invalid element type ", error);
     }
 }
