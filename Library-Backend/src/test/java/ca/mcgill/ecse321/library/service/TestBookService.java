@@ -96,7 +96,6 @@ public class TestBookService {
         assertEquals(author, book.getAuthor());
         assertEquals(Date.valueOf(dateOfRelease), book.getDateOfRelease());
         assertEquals(Float.valueOf(price), book.getPrice());
-        assertEquals(isbn, book.getIsbn());
         assertEquals(Integer.valueOf(numberOfPages), book.getNumberOfPages());
         assertNull(book.getBooking());
     }

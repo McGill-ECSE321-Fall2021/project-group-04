@@ -37,7 +37,7 @@ public class MovieService {
 
 		}
 		
-		Boolean hasError = error != null || error != "";
+		Boolean hasError = error != "";
 		
 		if(hasError) throw new IllegalArgumentException(error);
 
