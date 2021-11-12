@@ -14,6 +14,8 @@ import java.sql.Time;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -82,6 +84,22 @@ public class TestBookingService {
 
     @BeforeEach
     public void setMockOutput() {
+        lenient().when(bookingRepository.findAll()).thenAnswer((InvocationOnMock invocation) -> {
+
+            List<Booking> list = new LinkedList<Booking>();
+
+            Booking booking = new Booking();
+            booking.setId(BOOKING_ID);
+
+            Member member = new Member();
+            member.setUsername(USERNAME);
+            booking.setUser(member);
+
+            list.add(booking);
+
+
+            return list;
+        });
         lenient().when(bookingRepository.findBookingById(anyLong())).thenAnswer((InvocationOnMock invocation) -> {
             if (invocation.getArgument(0).equals(BOOKING_ID)) {
 
@@ -209,8 +227,6 @@ public class TestBookingService {
     @Test
     public void testCreateBooking(){
 
-        assertEquals(0, bookingService.getAllBookings().size());
-
         String elementType = "Book";
         String elementId = BOOK_TITLE;
         String user = USERNAME;
@@ -228,6 +244,23 @@ public class TestBookingService {
         assertEquals(USERNAME,booking.getUser().getUsername());
         assertEquals(Reservation.class, booking.getBookingType().getClass());
 
+    }
+
+    @Test
+    public void testGetAllBookings(){
+        List<Booking> list = null;
+        try{
+            list = bookingService.getAllBookings();
+        }
+        catch(IllegalArgumentException e){
+            fail();
+        }
+
+        assertNotNull(list);
+        assertNotNull(list.get(0));
+        assertEquals(BOOKING_ID, list.get(0).getId());
+        assertEquals(USERNAME, list.get(0).getUser().getUsername());
+        assertEquals(1, list.size());
     }
 
 
@@ -381,7 +414,7 @@ public class TestBookingService {
 
     @Test
     public void testCreateBookingNonExistentUser(){
-        assertEquals(0, bookingService.getAllBookings().size());
+
 
         String elementType = "Book";
         String elementId = BOOK_TITLE;
@@ -403,7 +436,7 @@ public class TestBookingService {
 
     @Test
     public void testCreateBookingEmptyUserName(){
-        assertEquals(0, bookingService.getAllBookings().size());
+
 
         String elementType = "Book";
         String elementId = BOOK_TITLE;
@@ -425,7 +458,7 @@ public class TestBookingService {
 
     @Test
     public void testCreateBookingEmptyElementType(){
-        assertEquals(0, bookingService.getAllBookings().size());
+
 
         String elementType = "";
         String elementId = BOOK_TITLE;
@@ -447,7 +480,7 @@ public class TestBookingService {
 
     @Test
     public void testCreateBookingEmptyElementID(){
-        assertEquals(0, bookingService.getAllBookings().size());
+
 
         String elementType = "Book";
         String elementId = "";
@@ -469,8 +502,6 @@ public class TestBookingService {
 
     @Test
     public void testCreateBookingNullUserName(){
-        assertEquals(0, bookingService.getAllBookings().size());
-
         String elementType = "Book";
         String elementId = BOOK_TITLE;
         String user = null;
@@ -491,8 +522,6 @@ public class TestBookingService {
 
     @Test
     public void testCreateBookingNullElementType(){
-        assertEquals(0, bookingService.getAllBookings().size());
-
         String elementType = null;
         String elementId = BOOK_TITLE;
         String user = USERNAME;
@@ -513,7 +542,6 @@ public class TestBookingService {
 
     @Test
     public void testCreateBookingNullElementID(){
-        assertEquals(0, bookingService.getAllBookings().size());
 
         String elementType = "Book";
         String elementId = null;
@@ -535,7 +563,6 @@ public class TestBookingService {
 
     @Test
     public void testCreateBookingNonExistentBook(){
-        assertEquals(0, bookingService.getAllBookings().size());
 
         String elementType = "Book";
         String elementId = "NonExistentBookTitle";
@@ -557,7 +584,6 @@ public class TestBookingService {
 
     @Test
     public void testCreateBookingNonExistentMovie(){
-        assertEquals(0, bookingService.getAllBookings().size());
 
         String elementType = "Movie";
         String elementId = "NonExistentMovieTitle";
@@ -579,7 +605,6 @@ public class TestBookingService {
 
     @Test
     public void testCreateBookingNonExistentMusicAlbum(){
-        assertEquals(0, bookingService.getAllBookings().size());
 
         String elementType = "MusicAlbum";
         String elementId = "NonExistentTitle";
@@ -601,7 +626,6 @@ public class TestBookingService {
 
     @Test
     public void testCreateBookingNonExistentType(){
-        assertEquals(0, bookingService.getAllBookings().size());
 
         String elementType = "nontype";
         String elementId = "NonExistentBookTitle";

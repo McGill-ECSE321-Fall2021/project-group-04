@@ -1,6 +1,7 @@
 package ca.mcgill.ecse321.library.controller;
 
 import ca.mcgill.ecse321.library.model.Booking;
+import ca.mcgill.ecse321.library.model.MobileItem;
 import ca.mcgill.ecse321.library.service.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -45,8 +46,8 @@ public class BookingController {
     @PostMapping(value = { "/return/itemType/{itemType}/itemId/{itemId}", "/return/{name}/itemType/{itemType}/itemId/{itemId}/" })
     public ResponseEntity<?> returnItem(@PathVariable String itemType, @PathVariable String itemId) {
         try {
-            bookingService.returnLibraryItem(itemType,itemId);
-            return new ResponseEntity<>("Successfully returned the book", HttpStatus.CREATED) ;
+            MobileItem item = bookingService.returnLibraryItem(itemType,itemId);
+            return new ResponseEntity<>("Successfully returned item", HttpStatus.CREATED) ;
         }
         catch (IllegalArgumentException e){
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
@@ -56,8 +57,8 @@ public class BookingController {
     @PostMapping(value = { "/checkout/username/{username}/bookingId/{bookingId}", "/checkout/username/{username}/bookingId/{bookingId}/" })
     public ResponseEntity<?> checkoutItem(@PathVariable String username, @PathVariable String bookingId) {
         try {
-            bookingService.confirmBooking(username,bookingId);
-            return new ResponseEntity<>("Successfully returned the book", HttpStatus.CREATED) ;
+            Booking booking = bookingService.confirmBooking(username,bookingId);
+            return new ResponseEntity<>(DTOConverter.convertToDto(booking, booking.getUser(), booking.getBookingType()), HttpStatus.CREATED) ;
         }
         catch (IllegalArgumentException e){
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
