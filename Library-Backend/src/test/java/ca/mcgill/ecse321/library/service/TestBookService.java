@@ -1,6 +1,7 @@
 package ca.mcgill.ecse321.library.service;
 import ca.mcgill.ecse321.library.dao.LibrarianRepository;
 import ca.mcgill.ecse321.library.model.Book;
+import ca.mcgill.ecse321.library.model.MusicAlbum;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -275,4 +276,39 @@ public class TestBookService {
         assertNull(book);
         assertEquals(error, "number of pages needs to be specified ");
     }
+
+    @Test
+    public void testDeleteBook(){
+
+        assertEquals(0, bookService.getAllBooks().size());
+        String barCode = "11";
+        String title = "Aly's book";
+        String author = "Aly";
+        String dateOfRelease = "2021-01-01";
+        String price = "20";
+        String isbn = "11";
+        String numberOfPages = "33";
+
+        Book book = null;
+
+        String error = "";
+        try{
+            book = bookService.createBook(barCode, title, author, dateOfRelease, price, isbn, numberOfPages);
+        }
+        catch (IllegalArgumentException e){
+            error = e.getMessage();
+
+        }
+        assertNotNull(book);
+
+        try{
+            bookService.deleteBook(title);
+        }
+        catch (IllegalArgumentException e){
+            error = e.getMessage();
+
+        }
+        assertNull(bookService.getBookByTitle(title));
+    }
+
 }

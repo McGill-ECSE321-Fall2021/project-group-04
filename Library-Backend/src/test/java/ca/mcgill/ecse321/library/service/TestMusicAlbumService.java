@@ -2,6 +2,7 @@ package ca.mcgill.ecse321.library.service;
 import ca.mcgill.ecse321.library.dao.LibrarianRepository;
 import ca.mcgill.ecse321.library.dao.MusicAlbumRepository;
 import ca.mcgill.ecse321.library.model.MusicAlbum;
+import ca.mcgill.ecse321.library.model.Newspaper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -71,7 +72,7 @@ public class TestMusicAlbumService {
     }
 
     @Test
-    public void testCreatemusicAlbum(){
+    public void testCreateMusicAlbum(){
         assertEquals(0, musicAlbumService.getAllMusicAlbums().size());
         String barCode = "11";
         String title = "Aly's musicAlbum";
@@ -281,7 +282,37 @@ public class TestMusicAlbumService {
 
     @Test
     public void testDeleteMusicAlbum(){
-        
+
+        assertEquals(0, musicAlbumService.getAllMusicAlbums().size());
+        MusicAlbum musicAlbum = null;
+        String barCode = "11";
+        String title = "Aly's musicAlbum";
+        String author = "Aly";
+        String dateOfRelease = "2020-02-02";
+        String price = "20";
+        String length = "160";
+        String numberOfSongs = "33";
+
+        String error = "";
+        try{
+            musicAlbum = musicAlbumService.createMusicAlbum(barCode, title, author, dateOfRelease, price, numberOfSongs, length);
+        }
+        catch (IllegalArgumentException e){
+            error = e.getMessage();
+
+        }
+        assertNotNull(musicAlbum);
+
+        try{
+            musicAlbumService.deleteMusicAlbum(title);
+        }
+        catch (IllegalArgumentException e){
+            error = e.getMessage();
+
+        }
+        assertNull(musicAlbumService.getMusicAlbumByTitle(title));
     }
+
+
 
 }
