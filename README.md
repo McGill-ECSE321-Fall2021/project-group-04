@@ -8,7 +8,7 @@ This project will be completed in a total of four sprints, and our project repor
 
 - [Project Report 1](https://github.com/McGill-ECSE321-Fall2021/project-group-04/wiki/Project-Report-1)
 
-- [Our website!] (https://library-backend-a6a.herokuapp.com)
+- [Our website!](https://library-backend-a6a.herokuapp.com)
 
 
 ## The Team Members
