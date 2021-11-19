@@ -15,7 +15,7 @@ public class LibraryApplication {
 
     @RequestMapping("/")
     public String greeting() {
-        return "Aziz has a small pipi";
+        return "Welcome to ECSE321!!";
     }
 
 }
