@@ -34,7 +34,7 @@ public class TestLendingPersistence {
 
         Lending lending = new Lending();
         Date expDate = Date.valueOf("2015-03-31");
-        lending.setReturnDate(expDate);
+        lending.setReturnDate(expDate); 
 
         lendingRepository.save(lending);
 
