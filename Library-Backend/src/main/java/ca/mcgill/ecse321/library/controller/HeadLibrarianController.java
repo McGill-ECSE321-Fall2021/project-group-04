@@ -66,7 +66,7 @@ public class HeadLibrarianController {
     @PostMapping(value = {"/schedule"})
     public ResponseEntity<?> creatSchedule(@RequestParam("workday") String aWorkday,
                                            @RequestParam("start_time") String aStartTime,
-                                           @RequestParam("end_ ime") String anEndTime) {
+                                           @RequestParam("end_time") String anEndTime) {
         try {
             WorkDay.DayOfWeek workday = WorkDay.DayOfWeek.valueOf(aWorkday);
             Time startTime = Time.valueOf(aStartTime + ":00");
