@@ -52,12 +52,6 @@
               <span class="nav-link-inner--text">Login</span>
             </router-link>
           </li>
-          <li class="nav-item">
-            <router-link class="nav-link nav-link-icon" to="/profile">
-              <i class="ni ni-single-02"></i>
-              <span class="nav-link-inner--text">Profile</span>
-            </router-link>
-          </li>
         </ul>
       </template>
     </base-nav>
@@ -66,11 +60,11 @@
       <div class="container">
         <div class="header-body text-center mb-7">
           <div class="row justify-content-center">
-            <div class="col-lg-5 col-md-6">
+            <div class="col-lg-7 col-md-6">
               <h1 class="text-white">Welcome!</h1>
               <p class="text-lead text-white">
-                Use these awesome forms to login or create new account in your
-                project for free.
+                Login or register to access our vast collection of books,
+                movies, music and more!
               </p>
             </div>
           </div>
@@ -102,11 +96,8 @@
           <div class="col-xl-6">
             <div class="copyright text-center text-xl-left text-muted">
               &copy; {{ year }}
-              <a
-                href="https://www.creative-tim.com"
-                class="font-weight-bold ml-1"
-                target="_blank"
-                >Creative Tim</a
+              <a href="#" class="font-weight-bold ml-1" target="_blank"
+                >Library</a
               >
             </div>
           </div>
@@ -116,26 +107,10 @@
             >
               <li class="nav-item">
                 <a
-                  href="https://www.creative-tim.com"
+                  href="#"
                   class="nav-link"
                   target="_blank"
-                  >Creative Tim</a
-                >
-              </li>
-              <li class="nav-item">
-                <a
-                  href="https://www.creative-tim.com/presentation"
-                  class="nav-link"
-                  target="_blank"
-                  >About Us</a
-                >
-              </li>
-              <li class="nav-item">
-                <a
-                  href="https://www.creative-tim.com/blog"
-                  class="nav-link"
-                  target="_blank"
-                  >Blog</a
+                  >Library</a
                 >
               </li>
               <li class="nav-item">
