@@ -2,7 +2,7 @@
   <div class="row justify-content-center">
     <div class="col-lg-5 col-md-7">
       <div class="card bg-secondary shadow border-0">
-        <div class="card-header bg-transparent pb-5">
+        <!-- <div class="card-header bg-transparent pb-5">
           <div class="text-muted text-center mt-2 mb-3">
             <small>Sign in with</small>
           </div>
@@ -20,17 +20,17 @@
               <span class="btn-inner--text">Google</span>
             </a>
           </div>
-        </div>
+        </div> -->
         <div class="card-body px-lg-5 py-lg-5">
           <div class="text-center text-muted mb-4">
-            <small>Or sign in with credentials</small>
+            <small>Login with credentials</small>
           </div>
           <form role="form">
             <base-input
-              formClasses="input-group-alternative mb-3"
-              placeholder="Email"
-              addon-left-icon="ni ni-email-83"
-              v-model="model.email"
+              formClasses="input-group-alternative"
+              placeholder="Username"
+              addon-left-icon="ni ni-hat-3"
+              v-model="model.username"
             >
             </base-input>
 
@@ -43,9 +43,9 @@
             >
             </base-input>
 
-            <base-checkbox class="custom-control-alternative">
+            <!-- <base-checkbox class="custom-control-alternative">
               <span class="text-muted">Remember me</span>
-            </base-checkbox>
+            </base-checkbox> -->
             <div class="text-center">
               <base-button type="primary" class="my-4">Sign in</base-button>
             </div>
@@ -54,7 +54,7 @@
       </div>
       <div class="row mt-3">
         <div class="col-6">
-          <a href="#" class="text-light"><small>Forgot password?</small></a>
+          <a href="#" class="text-light"><small></small></a>
         </div>
         <div class="col-6 text-right">
           <router-link to="/register" class="text-light"
@@ -71,7 +71,7 @@ export default {
   data() {
     return {
       model: {
-        email: "",
+        username: "",
         password: "",
       },
     };
