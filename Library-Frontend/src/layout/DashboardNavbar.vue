@@ -30,7 +30,9 @@
                 />
               </span>
               <div class="media-body ml-2 d-none d-lg-block">
-                <span class="mb-0 text-sm font-weight-bold">aziz</span>
+                <span class="mb-0 text-sm font-weight-bold">{{
+                  model.username
+                }}</span>
               </div>
             </div>
           </template>
@@ -70,6 +72,9 @@ export default {
       activeNotifications: false,
       showMenu: false,
       searchQuery: "",
+      model: {
+        username: "aziz",
+      },
     };
   },
   methods: {
