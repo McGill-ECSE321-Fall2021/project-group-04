@@ -5,10 +5,10 @@
         <div class="copyright text-center text-lg-left text-muted">
           © {{ year }}
           <a
-            href="https://www.creative-tim.com"
+            href="#"
             class="font-weight-bold ml-1"
             target="_blank"
-            >Creative Tim</a
+            >Libray</a
           >
         </div>
       </div>
@@ -17,37 +17,21 @@
           class="nav nav-footer justify-content-center justify-content-lg-end"
         >
           <li class="nav-item">
-            <a
-              href="https://www.creative-tim.com"
-              class="nav-link"
-              target="_blank"
-              >Creative Tim</a
-            >
-          </li>
-          <li class="nav-item">
-            <a
-              href="https://www.creative-tim.com/presentation"
-              class="nav-link"
-              target="_blank"
-              >About Us</a
-            >
-          </li>
-          <li class="nav-item">
-            <a
-              href="https://www.creative-tim.com/blog"
-              class="nav-link"
-              target="_blank"
-              >Blog</a
-            >
-          </li>
-          <li class="nav-item">
-            <a
-              href="https://www.creative-tim.com/license"
-              class="nav-link"
-              target="_blank"
-              >License</a
-            >
-          </li>
+                <a
+                  href="#"
+                  class="nav-link"
+                  target="_blank"
+                  >Library</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  href="https://github.com/creativetimofficial/argon-dashboard/blob/master/LICENSE.md"
+                  class="nav-link"
+                  target="_blank"
+                  >MIT License</a
+                >
+              </li>
         </ul>
       </div>
     </div>

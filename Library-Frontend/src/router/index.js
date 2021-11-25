@@ -15,6 +15,23 @@ import Register from "../views/Register.vue";
 const routes = [
   {
     path: "/",
+    redirect: "login",
+    component: AuthLayout,
+    children: [
+      {
+        path: "/login",
+        name: "login",
+        components: { default: Login },
+      },
+      {
+        path: "/register",
+        name: "register",
+        components: { default: Register },
+      },
+    ],
+  },
+  {
+    path: "/",
     redirect: "/dashboard",
     component: DashboardLayout,
     children: [
@@ -42,23 +59,6 @@ const routes = [
         path: "/tables",
         name: "tables",
         components: { default: Tables },
-      },
-    ],
-  },
-  {
-    path: "/",
-    redirect: "login",
-    component: AuthLayout,
-    children: [
-      {
-        path: "/login",
-        name: "login",
-        components: { default: Login },
-      },
-      {
-        path: "/register",
-        name: "register",
-        components: { default: Register },
       },
     ],
   },
