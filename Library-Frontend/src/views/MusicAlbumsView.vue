@@ -14,10 +14,8 @@
       <div class="container-fluid d-flex justify-content-between">
         <div class="row justify-content-between">
           <div class="col-lg-12 col-md-10">
-            <h1 class="display-2 text-white">Movies</h1>
-            <p class="text-white mt-0 mb-5">
-              Our vast collection of movies.
-            </p>
+            <h1 class="display-2 text-white">Music</h1>
+            <p class="text-white mt-0 mb-5">Music to my ears.</p>
           </div>
         </div>
       </div>
@@ -27,14 +25,11 @@
       <div class="col justify-content-center">
         <div class="order-xl-1">
           <card shadow type="secondary">
-
-            <music-albums :albums="albums"/>
-
+            <music-albums :albums="albums" />
           </card>
         </div>
       </div>
     </div>
-
   </div>
 </template>
 
@@ -76,6 +71,6 @@ export default {
         },
       ],
     };
-  }
-}
+  },
+};
 </script>

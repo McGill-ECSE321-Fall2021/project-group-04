@@ -33,7 +33,7 @@
 import Card from "./Card.vue";
 
 export default {
-  name: "stats-card",
+  name: "data-card",
   components: {
     Card,
   },

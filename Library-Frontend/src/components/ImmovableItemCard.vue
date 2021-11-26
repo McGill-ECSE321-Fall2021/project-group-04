@@ -1,21 +1,21 @@
 <template>
-  <stats-card :title="date" :sub-title="title" class="mb-2">
+  <data-card :title="date" :sub-title="title" class="mb-2">
     <template v-slot:footer>
       <span class="mr-2" v-if="numberOfPages">
         <i class="ni ni-book-bookmark"></i>
         {{ numberOfPages }} pages</span
       ><br />
     </template>
-  </stats-card>
+  </data-card>
 </template>
 
 <script>
-import StatsCard from "./StatsCard.vue";
+import DataCard from "./DataCard.vue";
 
 export default {
   name: "immovable-item-card",
   components: {
-    StatsCard,
+    DataCard,
   },
   props: {
     type: {

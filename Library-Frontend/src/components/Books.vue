@@ -1,10 +1,6 @@
 <template>
   <div class="row" v-if="books">
-    <div
-      class="col-lg-4"
-      v-for="book in books"
-      :key="book.title"
-    >
+    <div class="col-lg-4" v-for="book in books" :key="book.title">
       <book-card
         :title="book.title"
         :author="book.author"
@@ -23,7 +19,7 @@ export default {
   name: "books",
   components: { BookCard },
   props: {
-    books: Array
+    books: Array,
   },
 };
 </script>

@@ -15,9 +15,7 @@
         <div class="row justify-content-between">
           <div class="col-lg-12 col-md-10">
             <h1 class="display-2 text-white">Books</h1>
-            <p class="text-white mt-0 mb-5">
-              Our vast collection of classics.
-            </p>
+            <p class="text-white mt-0 mb-5">Our vast collection of classics.</p>
           </div>
         </div>
       </div>
@@ -27,14 +25,11 @@
       <div class="col justify-content-center">
         <div class="order-xl-1">
           <card shadow type="secondary">
-
-            <books :books="books"/>
-
+            <books :books="books" />
           </card>
         </div>
       </div>
     </div>
-
   </div>
 </template>
 
@@ -83,6 +78,6 @@ export default {
         },
       ],
     };
-  }
-}
+  },
+};
 </script>
