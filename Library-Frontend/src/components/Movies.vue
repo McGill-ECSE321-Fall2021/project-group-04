@@ -1,10 +1,6 @@
 <template>
   <div class="row" v-if="movies">
-    <div
-      class="col-lg-4"
-      v-for="movie in movies"
-      :key="movie.title"
-    >
+    <div class="col-lg-4" v-for="movie in movies" :key="movie.title">
       <movie-card
         :title="movie.title"
         :author="movie.author"
@@ -22,7 +18,7 @@ export default {
   name: "movies",
   components: { MovieCard },
   props: {
-    movies: Array
+    movies: Array,
   },
 };
 </script>

@@ -6,7 +6,6 @@
       containerClasses="px-4 container"
       expand
     >
-
       <template v-slot="{ closeMenu }">
         <!-- Collapse header -->
         <div class="navbar-collapse-header d-md-none">

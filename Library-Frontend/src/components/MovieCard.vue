@@ -1,5 +1,5 @@
 <template>
-  <stats-card :title="author" :sub-title="title" class="mb-2">
+  <data-card :title="author" :sub-title="title" class="mb-2">
     <template v-slot:footer>
       <span class="mr-2" v-if="dateOfRelease">
         <i class="ni ni-calendar-grid-58"></i>
@@ -10,16 +10,16 @@
         {{ length }} minutes
       </span>
     </template>
-  </stats-card>
+  </data-card>
 </template>
 
 <script>
-import StatsCard from "./StatsCard.vue";
+import DataCard from "./DataCard.vue";
 
 export default {
   name: "movie-card",
   components: {
-    StatsCard,
+    DataCard,
   },
   props: {
     type: {

@@ -1,10 +1,6 @@
 <template>
   <div class="wrapper" :class="{ 'nav-open': $sidebar.showSidebar }">
-    <side-bar
-      :background-color="sidebarBackground"
-      short-title="Argon"
-      title="Argon"
-    >
+    <side-bar :background-color="sidebarBackground">
       <template v-slot:links>
         <sidebar-item
           :link="{
@@ -75,7 +71,6 @@
       <dashboard-navbar></dashboard-navbar>
 
       <div @click="toggleSidebar">
-        <!-- your content here -->
         <router-view></router-view>
         <content-footer v-if="!$route.meta.hideFooter"></content-footer>
       </div>

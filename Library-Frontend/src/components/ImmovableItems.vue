@@ -1,10 +1,6 @@
 <template>
   <div class="row" v-if="immovableItems">
-    <div
-      class="col-lg-4"
-      v-for="item in immovableItems"
-      :key="item.date"
-    >
+    <div class="col-lg-4" v-for="item in immovableItems" :key="item.date">
       <immovable-item-card
         :title="item.title"
         :date="item.date"
@@ -19,9 +15,9 @@
 import ImmovableItemCard from "@/components/ImmovableItemCard";
 export default {
   name: "immovable-items",
-  components: { ImmovableItemCard  },
+  components: { ImmovableItemCard },
   props: {
-    immovableItems: Array
+    immovableItems: Array,
   },
 };
 </script>

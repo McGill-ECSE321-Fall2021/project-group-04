@@ -15,9 +15,7 @@
         <div class="row justify-content-between">
           <div class="col-lg-12 col-md-10">
             <h1 class="display-2 text-white">Newspapers</h1>
-            <p class="text-white mt-0 mb-5">
-              Lots o-news.
-            </p>
+            <p class="text-white mt-0 mb-5">Lots o-news.</p>
           </div>
         </div>
       </div>
@@ -27,14 +25,11 @@
       <div class="col justify-content-center">
         <div class="order-xl-1">
           <card shadow type="secondary">
-
-            <ImmovableItems :immovable-items="newspaper"/>
-
+            <ImmovableItems :immovable-items="newspaper" />
           </card>
         </div>
       </div>
     </div>
-
   </div>
 </template>
 
@@ -42,7 +37,7 @@
 import ImmovableItems from "@/components/ImmovableItems";
 export default {
   name: "newspaper-view",
-  components: { ImmovableItems  },
+  components: { ImmovableItems },
   data() {
     return {
       newspaper: [
@@ -68,6 +63,6 @@ export default {
         },
       ],
     };
-  }
-}
+  },
+};
 </script>

@@ -12,7 +12,7 @@
           class="nav nav-footer justify-content-center justify-content-lg-end"
         >
           <li class="nav-item">
-            <a href="#" class="nav-link" target="_blank">Library</a>
+            <a href="/about" class="nav-link" target="_blank">Library</a>
           </li>
           <li class="nav-item">
             <a
