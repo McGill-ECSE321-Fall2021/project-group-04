@@ -29,26 +29,28 @@ var AXIOS = axios.create({
 })
 
 export default {
-    name:'member_sign_up',
+    name:'create_head_librarian',
     data () {
         return {
             user: '',
             username: '',
             password: '',
             address: '',
-            errorLogin: '',
+            errorHeadSignup: '',
             response: []
         }
     },
     methods: {
+
         /**
-         * @author alymo
-         * @param username
-         * @param password
-         * gets user input from frontend and logs in using controller method login
-         */
-        signup (username, password, address, member_type, member_status) {
-            AXIOS.post('/member_sign_up/', $.param({username: username, password: password, member_type: member_type, member_status: member_status}))
+        * @author alex
+        * @param username
+        * @param password
+        * @param address
+        *
+        */
+        hl_signup (username, password, member_type, member_status) {
+            AXIOS.post('/create_head_librarian', $.param({username: username, password: password, address: address}))
                 .then(response => {
                     this.user = response.data
 
