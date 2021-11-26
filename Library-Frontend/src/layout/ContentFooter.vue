@@ -4,7 +4,7 @@
       <div class="col-lg-6">
         <div class="copyright text-center text-lg-left text-muted">
           © {{ year }}
-          <a href="#" class="font-weight-bold ml-1" target="_blank">Libray</a>
+          <a class="font-weight-bold ml-1" target="_blank">Library</a>
         </div>
       </div>
       <div class="col-lg-6">

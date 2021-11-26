@@ -4,13 +4,18 @@ import DashboardLayout from "@/layout/DashboardLayout";
 import AuthLayout from "@/layout/AuthLayout";
 
 import Dashboard from "../views/Dashboard.vue";
-import Icons from "../views/Icons.vue";
 import Maps from "../views/Maps.vue";
 import Profile from "../views/UserProfile.vue";
-import Tables from "../views/Tables.vue";
 
 import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
+
+import About from "../views/About.vue";
+import BooksView from "@/views/BooksView";
+import MoviesView from "@/views/MoviesView";
+import MusicAlbumsView from "@/views/MusicAlbumsView";
+import NewspaperView from "@/views/NewspaperView";
+import ArchiveView from "@/views/ArchiveView";
 
 const routes = [
   {
@@ -36,14 +41,14 @@ const routes = [
     component: DashboardLayout,
     children: [
       {
+        path: "/about",
+        name: "about",
+        components: { default: About },
+      },
+      {
         path: "/dashboard",
         name: "dashboard",
         components: { default: Dashboard },
-      },
-      {
-        path: "/icons",
-        name: "icons",
-        components: { default: Icons },
       },
       {
         path: "/maps",
@@ -56,9 +61,29 @@ const routes = [
         components: { default: Profile },
       },
       {
-        path: "/tables",
-        name: "tables",
-        components: { default: Tables },
+        path: "/books",
+        name: "books",
+        components: { default: BooksView },
+      },
+      {
+        path: "/movies",
+        name: "movies",
+        components: { default: MoviesView },
+      },
+      {
+        path: "/music-albums",
+        name: "music-albums",
+        components: { default: MusicAlbumsView },
+      },
+      {
+        path: "/newspapers",
+        name: "newspapers",
+        components: { default: NewspaperView },
+      },
+      {
+        path: "/archives",
+        name: "archives",
+        components: { default: ArchiveView },
       },
     ],
   },
