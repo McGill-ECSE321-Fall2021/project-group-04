@@ -3,10 +3,7 @@
     <div class="card-header border-0">
       <div class="row align-items-center">
         <div class="col">
-          <h3 class="mb-0">Social traffic</h3>
-        </div>
-        <div class="col text-right">
-          <base-button size="sm" type="primary">See all</base-button>
+          <h3 class="mb-0">Library Schedule</h3>
         </div>
       </div>
     </div>
@@ -14,28 +11,16 @@
     <div class="table-responsive">
       <base-table thead-classes="thead-light" :data="tableData">
         <template v-slot:columns>
-          <th>Referral</th>
-          <th>Visitors</th>
-          <th></th>
+          <th>Day</th>
+          <th>Time</th>
         </template>
 
         <template v-slot:default="row">
           <th scope="row">
-            {{ row.item.name }}
+            {{ row.item.day }}
           </th>
           <td>
-            {{ row.item.visitors }}
-          </td>
-          <td>
-            <div class="d-flex align-items-center">
-              <span class="mr-2">{{ row.item.progress }}%</span>
-              <base-progress
-                :type="row.item.progressType"
-                class="pt-0"
-                :show-percentage="false"
-                :value="row.item.progress"
-              />
-            </div>
+            {{ row.item.time }}
           </td>
         </template>
       </base-table>
@@ -49,34 +34,36 @@ export default {
     return {
       tableData: [
         {
-          name: "Facebook",
-          visitors: "1,480",
-          progress: 60,
-          progressType: "gradient-danger",
+          day: "Monday",
+          time: "7-22",
         },
         {
-          name: "LinkedIn",
-          visitors: "5,480",
-          progress: 70,
-          progressType: "gradient-success",
+          day: "Tuesday",
+          time: "7-22",
         },
         {
-          name: "Google",
-          visitors: "4,807",
-          progress: 80,
-          progressType: "gradient-primary",
+          day: "Wednesday",
+          time: "7-22",
         },
         {
-          name: "Instagram",
-          visitors: "3,678",
-          progress: 75,
-          progressType: "gradient-info",
+          day: "Wednesday",
+          time: "7-22",
         },
         {
-          name: "Twitter",
-          visitors: "2,645",
-          progress: 30,
-          progressType: "gradient-warning",
+          day: "Thursday",
+          time: "7-22",
+        },
+        {
+          day: "Friday",
+          time: "7-22",
+        },
+        {
+          day: "Saturday",
+          time: "7-22",
+        },
+        {
+          day: "Sunday",
+          time: "closed",
         },
       ],
     };

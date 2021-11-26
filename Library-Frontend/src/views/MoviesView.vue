@@ -21,7 +21,7 @@
       </div>
     </base-header>
 
-    <div class="container-fluid mt--7">
+    <div class="container-fluid mt- -7">
       <div class="col justify-content-center">
         <div class="order-xl-1">
           <card shadow type="secondary">
