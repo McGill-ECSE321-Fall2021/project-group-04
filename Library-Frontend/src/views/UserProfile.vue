@@ -141,9 +141,9 @@
             <template v-slot:header>
               <div class="bg-white border-0">
                 <div class="row align-items-center">
-                  <div class="col-8">
+                  <v class="col-8">
                     <h3 class="mb-0">Reservations</h3>
-                  </div>
+                  </v>
                 </div>
               </div>
             </template>
