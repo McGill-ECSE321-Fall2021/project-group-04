@@ -4,7 +4,9 @@
       <div class="col-lg-6">
         <div class="copyright text-center text-lg-left text-muted">
           © {{ year }}
-          <a class="font-weight-bold ml-1" target="_blank">Library</a>
+          <a class="font-weight-bold ml-1" target="_blank" href="/about">
+            Library
+          </a>
         </div>
       </div>
       <div class="col-lg-6">
@@ -19,8 +21,9 @@
               href="https://github.com/creativetimofficial/argon-dashboard/blob/master/LICENSE.md"
               class="nav-link"
               target="_blank"
-              >MIT License</a
-            >
+              >
+              MIT License
+            </a>
           </li>
         </ul>
       </div>

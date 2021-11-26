@@ -7,6 +7,7 @@
         :dateOfRelease="album.dateOfRelease"
         :numberOfSongs="album.numberOfSongs"
         :totalLength="album.totalLength"
+        :reservable="reservable"
       >
       </music-album-card>
     </div>
@@ -20,6 +21,10 @@ export default {
   components: { MusicAlbumCard },
   props: {
     albums: Array,
+    reservable: {
+      type: Boolean,
+      default: true,
+    },
   },
 };
 </script>
