@@ -1,5 +1,5 @@
 <template>
-  <data-card :title="author" :sub-title="title" class="mb-2">
+  <data-card :title="author" :sub-title="title" :reserveButton="reservable" class="mb-2">
     <template v-slot:footer>
       <span class="mr-2" v-if="dateOfRelease">
         <i class="ni ni-calendar-grid-58"></i>
@@ -29,6 +29,10 @@ export default {
     type: {
       type: String,
       default: "primary",
+    },
+    reservable: {
+      type: Boolean,
+      default: true,
     },
     title: String,
     author: String,

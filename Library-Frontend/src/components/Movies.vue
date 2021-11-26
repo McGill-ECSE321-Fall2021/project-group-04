@@ -6,6 +6,7 @@
         :author="movie.author"
         :dateOfRelease="movie.dateOfRelease"
         :length="movie.length"
+        :reservable="reservable"
       >
       </movie-card>
     </div>
@@ -19,6 +20,10 @@ export default {
   components: { MovieCard },
   props: {
     movies: Array,
+    reservable: {
+      type: Boolean,
+      default: true,
+    },
   },
 };
 </script>

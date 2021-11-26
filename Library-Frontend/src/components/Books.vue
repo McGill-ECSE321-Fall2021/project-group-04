@@ -7,6 +7,7 @@
         :dateOfRelease="book.dateOfRelease"
         :isbn="book.isbn"
         :numberOfPages="book.numberOfPages"
+        :reservable="reservable"
       >
       </book-card>
     </div>
@@ -20,6 +21,10 @@ export default {
   components: { BookCard },
   props: {
     books: Array,
+    reservable: {
+      type: Boolean,
+      default: true,
+    },
   },
 };
 </script>
