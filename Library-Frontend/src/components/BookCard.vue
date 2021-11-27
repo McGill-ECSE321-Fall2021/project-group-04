@@ -1,5 +1,10 @@
 <template>
-  <data-card :title="author" :sub-title="title" :reserveButton="reservable" class="mb-2">
+  <data-card
+      :title="author"
+      :sub-title="title"
+      :button="reservable"
+      class="mb-2"
+  >
     <template v-slot:footer>
       <span class="mr-2" v-if="dateOfRelease">
         <i class="ni ni-calendar-grid-58"></i>
@@ -13,6 +18,9 @@
         <i class="ni ni-badge"></i>
         ISBN: {{ isbn }}
       </span>
+    </template>
+    <template v-slot:modal>
+      You have successfully reserved {{title}}
     </template>
   </data-card>
 </template>

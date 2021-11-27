@@ -1,5 +1,5 @@
 <template>
-  <data-card :title="date" :sub-title="title" :reserveButton="false" class="mb-2">
+  <data-card :title="date" :sub-title="title" :button="false" class="mb-2">
     <template v-slot:footer>
       <span class="mr-2" v-if="numberOfPages">
         <i class="ni ni-book-bookmark"></i>
