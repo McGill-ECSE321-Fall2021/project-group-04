@@ -1,6 +1,6 @@
-<template v-if="name">
+<template v-if="name">reserveButton
   <data-card
-    :sub-title="name" :reserveButton="false" class="mb-2"
+    :sub-title="name" :button="false" class="mb-2"
   >
     <template v-slot:footer v-if="workHours">
       <div v-for="hour in workHours" v-bind:key="hour.day">

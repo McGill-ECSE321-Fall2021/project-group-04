@@ -1,5 +1,5 @@
 <template>
-  <data-card :title="author" :sub-title="title" :reserveButton="reservable" class="mb-2">
+  <data-card :title="author" :sub-title="title" :button="reservable" class="mb-2">
     <template v-slot:footer>
       <span class="mr-2" v-if="dateOfRelease">
         <i class="ni ni-calendar-grid-58"></i>
@@ -13,6 +13,9 @@
         <i class="ni ni-watch-time"></i>
         Length: {{ totalLength }}
       </span>
+    </template>
+    <template v-slot:modal>
+      You have successfully reserved {{title}}
     </template>
   </data-card>
 </template>

@@ -27,18 +27,18 @@
     <p class="mt-3 mb-0 text-sm">
       <slot name="footer"/><br>
     </p>
-    <div class="text-right pt-2" v-if="reserveButton">
+    <div class="text-right pt-2" v-if="button">
       <a>
-        <base-button size="sm" @click="modals[0]=true">Reserve</base-button>
+        <base-button size="sm" @click="modals[0]=true">{{ buttonText }}</base-button>
         <modal v-model:show="modals[0]">
           <template v-slot:header>
-            <h3 class="modal-title lg">Reservation Status</h3>
+            <h3 class="modal-title lg">{{ modalTitle }}</h3>
           </template>
           <div class="text-left">
-            You have successfully reserved {{subTitle}}.
+            <slot name="modal"/><br>
           </div>
           <template v-slot:footer>
-            <base-button size="sm" @click="modals[0]=false">Close</base-button>
+            <base-button size="sm" @click="modals[0]=false">OK</base-button>
           </template>
         </modal>
       </a>
@@ -60,7 +60,7 @@ export default {
       type: String,
       default: "primary",
     },
-    reserveButton: {
+    button: {
       type: Boolean,
       default: true,
     },
@@ -68,6 +68,18 @@ export default {
     title: String,
     subTitle: String,
     iconClasses: [String, Array],
+    successMessage: {
+      type: String,
+      default: "Success.",
+    },
+    modalTitle: {
+      type: String,
+      default: "Reservation Status"
+    },
+    buttonText: {
+      type: String,
+      default: "Reserve"
+    },
   },
   data() {
     return {
