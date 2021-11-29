@@ -13,7 +13,7 @@ import BaseRadio from "../components/BaseRadio";
 import BaseTable from "../components/BaseTable";
 import Card from "../components/Card";
 import Modal from "../components/Modal";
-import StatsCard from "../components/StatsCard";
+import DataCard from "../components/DataCard";
 import TabPane from "../components/Tabs/TabPane";
 import Tabs from "../components/Tabs/Tabs";
 
@@ -36,7 +36,7 @@ const GlobalComponents = {
     app.component("base-table", BaseTable);
     app.component("card", Card);
     app.component("modal", Modal);
-    app.component("stats-card", StatsCard);
+    app.component("data-card", DataCard);
     app.component("tab-pane", TabPane);
     app.component("tabs", Tabs);
     app.use(ElTooltip);
