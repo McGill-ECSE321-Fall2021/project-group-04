@@ -6,10 +6,6 @@
       containerClasses="px-4 container"
       expand
     >
-      <!-- <router-link slot="brand" class="navbar-brand" to="/">
-                <img src="img/brand/white.png"/>
-            </router-link> -->
-
       <template v-slot="{ closeMenu }">
         <!-- Collapse header -->
         <div class="navbar-collapse-header d-md-none">
@@ -106,12 +102,7 @@
               class="nav nav-footer justify-content-center justify-content-xl-end"
             >
               <li class="nav-item">
-                <a
-                  href="#"
-                  class="nav-link"
-                  target="_blank"
-                  >Library</a
-                >
+                <a href="#" class="nav-link" target="_blank">Library</a>
               </li>
               <li class="nav-item">
                 <a

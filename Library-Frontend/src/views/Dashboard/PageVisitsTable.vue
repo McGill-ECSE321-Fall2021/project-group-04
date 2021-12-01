@@ -3,10 +3,7 @@
     <div class="card-header border-0">
       <div class="row align-items-center">
         <div class="col">
-          <h3 class="mb-0">Page visits</h3>
-        </div>
-        <div class="col text-right">
-          <a href="#!" class="btn btn-sm btn-primary">See all</a>
+          <h3 class="mb-0">Librarian Schedule</h3>
         </div>
       </div>
     </div>
@@ -14,33 +11,36 @@
     <div class="table-responsive">
       <base-table thead-classes="thead-light" :data="tableData">
         <template v-slot:columns>
-          <th>Page name</th>
-          <th>Visitors</th>
-          <th>Unique users</th>
-          <th>Bounce rate</th>
+          <th>Librarian</th>
+          <th>Monday</th>
+          <th>Tuesday</th>
+          <th>Wednesday</th>
+          <th>Thursday</th>
+          <th>Friday</th>
+          <th>Saturday</th>
         </template>
 
         <template v-slot:default="row">
           <th scope="row">
-            {{ row.item.page }}
+            {{ row.item.name }}
           </th>
           <td>
-            {{ row.item.visitors }}
+            {{ row.item.monday }}
           </td>
           <td>
-            {{ row.item.unique }}
+            {{ row.item.tuesday }}
           </td>
           <td>
-            <i
-              class="fas fa-arrow-up text-success mr-3"
-              :class="
-                row.item.bounceRateDirection === 'up'
-                  ? 'text-success'
-                  : 'text-danger'
-              "
-            >
-            </i>
-            {{ row.item.bounceRate }}
+            {{ row.item.wednesday }}
+          </td>
+          <td>
+            {{ row.item.thursday }}
+          </td>
+          <td>
+            {{ row.item.friday }}
+          </td>
+          <td>
+            {{ row.item.saturday }}
           </td>
         </template>
       </base-table>
@@ -54,39 +54,49 @@ export default {
     return {
       tableData: [
         {
-          page: "/argon/",
-          visitors: "4,569",
-          unique: "340",
-          bounceRate: "46,53%",
-          bounceRateDirection: "up",
+          name: "Aziz",
+          monday: "9-22",
+          tuesday: "7-12",
+          wednesday: "7-5",
+          thursday: "-",
+          friday: "5-22",
+          saturday: "11-16",
         },
         {
-          page: "/argon/index.html",
-          visitors: "3,985",
-          unique: "319",
-          bounceRate: "46,53%",
-          bounceRateDirection: "down",
+          name: "Simo",
+          monday: "9-22",
+          tuesday: "7-12",
+          wednesday: "7-5",
+          thursday: "-",
+          friday: "5-22",
+          saturday: "11-16",
         },
         {
-          page: "/argon/charts.html",
-          visitors: "3,513",
-          unique: "294",
-          bounceRate: "36,49%",
-          bounceRateDirection: "down",
+          name: "Alex",
+          monday: "9-22",
+          tuesday: "7-12",
+          wednesday: "7-5",
+          thursday: "-",
+          friday: "5-22",
+          saturday: "11-16",
         },
         {
-          page: "/argon/tables.html",
-          visitors: "2,050",
-          unique: "147",
-          bounceRate: "50,87%",
-          bounceRateDirection: "up",
+          name: "Aly",
+          monday: "9-22",
+          tuesday: "7-12",
+          wednesday: "7-5",
+          thursday: "-",
+          friday: "5-22",
+          saturday: "11-16",
         },
         {
-          page: "/argon/profile.html",
-          visitors: "1,795",
-          unique: "190",
-          bounceRate: "46,53%",
-          bounceRateDirection: "down",
+          name: "Jewoo",
+          monday: "9-22",
+          tuesday: "7-12",
+          wednesday: "7-5",
+          thursday: "-",
+          friday: "5-22",
+          saturday: "11-16",
         },
       ],
     };
