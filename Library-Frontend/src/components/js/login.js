@@ -50,6 +50,7 @@ export default {
         };
     },
     methods: {
+
         /**
          * @author alymo
          * @param username
@@ -74,6 +75,9 @@ export default {
                     console.log("type:", this.user.type);
 
                     window.localStorage.setItem("username", this.user.username);
+                    window.localStorage.setItem("userType", this.user.type);
+                    window.localStorage.setItem("address", response.data.address);
+                    window.localStorage.setObject("user", response.data);
                     window.location.href = "/#/dashboard";
                     location.reload();
                 }
@@ -94,6 +98,9 @@ export default {
                         console.log("type:", this.user.type);
 
                         window.localStorage.setItem("username", this.user.username);
+                        window.localStorage.setItem("userType", this.user.type);
+                        window.localStorage.setItem("address", response.data.address);
+                        window.localStorage.setObject("user", response.data);
                         window.location.href = "/#/dashboard";
                         location.reload();
                     }
@@ -113,6 +120,10 @@ export default {
                             console.log("type:", this.user.type);
 
                             window.localStorage.setItem("username", this.user.username);
+                            window.localStorage.setItem("userType", this.user.type);
+                            window.localStorage.setItem("address", response.data.address);
+                            window.localStorage.setObject("user", response.data);
+                            console.log(localStorage.getObject("user"))
                             window.location.href = "/#/dashboard";
                             location.reload();
                         }

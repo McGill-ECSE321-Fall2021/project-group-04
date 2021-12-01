@@ -2,8 +2,9 @@ package ca.mcgill.ecse321.library.service;
 
 import ca.mcgill.ecse321.library.dao.BookingRepository;
 import ca.mcgill.ecse321.library.dao.MemberRepository;
-import ca.mcgill.ecse321.library.model.*;
-
+import ca.mcgill.ecse321.library.model.Member;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,8 @@ public class MemberService {
         member.setAddress(aAddress);
         member.setMemberType(aMemberType);
         member.setMemberStatus(aMemberStatus);
+        member.setMonthlyFee(aMemberType == Member.MemberType.Local ? 0 : 5);
+        member.setStartDate(Date.valueOf(LocalDate.now()));
 
         memberRepository.save(member);
 
