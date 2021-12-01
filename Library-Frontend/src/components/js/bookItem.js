@@ -1,8 +1,8 @@
 import axios from "axios";
-import JQuery from "jquery";
-import swal from "sweetalert";
+//import JQuery from "jquery";
+//import swal from "sweetalert";
 
-let $ = JQuery;
+//let $ = JQuery;
 let config = require("../../../config");
 
 let backend = function () {
@@ -41,7 +41,7 @@ export default {
         BookCard,
         Books
     },
-    name: "Book",
+    name: "BookItem",
     data() {
         return {
             book: {
@@ -49,12 +49,22 @@ export default {
                 author: "",
                 isbn: "",
                 dateOfRelease: "",
+                numberOfPages: "",
             },
             books: [],
             errorLogin: "",
             response: [],
         };
     },
+
+    created: function () {
+        // Initializing user
+        // See: was done above
+
+        // Initializing books
+        AXIOS.get('/books').then(response => {this.books = response.data}).catch(e => {this.errorEvent = e});
+    },
+
     methods: {
 
 
