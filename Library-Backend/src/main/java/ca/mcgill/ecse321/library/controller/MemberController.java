@@ -1,9 +1,13 @@
 package ca.mcgill.ecse321.library.controller;
 
+import ca.mcgill.ecse321.library.dto.BookingDto;
 import ca.mcgill.ecse321.library.dto.MemberDto;
+import ca.mcgill.ecse321.library.model.Booking;
 import ca.mcgill.ecse321.library.model.Member;
 import ca.mcgill.ecse321.library.model.User;
 import ca.mcgill.ecse321.library.service.MemberService;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +40,23 @@ public class MemberController {
             System.out.println("Error Message: " + e.getMessage());
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
+    }
+
+
+    /**
+     * @param username
+     * @return
+     * @author alymo
+     */
+    @GetMapping(value = {"/member_reservations/{username}"})
+    public List<BookingDto> viewMemberReservations(@PathVariable("username") String username) {
+            List<Booking> bookings = memberService.getMemberBookings(username);
+            List<BookingDto> bookingDtos = new ArrayList<BookingDto>();
+
+            for (Booking b : bookings ) {
+                bookingDtos.add((BookingDto) DTOConverter.convertToDto(b));
+            }
+            return  bookingDtos;
     }
 
     /**

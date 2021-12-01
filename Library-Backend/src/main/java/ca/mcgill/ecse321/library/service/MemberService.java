@@ -1,10 +1,9 @@
 package ca.mcgill.ecse321.library.service;
 
+import ca.mcgill.ecse321.library.dao.BookingRepository;
 import ca.mcgill.ecse321.library.dao.MemberRepository;
-import ca.mcgill.ecse321.library.model.HeadLibrarian;
-import ca.mcgill.ecse321.library.model.Librarian;
-import ca.mcgill.ecse321.library.model.Member;
-import ca.mcgill.ecse321.library.model.User;
+import ca.mcgill.ecse321.library.model.*;
+
 import java.util.List;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +14,9 @@ public class MemberService {
 
     @Autowired
     MemberRepository memberRepository;
+
+    @Autowired
+    BookingRepository bookingRepository;
 
     /**
      * @param aUsername
@@ -87,6 +89,16 @@ public class MemberService {
     @Transactional
     public Member getMember(String username) {
         return memberRepository.findMemberByUsername(username);
+    }
+
+    /**
+     * @param username
+     * @return
+     * @author alymo
+     */
+    @Transactional
+    public List<Booking> getMemberBookings(String username) {
+        return bookingRepository.findByUser(memberRepository.findMemberByUsername(username));
     }
 
     /**
