@@ -58,7 +58,7 @@ export default {
       showMenu: false,
       searchQuery: "",
       model: {
-        username: "aziz",
+        username: window.localStorage.getObject("user").username,
       },
     };
   },

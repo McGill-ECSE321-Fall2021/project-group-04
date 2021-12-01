@@ -76,7 +76,7 @@
               <h6 class="heading-small text-muted mb-4">User information</h6>
               <div class="pl-lg-4">
                 <div class="row">
-                  <div class="col-lg-6">
+                  <div :class="model.isMember ? 'col-lg-6' : 'col-lg-12'">
                     <base-input
                       alternative=""
                       label="Username"
@@ -86,7 +86,7 @@
                       :readonly="true"
                     />
                   </div>
-                  <div class="col-lg-3">
+                  <div class="col-lg-3" v-if="model.isMember">
                     <base-input
                       alternative=""
                       label="Start Date"
@@ -96,7 +96,7 @@
                       :readonly="true"
                     />
                   </div>
-                  <div class="col-lg-3">
+                  <div class="col-lg-3" v-if="model.isMember">
                     <base-input
                       alternative=""
                       label="Montly Fee"
@@ -221,10 +221,11 @@ export default {
   data() {
     return {
       model: {
-        username: "aziz",
-        address: "1234 University, Montreal, Canada",
-        startDate: "10/10/21",
-        monthlyFee: "0",
+        isMember: window.localStorage.getItem('userType') === 'member',
+        username: window.localStorage.getObject("user").username,
+        address: window.localStorage.getItem("address"),
+        startDate: window.localStorage.getObject("user").startDate,
+        monthlyFee: window.localStorage.getObject("user").monthlyFee,
       },
       books: [
         {

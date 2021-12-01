@@ -168,12 +168,14 @@
                       v-bind:key="lib.username"
                     >
                       <librarian-card
+                        :scheduleButton="isHead"
                         :username="lib.username"
                         :workHours="lib.workHours"
                       />
                     </div>
                     <div class="col-lg-3" v-if="headLibrarian">
                       <librarian-card
+                        :scheduleButton="isHead"
                         :username="headLibrarian.username"
                         :workHours="headLibrarian.workHours"
                       />
@@ -208,6 +210,7 @@ export default {
   },
   data() {
     return {
+      isHead: window.localStorage.getItem('userType') === 'head_librarian',
       librarians: [
         {
           username: "aly",

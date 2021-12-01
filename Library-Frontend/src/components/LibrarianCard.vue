@@ -1,7 +1,7 @@
 <template v-if="username">
   <data-card
     :sub-title="username"
-    :button="true"
+    :button="scheduleButton"
     class="mb-2"
     buttonText="Schedule"
     modalTitle="Schedule Librarian"
@@ -44,6 +44,10 @@ export default {
     DataCard,
   },
   props: {
+    scheduleButton: {
+      type: Boolean,
+      default: true,
+    },
     username: String,
     workHours: Array,
   },
