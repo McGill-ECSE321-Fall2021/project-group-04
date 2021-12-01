@@ -223,7 +223,7 @@ export default {
       model: {
         isMember: window.localStorage.getItem('userType') === 'member',
         username: window.localStorage.getObject("user").username,
-        address: window.localStorage.getItem("address"),
+        address: window.localStorage.getObject("user").address,
         startDate: window.localStorage.getObject("user").startDate,
         monthlyFee: window.localStorage.getObject("user").monthlyFee,
       },

@@ -46,7 +46,7 @@ export default {
                 password: "",
             },
             errorLogin: "",
-            response: [],
+            responses: [],
         };
     },
     methods: {
@@ -66,7 +66,7 @@ export default {
                 "/" + userTypes[0] + "_login/",
                 $.param({username: username, password: password})
             ).then(response => {
-                console.log(response.status === 200);
+                this.responses.push(response);
                 if (response.status === 200) {
                     this.user.type = userTypes[0];
                     this.user.username = username;
@@ -74,9 +74,7 @@ export default {
 
                     console.log("type:", this.user.type);
 
-                    window.localStorage.setItem("username", this.user.username);
                     window.localStorage.setItem("userType", this.user.type);
-                    window.localStorage.setItem("address", response.data.address);
                     window.localStorage.setObject("user", response.data);
                     window.location.href = "/#/dashboard";
                     location.reload();
@@ -89,7 +87,7 @@ export default {
                     "/" + userTypes[1] + "_login/",
                     $.param({username: username, password: password})
                 ).then(response => {
-                    console.log(response.status === 200);
+                    this.responses.push(response);
                     if (response.status === 200) {
                         this.user.type = userTypes[1];
                         this.user.username = username;
@@ -97,9 +95,7 @@ export default {
 
                         console.log("type:", this.user.type);
 
-                        window.localStorage.setItem("username", this.user.username);
                         window.localStorage.setItem("userType", this.user.type);
-                        window.localStorage.setItem("address", response.data.address);
                         window.localStorage.setObject("user", response.data);
                         window.location.href = "/#/dashboard";
                         location.reload();
@@ -111,7 +107,7 @@ export default {
                         "/" + userTypes[2] + "_login/",
                         $.param({username: username, password: password})
                     ).then(response => {
-                        console.log(response.status === 200);
+                        this.responses.push(response);
                         if (response.status === 200) {
                             this.user.type = userTypes[2];
                             this.user.username = username;
@@ -119,11 +115,8 @@ export default {
 
                             console.log("type:", this.user.type);
 
-                            window.localStorage.setItem("username", this.user.username);
                             window.localStorage.setItem("userType", this.user.type);
-                            window.localStorage.setItem("address", response.data.address);
                             window.localStorage.setObject("user", response.data);
-                            console.log(localStorage.getObject("user"))
                             window.location.href = "/#/dashboard";
                             location.reload();
                         }
