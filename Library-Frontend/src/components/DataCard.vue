@@ -7,7 +7,7 @@
             {{ title }}
           </h5>
           <span class="h2 font-weight-bold mb-0" v-if="subTitle">
-            {{subTitle}}
+            {{ subTitle }}
           </span>
         </slot>
       </div>
@@ -24,21 +24,19 @@
       </div>
     </div>
 
-    <p class="mt-3 mb-0 text-sm">
-      <slot name="footer"/><br>
-    </p>
+    <p class="mt-3 mb-0 text-sm"><slot name="footer" /><br /></p>
     <div class="text-right pt-2" v-if="button">
       <a>
-        <base-button size="sm" @click="modals[0]=true">{{ buttonText }}</base-button>
+        <base-button size="sm" @click="modals[0] = true">{{
+          buttonText
+        }}</base-button>
         <modal v-model:show="modals[0]">
           <template v-slot:header>
             <h3 class="modal-title lg">{{ modalTitle }}</h3>
           </template>
-          <div class="text-left">
-            <slot name="modal"/><br>
-          </div>
+          <div class="text-left"><slot name="modal" /><br /></div>
           <template v-slot:footer>
-            <base-button size="sm" @click="modals[0]=false">OK</base-button>
+            <base-button size="sm" @click="modals[0] = false">OK</base-button>
           </template>
         </modal>
       </a>
@@ -74,20 +72,18 @@ export default {
     },
     modalTitle: {
       type: String,
-      default: "Reservation Status"
+      default: "Reservation Status",
     },
     buttonText: {
       type: String,
-      default: "Reserve"
+      default: "Reserve",
     },
   },
   data() {
     return {
-      modals: [
-        false,
-      ],
+      modals: [false],
     };
-  }
+  },
 };
 </script>
 <style></style>

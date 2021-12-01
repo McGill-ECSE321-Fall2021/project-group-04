@@ -38,10 +38,7 @@
               <a class="nav-link" href="#" role="button">
                 <div class="media align-items-center">
                   <span class="avatar avatar-sm rounded-circle">
-                    <img
-                      alt="Image placeholder"
-                      src="img/theme/cat.jpg"
-                    />
+                    <img alt="Image placeholder" src="img/theme/cat.jpg" />
                   </span>
                 </div>
               </a>
