@@ -4,12 +4,9 @@
       <div class="col-lg-6">
         <div class="copyright text-center text-lg-left text-muted">
           © {{ year }}
-          <a
-            href="#"
-            class="font-weight-bold ml-1"
-            target="_blank"
-            >Libray</a
-          >
+          <a class="font-weight-bold ml-1" target="_blank" href="/about">
+            Library
+          </a>
         </div>
       </div>
       <div class="col-lg-6">
@@ -17,21 +14,17 @@
           class="nav nav-footer justify-content-center justify-content-lg-end"
         >
           <li class="nav-item">
-                <a
-                  href="#"
-                  class="nav-link"
-                  target="_blank"
-                  >Library</a
-                >
-              </li>
-              <li class="nav-item">
-                <a
-                  href="https://github.com/creativetimofficial/argon-dashboard/blob/master/LICENSE.md"
-                  class="nav-link"
-                  target="_blank"
-                  >MIT License</a
-                >
-              </li>
+            <a href="/about" class="nav-link" target="_blank">Library</a>
+          </li>
+          <li class="nav-item">
+            <a
+              href="https://github.com/creativetimofficial/argon-dashboard/blob/master/LICENSE.md"
+              class="nav-link"
+              target="_blank"
+              >
+              MIT License
+            </a>
+          </li>
         </ul>
       </div>
     </div>

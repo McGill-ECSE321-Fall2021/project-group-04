@@ -1,68 +1,76 @@
 <template>
   <div class="wrapper" :class="{ 'nav-open': $sidebar.showSidebar }">
-    <side-bar
-      :background-color="sidebarBackground"
-      short-title="Argon"
-      title="Argon"
-    >
+    <side-bar :background-color="sidebarBackground">
       <template v-slot:links>
         <sidebar-item
           :link="{
             name: 'Dashboard',
-            icon: 'ni ni-tv-2 text-primary',
+            icon: 'ni ni-tv-2 text-red',
             path: '/dashboard',
           }"
         />
-
-        <!-- <sidebar-item
-          :link="{
-            name: 'Icons',
-            icon: 'ni ni-planet text-blue',
-            path: '/icons',
-          }"
-        /> -->
         <sidebar-item
           :link="{
             name: 'Maps',
-            icon: 'ni ni-pin-3 text-orange',
+            icon: 'ni ni-pin-3 text-red',
             path: '/maps',
           }"
         />
-        <!-- <sidebar-item
+        <sidebar-item
           :link="{
             name: 'User Profile',
-            icon: 'ni ni-single-02 text-yellow',
+            icon: 'ni ni-single-02 text-red',
             path: '/profile',
           }"
-        /> -->
-        <!-- <sidebar-item
+        />
+        <sidebar-item
           :link="{
-            name: 'Tables',
-            icon: 'ni ni-bullet-list-67 text-red',
-            path: '/tables',
+            name: 'Books',
+            icon: 'ni ni-books text-red',
+            path: '/books',
           }"
-        /> -->
-        <!-- <sidebar-item
+        />
+        <sidebar-item
           :link="{
-            name: 'Login',
-            icon: 'ni ni-key-25 text-info',
-            path: '/login',
+            name: 'Movies',
+            icon: 'ni ni-button-play text-red',
+            path: '/movies',
           }"
-        /> -->
-        <!-- <sidebar-item
+        />
+        <sidebar-item
           :link="{
-            name: 'Register',
-            icon: 'ni ni-circle-08 text-pink',
-            path: '/register',
+            name: 'Music Albums',
+            icon: 'ni ni-note-03 text-red',
+            path: '/music-albums',
           }"
-        /> -->
+        />
+        <sidebar-item
+          :link="{
+            name: 'Newspapers',
+            icon: 'ni ni-align-left-2 text-red',
+            path: '/newspapers',
+          }"
+        />
+        <sidebar-item
+          :link="{
+            name: 'Archives',
+            icon: 'ni ni-archive-2 text-red',
+            path: '/archives',
+          }"
+        />
+        <sidebar-item
+          :link="{
+            name: 'About Us',
+            icon: 'ni ni-world text-red',
+            path: '/about',
+          }"
+        />
       </template>
     </side-bar>
     <div class="main-content" :data="sidebarBackground">
       <dashboard-navbar></dashboard-navbar>
 
       <div @click="toggleSidebar">
-        <!-- your content here -->
         <router-view></router-view>
         <content-footer v-if="!$route.meta.hideFooter"></content-footer>
       </div>
