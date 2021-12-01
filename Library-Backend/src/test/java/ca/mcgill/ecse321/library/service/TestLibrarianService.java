@@ -1,5 +1,6 @@
 package ca.mcgill.ecse321.library.service;
 
+import ca.mcgill.ecse321.library.dao.HeadLibrarianRepository;
 import ca.mcgill.ecse321.library.dao.LibrarianRepository;
 import ca.mcgill.ecse321.library.model.Librarian;
 import ca.mcgill.ecse321.library.model.WorkDay;
@@ -42,7 +43,11 @@ public class TestLibrarianService {
     private static final String LIBRARIAN_FRIDAY_START = "09:00:00";
     private static final String LIBRARIAN_FRIDAY_END = "17:00:00";
     @Mock
+    private HeadLibrarianRepository headLibrarianRepository;
+    @Mock
     private LibrarianRepository librarianRepository;
+    @InjectMocks
+    private HeadLibrarianService headLibrarianService;
     @InjectMocks
     private LibrarianService librarianService;
 
