@@ -28,15 +28,18 @@
               <span class="text-muted">Remember me</span>
             </base-checkbox> -->
             <div class="text-center">
-              <base-button type="primary" class="my-4" @click="login(user.username, user.password)">
+              <base-button
+                type="primary"
+                class="my-4"
+                @click="login(user.username, user.password)"
+              >
                 Sign in
               </base-button>
             </div>
 
-<!--            <base-alert type="danger" v-if="!errorLogin">-->
-<!--              <strong>Wrong Credentials</strong>-->
-<!--            </base-alert>-->
-
+            <!--            <base-alert type="danger" v-if="!errorLogin">-->
+            <!--              <strong>Wrong Credentials</strong>-->
+            <!--            </base-alert>-->
           </form>
         </div>
       </div>

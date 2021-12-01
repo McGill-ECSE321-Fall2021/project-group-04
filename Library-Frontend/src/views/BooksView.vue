@@ -26,47 +26,6 @@
         <div class="order-xl-1">
           <card shadow type="secondary">
             <books :books="books" />
-            <base-button block type="primary" v-if="!isMember" @click="modal = true">
-              New Book
-            </base-button>
-            <modal v-model:show="modal">
-              <template v-slot:header>
-                <h3 class="modal-title lg">Add a New Book to the Library</h3>
-              </template>
-              <div class="text-left">
-                <base-input
-                    placeholder="Title"
-                    input-classes="form-control-alternative"
-                />
-                <base-input
-                    placeholder="Author"
-                    input-classes="form-control-alternative"
-                />
-                <base-input
-                    placeholder="Date of Release"
-                    input-classes="form-control-alternative"
-                />
-                <base-input
-                    placeholder="Price"
-                    input-classes="form-control-alternative"
-                />
-                <base-input
-                    placeholder="Number of Pages"
-                    input-classes="form-control-alternative"
-                />
-                <base-input
-                    placeholder="ISBN"
-                    input-classes="form-control-alternative"
-                />
-                <base-input
-                    placeholder="Barcode"
-                    input-classes="form-control-alternative"
-                />
-              </div>
-              <template v-slot:footer>
-                <base-button size="lg" @click="modal = false">Add</base-button>
-              </template>
-            </modal>
           </card>
         </div>
       </div>
@@ -74,53 +33,15 @@
   </div>
 </template>
 
-<script>
+<script >
 import Books from "@/components/Books";
-import BaseButton from "@/components/BaseButton";
+import BookItem from "../components/js/bookItem.js"
 export default {
   name: "books-view",
-  components: {BaseButton, Books },
+  components: { Books },
   data() {
     return {
-      isMember: false,
-      modal: false,
-      books: [
-        {
-          title: "Percy Jackson & the Olympians: The Lightning Thief",
-          author: "Rick Riordan",
-          dateOfRelease: "06/28/05",
-          isbn: "0-7868-5629-7",
-          numberOfPages: "377",
-        },
-        {
-          title: "Percy Jackson & the Olympians: The Sea of Monsters",
-          author: "Rick Riordan",
-          dateOfRelease: "04/01/06",
-          isbn: "0-7868-5686-6",
-          numberOfPages: "279",
-        },
-        {
-          title: "Percy Jackson & the Olympians: The Titan’s Curse",
-          author: "Rick Riordan",
-          dateOfRelease: "05/01/07",
-          isbn: "978-1-4231-0145-1",
-          numberOfPages: "312",
-        },
-        {
-          title: "Percy Jackson & the Olympians: The Battle of the Labyrinth",
-          author: "Rick Riordan",
-          dateOfRelease: "05/06/08",
-          isbn: "9781423101468",
-          numberOfPages: "361",
-        },
-        {
-          title: "Percy Jackson & the Olympians: The Last Olympian",
-          author: "Rick Riordan",
-          dateOfRelease: "05/05/09",
-          isbn: "978-1-4231-0147-5",
-          numberOfPages: "381",
-        },
-      ],
+      books : BookItem.data().books,
     };
   },
 };
