@@ -1,3 +1,4 @@
+import signup from '../components/js/signup';
 <template>
   <div class="row justify-content-center">
     <div class="col-lg-5 col-md-7">
@@ -35,7 +36,7 @@
             </base-input>
 
             <div class="text-center">
-              <base-button type="primary" class="my-4"
+              <base-button type="primary" class="my-4" @click="print_info(model.name)"
                 >Create account</base-button
               >
             </div>
@@ -69,6 +70,12 @@ export default {
       },
     };
   },
+  methods: {
+    print_info(username){
+      console.log(username)
+      window.location.href = "/#/login"
+    }
+  }
 };
 </script>
 <style></style>
