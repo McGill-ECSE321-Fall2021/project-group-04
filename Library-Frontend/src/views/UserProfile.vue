@@ -27,10 +27,7 @@
                 <div class="col-lg-3 order-lg-2">
                   <div class="card-profile-image">
                     <a href="#">
-                      <img
-                        src="img/theme/cat.jpg"
-                        class="rounded-circle"
-                      />
+                      <img src="img/theme/cat.jpg" class="rounded-circle" />
                     </a>
                   </div>
                 </div>
@@ -160,13 +157,13 @@
                   <p class="description">
                     These are all the movies you have reserved.
                   </p>
-                  <movies :movies="movies " :reservable="false"/>
+                  <movies :movies="movies" :reservable="false" />
                 </tab-pane>
                 <tab-pane icon="ni ni-note-03" title="Music Albums">
                   <p class="description">
                     These are all the music albums you have reserved.
                   </p>
-                  <music-albums :albums="albums" :reservable="false"/>
+                  <music-albums :albums="albums" :reservable="false" />
                 </tab-pane>
               </card>
             </tabs>
@@ -193,17 +190,17 @@
               <card shadow>
                 <tab-pane icon="ni ni-books" title="Books">
                   <p class="description">These are all the books you have.</p>
-                  <books :books="books" :reservable="false"/>
+                  <books :books="books" :reservable="false" />
                 </tab-pane>
                 <tab-pane icon="ni ni-button-play" title="Movies">
                   <p class="description">These are all the movies you have.</p>
-                  <movies :movies="movies" :reservable="false"/>
+                  <movies :movies="movies" :reservable="false" />
                 </tab-pane>
                 <tab-pane icon="ni ni-note-03" title="Music Albums">
                   <p class="description">
                     These are all the music albums you have.
                   </p>
-                  <music-albums :albums="albums" :reservable="false"/>
+                  <music-albums :albums="albums" :reservable="false" />
                 </tab-pane>
               </card>
             </tabs>

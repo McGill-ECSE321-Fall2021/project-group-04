@@ -21,7 +21,7 @@
               href="https://github.com/creativetimofficial/argon-dashboard/blob/master/LICENSE.md"
               class="nav-link"
               target="_blank"
-              >
+            >
               MIT License
             </a>
           </li>

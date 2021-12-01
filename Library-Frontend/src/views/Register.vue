@@ -36,7 +36,10 @@ import signup from '../components/js/signup';
             </base-input>
 
             <div class="text-center">
-              <base-button type="primary" class="my-4" @click="print_info(model.name)"
+              <base-button
+                type="primary"
+                class="my-4"
+                @click="print_info(model.name)"
                 >Create account</base-button
               >
             </div>
@@ -71,11 +74,11 @@ export default {
     };
   },
   methods: {
-    print_info(username){
-      console.log(username)
-      window.location.href = "/#/login"
-    }
-  }
+    print_info(username) {
+      console.log(username);
+      window.location.href = "/#/login";
+    },
+  },
 };
 </script>
 <style></style>

@@ -1,9 +1,9 @@
 <template>
   <data-card
-      :title="author"
-      :sub-title="title"
-      :button="reservable"
-      class="mb-2"
+    :title="author"
+    :sub-title="title"
+    :button="reservable"
+    class="mb-2"
   >
     <template v-slot:footer>
       <span class="mr-2" v-if="dateOfRelease">
@@ -20,7 +20,7 @@
       </span>
     </template>
     <template v-slot:modal>
-      You have successfully reserved {{title}}
+      You have successfully reserved {{ title }}
     </template>
   </data-card>
 </template>
