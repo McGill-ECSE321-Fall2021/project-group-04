@@ -110,4 +110,4 @@ AXIOS.post('/checkout/username'.concat(localStorage.getItem('username')).concat(
         })
 }
 
-}
+}}
