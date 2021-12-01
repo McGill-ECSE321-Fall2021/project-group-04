@@ -2,6 +2,7 @@ package ca.mcgill.ecse321.library.service;
 
 import ca.mcgill.ecse321.library.dao.BookingRepository;
 import ca.mcgill.ecse321.library.dao.MemberRepository;
+import ca.mcgill.ecse321.library.model.Booking;
 import ca.mcgill.ecse321.library.model.Member;
 import java.sql.Date;
 import java.time.LocalDate;

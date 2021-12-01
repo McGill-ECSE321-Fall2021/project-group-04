@@ -26,6 +26,31 @@
         <div class="order-xl-1">
           <card shadow type="secondary">
             <ImmovableItems :immovable-items="newspaper" />
+            <base-button block type="primary" v-if="!isMember" @click="modal = true">
+              New Newspaper
+            </base-button>
+            <modal v-model:show="modal">
+              <template v-slot:header>
+                <h3 class="modal-title lg">Add a New Book to the Library</h3>
+              </template>
+              <div class="text-left">
+                <base-input
+                    placeholder="Title"
+                    input-classes="form-control-alternative"
+                />
+                <base-input
+                    placeholder="Date"
+                    input-classes="form-control-alternative"
+                />
+                <base-input
+                    placeholder="Number Of Pages"
+                    input-classes="form-control-alternative"
+                />
+              </div>
+              <template v-slot:footer>
+                <base-button size="lg" @click="modal = false">Add</base-button>
+              </template>
+            </modal>
           </card>
         </div>
       </div>
@@ -40,6 +65,8 @@ export default {
   components: { ImmovableItems },
   data() {
     return {
+      isMember: false,
+      modal: false,
       newspaper: [
         {
           title: "Charlie and the Chocolate Factory",
