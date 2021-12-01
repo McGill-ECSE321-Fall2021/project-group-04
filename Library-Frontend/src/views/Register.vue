@@ -12,7 +12,7 @@ import signup from '../components/js/signup';
               formClasses="input-group-alternative"
               placeholder="Username"
               addon-left-icon="ni ni-hat-3"
-              v-model="model.name"
+              v-model="user.username"
             >
             </base-input>
 
@@ -21,7 +21,7 @@ import signup from '../components/js/signup';
               placeholder="Password"
               type="password"
               addon-left-icon="ni ni-lock-circle-open"
-              v-model="model.password"
+              v-model="user.password"
             >
             </base-input>
 
@@ -31,7 +31,7 @@ import signup from '../components/js/signup';
               formClasses="input-group-alternative"
               placeholder="Address"
               addon-left-icon="ni ni-building"
-              v-model="model.address"
+              v-model="user.address"
             >
             </base-input>
 
@@ -39,7 +39,7 @@ import signup from '../components/js/signup';
               <base-button
                 type="primary"
                 class="my-4"
-                @click="print_info(model.name)"
+                @click="sign_up(user.username, user.password, user.address)"
                 >Create account</base-button
               >
             </div>
@@ -61,24 +61,5 @@ import signup from '../components/js/signup';
     </div>
   </div>
 </template>
-<script>
-export default {
-  name: "register",
-  data() {
-    return {
-      model: {
-        username: "",
-        password: "",
-        address: "",
-      },
-    };
-  },
-  methods: {
-    print_info(username) {
-      console.log(username);
-      window.location.href = "/#/login";
-    },
-  },
-};
-</script>
+<script src="../components/js/signup.js" />
 <style></style>

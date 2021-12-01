@@ -1,21 +1,22 @@
 import axios from "axios";
 import JQuery from "jquery";
+import swal from "sweetalert"
 
 let $ = JQuery;
-var config = require("../../../config");
+let config = require("../../../config");
 
-var backendConfigurer = function () {
+let backend = function () {
   switch (process.env.NODE_ENV) {
     case "development":
       return "http://" + config.dev.backendHost + ":" + config.dev.backendPort;
     case "production":
       return (
-        "https://" + config.build.backendHost + ":" + config.build.backendPort
+          "https://" + config.build.backendHost + ":" + config.build.backendPort
       );
   }
 };
 
-var frontendConfigurer = function () {
+let frontend = function () {
   switch (process.env.NODE_ENV) {
     case "development":
       return "http://" + config.dev.host + ":" + config.dev.port;
@@ -23,62 +24,75 @@ var frontendConfigurer = function () {
       return "https://" + config.build.host + ":" + config.build.port;
   }
 };
-var backendUrl = backendConfigurer();
-var frontendUrl = frontendConfigurer();
+let backendUrl = backend();
+let frontendUrl = frontend();
 
-var AXIOS = axios.create({
+let AXIOS = axios.create({
   baseURL: backendUrl,
-  headers: { "Access-Control-Allow-Origin": frontendUrl },
+  headers: {"Access-Control-Allow-Origin": frontendUrl},
 });
 
+import BaseAlert from "@/components/BaseAlert";
 export default {
-  name: "member_login",
+  components: {
+    BaseAlert
+  },
+  name: "sign_up",
   data() {
     return {
-      user: "",
-      username: "",
-      password: "",
-      errorLogin: "",
+      user: {
+        type: "",
+        username: "",
+        password: "",
+        address: ""
+      },
+      errorSignup: "",
       response: [],
     };
   },
   methods: {
+
+    print_info(username) {
+      console.log(username);
+      window.location.href = "/#/login";
+    },
     /**
      * @author alymo
      * @param username
      * @param password
      * gets user input from frontend and logs in using controller method login
      */
-    login(username, password, member_type, member_status) {
+    sign_up(username, password, address) {
+      console.log("signing up")
+      console.log(username)
+      console.log(password)
+      console.log(address)
+
+
+      let userTypes = ['member', 'librarian', 'head_librarian']
+      var input = "/member_sign_up?" + $.param({username: username, password: password, address: address, member_type: "Local", member_status: "Active"})
+      console.log(input)
       AXIOS.post(
-        "/member_sign_up/",
-        $.param({
-          username: username,
-          password: password,
-          member_type: member_type,
-          member_status: member_status,
-        })
-      )
-        .then((response) => {
-          this.user = response.data;
+          input
+      ).then(response => {
+        console.log(response)
+        console.log(response.status === 201);
+        if (response.status === 201) {
+          this.user.type = userTypes[0];
+          this.user.username = username;
+          this.user.password = password;
 
-          if (response.status === 200) {
-            window.localStorage.setItem("username", this.user.username);
+          console.log("type:", this.user.type);
 
-            if (this.type.localeCompare("member") == 0) {
-              window.location.href = "/#/member";
-            } else if (this.type.localeCompare("librarian") == 0) {
-              window.location.href = "/#/librarian";
-            } else {
-              window.location.href = "/#/headLibrarian";
-            }
+          window.localStorage.setItem("username", this.user.username);
+          window.location.href = "/#/dashboard";
+          location.reload();
+        }
+      }).catch((e) => {
+        console.error(e)
+        swal("ERROR", e.response.data, "error");
+      })
 
-            location.reload();
-          }
-        })
-        .catch((e) => {
-          window.swal("ERROR", e.response.data, "error");
-        });
     },
   },
 };
