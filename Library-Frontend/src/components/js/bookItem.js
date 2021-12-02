@@ -52,7 +52,7 @@ export default {
                 dateOfRelease: "",
                 numberOfPages: "",
             },
-            isMember: false,
+            isMember: window.localStorage.getItem('userType') === 'member',
             modal: false,
             books: [],
             isLoaded: false,
@@ -64,6 +64,8 @@ export default {
     created: function () {
         // Initializing user
         // See: was done above
+
+        console.log("Created bookItem")
 
         // Initializing books
         AXIOS.get('/books').then(response => {this.books = response.data}).catch(e => {this.errorEvent = e});
@@ -80,9 +82,6 @@ export default {
                 this.books = response.data
 
             }).catch(e => {this.errorEvent = e});
-
-            this.isLoaded = true;
-            console.log(this.isLoaded)
 
             return this.books
         },
@@ -101,7 +100,13 @@ export default {
             }).catch((e) => {
                 swal("ERROR", e.response.data);
             })
-        }
+
+        
 
     },
+        beforeMount(){
+            this.getBooks()
+        }
+    }
 };
+
