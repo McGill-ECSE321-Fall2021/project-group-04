@@ -1,7 +1,6 @@
 import axios from "axios";
 import JQuery from "jquery";
 
-
 let $ = JQuery;
 let config = require("../../../config");
 
@@ -29,68 +28,40 @@ let frontendUrl = frontend();
 
 let AXIOS = axios.create({
     baseURL: backendUrl,
-    headers: { "Access-Control-Allow-Origin": frontendUrl },
+    headers: {"Access-Control-Allow-Origin": frontendUrl},
 });
 
-import BaseAlert from "@/components/BaseAlert";
-import BookCard from "@/components/BookCard";
-import Books from "@/components/Books";
+import Movies from "@/components/Movies";
+import MovieItem from "../js/movieItem"
 import swal from "sweetalert";
 export default {
-    components: {
-        BaseAlert,
-        BookCard,
-        Books
-    },
-    name: "books-view",
+    name: "movies-view",
+    components: { Movies },
+    //String barCode, String title, String author,
+    //String dateOfRelease, String price, String length
     data() {
         return {
-            book: {
+            movie: {
                 title: "",
                 author: "",
-                isbn: "",
+                length: "",
                 dateOfRelease: "",
-                numberOfPages: "",
+                barCode: "",
+                price: ""
             },
             isMember: false,
             modal: false,
-            books: [],
-            isLoaded: false,
-            errorLogin: "",
-            response: [],
+            movies : MovieItem.data().movies,
         };
+
     },
-
-    created: function () {
-        // Initializing user
-        // See: was done above
-
-        // Initializing books
-        AXIOS.get('/books').then(response => {this.books = response.data}).catch(e => {this.errorEvent = e});
-    },
-
     methods: {
 
-
-        getBooks(){
-
-            console.log("Getting all Books")
-
-            AXIOS.get('/books').then(response => {
-                this.books = response.data
-
-            }).catch(e => {this.errorEvent = e});
-
-            this.isLoaded = true;
-            console.log(this.isLoaded)
-
-            return this.books
-        },
-        addBook(title, price, barCode, isbn, numberOfPages, author, dateOfRelease){
-            console.log(title + price + barCode + numberOfPages + author + dateOfRelease + isbn)
+        addMovie(title, price, barCode, length, author, dateOfRelease){
+            console.log(title + price + barCode + length + author + dateOfRelease)
             AXIOS.post(
-                "/create_book/",
-                $.param({barCode: barCode, title: title, author: author, dateOfRelease: dateOfRelease, price: price, isbn: isbn, numberOfPages: numberOfPages})
+                "/create_movie/",
+                $.param({barCode: barCode, title: title, author: author, dateOfRelease: dateOfRelease, price: price, length: length})
             ).then(response => {
                 console.log(response)
                 console.log(response.status === 201);
@@ -102,6 +73,5 @@ export default {
                 swal("ERROR", e.response.data);
             })
         }
-
-    },
+    }
 };

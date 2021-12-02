@@ -1,7 +1,6 @@
 import axios from "axios";
 import JQuery from "jquery";
 
-
 let $ = JQuery;
 let config = require("../../../config");
 
@@ -29,20 +28,15 @@ let frontendUrl = frontend();
 
 let AXIOS = axios.create({
     baseURL: backendUrl,
-    headers: { "Access-Control-Allow-Origin": frontendUrl },
+    headers: {"Access-Control-Allow-Origin": frontendUrl},
 });
 
-import BaseAlert from "@/components/BaseAlert";
-import BookCard from "@/components/BookCard";
 import Books from "@/components/Books";
+import BookItem from "../js/bookItem"
 import swal from "sweetalert";
 export default {
-    components: {
-        BaseAlert,
-        BookCard,
-        Books
-    },
     name: "books-view",
+    components: { Books },
     data() {
         return {
             book: {
@@ -51,41 +45,18 @@ export default {
                 isbn: "",
                 dateOfRelease: "",
                 numberOfPages: "",
+                barCode: "",
+                price: ""
             },
             isMember: false,
             modal: false,
-            books: [],
-            isLoaded: false,
-            errorLogin: "",
-            response: [],
+            books : BookItem.data().books,
         };
+
     },
-
-    created: function () {
-        // Initializing user
-        // See: was done above
-
-        // Initializing books
-        AXIOS.get('/books').then(response => {this.books = response.data}).catch(e => {this.errorEvent = e});
-    },
-
     methods: {
-
-
-        getBooks(){
-
-            console.log("Getting all Books")
-
-            AXIOS.get('/books').then(response => {
-                this.books = response.data
-
-            }).catch(e => {this.errorEvent = e});
-
-            this.isLoaded = true;
-            console.log(this.isLoaded)
-
-            return this.books
-        },
+        // @RequestParam String barCode, @RequestParam String title, @RequestParam String author,
+        // @RequestParam String dateOfRelease, @RequestParam String price, @RequestParam String isbn, @RequestParam String numberOfPages
         addBook(title, price, barCode, isbn, numberOfPages, author, dateOfRelease){
             console.log(title + price + barCode + numberOfPages + author + dateOfRelease + isbn)
             AXIOS.post(
@@ -102,6 +73,5 @@ export default {
                 swal("ERROR", e.response.data);
             })
         }
-
-    },
+    }
 };

@@ -122,7 +122,7 @@ export default {
                         }
                     }).catch((e) => {
                         console.error(e)
-                        swal("ERROR", e.response.data, "error");
+                        swal("ERROR", e.response.data);
                     })
                 })
             })

@@ -35,36 +35,44 @@
               </template>
               <div class="text-left">
                 <base-input
-                    placeholder="Title"
-                    input-classes="form-control-alternative"
+                        placeholder="Title"
+                        input-classes="form-control-alternative"
+                        v-model="musicAlbum.title"
                 />
                 <base-input
-                    placeholder="Author"
-                    input-classes="form-control-alternative"
+                        placeholder="Author"
+                        input-classes="form-control-alternative"
+                        v-model="musicAlbum.author"
                 />
                 <base-input
-                    placeholder="Date of Release"
-                    input-classes="form-control-alternative"
+                        placeholder="Date of Release"
+                        input-classes="form-control-alternative"
+                        v-model="musicAlbum.dateOfRelease"
                 />
                 <base-input
-                    placeholder="Price"
-                    input-classes="form-control-alternative"
+                        placeholder="Price"
+                        input-classes="form-control-alternative"
+                        v-model="musicAlbum.price"
                 />
                 <base-input
-                    placeholder="Number of Songs"
-                    input-classes="form-control-alternative"
+                        placeholder="Number of Songs"
+                        input-classes="form-control-alternative"
+                        v-model="musicAlbum.numberOfSongs"
                 />
                 <base-input
-                    placeholder="Total Length"
-                    input-classes="form-control-alternative"
+                        placeholder="Total Length"
+                        input-classes="form-control-alternative"
+                        v-model="musicAlbum.totalLength"
+
                 />
                 <base-input
-                    placeholder="Barcode"
-                    input-classes="form-control-alternative"
+                        placeholder="Barcode"
+                        input-classes="form-control-alternative"
+                        v-model="musicAlbum.barCode"
                 />
               </div>
               <template v-slot:footer>
-                <base-button size="lg" @click="modal = false">Add</base-button>
+                <base-button size="lg"  @click="add_music_album(musicAlbum.title, musicAlbum.price, musicAlbum.barCode, musicAlbum.numberOfSongs, musicAlbum.numberOfPages, musicAlbum.author, musicAlbum.dateOfRelease, musicAlbum.totalLength)">Add</base-button>
               </template>
             </modal>
           </card>

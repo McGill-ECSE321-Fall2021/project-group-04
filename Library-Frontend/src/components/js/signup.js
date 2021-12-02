@@ -84,13 +84,14 @@ export default {
 
           console.log("type:", this.user.type);
 
+          swal("SUCCESS", response.data);
           window.localStorage.setItem("username", this.user.username);
           window.location.href = "/#/dashboard";
           location.reload();
         }
       }).catch((e) => {
         console.error(e)
-        swal("ERROR", e.response.data, "error");
+        swal("ERROR", e.response.data);
       })
 
     },

@@ -1,5 +1,7 @@
 import axios from "axios";
 let config = require("../../../config");
+let $ = JQuery;
+
 
 let backend = function () {
     switch (process.env.NODE_ENV) {
@@ -29,11 +31,21 @@ let AXIOS = axios.create({
 });
 
 import Movies from "@/components/Movies";
+import swal from "sweetalert";
+import JQuery from "jquery";
 export default {
     name: "movies-view",
     components: { Movies },
     data() {
         return {
+            movie: {
+                title: "",
+                author: "",
+                dateOfRelease: "",
+                length: "",
+                barCode: "",
+                price: ""
+            },
             isMember: false,
             modal: false,
             movies: [
@@ -69,6 +81,22 @@ export default {
         getMovies() {
             AXIOS.post("/movies").then(response => {
                 this.movies = response.data;
+            })
+        },
+        add_movie(title, price, barCode, length, author, dateOfRelease){
+            console.log(title + price + barCode + length + author + dateOfRelease)
+            AXIOS.post(
+                "/create_movie/",
+                $.param({barCode: barCode, title: title, author: author, dateOfRelease: dateOfRelease, price: price, length: length})
+            ).then(response => {
+                console.log(response)
+                console.log(response.status === 201);
+                if (response.status === 201) {
+                    swal("SUCCESS", response.data);
+                }
+
+            }).catch((e) => {
+                swal("ERROR", e.response.data);
             })
         }
     },

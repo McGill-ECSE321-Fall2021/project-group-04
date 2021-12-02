@@ -1,6 +1,6 @@
 import axios from "axios";
 import JQuery from "jquery";
-
+//import swal from "sweetalert";
 
 let $ = JQuery;
 let config = require("../../../config");
@@ -42,22 +42,50 @@ export default {
         BookCard,
         Books
     },
-    name: "books-view",
+    name: "MusicAlbumItem",
     data() {
         return {
-            book: {
+            musicAlbum: {
                 title: "",
                 author: "",
-                isbn: "",
                 dateOfRelease: "",
-                numberOfPages: "",
+
             },
             isMember: false,
-            modal: false,
-            books: [],
-            isLoaded: false,
+            musicAlbums: [],
             errorLogin: "",
             response: [],
+            modal: false,
+            albums: [
+                {
+                    title: "Kamikaze",
+                    author: "Eminem",
+                    dateOfRelease: "08/31/18",
+                    numberOfSongs: "13",
+                    totalLength: "45:49",
+                },
+                {
+                    title: "Music to Be Murdered By",
+                    author: "Eminem",
+                    dateOfRelease: "01/17/20",
+                    numberOfSongs: "13",
+                    totalLength: "62:23",
+                },
+                {
+                    title: "Revival",
+                    author: "Eminem",
+                    dateOfRelease: "12/15/17",
+                    numberOfSongs: "18",
+                    totalLength: "77:39",
+                },
+                {
+                    title: "+ (Plus) Deluxe",
+                    author: "Ed Sheeran",
+                    dateOfRelease: "09/09/11",
+                    numberOfSongs: "12",
+                    totalLength: "65:35",
+                },
+            ],
         };
     },
 
@@ -66,31 +94,15 @@ export default {
         // See: was done above
 
         // Initializing books
-        AXIOS.get('/books').then(response => {this.books = response.data}).catch(e => {this.errorEvent = e});
+        AXIOS.get('/musicAlbums').then(response => {this.albums = response.data}).catch(e => {this.errorEvent = e});
     },
 
     methods: {
-
-
-        getBooks(){
-
-            console.log("Getting all Books")
-
-            AXIOS.get('/books').then(response => {
-                this.books = response.data
-
-            }).catch(e => {this.errorEvent = e});
-
-            this.isLoaded = true;
-            console.log(this.isLoaded)
-
-            return this.books
-        },
-        addBook(title, price, barCode, isbn, numberOfPages, author, dateOfRelease){
-            console.log(title + price + barCode + numberOfPages + author + dateOfRelease + isbn)
+        add_music_album(title, price, barCode, numberOfSongs, numberOfPages, author, dateOfRelease, totalLength){
+            console.log(title + price + barCode + numberOfPages + author + dateOfRelease )
             AXIOS.post(
-                "/create_book/",
-                $.param({barCode: barCode, title: title, author: author, dateOfRelease: dateOfRelease, price: price, isbn: isbn, numberOfPages: numberOfPages})
+                "/create_music_album/",
+                $.param({barCode: barCode, title: title, author: author, dateOfRelease: dateOfRelease, price: price, numberOfSongs: numberOfSongs, totalLength: totalLength})
             ).then(response => {
                 console.log(response)
                 console.log(response.status === 201);
@@ -104,4 +116,5 @@ export default {
         }
 
     },
+
 };

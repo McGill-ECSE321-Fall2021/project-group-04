@@ -29,7 +29,7 @@
             <section>
               <div class="row align-items-center">
                 <div class="col-xl-3 col-sm-6 col-12 mb-4">
-                  <a href="/books">
+                  <a href="/#/books">
                     <div class="card">
                       <div class="card-body">
                         <div class="d-flex justify-content-around px-md-1">
@@ -46,7 +46,7 @@
                   </a>
                 </div>
                 <div class="col-xl-3 col-sm-6 col-12 mb-4">
-                  <a href="/movies">
+                  <a href="/#/movies">
                     <div class="card">
                       <div class="card-body">
                         <div class="d-flex justify-content-around px-md-1">
@@ -63,7 +63,7 @@
                   </a>
                 </div>
                 <div class="col-xl-3 col-sm-6 col-12 mb-4">
-                  <a href="/albums">
+                  <a href="/#/music-albums">
                     <div class="card">
                       <div class="card-body">
                         <div class="d-flex justify-content-around px-md-1">
@@ -82,7 +82,7 @@
               </div>
               <div class="row align-items-center">
                 <div class="col-xl-3 col-sm-6 col-12 mb-4">
-                  <a href="/newspapers">
+                  <a href="/#/newspapers">
                     <div class="card">
                       <div class="card-body">
                         <div class="d-flex justify-content-around px-md-1">
@@ -101,7 +101,7 @@
                   </a>
                 </div>
                 <div class="col-xl-3 col-sm-6 col-12 mb-4">
-                  <a href="/archives">
+                  <a href="/#/archives">
                     <div class="card">
                       <div class="card-body">
                         <div class="d-flex justify-content-around px-md-1">
@@ -213,7 +213,7 @@ export default {
       isHead: window.localStorage.getItem('userType') === 'head_librarian',
       librarians: [
         {
-          username: "aly",
+          username: "Aly",
           workHours: [
             {
               day: "Monday",
@@ -253,7 +253,7 @@ export default {
           ],
         },
         {
-          username: "simo",
+          username: "Simo",
           workHours: [
             {
               day: "Monday",
@@ -293,7 +293,7 @@ export default {
           ],
         },
         {
-          username: "saghar",
+          username: "Saghar",
           workHours: [
             {
               day: "Monday",
@@ -333,7 +333,7 @@ export default {
           ],
         },
         {
-          username: "zizou",
+          username: "Zizou",
           workHours: [
             {
               day: "Monday",
@@ -364,6 +364,46 @@ export default {
               day: "Saturday",
               start: "",
               end: "",
+            },
+            {
+              day: "Sunday",
+              start: "",
+              end: "",
+            },
+          ],
+        },
+        {
+          username: "Alex",
+          workHours: [
+            {
+              day: "Monday",
+              start: "9:00",
+              end: "5:00",
+            },
+            {
+              day: "Tuesday",
+              start: "9:00",
+              end: "5:00",
+            },
+            {
+              day: "Wednesday",
+              start: "9:00",
+              end: "5:00",
+            },
+            {
+              day: "Thursday",
+              start: "9:00",
+              end: "5:00",
+            },
+            {
+              day: "Friday",
+              start: "9:00",
+              end: "5:00",
+            },
+            {
+              day: "Saturday",
+              start: "9:00",
+              end: "5:00",
             },
             {
               day: "Sunday",
@@ -374,7 +414,7 @@ export default {
         },
       ],
       headLibrarian: {
-        username: "jewoo",
+        username: "Jewoo",
         workHours: [
           {
             day: "Monday",

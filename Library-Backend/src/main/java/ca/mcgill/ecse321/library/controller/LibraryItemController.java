@@ -165,6 +165,8 @@ public class LibraryItemController {
         return books;
     }
 
+
+
     /**
      * @return list of all the movies
      * @author Alexandre
@@ -198,7 +200,7 @@ public class LibraryItemController {
      * @author Alexandre
      * Gets a list of all the Archive
      */
-    @GetMapping(value = {"/archive", "/archive/"})
+    @GetMapping(value = {"/archives", "/archives/"})
     public List<ArchiveDto> getAllArchives() {
         List<ArchiveDto> archives = new ArrayList<ArchiveDto>();
         for (Archive archive : archiveService.getAllArchives()) {
@@ -212,7 +214,7 @@ public class LibraryItemController {
      * @author Alexandre
      * Gets a list of all the Newpapers
      */
-    @GetMapping(value = {"/newspaper", "/newspaper/"})
+    @GetMapping(value = {"/newspapers", "/newspapers/"})
     public List<NewspaperDto> getAllNewspapers() {
         List<NewspaperDto> newspapers = new ArrayList<NewspaperDto>();
         for (Newspaper newspaper : newspaperService.getAllNewspapers()) {

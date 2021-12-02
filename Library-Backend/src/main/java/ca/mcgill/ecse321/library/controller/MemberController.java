@@ -49,7 +49,7 @@ public class MemberController {
      * @author alymo
      */
     @GetMapping(value = {"/member_reservations/{username}"})
-    public List<BookingDto> viewMemberReservations(@PathVariable("username") String username) {
+    public List<BookingDto> viewMemberBookings(@PathVariable("username") String username) {
             List<Booking> bookings = memberService.getMemberBookings(username);
             List<BookingDto> bookingDtos = new ArrayList<BookingDto>();
 
