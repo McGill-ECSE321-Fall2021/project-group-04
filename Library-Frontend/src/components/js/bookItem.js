@@ -41,7 +41,7 @@ export default {
         BookCard,
         Books
     },
-    name: "BookItem",
+    name: "books-view",
     data() {
         return {
             book: {
@@ -51,6 +51,8 @@ export default {
                 dateOfRelease: "",
                 numberOfPages: "",
             },
+            isMember: false,
+            modal: false,
             books: [],
             isLoaded: false,
             errorLogin: "",

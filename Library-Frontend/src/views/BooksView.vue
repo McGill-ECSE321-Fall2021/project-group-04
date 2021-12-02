@@ -25,7 +25,7 @@
       <div class="col justify-content-center">
         <div class="order-xl-1">
           <card shadow type="secondary">
-            <books  v-if="!(isBooks == [])" :books="isBooks" />
+            <books  :books="books" />
             <base-button block type="primary" v-if="!isMember" @click="modal = true">
               New Book
             </base-button>
@@ -74,24 +74,6 @@
   </div>
 </template>
 
-<script >
-import Books from "@/components/Books";
-import BookItem from "../components/js/bookItem.js"
-export default {
-  name: "books-view",
-  components: { Books },
-  data() {
-    return {
-      isMember: false,
-      modal: false,
-      books : BookItem.methods.getBooks(),
+<script src="../components/js/bookItem.js">
 
-    };
-  },
-  computed: {
-    isBooks() {
-      return BookItem.methods.getBooks()
-    }
-  }
-};
 </script>
