@@ -33,16 +33,14 @@ let AXIOS = axios.create({
 });
 
 import BaseAlert from "@/components/BaseAlert";
-import BookCard from "@/components/BookCard";
-import Books from "@/components/Books";
+import MusicAlbums from "@/components/MusicAlbums";
 import swal from "sweetalert";
 export default {
     components: {
         BaseAlert,
-        BookCard,
-        Books
+        MusicAlbums
     },
-    name: "MusicAlbumItem",
+    name: "music-album-view",
     data() {
         return {
             musicAlbum: {
@@ -51,12 +49,13 @@ export default {
                 dateOfRelease: "",
 
             },
-            isMember: false,
+            isMember: window.localStorage.getItem('userType') === 'member',
             musicAlbums: [],
             errorLogin: "",
             response: [],
             modal: false,
-            albums: [
+            albums: [],
+            albumsC: [
                 {
                     title: "Kamikaze",
                     author: "Eminem",
@@ -94,7 +93,10 @@ export default {
         // See: was done above
 
         // Initializing books
-        AXIOS.get('/musicAlbums').then(response => {this.albums = response.data}).catch(e => {this.errorEvent = e});
+        AXIOS.get('/musicAlbums').then(response => {
+            this.albums = response.data
+            console.log(response.data)
+        }).catch(e => {this.errorEvent = e});
     },
 
     methods: {
@@ -107,11 +109,11 @@ export default {
                 console.log(response)
                 console.log(response.status === 201);
                 if (response.status === 201) {
-                    swal("SUCCESS", response.data);
+                    swal("Success", response.data);
                 }
 
             }).catch((e) => {
-                swal("ERROR", e.response.data);
+                swal("Error", e.response.data);
             })
         }
 

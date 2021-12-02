@@ -1,6 +1,6 @@
 import axios from "axios";
 //import JQuery from "jquery";
-//import swal from "sweetalert"
+import swal from "sweetalert"
 
 //let $ = JQuery;
 let config = require("../../../config");
@@ -57,7 +57,10 @@ export default {
             newBooking: '',
             errorBooking: '',
             bookings: [],
+            isMember: window.localStorage.getItem('userType') === 'member',
             reservations: [],
+            allReservations: [],
+            allLendings: [],
             movies: [{
                 title: "Charlie and the Chocolate Factory",
                 author: "Tim Burton",
@@ -96,6 +99,10 @@ created: function () {
     // Initializing bookings
     AXIOS.get('/bookings').then(response => {this.bookings = response.data}).catch(e => {this.errorEvent = e});
 
+    AXIOS.get('/reservations').then(response => {this.allReservations = response.data}).catch(e => {this.errorEvent = e});
+
+    AXIOS.get('/lendings').then(response => {this.allLendings = response.data}).catch(e => {this.errorEvent = e});
+
     AXIOS.get('/member_bookReservations/'.concat(window.localStorage.getItem('username'))).then(response => {this.reservations = response.data}).catch(e => {this.errorEvent = e});
 
     AXIOS.get('/member_bookLendings/'.concat(window.localStorage.getItem('username'))).then(response => {this.lendings = response.data}).catch(e => {this.errorEvent = e});
@@ -104,52 +111,58 @@ created: function () {
 
 methods: {
 
-createBooking: function (itemType, itemId){
- AXIOS.post('/booking/'.concat(localStorage.getItem('username')).concat('/itemType/').concat(itemType).concat('/itemId/').concat(itemId), {}, {})
+createBooking: function (itemType, itemTitle){
+    console.log("Booking item")
+    console.log('/booking/'.concat(localStorage.getItem('username')).concat('/itemType/').concat(itemType).concat('/itemId/').concat(itemTitle))
+ AXIOS.post('/booking/'.concat(localStorage.getItem('username')).concat('/itemType/').concat(itemType).concat('/itemId/').concat(itemTitle), {}, {})
         .then(response => {
-        // JSON responses are automatically parsed.
-          this.bookings.push(response.data)
-          this.errorBooking = ''
-          this.newBooking = response.data
-          this.user = localStorage.getItem('username')
+
+            this.errorBooking = ''
+            this.newBooking = response.data
+            this.user = localStorage.getItem('username')
+            swal("Reservation Confirmed","You have successfully reserved the " + itemType.toLowerCase() + "loc: " + itemTitle)
 
         })
-        .catch(e => {
-          var errorMsg = e.response.data.message
+        .catch((e) => {
+          var errorMsg = e
           console.log(errorMsg)
-          this.errorBooking = errorMsg
+          this.errorBooking = errorMsg;
+          swal("Error", e.response.data)
+
 
         })
 
 },
 
-returnItem(itemType, itemId){
-AXIOS.post('/return/itemType/'.concat(itemType).concat('/itemId/').concat(itemId), {}, {})
+returnItem(itemType, itemTitle){
+AXIOS.post('/return/itemType/'.concat(itemType).concat('/itemId/').concat(itemTitle), {}, {})
         .then(response => {
         // JSON responses are automatically parsed.
         //should removeItem from reserved list
             this.response = response.data
         })
         .catch(e => {
-          var errorMsg = e.response.data.message
+          var errorMsg = e.response.data
           console.log(errorMsg)
           this.errorBooking = errorMsg
         })
 },
 
-checkoutItem(bookingId){
-AXIOS.post('/checkout/username/'.concat(localStorage.getItem('username')).concat('/bookingId/').concat(bookingId), {}, {})
+checkoutItem(reservee, bookingId){
+AXIOS.post('/checkout/username/'.concat(reservee).concat('/bookingId/').concat(bookingId), {}, {})
         .then(response => {
         // JSON responses are automatically parsed.
         //alters booking type in the booking
         this.errorBooking = ''
         this.newBooking = response.data
         this.user = localStorage.getItem('username')
+            swal("Successful", "Checkout reservation for " + reservee)
         })
         .catch(e => {
-          var errorMsg = e.response.data.message
+          var errorMsg = e.response.data
           console.log(errorMsg)
           this.errorBooking = errorMsg
+            swal("Error", e.response.data)
         })
 },
 

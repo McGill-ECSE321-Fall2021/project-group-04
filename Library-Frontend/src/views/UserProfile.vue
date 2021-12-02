@@ -148,10 +148,14 @@
             <tabs fill class="flex-column flex-md-row">
               <card shadow>
                 <tab-pane icon="ni ni-books" title="Books">
-                  <p class="description">
+                  <p v-if="isMember" class="description">
                     These are all the books you have reserved.
                   </p>
-                  <books :books="reservations" :reservable="false" />
+                  <p v-if="!isMember" class="description">
+                    All the books people have reserved.
+                  </p>
+                  <books v-if="!isMember" :books="allReservations" :reservable="false" :checkoutable="true" />
+                  <books v-if="isMember" :books="reservations" :reservable="false" :checkoutable="false" />
                 </tab-pane>
                 <tab-pane icon="ni ni-button-play" title="Movies">
                   <p class="description">
@@ -163,7 +167,7 @@
                   <p class="description">
                     These are all the music albums you have reserved.
                   </p>
-                  <music-albums :albums="albums" :reservable="false" />
+                  <music-albums :albums="albums" :reservable="false"  />
                 </tab-pane>
               </card>
             </tabs>
@@ -189,8 +193,10 @@
             <tabs fill class="flex-column flex-md-row">
               <card shadow>
                 <tab-pane icon="ni ni-books" title="Books">
-                  <p class="description">These are all the books you have.</p>
-                  <books :books="lendings" :reservable="false" />
+                  <p v-if="isMember" class="description">These are all the books you have.</p>
+                  <p v-if="!isMember" class="description">All books people have lent out.</p>
+                  <books v-if="isMember" :books="lendings" :reservable="false"  />
+                  <books v-if="!isMember" :books="allLendings" :reservable="false"  />
                 </tab-pane>
                 <tab-pane icon="ni ni-button-play" title="Movies">
                   <p class="description">These are all the movies you have.</p>

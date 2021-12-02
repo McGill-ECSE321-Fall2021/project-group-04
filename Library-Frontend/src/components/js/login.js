@@ -75,6 +75,7 @@ export default {
                     console.log("type:", this.user.type);
 
                     window.localStorage.setItem("userType", this.user.type);
+                    window.localStorage.setItem("username", this.user.username);
                     window.localStorage.setObject("user", response.data);
                     window.location.href = "/#/dashboard";
                     location.reload();
@@ -96,6 +97,7 @@ export default {
                         console.log("type:", this.user.type);
 
                         window.localStorage.setItem("userType", this.user.type);
+                        window.localStorage.setItem("username", this.user.username);
                         window.localStorage.setObject("user", response.data);
                         window.location.href = "/#/dashboard";
                         location.reload();
@@ -116,6 +118,7 @@ export default {
                             console.log("type:", this.user.type);
 
                             window.localStorage.setItem("userType", this.user.type);
+                            window.localStorage.setItem("username", this.user.username);
                             window.localStorage.setObject("user", response.data);
                             window.location.href = "/#/dashboard";
                             location.reload();

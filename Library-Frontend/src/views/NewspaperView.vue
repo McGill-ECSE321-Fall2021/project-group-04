@@ -65,26 +65,26 @@ export default {
   components: { ImmovableItems },
   data() {
     return {
-      isMember: false,
+      isMember: window.localStorage.getItem('userType') === 'member',
       modal: false,
       newspaper: [
         {
-          title: "Charlie and the Chocolate Factory",
-          date: "07/10/05",
+          title: "War against Drugs",
+          date: "07/10/70",
           numberOfPages: "11",
         },
         {
-          title: "The Maze Runner",
+          title: "Twin Towers",
           date: "09/19/14",
           numberOfPages: "11",
         },
         {
-          title: "Red Notice",
+          title: "Rise of Fear",
           date: "11/05/21",
           numberOfPages: "11",
         },
         {
-          title: "Fast Five",
+          title: "Vietnam War",
           date: "04/15/11",
           numberOfPages: "11",
         },

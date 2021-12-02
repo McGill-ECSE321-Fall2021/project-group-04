@@ -27,7 +27,7 @@ let frontendUrl = frontend();
 
 let AXIOS = axios.create({
     baseURL: backendUrl,
-    headers: {"Access-Control-Allow-Origin": frontendUrl},
+    headers: { "Access-Control-Allow-Origin": frontendUrl },
 });
 
 import Movies from "@/components/Movies";
@@ -46,7 +46,7 @@ export default {
                 barCode: "",
                 price: ""
             },
-            isMember: false,
+            isMember: window.localStorage.getItem('userType') === 'member',
             modal: false,
             movies: [
                 {
@@ -79,7 +79,7 @@ export default {
 
     methods:{
         getMovies() {
-            AXIOS.post("/movies").then(response => {
+            AXIOS.get("/movies").then(response => {
                 this.movies = response.data;
             })
         },

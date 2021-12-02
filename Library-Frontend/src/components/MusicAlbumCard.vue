@@ -3,6 +3,7 @@
     :title="author"
     :sub-title="title"
     :button="reservable"
+    :type="'MusicAlbum'"
     class="mb-2"
   >
     <template v-slot:footer>
