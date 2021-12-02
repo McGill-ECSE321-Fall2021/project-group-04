@@ -25,8 +25,13 @@
       <div class="col justify-content-center">
         <div class="order-xl-1">
           <card shadow type="secondary">
-            <music-albums :albums="albums" />
-            <base-button block type="primary" v-if="!isMember" @click="modal = true">
+            <music-albums :albums="albums" :empty="!albums.length" />
+            <base-button
+              block
+              type="primary"
+              v-if="!isMember"
+              @click="modal = true"
+            >
               New Music Album
             </base-button>
             <modal v-model:show="modal">
@@ -35,44 +40,58 @@
               </template>
               <div class="text-left">
                 <base-input
-                        placeholder="Title"
-                        input-classes="form-control-alternative"
-                        v-model="musicAlbum.title"
+                  placeholder="Title"
+                  input-classes="form-control-alternative"
+                  v-model="musicAlbum.title"
                 />
                 <base-input
-                        placeholder="Author"
-                        input-classes="form-control-alternative"
-                        v-model="musicAlbum.author"
+                  placeholder="Author"
+                  input-classes="form-control-alternative"
+                  v-model="musicAlbum.author"
                 />
                 <base-input
-                        placeholder="Date of Release"
-                        input-classes="form-control-alternative"
-                        v-model="musicAlbum.dateOfRelease"
+                  placeholder="Date of Release"
+                  input-classes="form-control-alternative"
+                  v-model="musicAlbum.dateOfRelease"
                 />
                 <base-input
-                        placeholder="Price"
-                        input-classes="form-control-alternative"
-                        v-model="musicAlbum.price"
+                  placeholder="Price"
+                  input-classes="form-control-alternative"
+                  v-model="musicAlbum.price"
                 />
                 <base-input
-                        placeholder="Number of Songs"
-                        input-classes="form-control-alternative"
-                        v-model="musicAlbum.numberOfSongs"
+                  placeholder="Number of Songs"
+                  input-classes="form-control-alternative"
+                  v-model="musicAlbum.numberOfSongs"
                 />
                 <base-input
-                        placeholder="Total Length"
-                        input-classes="form-control-alternative"
-                        v-model="musicAlbum.totalLength"
-
+                  placeholder="Total Length"
+                  input-classes="form-control-alternative"
+                  v-model="musicAlbum.totalLength"
                 />
                 <base-input
-                        placeholder="Barcode"
-                        input-classes="form-control-alternative"
-                        v-model="musicAlbum.barCode"
+                  placeholder="Barcode"
+                  input-classes="form-control-alternative"
+                  v-model="musicAlbum.barcode"
                 />
               </div>
               <template v-slot:footer>
-                <base-button size="lg"  @click="add_music_album(musicAlbum.title, musicAlbum.price, musicAlbum.barCode, musicAlbum.numberOfSongs, musicAlbum.numberOfPages, musicAlbum.author, musicAlbum.dateOfRelease, musicAlbum.totalLength)">Add</base-button>
+                <base-button
+                  size="lg"
+                  @click="
+                    add_music_album(
+                      musicAlbum.title,
+                      musicAlbum.price,
+                      musicAlbum.barcode,
+                      musicAlbum.numberOfSongs,
+                      musicAlbum.author,
+                      musicAlbum.dateOfRelease,
+                      musicAlbum.totalLength
+                    );
+                    modal = false;
+                  "
+                  >Add</base-button
+                >
               </template>
             </modal>
           </card>
@@ -82,5 +101,4 @@
   </div>
 </template>
 
-<script src="../components/js/musicAlbumItem.js">
-</script>
+<script src="../components/js/musicAlbumItem.js"></script>

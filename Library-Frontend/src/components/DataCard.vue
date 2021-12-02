@@ -28,16 +28,22 @@
 
     <div class="text-right pt-2" v-if="button2">
       <a>
-        <base-button size="sm" @click="modals[1].methods.checkoutItem(this.reservedBy, this.bookingId)">{{
-            button2Text
-          }}</base-button>
+        <base-button
+          size="sm"
+          @click="
+            modals[1].methods.checkoutItem(this.reservedBy, this.bookingId)
+          "
+          >{{ button2Text }}</base-button
+        >
       </a>
     </div>
     <div class="text-right pt-2" v-if="button">
       <a>
-        <base-button size="sm" @click="modals[1].methods.createBooking(this.type,this.subTitle)">{{
-          buttonText
-        }}</base-button>
+        <base-button
+          size="sm"
+          @click="modals[1].methods.createBooking(this.type, this.subTitle)"
+          >{{ buttonText }}</base-button
+        >
 
         <modal v-model:show="modals[0]">
           <template v-slot:header>

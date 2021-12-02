@@ -2,7 +2,7 @@
   <data-card
     :title="author"
     :sub-title="title"
-    :booking-id= "booking==undefined ? booking : booking.id"
+    :booking-id="booking == undefined ? booking : booking.id"
     :button="reservable"
     :button2="checkoutable"
     :reserved-by="reservedBy"
@@ -24,7 +24,7 @@
       </span>
       <br />
       <span class="mr-2" v-if="!isMember">
-        <i class="ni ni-badge"></i>
+        <i class="ni ni-circle-08"></i>
         Reservee: {{ reservedBy }}
       </span>
     </template>
@@ -42,10 +42,10 @@ export default {
   components: {
     DataCard,
   },
-  data(){
-    return{
-      isMember: window.localStorage.getItem('userType') === 'member',
-    }
+  data() {
+    return {
+      isMember: window.localStorage.getItem("userType") === "member",
+    };
   },
   props: {
     type: {
@@ -68,7 +68,6 @@ export default {
     booking: String,
     reservedBy: String,
     bookingType: String,
-
   },
 };
 </script>

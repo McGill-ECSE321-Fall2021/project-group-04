@@ -210,7 +210,7 @@ export default {
   },
   data() {
     return {
-      isHead: window.localStorage.getItem('userType') === 'head_librarian',
+      isHead: window.localStorage.getItem("userType") === "head_librarian",
       librarians: [
         {
           username: "Aly",
