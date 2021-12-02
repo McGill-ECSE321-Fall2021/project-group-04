@@ -61,6 +61,7 @@ export default {
         // Initializing user
         // See: was done above
 
+        console.log("Getting all Books")
         // Initializing books
         AXIOS.get('/books').then(response => {this.books = response.data}).catch(e => {this.errorEvent = e});
     },
