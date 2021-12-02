@@ -25,7 +25,7 @@
       <div class="col justify-content-center">
         <div class="order-xl-1">
           <card shadow type="secondary">
-            <books :books="books" />
+            <books  v-if="!(isBooks == [])" :books="isBooks" />
             <base-button block type="primary" v-if="!isMember" @click="modal = true">
               New Book
             </base-button>
@@ -84,8 +84,14 @@ export default {
     return {
       isMember: false,
       modal: false,
-      books : BookItem.data().books,
+      books : BookItem.methods.getBooks(),
+
     };
   },
+  computed: {
+    isBooks() {
+      return BookItem.methods.getBooks()
+    }
+  }
 };
 </script>

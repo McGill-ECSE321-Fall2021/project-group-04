@@ -52,6 +52,7 @@ export default {
                 numberOfPages: "",
             },
             books: [],
+            isLoaded: false,
             errorLogin: "",
             response: [],
         };
@@ -67,6 +68,21 @@ export default {
 
     methods: {
 
+
+        getBooks(){
+
+            console.log("Getting all Books")
+
+            AXIOS.get('/books').then(response => {
+                this.books = response.data
+
+            }).catch(e => {this.errorEvent = e});
+
+            this.isLoaded = true;
+            console.log(this.isLoaded)
+
+            return this.books
+        }
 
     },
 };
