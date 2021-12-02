@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "postinstall": "npm run build",
+    "start": "node server.js",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
@@ -14,9 +16,11 @@
     "chart.js": "2.9.4",
     "core-js": "3.6.5",
     "element-plus": "1.0.1-beta.24",
+    "express": "^4.17.1",
     "google-maps": "4.3.3",
     "jquery": "^3.6.0",
     "nouislider": "14.6.0",
+    "serve-static": "^1.14.1",
     "sweetalert": "^2.1.2",
     "vue": "3.0.5",
     "vue-router": "4.0.1",
