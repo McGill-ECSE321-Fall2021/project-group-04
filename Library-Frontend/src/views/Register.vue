@@ -1,3 +1,4 @@
+import signup from '../components/js/signup';
 <template>
   <div class="row justify-content-center">
     <div class="col-lg-5 col-md-7">
@@ -11,7 +12,7 @@
               formClasses="input-group-alternative"
               placeholder="Username"
               addon-left-icon="ni ni-hat-3"
-              v-model="model.name"
+              v-model="user.username"
             >
             </base-input>
 
@@ -20,7 +21,7 @@
               placeholder="Password"
               type="password"
               addon-left-icon="ni ni-lock-circle-open"
-              v-model="model.password"
+              v-model="user.password"
             >
             </base-input>
 
@@ -30,12 +31,15 @@
               formClasses="input-group-alternative"
               placeholder="Address"
               addon-left-icon="ni ni-building"
-              v-model="model.address"
+              v-model="user.address"
             >
             </base-input>
 
             <div class="text-center">
-              <base-button type="primary" class="my-4"
+              <base-button
+                type="primary"
+                class="my-4"
+                @click="sign_up(user.username, user.password, user.address)"
                 >Create account</base-button
               >
             </div>
@@ -57,18 +61,5 @@
     </div>
   </div>
 </template>
-<script>
-export default {
-  name: "register",
-  data() {
-    return {
-      model: {
-        username: "",
-        password: "",
-        address: "",
-      },
-    };
-  },
-};
-</script>
+<script src="../components/js/signup.js" />
 <style></style>

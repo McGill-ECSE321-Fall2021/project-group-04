@@ -17,8 +17,10 @@
     "google-maps": "4.3.3",
     "jquery": "^3.6.0",
     "nouislider": "14.6.0",
+    "sweetalert": "^2.1.2",
     "vue": "3.0.5",
     "vue-router": "4.0.1",
+    "vue-sweetalert2": "^5.0.2",
     "vue-toastification": "1.7.11"
   },
   "devDependencies": {

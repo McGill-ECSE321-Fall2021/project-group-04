@@ -11,7 +11,7 @@
               formClasses="input-group-alternative"
               placeholder="Username"
               addon-left-icon="ni ni-hat-3"
-              v-model="model.username"
+              v-model="user.username"
             >
             </base-input>
 
@@ -20,7 +20,7 @@
               placeholder="Password"
               type="password"
               addon-left-icon="ni ni-lock-circle-open"
-              v-model="model.password"
+              v-model="user.password"
             >
             </base-input>
 
@@ -28,8 +28,18 @@
               <span class="text-muted">Remember me</span>
             </base-checkbox> -->
             <div class="text-center">
-              <base-button type="primary" class="my-4">Sign in</base-button>
+              <base-button
+                type="primary"
+                class="my-4"
+                @click="login(user.username, user.password)"
+              >
+                Sign in
+              </base-button>
             </div>
+
+            <!--            <base-alert type="danger" v-if="!errorLogin">-->
+            <!--              <strong>Wrong Credentials</strong>-->
+            <!--            </base-alert>-->
           </form>
         </div>
       </div>
@@ -46,17 +56,5 @@
     </div>
   </div>
 </template>
-<script>
-export default {
-  name: "login",
-  data() {
-    return {
-      model: {
-        username: "",
-        password: "",
-      },
-    };
-  },
-};
-</script>
+<script src="../components/js/login.js" />
 <style></style>

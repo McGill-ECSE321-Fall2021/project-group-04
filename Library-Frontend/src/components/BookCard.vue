@@ -1,9 +1,13 @@
 <template>
   <data-card
-      :title="author"
-      :sub-title="title"
-      :button="reservable"
-      class="mb-2"
+    :title="author"
+    :sub-title="title"
+    :booking-id="booking == undefined ? booking : booking.id"
+    :button="reservable"
+    :button2="checkoutable"
+    :reserved-by="reservedBy"
+    :type="'Book'"
+    class="mb-2"
   >
     <template v-slot:footer>
       <span class="mr-2" v-if="dateOfRelease">
@@ -18,9 +22,14 @@
         <i class="ni ni-badge"></i>
         ISBN: {{ isbn }}
       </span>
+      <br />
+      <span class="mr-2" v-if="!isMember">
+        <i class="ni ni-circle-08"></i>
+        Reservee: {{ reservedBy }}
+      </span>
     </template>
     <template v-slot:modal>
-      You have successfully reserved {{title}}
+      You have successfully reserved {{ title }}
     </template>
   </data-card>
 </template>
@@ -33,6 +42,11 @@ export default {
   components: {
     DataCard,
   },
+  data() {
+    return {
+      isMember: window.localStorage.getItem("userType") === "member",
+    };
+  },
   props: {
     type: {
       type: String,
@@ -42,11 +56,18 @@ export default {
       type: Boolean,
       default: true,
     },
+    checkoutable: {
+      type: Boolean,
+      default: false,
+    },
     title: String,
     author: String,
     dateOfRelease: String,
     isbn: String,
     numberOfPages: String,
+    booking: String,
+    reservedBy: String,
+    bookingType: String,
   },
 };
 </script>

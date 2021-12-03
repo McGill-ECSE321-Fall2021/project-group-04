@@ -27,10 +27,7 @@
                 <div class="col-lg-3 order-lg-2">
                   <div class="card-profile-image">
                     <a href="#">
-                      <img
-                        src="img/theme/cat.jpg"
-                        class="rounded-circle"
-                      />
+                      <img src="img/theme/cat.jpg" class="rounded-circle" />
                     </a>
                   </div>
                 </div>
@@ -79,7 +76,7 @@
               <h6 class="heading-small text-muted mb-4">User information</h6>
               <div class="pl-lg-4">
                 <div class="row">
-                  <div class="col-lg-6">
+                  <div :class="model.isMember ? 'col-lg-6' : 'col-lg-12'">
                     <base-input
                       alternative=""
                       label="Username"
@@ -89,7 +86,7 @@
                       :readonly="true"
                     />
                   </div>
-                  <div class="col-lg-3">
+                  <div class="col-lg-3" v-if="model.isMember">
                     <base-input
                       alternative=""
                       label="Start Date"
@@ -99,7 +96,7 @@
                       :readonly="true"
                     />
                   </div>
-                  <div class="col-lg-3">
+                  <div class="col-lg-3" v-if="model.isMember">
                     <base-input
                       alternative=""
                       label="Montly Fee"
@@ -151,22 +148,42 @@
             <tabs fill class="flex-column flex-md-row">
               <card shadow>
                 <tab-pane icon="ni ni-books" title="Books">
-                  <p class="description">
+                  <p v-if="isMember" class="description">
                     These are all the books you have reserved.
                   </p>
-                  <books :books="books" :reservable="false" />
+                  <p v-if="!isMember" class="description">
+                    All the books people have reserved.
+                  </p>
+                  <books
+                    v-if="!isMember"
+                    :books="allReservations"
+                    :reservable="false"
+                    :checkoutable="true"
+                  />
+                  <books
+                    v-if="isMember"
+                    :books="reservations"
+                    :reservable="false"
+                    :checkoutable="false"
+                  />
                 </tab-pane>
                 <tab-pane icon="ni ni-button-play" title="Movies">
-                  <p class="description">
+                  <p v-if="isMember" class="description">
                     These are all the movies you have reserved.
                   </p>
-                  <movies :movies="movies " :reservable="false"/>
+                  <p v-if="!isMember" class="description">
+                    All the movies people have reserved.
+                  </p>
+                  <movies :movies="movies" :reservable="false" />
                 </tab-pane>
                 <tab-pane icon="ni ni-note-03" title="Music Albums">
-                  <p class="description">
+                  <p v-if="isMember" class="description">
                     These are all the music albums you have reserved.
                   </p>
-                  <music-albums :albums="albums" :reservable="false"/>
+                  <p v-if="!isMember" class="description">
+                    All the music albums people have reserved.
+                  </p>
+                  <music-albums :albums="albums" :reservable="false" />
                 </tab-pane>
               </card>
             </tabs>
@@ -192,18 +209,40 @@
             <tabs fill class="flex-column flex-md-row">
               <card shadow>
                 <tab-pane icon="ni ni-books" title="Books">
-                  <p class="description">These are all the books you have.</p>
-                  <books :books="books" :reservable="false"/>
+                  <p v-if="isMember" class="description">
+                    These are all the books you have.
+                  </p>
+                  <p v-if="!isMember" class="description">
+                    All books you have lent out.
+                  </p>
+                  <books
+                    v-if="isMember"
+                    :books="lendings"
+                    :reservable="false"
+                  />
+                  <books
+                    v-if="!isMember"
+                    :books="allLendings"
+                    :reservable="false"
+                  />
                 </tab-pane>
                 <tab-pane icon="ni ni-button-play" title="Movies">
-                  <p class="description">These are all the movies you have.</p>
-                  <movies :movies="movies" :reservable="false"/>
+                  <p v-if="isMember" class="description">
+                    These are all the movies you have.
+                  </p>
+                  <p v-if="!isMember" class="description">
+                    All movies you have lent out.
+                  </p>
+                  <movies :movies="movies" :reservable="false" />
                 </tab-pane>
                 <tab-pane icon="ni ni-note-03" title="Music Albums">
-                  <p class="description">
+                  <p v-if="isMember" class="description">
                     These are all the music albums you have.
                   </p>
-                  <music-albums :albums="albums" :reservable="false"/>
+                  <p v-if="!isMember" class="description">
+                    All music albums you have lent out.
+                  </p>
+                  <music-albums :albums="albums" :reservable="false" />
                 </tab-pane>
               </card>
             </tabs>
@@ -213,117 +252,5 @@
     </div>
   </div>
 </template>
-<script>
-import Card from "@/components/Card.vue";
-import Books from "@/components/Books";
-import Movies from "@/components/Movies";
-import MusicAlbums from "@/components/MusicAlbums";
-export default {
-  components: { MusicAlbums, Movies, Books, Card },
-  name: "user-profile",
-  data() {
-    return {
-      model: {
-        username: "aziz",
-        address: "1234 University, Montreal, Canada",
-        startDate: "10/10/21",
-        monthlyFee: "0",
-      },
-      books: [
-        {
-          title: "Percy Jackson & the Olympians: The Lightning Thief",
-          author: "Rick Riordan",
-          dateOfRelease: "06/28/05",
-          isbn: "0-7868-5629-7",
-          numberOfPages: "377",
-        },
-        {
-          title: "Percy Jackson & the Olympians: The Sea of Monsters",
-          author: "Rick Riordan",
-          dateOfRelease: "04/01/06",
-          isbn: "0-7868-5686-6",
-          numberOfPages: "279",
-        },
-        {
-          title: "Percy Jackson & the Olympians: The Titan’s Curse",
-          author: "Rick Riordan",
-          dateOfRelease: "05/01/07",
-          isbn: "978-1-4231-0145-1",
-          numberOfPages: "312",
-        },
-        {
-          title: "Percy Jackson & the Olympians: The Battle of the Labyrinth",
-          author: "Rick Riordan",
-          dateOfRelease: "05/06/08",
-          isbn: "9781423101468",
-          numberOfPages: "361",
-        },
-        {
-          title: "Percy Jackson & the Olympians: The Last Olympian",
-          author: "Rick Riordan",
-          dateOfRelease: "05/05/09",
-          isbn: "978-1-4231-0147-5",
-          numberOfPages: "381",
-        },
-      ],
-      movies: [
-        {
-          title: "Charlie and the Chocolate Factory",
-          author: "Tim Burton",
-          dateOfRelease: "07/10/05",
-          length: "115",
-        },
-        {
-          title: "The Maze Runner",
-          author: "Wes Ball",
-          dateOfRelease: "09/19/14",
-          length: "113",
-        },
-        {
-          title: "Red Notice",
-          author: "Rawson Marshall Thurber",
-          dateOfRelease: "11/05/21",
-          length: "118",
-        },
-        {
-          title: "Fast Five",
-          author: "Justin Lin",
-          dateOfRelease: "04/15/11",
-          length: "130",
-        },
-      ],
-      albums: [
-        {
-          title: "Kamikaze",
-          author: "Eminem",
-          dateOfRelease: "08/31/18",
-          numberOfSongs: "13",
-          totalLength: "45:49",
-        },
-        {
-          title: "Music to Be Murdered By",
-          author: "Eminem",
-          dateOfRelease: "01/17/20",
-          numberOfSongs: "13",
-          totalLength: "62:23",
-        },
-        {
-          title: "Revival",
-          author: "Eminem",
-          dateOfRelease: "12/15/17",
-          numberOfSongs: "18",
-          totalLength: "77:39",
-        },
-        {
-          title: "+ (Plus) Deluxe",
-          author: "Ed Sheeran",
-          dateOfRelease: "09/09/11",
-          numberOfSongs: "12",
-          totalLength: "65:35",
-        },
-      ],
-    };
-  },
-};
-</script>
+<script src="../components/js/Booking.js"></script>
 <style></style>

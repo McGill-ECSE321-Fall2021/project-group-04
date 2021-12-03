@@ -25,7 +25,76 @@
       <div class="col justify-content-center">
         <div class="order-xl-1">
           <card shadow type="secondary">
-            <books :books="books" />
+            <books :books="books" :empty="!books.length" />
+            <base-button
+              block
+              type="primary"
+              v-if="!isMember"
+              @click="modal = true"
+            >
+              New Book
+            </base-button>
+            <modal v-model:show="modal">
+              <template v-slot:header>
+                <h3 class="modal-title lg">Add a New Book to the Library</h3>
+              </template>
+              <div class="text-left">
+                <base-input
+                  placeholder="Title"
+                  input-classes="form-control-alternative"
+                  v-model="book.title"
+                />
+                <base-input
+                  placeholder="Author"
+                  input-classes="form-control-alternative"
+                  v-model="book.author"
+                />
+                <base-input
+                  placeholder="Date of Release"
+                  input-classes="form-control-alternative"
+                  v-model="book.dateOfRelease"
+                />
+                <base-input
+                  placeholder="Price"
+                  input-classes="form-control-alternative"
+                  v-model="book.price"
+                />
+                <base-input
+                  placeholder="Number of Pages"
+                  input-classes="form-control-alternative"
+                  v-model="book.numberOfPages"
+                />
+                <base-input
+                  placeholder="ISBN"
+                  input-classes="form-control-alternative"
+                  v-model="book.isbn"
+                />
+                <base-input
+                  placeholder="Barcode"
+                  input-classes="form-control-alternative"
+                  v-model="book.barcode"
+                />
+              </div>
+              <template v-slot:footer>
+                <base-button
+                  size="lg"
+                  @click="
+                    addBook(
+                      book.title,
+                      book.price,
+                      book.barcode,
+                      book.isbn,
+                      book.numberOfPages,
+                      book.author,
+                      book.dateOfRelease,
+                      modal
+                    );
+                    modal = false;
+                  "
+                  >Add</base-button
+                >
+              </template>
+            </modal>
           </card>
         </div>
       </div>
@@ -33,51 +102,4 @@
   </div>
 </template>
 
-<script>
-import Books from "@/components/Books";
-export default {
-  name: "books-view",
-  components: { Books },
-  data() {
-    return {
-      books: [
-        {
-          title: "Percy Jackson & the Olympians: The Lightning Thief",
-          author: "Rick Riordan",
-          dateOfRelease: "06/28/05",
-          isbn: "0-7868-5629-7",
-          numberOfPages: "377",
-        },
-        {
-          title: "Percy Jackson & the Olympians: The Sea of Monsters",
-          author: "Rick Riordan",
-          dateOfRelease: "04/01/06",
-          isbn: "0-7868-5686-6",
-          numberOfPages: "279",
-        },
-        {
-          title: "Percy Jackson & the Olympians: The Titan’s Curse",
-          author: "Rick Riordan",
-          dateOfRelease: "05/01/07",
-          isbn: "978-1-4231-0145-1",
-          numberOfPages: "312",
-        },
-        {
-          title: "Percy Jackson & the Olympians: The Battle of the Labyrinth",
-          author: "Rick Riordan",
-          dateOfRelease: "05/06/08",
-          isbn: "9781423101468",
-          numberOfPages: "361",
-        },
-        {
-          title: "Percy Jackson & the Olympians: The Last Olympian",
-          author: "Rick Riordan",
-          dateOfRelease: "05/05/09",
-          isbn: "978-1-4231-0147-5",
-          numberOfPages: "381",
-        },
-      ],
-    };
-  },
-};
-</script>
+<script src="../components/js/bookItem.js" />

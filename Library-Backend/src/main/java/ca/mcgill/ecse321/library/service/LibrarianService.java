@@ -126,6 +126,10 @@ public class LibrarianService {
             throw new IllegalArgumentException("Invalid Username.");
         }
 
+        if (headLibrarianRepository.findHeadLibrarianByUsername(username) != null) {
+            throw new IllegalArgumentException("Invalid Username.");
+        }
+
         Librarian librarian = librarianRepository.findLibrarianByUsername(username);
         if (librarian != null && librarian.getPassword().equals(password)) {
             return librarian;

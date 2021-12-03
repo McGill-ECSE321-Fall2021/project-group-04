@@ -110,4 +110,13 @@ public class DTOConverter {
         WorkDayDto workdayDto = new WorkDayDto(aworkday.getId(), aworkday.getDayOfWeek(), aworkday.getStartTime(), aworkday.getEndTime());
         return workdayDto;
     }
+
+    public static Object convertToDto(Booking booking) {
+        BookingTypeDto btDto = booking.getBookingType() == null ? null : convertToDto(booking.getBookingType());
+        UserDto userDto = booking.getUser() == null ? null : convertToDto(booking.getUser());
+
+        return new BookingDto(booking.getId(), booking.getBookingDate(), userDto, btDto);
+    }
+
+
 }

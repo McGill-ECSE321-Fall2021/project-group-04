@@ -94,14 +94,14 @@ const router = createRouter({
   linkActiveClass: "active",
   routes,
   // eslint-disable-next-line no-unused-vars
-  scrollBehavior (to, from, savedPosition) {
+  scrollBehavior(to, from, savedPosition) {
     if (to.hash) {
       return {
         selector: to.hash,
-        behavior: 'smooth',
-      }
+        behavior: "smooth",
+      };
     }
-  }
+  },
 });
 
 export default router;

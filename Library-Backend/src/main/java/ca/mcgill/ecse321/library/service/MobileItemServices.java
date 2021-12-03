@@ -35,7 +35,7 @@ public class MobileItemServices {
         try {
             Date date = Date.valueOf(dateOfRelease);
         } catch (Exception e) {
-            error += "date format is not correct";
+            error += "date format is not correct ";
         }
         if (price == null || price == "") {
             error += "price needs to be specified ";
@@ -43,7 +43,7 @@ public class MobileItemServices {
         try {
             int p = Integer.valueOf(price);
         } catch (Exception e) {
-            error += "price is not a number";
+            error += "price is not a number ";
         }
 
         Boolean hasError = error != "";

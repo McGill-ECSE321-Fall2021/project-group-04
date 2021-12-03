@@ -4,7 +4,7 @@
       <span class="mr-2" v-if="numberOfPages">
         <i class="ni ni-book-bookmark"></i>
         {{ numberOfPages }} pages</span
-      ><br />
+      >
     </template>
   </data-card>
 </template>

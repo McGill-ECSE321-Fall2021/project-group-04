@@ -1,79 +1,106 @@
-import axios from 'axios'
-import JQuery from 'jquery'
-let $ = JQuery
-var config = require ('../../../config')
+import axios from "axios";
+import JQuery from "jquery";
+import swal from "sweetalert";
 
-var backendConfigurer = function(){
-    switch(process.env.NODE_ENV){
-        case 'development':
-            return 'http://' + config.dev.backendHost + ':' + config.dev.backendPort;
-        case 'production':
-            return 'https://' + config.build.backendHost + ':' + config.build.backendPort ;
-    }
+let $ = JQuery;
+let config = require("../../../config");
+
+let backend = function () {
+  switch (process.env.NODE_ENV) {
+    case "development":
+      return "http://" + config.dev.backendHost + ":" + config.dev.backendPort;
+    case "production":
+      return (
+        "https://" + config.build.backendHost + ":" + config.build.backendPort
+      );
+  }
 };
 
-var frontendConfigurer = function(){
-    switch(process.env.NODE_ENV){
-        case 'development':
-            return 'http://' + config.dev.host + ':' + config.dev.port;
-        case 'production':
-            return 'https://' + config.build.host + ':' + config.build.port ;
-    }
+let frontend = function () {
+  switch (process.env.NODE_ENV) {
+    case "development":
+      return "http://" + config.dev.host + ":" + config.dev.port;
+    case "production":
+      return "https://" + config.build.host + ":" + config.build.port;
+  }
 };
-var backendUrl = backendConfigurer();
-var frontendUrl = frontendConfigurer();
+let backendUrl = backend();
+let frontendUrl = frontend();
 
-var AXIOS = axios.create({
-    baseURL: backendUrl,
-    headers: { 'Access-Control-Allow-Origin': frontendUrl }
-})
+let AXIOS = axios.create({
+  baseURL: backendUrl,
+  headers: { "Access-Control-Allow-Origin": frontendUrl },
+});
+
+import BaseAlert from "@/components/BaseAlert";
 
 export default {
-    name:'member_sign_up',
-    data () {
-        return {
-            user: '',
-            username: '',
-            password: '',
-            address: '',
-            errorLogin: '',
-            response: []
-        }
+  components: {
+    BaseAlert,
+  },
+  name: "sign_up",
+  data() {
+    return {
+      user: {
+        type: "",
+        username: "",
+        password: "",
+        address: "",
+      },
+      errorSignup: "",
+      response: [],
+    };
+  },
+  methods: {
+    print_info(username) {
+      console.log(username);
+      window.location.href = "/#/login";
     },
-    methods: {
-        /**
-         * @author alymo
-         * @param username
-         * @param password
-         * gets user input from frontend and logs in using controller method login
-         */
-        signup (username, password, address, member_type, member_status) {
-            AXIOS.post('/member_sign_up/', $.param({username: username, password: password, member_type: member_type, member_status: member_status}))
-                .then(response => {
-                    this.user = response.data
+    /**
+     * @author alymo
+     * @param username
+     * @param password
+     * gets user input from frontend and logs in using controller method login
+     */
+    sign_up(username, password, address) {
+      console.log("signing up");
+      console.log(username);
+      console.log(password);
+      console.log(address);
 
-                    if (response.status===200) {
+      var input =
+        "/member_sign_up?" +
+        $.param({
+          username: username,
+          password: password,
+          address: address,
+          member_type: "Local",
+          member_status: "Active",
+        });
+      console.log(input);
+      AXIOS.post(input)
+        .then((response) => {
+          console.log(response);
+          console.log(response.status === 201);
+          if (response.status === 201) {
+            this.user.type = "member";
+            this.user.username = username;
+            this.user.password = password;
 
-                        window.localStorage.setItem('username', this.user.username)
+            console.log("type:", this.user.type);
 
-                        if(this.type.localeCompare("member")==0){
-
-                            window.location.href = "/#/member"
-                        }
-                        else if(this.type.localeCompare("librarian")==0){
-                            window.location.href = "/#/librarian"
-                        }
-                        else {
-                            window.location.href = "/#/headLibrarian"
-                        }
-
-                        location.reload();
-                    }
-                })
-                .catch(e => {
-                    swal("ERROR", e.response.data, "error");
-                })
-        }
-    }
-
-}
+            // swal("SUCCESS", response.data);
+            window.localStorage.setItem("userType", this.user.type);
+            window.localStorage.setObject("user", response.data);
+            window.localStorage.setItem("username", this.user.username);
+            window.location.href = "/#/dashboard";
+            location.reload();
+          }
+        })
+        .catch((e) => {
+          console.error(e);
+          swal("ERROR", e.response.data);
+        });
+    },
+  },
+};

@@ -24,10 +24,7 @@
           <template v-slot:title>
             <div class="media align-items-center">
               <span class="avatar avatar-sm rounded-circle">
-                <img
-                  alt="Image placeholder"
-                  src="img/theme/cat.jpg"
-                />
+                <img alt="Image placeholder" src="img/theme/cat.jpg" />
               </span>
               <div class="media-body ml-2 d-none d-lg-block">
                 <span class="mb-0 text-sm font-weight-bold">{{
@@ -44,7 +41,7 @@
             <span>My profile</span>
           </router-link>
           <div class="dropdown-divider"></div>
-          <router-link to="/profile" class="dropdown-item">
+          <router-link to="/login" class="dropdown-item">
             <i class="ni ni-user-run"></i>
             <span>Logout</span>
           </router-link>
@@ -55,13 +52,14 @@
 </template>
 <script>
 export default {
+  name: "navbar",
   data() {
     return {
       activeNotifications: false,
       showMenu: false,
       searchQuery: "",
       model: {
-        username: "aziz",
+        username: window.localStorage.getObject("user").username,
       },
     };
   },
