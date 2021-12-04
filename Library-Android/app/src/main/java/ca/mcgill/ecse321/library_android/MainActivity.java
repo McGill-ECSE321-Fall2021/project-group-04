@@ -86,22 +86,14 @@ public class MainActivity extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 
+    public void print(View view){
+        System.out.println("function called");
+    }
 
+    public void signIn(View view){
 
-//    private void refreshErrorMessage() {
-//        // set the error message
-//        TextView tvError = (TextView) findViewById(R.id.error);
-//        tvError.setText(error);
-//
-//        if (error == null || error.length() == 0) {
-//            tvError.setVisibility(View.GONE);
-//        } else {
-//            tvError.setVisibility(View.VISIBLE);
-//        }
-//
-//    }
+        System.out.println("function called");
 
-    public void signin(View view){
         final EditText username = findViewById(R.id.Username);
         final EditText password = findViewById(R.id.Password);
         RequestParams rp = new RequestParams();
@@ -112,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onSuccess(int statusCode, cz.msebera.android.httpclient.Header[] headers, JSONObject response) {
                 try {
-                    System.out.println("tada");
+
                     JSONObject serverResp = new JSONObject(response.toString());
                     userName = serverResp.getString("username");
                     userType = serverResp.getString("userType");
