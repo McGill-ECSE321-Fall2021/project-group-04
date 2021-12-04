@@ -62,11 +62,11 @@ All the related documents for each sprint can be accessed below:
 ### Roles and Budget
 |        Name        |         Roles/Assigned Tasks       |    Time Spent   |
 | ------------------ | ---------------------------------- | --------------- |
-| Alexandre Saroufim | Architecture model and description, Integration of Web Frontend with Backend Services,Wiki page                                   |        40      |
-|    Aly Mohamed     | Architecture model and description, Integration of Web Frontend with Backend Services,Wiki page  |        40    |
-| Abd-El-Aziz Zayed  | Architecture model and description, Implementation of Web front-end, Integration of Web Frontend with Backend Services, Wiki page |    40       |
-|     Jewoo Lee      | Architecture model and description, Implementation of Web front-end, Wiki page  |       40      |
-|   Saghar Sahebi    | Architecture model and description, Implementation of Web front-end, Wiki page        |        40    |
-| Simo      Benkirane| Architecture model and description, Integration of Web Frontend with Backend Services,Wiki page                 |    40     |
+| Alexandre Saroufim | Architecture model and description, Integration of Web Front-end with Backend Services, Wiki page |        40      |
+|    Aly Mohamed     | Architecture model and description, Integration of Web Front-end with Backend Services, Wiki page  |        40    |
+| Abd-El-Aziz Zayed  | Architecture model and description, Implementation of Web Front-end, Integration of Web Front-end with Backend Services, Wiki page |    40       |
+|     Jewoo Lee      | Architecture model and description, Implementation of Web Front-end, Wiki page  |       40      |
+|   Saghar Sahebi    | Architecture model and description, Implementation of Web Front-end, Wiki page        |        40    |
+| Simo      Benkirane| Architecture model and description, Integration of Web Front-end with Backend Services,Wiki page   |    40     |
 
 
