@@ -6,13 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="a6f02e96-50d4-4210-86e8-4f7d4c8a0725" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library-Android/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Library-Android/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library-Android/app/src/main/java/ca/mcgill/ecse321/library_android/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/Library-Android/app/src/main/java/ca/mcgill/ecse321/library_android/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library-Android/app/src/main/java/ca/mcgill/ecse321/library_android/SignUp.java" beforeDir="false" afterPath="$PROJECT_DIR$/Library-Android/app/src/main/java/ca/mcgill/ecse321/library_android/SignUp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library-Android/app/src/main/res/layout/checkout_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Library-Android/app/src/main/res/layout/checkout_item.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library-Android/app/src/main/res/layout/fragment_first.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Library-Android/app/src/main/res/layout/fragment_first.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library-Android/app/src/main/res/layout/reserve_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Library-Android/app/src/main/res/layout/reserve_item.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library-Android/app/src/main/res/layout/sign_up.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Library-Android/app/src/main/res/layout/sign_up.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,10 +31,15 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="a6f02e96-50d4-4210-86e8-4f7d4c8a0725" name="Default Changelist" comment="" />
@@ -49,8 +47,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1638582430470</updated>
+      <workItem from="1638642224836" duration="155000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -63,6 +65,12 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="225" y="68" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1638642378921">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="225" y="68" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1638642378921" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Library$Tests_in__Library_Library_Backend_test_.ic" NAME="Tests in 'Library.Library-Backend.test' Coverage Results" MODIFIED="1636691255113" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

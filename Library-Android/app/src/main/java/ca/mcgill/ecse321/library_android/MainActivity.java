@@ -124,6 +124,72 @@ public class MainActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
+
+            public void signup(View view){
+
+                final EditText username =  findViewById(R.id.signup_username);
+                final EditText password =  findViewById(R.id.signup_password);
+                final EditText address =  findViewById(R.id.signup_address);
+
+                RequestParams rp = new RequestParams();
+
+                rp.put("address", address.getText());
+                rp.put("username", username.getText());
+                rp.put("password", password.getText());
+                rp.put("member_type", "Local");
+                rp.put("member_status", "Active");
+
+
+                if (address.getText().toString().equals("") ||password.getText().toString().equals("")||
+                        username.getText().toString().equals("")){
+                    new SweetAlertDialog(MainActivity.this)
+                            .setTitleText("Missing sign up information")
+                            .show();
+                }
+
+                else {
+                    HttpUtils.post("member_sign_up/", rp, new JsonHttpResponseHandler() {
+
+                        @Override
+                        public void onSuccess(int statusCode, cz.msebera.android.httpclient.Header[] headers, JSONObject response) {
+                            try {
+                                new SweetAlertDialog(MainActivity.this)
+                                        .setTitleText("Registration Successful, Login please!")
+                                        .show();
+//                                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+//                                        new Login()).commit();
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(int statusCode, cz.msebera.android.httpclient.Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                            try {
+                                new SweetAlertDialog(MainActivity.this)
+                                        .setTitleText(errorResponse.get("message").toString())
+                                        .show();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        @Override
+                        public void onFailure(int statusCode, cz.msebera.android.httpclient.Header[] headers, String errorMessage, Throwable throwable) {
+                            try {
+                                new SweetAlertDialog(MainActivity.this)
+                                        .setTitleText(errorMessage)
+                                        .show();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+                }
+            }
+
+
+
             @Override
             public void onFailure(int statusCode, cz.msebera.android.httpclient.Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 try {
@@ -144,20 +210,14 @@ public class MainActivity extends AppCompatActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
             }
         });
 
-//        public void goToSignup(View view){
-//            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-//                    new Signup()).commit();
-//        }
-
     }
 
-
-
-
+    public void goToSignUp(View view){
+        setContentView(R.layout.sign_up);
+    }
 
 
 
