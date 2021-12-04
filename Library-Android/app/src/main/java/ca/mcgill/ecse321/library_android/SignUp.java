@@ -8,12 +8,11 @@ import android.view.ViewGroup;
 public class SignUp {
 
 
-//    public View onCreateView(
-//            LayoutInflater inflater, ViewGroup container,
-//            Bundle savedInstanceState
-//    ) {
-//        // Inflate the layout for this fragment
-//        return inflater.inflate(R.layout.signup, container, false);
-//    }
+    public View onCreateView(
+            LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState
+    ) {
+        return inflater.inflate(R.layout.sign_up, container, false);
+    }
 
 }

@@ -101,14 +101,14 @@ public class MainActivity extends AppCompatActivity {
 //
 //    }
 
-    public void login(View view){
+    public void signin(View view){
         final EditText username = findViewById(R.id.Username);
         final EditText password = findViewById(R.id.Password);
         RequestParams rp = new RequestParams();
         rp.put("username", username.getText());
         rp.put("password", password.getText());
 
-        HttpUtils.post("login", rp, new JsonHttpResponseHandler(){
+        HttpUtils.post("sign_in", rp, new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, cz.msebera.android.httpclient.Header[] headers, JSONObject response) {
                 try {

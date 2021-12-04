@@ -5,11 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a6f02e96-50d4-4210-86e8-4f7d4c8a0725" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Library-Android/app/src/main/java/ca/mcgill/ecse321/library_android/HttpUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Library-Android/app/src/main/res/values/ids.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library-Android/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/Library-Android/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library-Android/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Library-Android/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Library-Android/app/src/main/java/ca/mcgill/ecse321/library_android/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/Library-Android/app/src/main/java/ca/mcgill/ecse321/library_android/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library-Android/app/src/main/java/ca/mcgill/ecse321/library_android/SignUp.java" beforeDir="false" afterPath="$PROJECT_DIR$/Library-Android/app/src/main/java/ca/mcgill/ecse321/library_android/SignUp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library-Android/app/src/main/res/layout/checkout_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Library-Android/app/src/main/res/layout/checkout_item.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library-Android/app/src/main/res/layout/fragment_first.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Library-Android/app/src/main/res/layout/fragment_first.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library-Android/app/src/main/res/layout/reserve_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Library-Android/app/src/main/res/layout/reserve_item.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library-Android/app/src/main/res/layout/sign_up.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Library-Android/app/src/main/res/layout/sign_up.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
