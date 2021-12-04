@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="Username" type="id" />
+    <item name="Password" type="id" />
+    <item name="fragment_container" type="id" />
+    <item name="bottom_navigation" type="id" />
+</resources>
