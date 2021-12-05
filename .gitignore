@@ -1,0 +1,5 @@
+.gradle
+.idea
+Library-Backend
+Library-Frontend
+.DS_Store
