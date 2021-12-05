@@ -26,7 +26,7 @@
         android:layout_marginStart="3dp"
         android:layout_marginBottom="56dp"
         android:ems="10"
-        android:hint="name of item"
+        android:hint="Name of Item"
         android:inputType="textEmailAddress"
         app:layout_constraintBottom_toTopOf="@+id/signup_password"
         app:layout_constraintStart_toStartOf="@+id/signup_password" />
@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="264dp"
         android:ems="10"
-        android:hint="type (Book/Movie/Music)"
+        android:hint="Type (Book/Movie/Music)"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.517"
@@ -50,7 +50,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginBottom="60dp"
-        android:text="Checkout item"
+        android:text="Checkout Item"
         android:textSize="34sp"
         app:layout_constraintBottom_toTopOf="@+id/signup_username"
         app:layout_constraintStart_toStartOf="@+id/signup_username" />
@@ -62,7 +62,7 @@
         android:layout_marginStart="5dp"
         android:layout_marginTop="44dp"
         android:ems="10"
-        android:hint="username"
+        android:hint="Username"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="@+id/signup_password"
         app:layout_constraintTop_toBottomOf="@+id/signup_password" />

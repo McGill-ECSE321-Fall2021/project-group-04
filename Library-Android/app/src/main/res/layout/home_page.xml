@@ -49,7 +49,7 @@
                 app:layout_constraintVertical_bias="0.002" />
 
             <TextView
-                android:id="@+id/reviews"
+                android:id="@+id/allReviews"
                 android:layout_width="337dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="casual"
@@ -109,7 +109,7 @@
                 app:layout_constraintVertical_bias="0.391" />
 
             <View
-                android:id="@+id/divider3"
+                android:id="@+id/allAppointments"
                 android:layout_width="match_parent"
                 android:layout_height="5dp"
                 android:background="@android:color/darker_gray"
@@ -151,11 +151,26 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.667" />
 
+            <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="@android:color/darker_gray"
+                android:backgroundTint="#F7292626"
+                android:fontFamily="casual"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.739" />
+
             <TextView
                 android:id="@+id/textView6"
                 android:layout_width="284dp"
                 android:layout_height="39dp"
                 android:text="Reminders"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="#FF9800"
                 android:textSize="30sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -164,6 +179,15 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.773" />
+
+            <TextView
+                android:id="@+id/allReminders"
+                android:layout_width="337dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="casual"
+                android:text=""
+                android:textColor="#F7292626"
+                android:textSize="15sp" />
 
             <View
                 android:id="@+id/divider4"
@@ -178,21 +202,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.739" />
-
-            <TextView
-                android:id="@+id/allReminders"
-                android:layout_width="337dp"
-                android:layout_height="wrap_content"
-                android:fontFamily="casual"
-                android:text=""
-                android:textColor="#F7292626"
-                android:textSize="15sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.571"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.973" />
 
         </LinearLayout>
     </ScrollView>
