@@ -25,7 +25,8 @@
     "vue": "3.0.5",
     "vue-router": "4.0.1",
     "vue-sweetalert2": "^5.0.2",
-    "vue-toastification": "1.7.11"
+    "vue-toastification": "1.7.11",
+    "workbox-webpack-plugin": "^6.4.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "4.5.10",
@@ -41,6 +42,8 @@
     "eslint-plugin-vue": "7.4.1",
     "node-sass": "5.0.0",
     "prettier": "2.2.1",
-    "sass-loader": "10.1.1"
+    "register-service-worker": "^1.7.2",
+    "sass-loader": "10.1.1",
+    "workbox-window": "^6.4.2"
   }
 }

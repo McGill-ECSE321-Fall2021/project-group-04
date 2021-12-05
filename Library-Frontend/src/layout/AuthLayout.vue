@@ -12,7 +12,7 @@
           <div class="row">
             <div class="col-6 collapse-brand">
               <router-link to="/">
-                <img src="img/brand/green.png" />
+                <img src="../../public/img/brand/logo.png" />
               </router-link>
             </div>
             <div class="col-6 collapse-close">

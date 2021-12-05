@@ -24,24 +24,24 @@
           <template v-slot:title>
             <div class="media align-items-center">
               <span class="avatar avatar-sm rounded-circle">
-                <img alt="Image placeholder" src="img/theme/cat.jpg" />
+                <img alt="User Image" src="img/theme/cat.jpg" />
               </span>
               <div class="media-body ml-2 d-none d-lg-block">
-                <span class="mb-0 text-sm font-weight-bold">{{
-                  model.username
-                }}</span>
+                <span class="mb-0 text-sm font-weight-bold">
+                  {{ model.username }}
+                </span>
               </div>
             </div>
           </template>
           <div class="dropdown-header noti-title">
-            <h6 class="text-overflow m-0">Welcome!</h6>
+            <h6 class="text-overflow m-0">Welcome, {{ model.username }}!</h6>
           </div>
           <router-link to="/profile" class="dropdown-item">
             <i class="ni ni-single-02"></i>
             <span>My profile</span>
           </router-link>
           <div class="dropdown-divider"></div>
-          <router-link to="/login" class="dropdown-item">
+          <router-link to="/#/login" class="dropdown-item">
             <i class="ni ni-user-run"></i>
             <span>Logout</span>
           </router-link>
