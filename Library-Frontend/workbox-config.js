@@ -1,5 +1,5 @@
 module.exports = {
-	globDirectory: 'src/',
+	globDirectory: 'public/',
 	globPatterns: [
 		'**/*.{vue,png,scss,css,txt,eot,svg,ttf,woff,woff2,js}'
 	],
