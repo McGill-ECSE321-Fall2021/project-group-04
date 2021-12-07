@@ -25,6 +25,15 @@ import signup from '../components/js/signup';
             >
             </base-input>
 
+            <base-input
+                formClasses="input-group-alternative"
+                placeholder="Confirm Password"
+                type="password"
+                addon-left-icon="ni ni-lock-circle-open"
+                v-model="user.password"
+            >
+            </base-input>
+
             <hr class="my-4" />
 
             <base-input
