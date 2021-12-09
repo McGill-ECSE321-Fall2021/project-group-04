@@ -6,7 +6,7 @@ let $ = JQuery;
 let backend = function () {
   switch (process.env.NODE_ENV) {
     case "development":
-      return "http://" + config.dev.backendHost //+ ":" + config.dev.backendPort;
+      return "http://" + config.dev.backendHost + ":" + config.dev.backendPort;
     case "production":
       return (
         "https://" + config.build.backendHost //+ ":" + config.build.backendPort
@@ -17,7 +17,7 @@ let backend = function () {
 let frontend = function () {
   switch (process.env.NODE_ENV) {
     case "development":
-      return "http://" + config.dev.host //+ ":" + config.dev.port;
+      return "http://" + config.dev.host + ":" + config.dev.port;
     case "production":
       return "https://" + config.build.host //+ ":" + config.build.port;
   }
