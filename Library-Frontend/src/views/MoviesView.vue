@@ -21,12 +21,17 @@
       </div>
     </base-header>
 
-    <div class="container-fluid mt- -7">
+    <div class="container-fluid mt--7">
       <div class="col justify-content-center">
         <div class="order-xl-1">
           <card shadow type="secondary">
-            <movies :movies="movies" />
-            <base-button block type="primary" v-if="!isMember" @click="modal = true">
+            <movies :movies="movies" :empty="!movies.length" />
+            <base-button
+              block
+              type="primary"
+              v-if="!isMember"
+              @click="modal = true"
+            >
               New Movie
             </base-button>
             <modal v-model:show="modal">
@@ -35,32 +40,52 @@
               </template>
               <div class="text-left">
                 <base-input
-                    placeholder="Title"
-                    input-classes="form-control-alternative"
+                  placeholder="Title"
+                  input-classes="form-control-alternative"
+                  v-model="movie.title"
                 />
                 <base-input
-                    placeholder="Author"
-                    input-classes="form-control-alternative"
+                  placeholder="Author"
+                  input-classes="form-control-alternative"
+                  v-model="movie.author"
                 />
                 <base-input
-                    placeholder="Date of Release"
-                    input-classes="form-control-alternative"
+                  placeholder="Date of Release"
+                  input-classes="form-control-alternative"
+                  v-model="movie.dateOfRelease"
                 />
                 <base-input
-                    placeholder="Price"
-                    input-classes="form-control-alternative"
+                  placeholder="Price"
+                  input-classes="form-control-alternative"
+                  v-model="movie.price"
                 />
                 <base-input
-                    placeholder="Length"
-                    input-classes="form-control-alternative"
+                  placeholder="Length"
+                  input-classes="form-control-alternative"
+                  v-model="movie.length"
                 />
                 <base-input
-                    placeholder="Barcode"
-                    input-classes="form-control-alternative"
+                  placeholder="Barcode"
+                  input-classes="form-control-alternative"
+                  v-model="movie.barCode"
                 />
               </div>
               <template v-slot:footer>
-                <base-button size="lg" @click="modal = false">Add</base-button>
+                <base-button
+                  size="lg"
+                  @click="
+                    add_movie(
+                      movie.title,
+                      movie.price,
+                      movie.barCode,
+                      movie.length,
+                      movie.author,
+                      movie.dateOfRelease
+                    );
+                    modal = false;
+                  "
+                  >Add</base-button
+                >
               </template>
             </modal>
           </card>
@@ -70,4 +95,4 @@
   </div>
 </template>
 
-<script src="../components/js/movies.js" />
+<script src="../components/js/movieItem.js" />

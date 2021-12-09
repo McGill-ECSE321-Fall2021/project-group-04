@@ -181,7 +181,7 @@ public class TestMovieService {
         }
 
         assertNull(movie);
-        assertEquals(error, "dateOfRelease needs to be specified date format is not correct");
+        assertEquals(error, "dateOfRelease needs to be specified date format is not correct ");
     }
 
     @Test
@@ -204,7 +204,7 @@ public class TestMovieService {
         }
 
         assertNull(movie);
-        assertEquals(error, "price needs to be specified price is not a number");
+        assertEquals(error, "price needs to be specified price is not a number ");
     }
 
 

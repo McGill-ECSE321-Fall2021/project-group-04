@@ -1,4 +1,3 @@
-import signup from '../components/js/signup';
 <template>
   <div class="row justify-content-center">
     <div class="col-lg-5 col-md-7">
@@ -48,7 +47,7 @@ import signup from '../components/js/signup';
       </div>
       <div class="row mt-3">
         <div class="col-6">
-          <a href="#" class="text-light">
+          <a href="/#/libregister" class="text-light">
             <small>Librarian Register</small>
           </a>
         </div>

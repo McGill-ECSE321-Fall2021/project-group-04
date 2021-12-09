@@ -1,0 +1,16 @@
+{
+  "name": "Lib.io",
+  "short_name": "Lib.io",
+  "icons": [
+    {
+      "src": "./img/brand/favicon.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    }
+  ],
+  "start_url": ".",
+  "scope": "https://library-frontend-a6a.herokuapp.com/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#4DBA87"
+}

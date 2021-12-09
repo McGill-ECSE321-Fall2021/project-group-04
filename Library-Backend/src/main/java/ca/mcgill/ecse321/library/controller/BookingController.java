@@ -1,8 +1,12 @@
 package ca.mcgill.ecse321.library.controller;
 
+import ca.mcgill.ecse321.library.dto.BookDto;
 import ca.mcgill.ecse321.library.dto.BookingDto;
 import ca.mcgill.ecse321.library.model.Booking;
+import ca.mcgill.ecse321.library.model.Lending;
 import ca.mcgill.ecse321.library.model.MobileItem;
+import ca.mcgill.ecse321.library.model.Reservation;
+import ca.mcgill.ecse321.library.service.BookService;
 import ca.mcgill.ecse321.library.service.BookingService;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,6 +26,9 @@ public class BookingController {
     @Autowired
     BookingService bookingService;
 
+    @Autowired
+    BookService bookService;
+
 
     @GetMapping(value = {"/bookings", "/bookings/"})
     public ResponseEntity<?> getAllBookings() {
@@ -33,6 +40,29 @@ public class BookingController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping(value = {"/reservations", "/reservations/"})
+    public ResponseEntity<?> getAllReservations() {
+        try {
+            List<BookDto> bookings = bookService.getAllBooks().stream().filter(c -> c.getBooking() != null && c.getBooking().getBookingType() instanceof Reservation).map(bk -> DTOConverter.convertToDto(bk,bk.getBooking())).collect(Collectors.toList());
+            return new ResponseEntity<>(bookings, HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping(value = {"/lendings", "/lendings/"})
+    public ResponseEntity<?> getAllLendings() {
+        try {
+            List<BookDto> bookings = bookService.getAllBooks().stream().filter(c -> c.getBooking() != null && c.getBooking().getBookingType() instanceof Lending).map(bk -> DTOConverter.convertToDto(bk,bk.getBooking())).collect(Collectors.toList());
+            return new ResponseEntity<>(bookings, HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 
     @PostMapping(value = {"/booking/{name}/itemType/{itemType}/itemId/{itemId}", "/booking/{name}/itemType/{itemType}/itemId/{itemId}/"})
     public ResponseEntity<?> createBooking(@PathVariable String name, @PathVariable String itemType, @PathVariable String itemId) {

@@ -20,18 +20,18 @@ import App from "./App.vue";
 import router from "./router";
 import ArgonDashboard from "./plugins/argon-dashboard";
 import "element-plus/lib/theme-chalk/index.css";
+import "../public/registerServiceWorker"
 
 const appInstance = createApp(App);
 appInstance.use(router);
 appInstance.use(ArgonDashboard);
 appInstance.mount("#app");
 
-Storage.prototype.setObject = function(key, value) {
-    this.setItem(key, JSON.stringify(value));
-}
+Storage.prototype.setObject = function (key, value) {
+  this.setItem(key, JSON.stringify(value));
+};
 
-Storage.prototype.getObject = function(key) {
-    var value = this.getItem(key);
-    return value && JSON.parse(value);
-}
-
+Storage.prototype.getObject = function (key) {
+  var value = this.getItem(key);
+  return value && JSON.parse(value);
+};

@@ -11,6 +11,11 @@
       </movie-card>
     </div>
   </div>
+  <div v-if="empty && showAlert">
+    <base-alert type="danger">
+      <strong>Nothing to see here.</strong>
+    </base-alert>
+  </div>
 </template>
 
 <script>
@@ -24,6 +29,26 @@ export default {
       type: Boolean,
       default: true,
     },
+    empty: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  data() {
+    return {
+      showAlert: false,
+    };
+  },
+  methods: {
+    delay() {
+      let delay = 500;
+      setTimeout(() => {
+        this.showAlert = true;
+      }, delay);
+    },
+  },
+  mounted() {
+    this.delay();
   },
 };
 </script>

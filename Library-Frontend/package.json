@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "postinstall": "npm run build",
+    "start": "node server.js",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
@@ -14,14 +16,17 @@
     "chart.js": "2.9.4",
     "core-js": "3.6.5",
     "element-plus": "1.0.1-beta.24",
+    "express": "^4.17.1",
     "google-maps": "4.3.3",
     "jquery": "^3.6.0",
     "nouislider": "14.6.0",
+    "serve-static": "^1.14.1",
     "sweetalert": "^2.1.2",
     "vue": "3.0.5",
     "vue-router": "4.0.1",
     "vue-sweetalert2": "^5.0.2",
-    "vue-toastification": "1.7.11"
+    "vue-toastification": "1.7.11",
+    "workbox-webpack-plugin": "^6.4.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "4.5.10",
@@ -37,6 +42,8 @@
     "eslint-plugin-vue": "7.4.1",
     "node-sass": "5.0.0",
     "prettier": "2.2.1",
-    "sass-loader": "10.1.1"
+    "register-service-worker": "^1.7.2",
+    "sass-loader": "10.1.1",
+    "workbox-window": "^6.4.2"
   }
 }

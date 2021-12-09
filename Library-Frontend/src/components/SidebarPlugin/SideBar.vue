@@ -16,26 +16,7 @@
         <ul class="nav align-items-center d-md-none">
           <base-dropdown class="nav-item" position="right">
             <template v-slot:title>
-              <a
-                class="nav-link nav-link-icon"
-                href="#"
-                role="button"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                <i class="ni ni-bell-55"></i>
-              </a>
-            </template>
-
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </base-dropdown>
-          <base-dropdown class="nav-item" position="right">
-            <template v-slot:title>
-              <a class="nav-link" href="#" role="button">
+              <a class="nav-link" role="button">
                 <div class="media align-items-center">
                   <span class="avatar avatar-sm rounded-circle">
                     <img alt="Image placeholder" src="img/theme/cat.jpg" />
@@ -45,14 +26,14 @@
             </template>
 
             <div class="dropdown-header noti-title">
-              <h6 class="text-overflow m-0">Welcome!</h6>
+              <h6 class="text-overflow m-0">Welcome, {{ model.username }}!</h6>
             </div>
             <router-link to="/profile" class="dropdown-item">
               <i class="ni ni-single-02"></i>
               <span>My profile</span>
             </router-link>
             <div class="dropdown-divider"></div>
-            <a href="#!" class="dropdown-item">
+            <a href="/#/login" class="dropdown-item">
               <i class="ni ni-user-run"></i>
               <span>Logout</span>
             </a>
@@ -61,7 +42,7 @@
       </slot>
       <slot></slot>
       <div
-        v-show="$sidebar.showSidebar"
+        v-show="this.$sidebar.showSidebar"
         class="navbar-collapse collapse show"
         id="sidenav-collapse-main"
       >
@@ -107,6 +88,13 @@ export default {
       description:
         "Whether sidebar should autoclose on mobile when clicking an item",
     },
+  },
+  data() {
+    return {
+      model: {
+        username: window.localStorage.getObject("user").username,
+      },
+    }
   },
   provide() {
     return {

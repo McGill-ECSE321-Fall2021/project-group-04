@@ -9,6 +9,7 @@ import Profile from "../views/UserProfile.vue";
 
 import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
+import LibrarianRegister from "../views/LibrarianRegister"
 
 import About from "../views/About.vue";
 import BooksView from "@/views/BooksView";
@@ -16,6 +17,7 @@ import MoviesView from "@/views/MoviesView";
 import MusicAlbumsView from "@/views/MusicAlbumsView";
 import NewspaperView from "@/views/NewspaperView";
 import ArchiveView from "@/views/ArchiveView";
+import Bookings from "../views/Bookings"
 
 const routes = [
   {
@@ -32,6 +34,11 @@ const routes = [
         path: "/register",
         name: "register",
         components: { default: Register },
+      },
+      {
+        path: "/libregister",
+        name: "libregister",
+        components: { default: LibrarianRegister },
       },
     ],
   },
@@ -84,6 +91,11 @@ const routes = [
         path: "/archives",
         name: "archives",
         components: { default: ArchiveView },
+      },
+      {
+        path: "/bookings",
+        name: "bookings",
+        components: { default: Bookings },
       },
     ],
   },

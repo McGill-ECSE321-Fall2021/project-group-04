@@ -25,8 +25,13 @@
       <div class="col justify-content-center">
         <div class="order-xl-1">
           <card shadow type="secondary">
-            <music-albums :albums="albums" />
-            <base-button block type="primary" v-if="!isMember" @click="modal = true">
+            <music-albums :albums="albums" :empty="!albums.length" />
+            <base-button
+              block
+              type="primary"
+              v-if="!isMember"
+              @click="modal = true"
+            >
               New Music Album
             </base-button>
             <modal v-model:show="modal">
@@ -35,36 +40,58 @@
               </template>
               <div class="text-left">
                 <base-input
-                    placeholder="Title"
-                    input-classes="form-control-alternative"
+                  placeholder="Title"
+                  input-classes="form-control-alternative"
+                  v-model="musicAlbum.title"
                 />
                 <base-input
-                    placeholder="Author"
-                    input-classes="form-control-alternative"
+                  placeholder="Author"
+                  input-classes="form-control-alternative"
+                  v-model="musicAlbum.author"
                 />
                 <base-input
-                    placeholder="Date of Release"
-                    input-classes="form-control-alternative"
+                  placeholder="Date of Release"
+                  input-classes="form-control-alternative"
+                  v-model="musicAlbum.dateOfRelease"
                 />
                 <base-input
-                    placeholder="Price"
-                    input-classes="form-control-alternative"
+                  placeholder="Price"
+                  input-classes="form-control-alternative"
+                  v-model="musicAlbum.price"
                 />
                 <base-input
-                    placeholder="Number of Songs"
-                    input-classes="form-control-alternative"
+                  placeholder="Number of Songs"
+                  input-classes="form-control-alternative"
+                  v-model="musicAlbum.numberOfSongs"
                 />
                 <base-input
-                    placeholder="Total Length"
-                    input-classes="form-control-alternative"
+                  placeholder="Total Length"
+                  input-classes="form-control-alternative"
+                  v-model="musicAlbum.totalLength"
                 />
                 <base-input
-                    placeholder="Barcode"
-                    input-classes="form-control-alternative"
+                  placeholder="Barcode"
+                  input-classes="form-control-alternative"
+                  v-model="musicAlbum.barcode"
                 />
               </div>
               <template v-slot:footer>
-                <base-button size="lg" @click="modal = false">Add</base-button>
+                <base-button
+                  size="lg"
+                  @click="
+                    add_music_album(
+                      musicAlbum.title,
+                      musicAlbum.price,
+                      musicAlbum.barcode,
+                      musicAlbum.numberOfSongs,
+                      musicAlbum.author,
+                      musicAlbum.dateOfRelease,
+                      musicAlbum.totalLength
+                    );
+                    modal = false;
+                  "
+                  >Add</base-button
+                >
               </template>
             </modal>
           </card>
@@ -74,46 +101,4 @@
   </div>
 </template>
 
-<script>
-import MusicAlbums from "@/components/MusicAlbums";
-export default {
-  name: "music-albums-view",
-  components: { MusicAlbums },
-  data() {
-    return {
-      isMember: false,
-      modal: false,
-      albums: [
-        {
-          title: "Kamikaze",
-          author: "Eminem",
-          dateOfRelease: "08/31/18",
-          numberOfSongs: "13",
-          totalLength: "45:49",
-        },
-        {
-          title: "Music to Be Murdered By",
-          author: "Eminem",
-          dateOfRelease: "01/17/20",
-          numberOfSongs: "13",
-          totalLength: "62:23",
-        },
-        {
-          title: "Revival",
-          author: "Eminem",
-          dateOfRelease: "12/15/17",
-          numberOfSongs: "18",
-          totalLength: "77:39",
-        },
-        {
-          title: "+ (Plus) Deluxe",
-          author: "Ed Sheeran",
-          dateOfRelease: "09/09/11",
-          numberOfSongs: "12",
-          totalLength: "65:35",
-        },
-      ],
-    };
-  },
-};
-</script>
+<script src="../components/js/musicAlbumItem.js"></script>

@@ -25,11 +25,26 @@
     </div>
 
     <p class="mt-3 mb-0 text-sm"><slot name="footer" /><br /></p>
+
+    <div class="text-right pt-2" v-if="button2">
+      <a>
+        <base-button
+          size="sm"
+          @click="
+            modals[1].methods.checkoutItem(this.reservedBy, this.bookingId)
+          "
+          >{{ button2Text }}</base-button
+        >
+      </a>
+    </div>
     <div class="text-right pt-2" v-if="button">
       <a>
-        <base-button size="sm" @click="modals[0] = true">{{
-          buttonText
-        }}</base-button>
+        <base-button
+          size="sm"
+          @click="modals[1].methods.createBooking(this.type, this.subTitle)"
+          >{{ buttonText }}</base-button
+        >
+
         <modal v-model:show="modals[0]">
           <template v-slot:header>
             <h3 class="modal-title lg">{{ modalTitle }}</h3>
@@ -46,6 +61,7 @@
 <script>
 import Card from "./Card.vue";
 import BaseButton from "@/components/BaseButton";
+import Booking from "@/components/js/Booking";
 
 export default {
   name: "data-card",
@@ -62,9 +78,15 @@ export default {
       type: Boolean,
       default: true,
     },
+    button2: {
+      type: Boolean,
+      default: false,
+    },
     icon: String,
     title: String,
     subTitle: String,
+    bookingId: String,
+    reservedBy: String,
     iconClasses: [String, Array],
     successMessage: {
       type: String,
@@ -78,10 +100,14 @@ export default {
       type: String,
       default: "Reserve",
     },
+    button2Text: {
+      type: String,
+      default: "Check Out",
+    },
   },
   data() {
     return {
-      modals: [false],
+      modals: [false, Booking],
     };
   },
 };

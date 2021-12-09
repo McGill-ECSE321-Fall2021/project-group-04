@@ -88,8 +88,19 @@ public class BookService {
      * @author Jewoo Lee
      * returns all books from database
      */
+    @Transactional
     public List<Book> getAllBooks() {
         return Services.toList(bookRepository.findAll());
+    }
+
+    /**
+     * @return
+     * @author Jewoo Lee
+     * returns all books from database
+     */
+    @Transactional
+    public List<Book> getBooksByBooking(Booking booking) {
+        return Services.toList(bookRepository.findByBooking(booking));
     }
 
 

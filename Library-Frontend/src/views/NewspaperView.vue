@@ -25,8 +25,16 @@
       <div class="col justify-content-center">
         <div class="order-xl-1">
           <card shadow type="secondary">
-            <ImmovableItems :immovable-items="newspaper" />
-            <base-button block type="primary" v-if="!isMember" @click="modal = true">
+            <ImmovableItems
+              :immovable-items="newspapers"
+              :empty="!newspapers.length"
+            />
+            <base-button
+              block
+              type="primary"
+              v-if="!isMember"
+              @click="modal = true"
+            >
               New Newspaper
             </base-button>
             <modal v-model:show="modal">
@@ -35,20 +43,34 @@
               </template>
               <div class="text-left">
                 <base-input
-                    placeholder="Title"
-                    input-classes="form-control-alternative"
+                  placeholder="Title"
+                  input-classes="form-control-alternative"
+                  v-model="newspaper.title"
                 />
                 <base-input
-                    placeholder="Date"
-                    input-classes="form-control-alternative"
+                  placeholder="Date"
+                  input-classes="form-control-alternative"
+                  v-model="newspaper.date"
                 />
                 <base-input
-                    placeholder="Number Of Pages"
-                    input-classes="form-control-alternative"
+                  placeholder="Number Of Pages"
+                  input-classes="form-control-alternative"
+                  v-model="newspaper.numberOfPages"
                 />
               </div>
               <template v-slot:footer>
-                <base-button size="lg" @click="modal = false">Add</base-button>
+                <base-button
+                  size="lg"
+                  @click="
+                    addNewspaper(
+                      newspaper.date,
+                      newspaper.numberOfPages,
+                      newspaper.title
+                    );
+                    modal = false;
+                  "
+                  >Add</base-button
+                >
               </template>
             </modal>
           </card>
@@ -58,38 +80,4 @@
   </div>
 </template>
 
-<script>
-import ImmovableItems from "@/components/ImmovableItems";
-export default {
-  name: "newspaper-view",
-  components: { ImmovableItems },
-  data() {
-    return {
-      isMember: false,
-      modal: false,
-      newspaper: [
-        {
-          title: "Charlie and the Chocolate Factory",
-          date: "07/10/05",
-          numberOfPages: "11",
-        },
-        {
-          title: "The Maze Runner",
-          date: "09/19/14",
-          numberOfPages: "11",
-        },
-        {
-          title: "Red Notice",
-          date: "11/05/21",
-          numberOfPages: "11",
-        },
-        {
-          title: "Fast Five",
-          date: "04/15/11",
-          numberOfPages: "11",
-        },
-      ],
-    };
-  },
-};
-</script>
+<script src="../components/js/newspaperItem.js" />

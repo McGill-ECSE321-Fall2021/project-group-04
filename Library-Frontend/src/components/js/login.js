@@ -1,132 +1,143 @@
 import axios from "axios";
 import JQuery from "jquery";
-import swal from "sweetalert"
+import swal from "sweetalert";
 
 let $ = JQuery;
 let config = require("../../../config");
 
 let backend = function () {
-    switch (process.env.NODE_ENV) {
-        case "development":
-            return "http://" + config.dev.backendHost + ":" + config.dev.backendPort;
-        case "production":
-            return (
-                "https://" + config.build.backendHost + ":" + config.build.backendPort
-            );
-    }
+  switch (process.env.NODE_ENV) {
+    case "development":
+      return "http://" + config.dev.backendHost + ":" + config.dev.backendPort;
+    case "production":
+      return "https://" + config.build.backendHost //+ ":" + config.build.backendPort;
+  }
 };
 
 let frontend = function () {
-    switch (process.env.NODE_ENV) {
-        case "development":
-            return "http://" + config.dev.host + ":" + config.dev.port;
-        case "production":
-            return "https://" + config.build.host + ":" + config.build.port;
-    }
+  switch (process.env.NODE_ENV) {
+    case "development":
+      return "http://" + config.dev.host + ":" + config.dev.port;
+    case "production":
+      return "https://" + config.build.host //+ ":" + config.build.port;
+  }
 };
 let backendUrl = backend();
 let frontendUrl = frontend();
 
 let AXIOS = axios.create({
-    baseURL: backendUrl,
-    headers: {"Access-Control-Allow-Origin": frontendUrl},
+  baseURL: backendUrl,
+  headers: { "Access-Control-Allow-Origin": frontendUrl },
 });
 
 import BaseAlert from "@/components/BaseAlert";
+
 export default {
-    components: {
-        BaseAlert
-    },
-    name: "login",
-    data() {
-        return {
-            user: {
-                type: "",
-                username: "",
-                password: "",
-            },
-            errorLogin: "",
-            responses: [],
-        };
-    },
-    methods: {
+  components: {
+    BaseAlert,
+  },
+  name: "login",
+  data() {
+    return {
+      user: {
+        type: "",
+        username: "",
+        password: "",
+      },
+      errorLogin: "",
+      responses: [],
+    };
+  },
+  methods: {
+    /**
+     * @author alymo
+     * @param username
+     * @param password
+     * gets user input from frontend and logs in using controller method login
+     */
+    login(username, password) {
+      console.log("Logging in");
 
-        /**
-         * @author alymo
-         * @param username
-         * @param password
-         * gets user input from frontend and logs in using controller method login
-         */
-        login(username, password) {
-            console.log("Logging in")
+      let userTypes = ["member", "librarian", "head_librarian"];
 
-            let userTypes = ['member', 'librarian', 'head_librarian']
+      AXIOS.post(
+        "/" + userTypes[0] + "_login/",
+        $.param({ username: username, password: password })
+      )
+        .then((response) => {
+          this.responses.push(response);
+          if (response.status === 200) {
+            this.user.type = userTypes[0];
+            this.user.username = username;
+            this.user.password = password;
 
-            AXIOS.post(
-                "/" + userTypes[0] + "_login/",
-                $.param({username: username, password: password})
-            ).then(response => {
-                this.responses.push(response);
-                if (response.status === 200) {
-                    this.user.type = userTypes[0];
+            console.log("type:", this.user.type);
+
+            window.localStorage.setItem("userType", this.user.type);
+            window.localStorage.setItem("username", this.user.username);
+            window.localStorage.setObject("user", response.data);
+            window.location.href = "/#/dashboard";
+            location.reload();
+          }
+        })
+        .catch((e) => {
+          console.error(e);
+
+          console.log("login lib");
+          AXIOS.post(
+            "/" + userTypes[1] + "_login/",
+            $.param({ username: username, password: password })
+          )
+            .then((response) => {
+              this.responses.push(response);
+              if (response.status === 200) {
+                this.user.type = userTypes[1];
+                this.user.username = username;
+                this.user.password = password;
+
+                console.log("type:", this.user.type);
+
+                window.localStorage.setItem("userType", this.user.type);
+                window.localStorage.setItem("username", this.user.username);
+                window.localStorage.setObject("user", response.data);
+                window.location.href = "/#/dashboard";
+                location.reload();
+              }
+            })
+            .catch((e) => {
+              console.error(e);
+              console.log("login head lib");
+              AXIOS.post(
+                "/" + userTypes[2] + "_login/",
+                $.param({ username: username, password: password })
+              )
+                .then((response) => {
+                  this.responses.push(response);
+                  if (response.status === 200) {
+                    this.user.type = userTypes[2];
                     this.user.username = username;
                     this.user.password = password;
 
                     console.log("type:", this.user.type);
 
                     window.localStorage.setItem("userType", this.user.type);
+                    window.localStorage.setItem("username", this.user.username);
                     window.localStorage.setObject("user", response.data);
                     window.location.href = "/#/dashboard";
                     location.reload();
-                }
-            }).catch((e) => {
-                console.error(e)
-
-                console.log("login lib")
-                AXIOS.post(
-                    "/" + userTypes[1] + "_login/",
-                    $.param({username: username, password: password})
-                ).then(response => {
-                    this.responses.push(response);
-                    if (response.status === 200) {
-                        this.user.type = userTypes[1];
-                        this.user.username = username;
-                        this.user.password = password;
-
-                        console.log("type:", this.user.type);
-
-                        window.localStorage.setItem("userType", this.user.type);
-                        window.localStorage.setObject("user", response.data);
-                        window.location.href = "/#/dashboard";
-                        location.reload();
-                    }
-                }).catch((e) => {
-                    console.error(e)
-                    console.log("login head lib")
-                    AXIOS.post(
-                        "/" + userTypes[2] + "_login/",
-                        $.param({username: username, password: password})
-                    ).then(response => {
-                        this.responses.push(response);
-                        if (response.status === 200) {
-                            this.user.type = userTypes[2];
-                            this.user.username = username;
-                            this.user.password = password;
-
-                            console.log("type:", this.user.type);
-
-                            window.localStorage.setItem("userType", this.user.type);
-                            window.localStorage.setObject("user", response.data);
-                            window.location.href = "/#/dashboard";
-                            location.reload();
-                        }
-                    }).catch((e) => {
-                        console.error(e)
-                        swal("ERROR", e.response.data, "error");
-                    })
+                  }
                 })
-            })
-
-        },
+                .catch((e) => {
+                  console.error(e);
+                  swal("ERROR", e.response.data);
+                });
+            });
+        });
     },
+  },
+
+  mounted() {
+    window.localStorage.clear();
+    this.$forceUpdate();
+  },
 };

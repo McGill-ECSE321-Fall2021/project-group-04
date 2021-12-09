@@ -8,7 +8,8 @@ This project will be completed in a total of four sprints, and our project repor
 
 - [Project Report 1](https://github.com/McGill-ECSE321-Fall2021/project-group-04/wiki/Project-Report-1)
 
-- [Our website!](https://library-backend-a6a.herokuapp.com)
+- [Our website backend](https://library-backend-a6a.herokuapp.com)
+- [Our website!](https://library-frontend-a6a.herokuapp.com)
 
 
 ## The Team Members
@@ -45,7 +46,6 @@ All the related documents for each sprint can be accessed below:
 ### Sprint 2
 
 
-
 ### Roles and Budget
 |        Name        |         Roles/Assigned Tasks       |    Time Spent   |
 | ------------------ | ---------------------------------- | --------------- |
@@ -55,3 +55,18 @@ All the related documents for each sprint can be accessed below:
 |     Jewoo Lee      | Service/Controller classes, Wiki Page, Unit testing, Integration testing   |       40      |
 |   Saghar Sahebi    | Service/Controller classes, Wiki Page, Unit testing, Integration testing         |        40    |
 | Simo      Benkirane| Service/Dto/Controller classes,  Unit testing, Integration testing                  |    40     |
+
+### Sprint 3
+
+
+### Roles and Budget
+|        Name        |         Roles/Assigned Tasks       |    Time Spent   |
+| ------------------ | ---------------------------------- | --------------- |
+| Alexandre Saroufim | Architecture model and description, Integration of Web Front-end with Backend Services, Wiki page |        40      |
+|    Aly Mohamed     | Architecture model and description, Integration of Web Front-end with Backend Services, Wiki page  |        40    |
+| Abd-El-Aziz Zayed  | Architecture model and description, Implementation of Web Front-end, Integration of Web Front-end with Backend Services, Wiki page |    40       |
+|     Jewoo Lee      | Architecture model and description, Implementation of Web Front-end, Wiki page  |       40      |
+|   Saghar Sahebi    | Architecture model and description, Implementation of Web Front-end, Wiki page        |        40    |
+| Simo      Benkirane| Architecture model and description, Integration of Web Front-end with Backend Services,Wiki page   |    40     |
+
+
