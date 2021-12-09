@@ -11,7 +11,7 @@
         <div class="navbar-collapse-header d-md-none">
           <div class="row">
             <div class="col-6 collapse-brand">
-              <router-link to="/">
+              <router-link to="/about">
                 <img src="../../public/img/brand/logo.png" />
               </router-link>
             </div>
@@ -30,12 +30,12 @@
         </div>
         <!-- Navbar items -->
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <router-link class="nav-link nav-link-icon" to="/">
-              <i class="ni ni-planet"></i>
-              <span class="nav-link-inner--text">Dashboard</span>
-            </router-link>
-          </li>
+<!--          <li class="nav-item">-->
+<!--            <router-link class="nav-link nav-link-icon" to="/">-->
+<!--              <i class="ni ni-planet"></i>-->
+<!--              <span class="nav-link-inner&#45;&#45;text">Dashboard</span>-->
+<!--            </router-link>-->
+<!--          </li>-->
           <li class="nav-item">
             <router-link class="nav-link nav-link-icon" to="/register">
               <i class="ni ni-circle-08"></i>

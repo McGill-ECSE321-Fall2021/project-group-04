@@ -4,7 +4,7 @@
       <div class="card bg-secondary shadow border-0">
         <div class="card-body px-lg-5 py-lg-5">
           <div class="text-center text-muted mb-4">
-            <small>Sign up with credentials</small>
+            <small>Sign up to be a librarian</small>
           </div>
           <form role="form">
             <base-input
@@ -47,8 +47,8 @@
       </div>
       <div class="row mt-3">
         <div class="col-6">
-          <a href="/#/libregister" class="text-light">
-            <small>Librarian Register</small>
+          <a href="/#/register" class="text-light">
+            <small>Member Register</small>
           </a>
         </div>
         <div class="col-6 text-right">
@@ -60,5 +60,5 @@
     </div>
   </div>
 </template>
-<script src="../components/js/signup.js" />
+<script src="../components/js/libsignup.js" />
 <style></style>

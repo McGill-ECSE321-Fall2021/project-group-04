@@ -38,7 +38,7 @@ export default {
   components: {
     BaseAlert,
   },
-  name: "sign_up",
+  name: "librarian_sign_up",
   data() {
     return {
       user: {
@@ -52,10 +52,7 @@ export default {
     };
   },
   methods: {
-    print_info(username) {
-      console.log(username);
-      window.location.href = "/#/login";
-    },
+
     /**
      * @author alymo
      * @param username
@@ -69,7 +66,7 @@ export default {
       console.log(address);
 
       AXIOS.post(
-          "/member_sign_up/",
+          "/create_librarian/",
           $.param({
             username: username,
             password: password,
@@ -80,7 +77,7 @@ export default {
           console.log(response);
           console.log(response.status === 201);
           if (response.status === 201) {
-            this.user.type = "member";
+            this.user.type = "librarian";
             this.user.username = username;
             this.user.password = password;
 

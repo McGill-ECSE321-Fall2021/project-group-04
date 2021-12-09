@@ -148,40 +148,24 @@
             <tabs fill class="flex-column flex-md-row">
               <card shadow>
                 <tab-pane icon="ni ni-books" title="Books">
-                  <p v-if="isMember" class="description">
+                  <p class="description">
                     These are all the books you have reserved.
                   </p>
-                  <p v-if="!isMember" class="description">
-                    All the books people have reserved.
-                  </p>
                   <books
-                    v-if="!isMember"
-                    :books="allReservations"
-                    :reservable="false"
-                    :checkoutable="true"
-                  />
-                  <books
-                    v-if="isMember"
                     :books="reservations"
                     :reservable="false"
                     :checkoutable="false"
                   />
                 </tab-pane>
                 <tab-pane icon="ni ni-button-play" title="Movies">
-                  <p v-if="isMember" class="description">
+                  <p class="description">
                     These are all the movies you have reserved.
-                  </p>
-                  <p v-if="!isMember" class="description">
-                    All the movies people have reserved.
                   </p>
                   <movies :movies="movies" :reservable="false" />
                 </tab-pane>
                 <tab-pane icon="ni ni-note-03" title="Music Albums">
-                  <p v-if="isMember" class="description">
+                  <p class="description">
                     These are all the music albums you have reserved.
-                  </p>
-                  <p v-if="!isMember" class="description">
-                    All the music albums people have reserved.
                   </p>
                   <music-albums :albums="albums" :reservable="false" />
                 </tab-pane>
@@ -209,38 +193,20 @@
             <tabs fill class="flex-column flex-md-row">
               <card shadow>
                 <tab-pane icon="ni ni-books" title="Books">
-                  <p v-if="isMember" class="description">
+                  <p class="description">
                     These are all the books you have.
                   </p>
-                  <p v-if="!isMember" class="description">
-                    All books you have lent out.
-                  </p>
-                  <books
-                    v-if="isMember"
-                    :books="lendings"
-                    :reservable="false"
-                  />
-                  <books
-                    v-if="!isMember"
-                    :books="allLendings"
-                    :reservable="false"
-                  />
+                  <books :books="lendings" :reservable="false" :checkoutable="false"/>
                 </tab-pane>
                 <tab-pane icon="ni ni-button-play" title="Movies">
-                  <p v-if="isMember" class="description">
+                  <p class="description">
                     These are all the movies you have.
-                  </p>
-                  <p v-if="!isMember" class="description">
-                    All movies you have lent out.
                   </p>
                   <movies :movies="movies" :reservable="false" />
                 </tab-pane>
                 <tab-pane icon="ni ni-note-03" title="Music Albums">
-                  <p v-if="isMember" class="description">
+                  <p class="description">
                     These are all the music albums you have.
-                  </p>
-                  <p v-if="!isMember" class="description">
-                    All music albums you have lent out.
                   </p>
                   <music-albums :albums="albums" :reservable="false" />
                 </tab-pane>
@@ -252,5 +218,5 @@
     </div>
   </div>
 </template>
-<script src="../components/js/Booking.js"></script>
+<script src="../components/js/user.js"></script>
 <style></style>

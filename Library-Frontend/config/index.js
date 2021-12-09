@@ -27,7 +27,7 @@ module.exports = {
   },
   dev: {
     env: require('./dev.env'),
-    host: '127.0.0.1',
+    host: 'localhost',
     port: 8087,
     autoOpenBrowser: true,
     assetsSubDirectory: 'static',
@@ -39,7 +39,7 @@ module.exports = {
     // In our experience, they generally work as expected,
     // just be aware of this issue when enabling this option.
     cssSourceMap: false,
-    backendHost: '127.0.0.1',
+    backendHost: 'localhost',
     backendPort: 8080
   }
 }

@@ -59,6 +59,14 @@
           }"
         />
         <sidebar-item
+            v-if="!isMember"
+            :link="{
+            name: 'Bookings',
+            icon: 'ni ni-cart text-red',
+            path: '/bookings',
+          }"
+        />
+        <sidebar-item
           :link="{
             name: 'About Us',
             icon: 'ni ni-world text-red',
@@ -89,6 +97,7 @@ export default {
   data() {
     return {
       sidebarBackground: "vue", //vue|blue|orange|green|red|primary
+      isMember: window.localStorage.getItem("userType") === "member",
     };
   },
   methods: {
