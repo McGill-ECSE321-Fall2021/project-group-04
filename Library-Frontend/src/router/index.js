@@ -18,6 +18,7 @@ import MusicAlbumsView from "@/views/MusicAlbumsView";
 import NewspaperView from "@/views/NewspaperView";
 import ArchiveView from "@/views/ArchiveView";
 import Bookings from "../views/Bookings"
+import LibrarianScheduler from "../views/LibrarianScheduler"
 
 const routes = [
   {
@@ -96,6 +97,11 @@ const routes = [
         path: "/bookings",
         name: "bookings",
         components: { default: Bookings },
+      },
+      {
+        path: "/librarian_scheduler",
+        name: "librarianScheduler",
+        components: { default: LibrarianScheduler },
       },
     ],
   },
