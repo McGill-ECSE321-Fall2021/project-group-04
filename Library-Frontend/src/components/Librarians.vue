@@ -4,6 +4,7 @@
       <librarian-card
         :username="librarian.username"
         :workHours="librarian.workHours"
+        :scheduleButton="false"
       >
       </librarian-card>
     </div>
@@ -22,8 +23,7 @@ export default {
   name: "librarians",
   components: { LibrarianCard },
   props: {
-    username: String,
-    workHours: Array,
+    librarians: Array,
     empty: {
       type: Boolean,
       default: false,
@@ -32,208 +32,6 @@ export default {
   data() {
     return {
       showAlert: false,
-      librarians: [
-              {
-                username: "Aly",
-                workHours: [
-                  {
-                    day: "Monday",
-                    start: "9:00",
-                    end: "5:00",
-                  },
-                  {
-                    day: "Tuesday",
-                    start: "9:00",
-                    end: "5:00",
-                  },
-                  {
-                    day: "Wednesday",
-                    start: "9:00",
-                    end: "5:00",
-                  },
-                  {
-                    day: "Thursday",
-                    start: "9:00",
-                    end: "5:00",
-                  },
-                  {
-                    day: "Friday",
-                    start: "9:00",
-                    end: "5:00",
-                  },
-                  {
-                    day: "Saturday",
-                    start: "9:00",
-                    end: "5:00",
-                  },
-                  {
-                    day: "Sunday",
-                    start: "",
-                    end: "",
-                  },
-                ],
-              },
-              {
-                username: "Simo",
-                workHours: [
-                  {
-                    day: "Monday",
-                    start: "9:00",
-                    end: "5:00",
-                  },
-                  {
-                    day: "Tuesday",
-                    start: "9:00",
-                    end: "5:00",
-                  },
-                  {
-                    day: "Wednesday",
-                    start: "9:00",
-                    end: "5:00",
-                  },
-                  {
-                    day: "Thursday",
-                    start: "9:00",
-                    end: "5:00",
-                  },
-                  {
-                    day: "Friday",
-                    start: "9:00",
-                    end: "5:00",
-                  },
-                  {
-                    day: "Saturday",
-                    start: "",
-                    end: "",
-                  },
-                  {
-                    day: "Sunday",
-                    start: "",
-                    end: "",
-                  },
-                ],
-              },
-              {
-                username: "Saghar",
-                workHours: [
-                  {
-                    day: "Monday",
-                    start: "9:00",
-                    end: "5:00",
-                  },
-                  {
-                    day: "Tuesday",
-                    start: "9:00",
-                    end: "5:00",
-                  },
-                  {
-                    day: "Wednesday",
-                    start: "9:00",
-                    end: "5:00",
-                  },
-                  {
-                    day: "Thursday",
-                    start: "9:00",
-                    end: "5:00",
-                  },
-                  {
-                    day: "Friday",
-                    start: "9:00",
-                    end: "5:00",
-                  },
-                  {
-                    day: "Saturday",
-                    start: "",
-                    end: "",
-                  },
-                  {
-                    day: "Sunday",
-                    start: "",
-                    end: "",
-                  },
-                ],
-              },
-              {
-                username: "Zizou",
-                workHours: [
-                  {
-                    day: "Monday",
-                    start: "9:00",
-                    end: "5:00",
-                  },
-                  {
-                    day: "Tuesday",
-                    start: "9:00",
-                    end: "5:00",
-                  },
-                  {
-                    day: "Wednesday",
-                    start: "9:00",
-                    end: "5:00",
-                  },
-                  {
-                    day: "Thursday",
-                    start: "9:00",
-                    end: "5:00",
-                  },
-                  {
-                    day: "Friday",
-                    start: "9:00",
-                    end: "5:00",
-                  },
-                  {
-                    day: "Saturday",
-                    start: "",
-                    end: "",
-                  },
-                  {
-                    day: "Sunday",
-                    start: "",
-                    end: "",
-                  },
-                ],
-              },
-              {
-                username: "Alex",
-                workHours: [
-                  {
-                    day: "Monday",
-                    start: "9:00",
-                    end: "5:00",
-                  },
-                  {
-                    day: "Tuesday",
-                    start: "9:00",
-                    end: "5:00",
-                  },
-                  {
-                    day: "Wednesday",
-                    start: "9:00",
-                    end: "5:00",
-                  },
-                  {
-                    day: "Thursday",
-                    start: "9:00",
-                    end: "5:00",
-                  },
-                  {
-                    day: "Friday",
-                    start: "9:00",
-                    end: "5:00",
-                  },
-                  {
-                    day: "Saturday",
-                    start: "9:00",
-                    end: "5:00",
-                  },
-                  {
-                    day: "Sunday",
-                    start: "",
-                    end: "",
-                  },
-                ],
-              },
-            ],
     };
   },
   methods: {

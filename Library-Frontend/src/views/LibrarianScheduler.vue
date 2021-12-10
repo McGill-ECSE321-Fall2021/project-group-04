@@ -43,7 +43,7 @@
                   </p>
                   <books
                       v-if="!isMember"
-                      :books="allReservations"
+                      :books="librarians"
                       :reservable="false"
                       :checkoutable="true"
                   />
@@ -57,5 +57,5 @@
 
   </div>
 </template>
-<script src="../components/js/Booking.js"></script>
+<script src="../components/js/librarian.js"></script>
 <style></style>

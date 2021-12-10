@@ -45,11 +45,49 @@ export default {
                 isMember: window.localStorage.getItem("userType") === "member",
                 username: window.localStorage.getObject("user").username,
                 address: window.localStorage.getObject("user").address,
-                startDate: window.localStorage.getObject("user").startDate,
-                monthlyFee: window.localStorage.getObject("user").monthlyFee,
+
             },
             user: "",
-            librarians: [],
+            librarians: [{
+                username: "Aly",
+                workHours: [
+                    {
+                        day: "Monday",
+                        start: "9:00",
+                        end: "5:00",
+                    },
+                    {
+                        day: "Tuesday",
+                        start: "9:00",
+                        end: "5:00",
+                    },
+                    {
+                        day: "Wednesday",
+                        start: "9:00",
+                        end: "5:00",
+                    },
+                    {
+                        day: "Thursday",
+                        start: "9:00",
+                        end: "5:00",
+                    },
+                    {
+                        day: "Friday",
+                        start: "9:00",
+                        end: "5:00",
+                    },
+                    {
+                        day: "Saturday",
+                        start: "9:00",
+                        end: "5:00",
+                    },
+                    {
+                        day: "Sunday",
+                        start: "",
+                        end: "",
+                    },
+                ],
+            },],
             isMember: window.localStorage.getItem("userType") === "member",
 
 
