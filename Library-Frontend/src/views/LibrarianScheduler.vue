@@ -41,11 +41,9 @@
                   <p class="description">
                     All your librarians.
                   </p>
-                  <books
+                  <librarians
                       v-if="!isMember"
-                      :books="librarians"
-                      :reservable="false"
-                      :checkoutable="true"
+                      :librarians="librarians"
                   />
                 </tab-pane>
               </card>
