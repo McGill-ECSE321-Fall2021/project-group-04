@@ -74,6 +74,8 @@ export default {
             username: username,
             password: password,
             address: address,
+            member_type: "Local",
+            member_status: "Active",
           })
       )
         .then((response) => {
