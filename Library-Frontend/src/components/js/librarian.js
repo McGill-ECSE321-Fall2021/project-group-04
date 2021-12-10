@@ -1,0 +1,86 @@
+import axios from "axios";
+//import JQuery from "jquery";
+
+//let $ = JQuery;
+let config = require("../../../config");
+
+let backend = function () {
+    switch (process.env.NODE_ENV) {
+        case "development":
+            return "http://" + config.dev.backendHost + ":" + config.dev.backendPort;
+        case "production":
+            return (
+                "https://" + config.build.backendHost //+ ":" + config.build.backendPort
+            );
+    }
+};
+
+let frontend = function () {
+    switch (process.env.NODE_ENV) {
+        case "development":
+            return "http://" + config.dev.host + ":" + config.dev.port;
+        case "production":
+            return "https://" + config.build.host //+ ":" + config.build.port;
+    }
+};
+let backendUrl = backend();
+let frontendUrl = frontend();
+
+let AXIOS = axios.create({
+    baseURL: backendUrl,
+    headers: { "Access-Control-Allow-Origin": frontendUrl },
+});
+
+import Card from "@/components/Card.vue";
+import Books from "@/components/Books";
+import Movies from "@/components/Movies";
+import MusicAlbums from "@/components/MusicAlbums";
+
+export default {
+    components: { MusicAlbums, Movies, Books, Card },
+    name: "librarians",
+    data() {
+        return {
+            model: {
+                isMember: window.localStorage.getItem("userType") === "member",
+                username: window.localStorage.getObject("user").username,
+                address: window.localStorage.getObject("user").address,
+                startDate: window.localStorage.getObject("user").startDate,
+                monthlyFee: window.localStorage.getObject("user").monthlyFee,
+            },
+            user: "",
+            librarians: [],
+            isMember: window.localStorage.getItem("userType") === "member",
+
+
+        };
+    },
+
+    created: function () {
+        // Initializing user
+        // See: was done above
+
+        // Initializing bookings
+        AXIOS.get("/librarians")
+            .then((response) => {
+                this.librarians = response.data;
+            })
+            .catch((e) => {
+                this.errorEvent = e;
+            });
+
+    },
+
+    methods: {
+
+        getLibrarians(username) {
+            AXIOS.get("/librarians/".concat(username))
+                .then((response) => {
+                    this.librarians = response.data;
+                })
+                .catch((e) => {
+                    this.errorEvent = e;
+                });
+        },
+    },
+};
