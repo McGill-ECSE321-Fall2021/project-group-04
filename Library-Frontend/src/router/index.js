@@ -100,7 +100,7 @@ const routes = [
       },
       {
         path: "/librarian_scheduler",
-        name: "librarianScheduler",
+        name: "librarian_scheduler",
         components: { default: LibrarianScheduler },
       },
     ],

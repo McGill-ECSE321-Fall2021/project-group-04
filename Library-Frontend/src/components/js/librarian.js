@@ -35,20 +35,22 @@ import Card from "@/components/Card.vue";
 import Books from "@/components/Books";
 import Movies from "@/components/Movies";
 import MusicAlbums from "@/components/MusicAlbums";
+import Librarians from "@/components/Librarians";
 
 export default {
-    components: { MusicAlbums, Movies, Books, Card },
-    name: "librarians",
+    components: { MusicAlbums, Movies, Books, Card, Librarians },
+    name: "librarian_scheduler",
     data() {
         return {
+            isMember: window.localStorage.getItem("userType") === "member",
             model: {
-                isMember: window.localStorage.getItem("userType") === "member",
                 username: window.localStorage.getObject("user").username,
                 address: window.localStorage.getObject("user").address,
 
             },
             user: "",
-            librarians: [{
+            librarians: [],
+            librarianExamples: [{
                 username: "Aly",
                 workHours: [
                     {
@@ -88,31 +90,16 @@ export default {
                     },
                 ],
             },],
-            isMember: window.localStorage.getItem("userType") === "member",
-
-
         };
     },
 
     created: function () {
-        // Initializing user
-        // See: was done above
-
-        // Initializing bookings
-        AXIOS.get("/librarians")
-            .then((response) => {
-                this.librarians = response.data;
-            })
-            .catch((e) => {
-                this.errorEvent = e;
-            });
-
+        this.getLibrarians()
     },
 
     methods: {
-
-        getLibrarians(username) {
-            AXIOS.get("/librarians/".concat(username))
+        getLibrarians() {
+            AXIOS.get("/librarians/")
                 .then((response) => {
                     this.librarians = response.data;
                 })

@@ -25,7 +25,6 @@
     </div>
 
     <p class="mt-3 mb-0 text-sm"><slot name="footer" /><br /></p>
-
     <div class="text-right pt-2" v-if="button2">
       <a>
         <base-button
@@ -41,7 +40,7 @@
       <a>
         <base-button
           size="sm"
-          @click="modals[1].methods.createBooking(this.type, this.subTitle)"
+          @click="modals[1].methods.scheduleOrBooking(this.buttonText, this.type, this.subTitle, this.username)"
           >{{ buttonText }}</base-button
         >
 
@@ -82,8 +81,13 @@ export default {
       type: Boolean,
       default: false,
     },
+    button3: {
+      type: Boolean,
+      default: false,
+    },
     icon: String,
     title: String,
+    username: String,
     subTitle: String,
     bookingId: String,
     reservedBy: String,
@@ -104,6 +108,7 @@ export default {
       type: String,
       default: "Check Out",
     },
+
   },
   data() {
     return {

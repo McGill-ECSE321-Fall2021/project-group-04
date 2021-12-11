@@ -4,7 +4,7 @@
       <librarian-card
         :username="librarian.username"
         :workHours="librarian.workHours"
-        :scheduleButton="false"
+        :scheduleButton="true"
       >
       </librarian-card>
     </div>

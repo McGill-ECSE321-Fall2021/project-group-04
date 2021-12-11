@@ -1,7 +1,6 @@
 <template v-if="username">
   <data-card
     :sub-title="username"
-    :button="scheduleButton"
     class="mb-2"
     buttonText="Schedule"
     modalTitle="Schedule Librarian"
