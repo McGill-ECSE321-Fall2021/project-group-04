@@ -67,16 +67,16 @@
           }"
         />
         <sidebar-item
-            v-if= "isHeadLibrarian"
-            :link="{
+          v-if= "isHeadLibrarian"
+          :link="{
             name: 'Librarian Schedule',
             icon: 'ni ni-time-alarm text-red',
             path: '/librarian_scheduler',
           }"
         />
         <sidebar-item
-                v-if= "isHeadLibrarian"
-                :link="{
+          v-if= "isHeadLibrarian"
+          :link="{
             name: 'Create User',
             icon: 'ni ni-fat-add text-red',
             path: '/register',

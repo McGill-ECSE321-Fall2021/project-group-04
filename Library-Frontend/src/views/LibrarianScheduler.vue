@@ -28,9 +28,9 @@
             <template v-slot:header>
               <div class="bg-white border-0">
                 <div class="row align-items-center">
-                  <v class="col-8">
+                  <div class="col-8">
                     <h3 class="mb-0">Librarians</h3>
-                  </v>
+                  </div>
                 </div>
               </div>
             </template>
