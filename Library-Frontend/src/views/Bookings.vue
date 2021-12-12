@@ -91,7 +91,7 @@
               <card shadow>
                 <tab-pane icon="ni ni-books" title="Books">
                   <p class="description">
-                    All books you have lent out.
+                    All books people have lent out.
                   </p>
                   <books
                     v-if="isMember"

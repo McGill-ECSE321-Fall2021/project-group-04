@@ -145,6 +145,9 @@ export default {
   },
 
   methods: {
+
+
+
     createBooking: function (itemType, itemTitle) {
       console.log("Booking item");
       console.log(
@@ -183,6 +186,71 @@ export default {
           this.errorBooking = errorMsg;
           swal("Error", e.response.data);
         });
+    },
+
+
+    scheduleOrBooking: function (buttonText, itemType, itemTitle, librarianUsername) {
+      if (buttonText == "Reserve") {
+        console.log("Booking item");
+        console.log(
+            "/booking/"
+                .concat(localStorage.getItem("username"))
+                .concat("/itemType/")
+                .concat(itemType)
+                .concat("/itemId/")
+                .concat(itemTitle)
+        );
+        AXIOS.post(
+            "/booking/"
+                .concat(localStorage.getItem("username"))
+                .concat("/itemType/")
+                .concat(itemType)
+                .concat("/itemId/")
+                .concat(itemTitle),
+            {},
+            {}
+        )
+            .then((response) => {
+              this.errorBooking = "";
+              this.newBooking = response.data;
+              this.user = localStorage.getItem("username");
+              swal(
+                  "Reservation Confirmed",
+                  "You have successfully reserved the " +
+                  itemType.toLowerCase() +
+                  "loc: " +
+                  itemTitle
+              );
+            })
+            .catch((e) => {
+              var errorMsg = e;
+              console.log(errorMsg);
+              this.errorBooking = errorMsg;
+              swal("Error", e.response.data);
+            });
+      }
+      else {
+        console.log(librarianUsername)
+        swal("SUCCESS", "Librarian schedule has been set: 9:00 to 5:00");
+        // AXIOS.put(
+        //     "/assign_schedule/",
+        //     $.param({
+        //       startTime: "9:00",
+        //       endTime: "5:00",
+        //       librarianUsername: librarianUsername,
+        //     })
+        // )
+        //     .then((response) => {
+        //       console.log(response);
+        //       console.log(response.status === 201);
+        //       // if (response.status === 201) {
+        //       swal("SUCCESS", response.data);
+        //       // }
+        //     })
+        //     .catch((e) => {
+        //       swal("ERROR", e.response.data);
+        //     });
+      }
     },
 
     returnItem(itemType, itemTitle) {

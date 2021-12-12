@@ -100,6 +100,24 @@ public class HeadLibrarianService {
         return Services.toList(headLibrarianRepository.findAll());
     }
 
+    @Transactional
+    public List<Librarian> getAllLibrarians() {
+        return Services.toList(librarianRepository.findAll());
+    }
+
+    @Transactional
+    public void assignSchedule(String startTime, String endTime, String librarianUsername){
+        for(DayOfWeek day: DayOfWeek.values()){
+            assignDaySchedule(startTime, endTime, librarianUsername, day);
+        }
+    }
+
+    private void assignDaySchedule(String startTime, String endTime, String librarianUsername, DayOfWeek day){
+        if(librarianRepository.existsLibrarianByUsername(librarianUsername)){
+            librarianRepository.findLibrarianByUsername(librarianUsername).setWorkHours(WeekSchedule(Schedule(day, Time.valueOf(startTime), Time.valueOf(endTime))));
+        }
+    }
+
     /**
      * HeadLib can assign schedule
      *

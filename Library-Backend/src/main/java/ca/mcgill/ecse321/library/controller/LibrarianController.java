@@ -9,12 +9,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -32,6 +27,7 @@ public class LibrarianController {
     public LibrarianDto viewLibrarian(@PathVariable("username") String username) {
         return DTOConverter.convertToDto(libraryService.getLibrarian(username));
     }
+
 
     /**
      * @param aUsername
@@ -66,6 +62,20 @@ public class LibrarianController {
         Librarian librarian = null;
         try {
             librarian = libraryService.login(username, password);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        return new ResponseEntity<>(DTOConverter.convertToDto(librarian), HttpStatus.OK);
+    }
+
+
+    @PutMapping(value = {"/assign_schedule", "/assign_schedule/"})
+    public ResponseEntity<?> assignSchedule(@RequestParam String startTime, @RequestParam String endTime, @RequestParam String librarianUsername) {
+        Librarian librarian = null;
+        try {
+            assignSchedule(startTime, endTime, librarianUsername);
+            librarian = libraryService.getLibrarian(librarianUsername);
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }

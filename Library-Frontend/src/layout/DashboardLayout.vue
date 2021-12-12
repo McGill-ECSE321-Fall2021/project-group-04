@@ -67,6 +67,22 @@
           }"
         />
         <sidebar-item
+          v-if= "isHeadLibrarian"
+          :link="{
+            name: 'Librarian Schedule',
+            icon: 'ni ni-time-alarm text-red',
+            path: '/librarian_scheduler',
+          }"
+        />
+        <sidebar-item
+          v-if= "isHeadLibrarian"
+          :link="{
+            name: 'Create User',
+            icon: 'ni ni-fat-add text-red',
+            path: '/register',
+          }"
+        />
+        <sidebar-item
           :link="{
             name: 'About Us',
             icon: 'ni ni-world text-red',
@@ -98,6 +114,7 @@ export default {
     return {
       sidebarBackground: "vue", //vue|blue|orange|green|red|primary
       isMember: window.localStorage.getItem("userType") === "member",
+      isHeadLibrarian : window.localStorage.getItem("userType") == "head_librarian"
     };
   },
   methods: {
