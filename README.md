@@ -69,4 +69,20 @@ All the related documents for each sprint can be accessed below:
 |   Saghar Sahebi    | Architecture model and description, Implementation of Web Front-end, Wiki page        |        40    |
 | Simo      Benkirane| Architecture model and description, Integration of Web Front-end with Backend Services,Wiki page   |    40     |
 
+### Sprint 4
+
+- [User Documentation for Website & Mobile App](https://github.com/McGill-ECSE321-Fall2021/project-group-04/wiki/User-Documentation)
+- [Meetings Minutes and Agenda](https://github.com/McGill-ECSE321-Fall2021/project-group-04/wiki/Meeting-Minutes-and-Agenda#meeting-minutes-for-fourth-deliverable)
+- [Project Report 4](https://github.com/McGill-ECSE321-Fall2021/project-group-04/wiki/Project-report-4)
+
+### Roles and Budget
+|        Name        |         Roles/Assigned Tasks       |    Time Spent   |
+| ------------------ | ---------------------------------- | --------------- |
+| Alexandre Saroufim | User Documentation,Implementation of Android application front-end,Wiki page      |        10      |
+|    Aly Mohamed     | User Documentation,Implementation of Android application front-end,Wiki page |        10    |
+| Abd-El-Aziz Zayed  | User Documentation,Implementation of Android application front-end,Wiki page  |    10       |
+|     Jewoo Lee      | User Documentation,Implementation of Android application front-end,Wiki page  |       10      |
+|   Saghar Sahebi    | User Documentation,Implementation of Android application front-end,Wiki page       |        10    |
+| Simo      Benkirane| User Documentation,Implementation of Android application front-end,Wiki page     |    10     |
+
 
